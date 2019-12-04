@@ -43,6 +43,8 @@ Partial Class R01_SaldoProducto
         '
         'MPnInferior
         '
+        Me.MPnInferior.Location = New System.Drawing.Point(300, 525)
+        Me.MPnInferior.Size = New System.Drawing.Size(684, 36)
         Me.MPnInferior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.MPnInferior.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(244, Byte), Integer))
         Me.MPnInferior.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(244, Byte), Integer))
@@ -50,6 +52,10 @@ Partial Class R01_SaldoProducto
         Me.MPnInferior.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.MPnInferior.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.MPnInferior.Style.GradientAngle = 90
+        '
+        'MPanelToolBarUsuario
+        '
+        Me.MPanelToolBarUsuario.Location = New System.Drawing.Point(484, 0)
         '
         'MTbUsuario
         '
@@ -87,6 +93,7 @@ Partial Class R01_SaldoProducto
         '
         'MGpFiltro
         '
+        Me.MGpFiltro.Size = New System.Drawing.Size(300, 491)
         '
         '
         '
@@ -115,6 +122,10 @@ Partial Class R01_SaldoProducto
         '
         '
         Me.MGpFiltro.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'MCrReporte
+        '
+        Me.MCrReporte.Size = New System.Drawing.Size(684, 561)
         '
         'R01_SaldoProducto
         '
