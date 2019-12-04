@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="24fc2bc05e4645fd98e411859379ebf6" Name="Diagram1">
+        <EntityTypeShape EntityType="BDDistBHFModel.CM001" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.CM0011" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TA001" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TB001" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC001" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC002" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC003" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC004" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC0042" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC004B" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC005" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC0051" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC006" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC011" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC0111" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TCA001" Width="1.5" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TCA0011" Width="1.5" PointX="8.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TFV001" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TI002" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TI0021" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TI004" Width="1.5" PointX="4.75" PointY="12.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TI0041" Width="1.5" PointX="12.75" PointY="7.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TL001" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TL002" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO001" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO001C" Width="1.5" PointX="14.75" PointY="8.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO004" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TP007" Width="1.5" PointX="6.75" PointY="15.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TP008" Width="1.5" PointX="12.75" PointY="15.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TP0081" Width="1.5" PointX="14.75" PointY="15.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TV00121" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TZ001" Width="1.5" PointX="0.75" PointY="16.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.ZY0021" Width="1.5" PointX="2.75" PointY="16.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC0011" Width="1.5" PointX="16.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC0012" Width="1.5" PointX="16.75" PointY="8.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC0041" Width="1.5" PointX="16.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC004A1" Width="1.5" PointX="16.75" PointY="16.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC004A2" Width="1.5" PointX="8.75" PointY="17.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TC0091" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TCA00121" Width="1.5" PointX="18.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TCP0011" Width="1.5" PointX="18.75" PointY="8.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TI003" Width="1.5" PointX="18.75" PointY="12.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TM001" Width="1.5" PointX="18.75" PointY="15.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TM0011" Width="1.5" PointX="4.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TM0012" Width="1.5" PointX="10.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TM0013" Width="1.5" PointX="12.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO0011" Width="1.5" PointX="14.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO0014" Width="1.5" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO001A" Width="1.5" PointX="0.75" PointY="20.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO002" Width="1.5" PointX="20.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO0021" Width="1.5" PointX="6.75" PointY="20.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO0022" Width="1.5" PointX="20.75" PointY="8.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO0023" Width="1.5" PointX="20.75" PointY="12.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO003" Width="1.5" PointX="20.75" PointY="16.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO0041" Width="1.5" PointX="16.75" PointY="20.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO0042" Width="1.5" PointX="18.75" PointY="20.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TO0043" Width="1.5" PointX="20.75" PointY="20.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TP001" Width="1.5" PointX="22.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TP002" Width="1.5" PointX="2.75" PointY="22.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TP003" Width="1.5" PointX="22.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TP004" Width="1.5" PointX="22.75" PointY="7.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TP006" Width="1.5" PointX="8.75" PointY="22.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TP0061" Width="1.5" PointX="10.75" PointY="22.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TV0013" Width="1.5" PointX="22.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.vista_promconsumo" Width="1.5" PointX="12.75" PointY="22.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.vista_transacciones" Width="1.5" PointX="22.75" PointY="15.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_Clientes" Width="1.5" PointX="22.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_ClientesPendientesNota" Width="1.5" PointX="14.75" PointY="23.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.Vr_Conciliacion" Width="1.5" PointX="20.75" PointY="23.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_CuentasPagar_PagosRealizados" Width="1.5" PointX="22.75" PointY="23.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_EntregaPedidos" Width="1.5" PointX="24.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_Facturas" Width="1.5" PointX="4.75" PointY="24.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_FacturasChacaltaya" Width="1.5" PointX="24.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.vr_go_comprobanteSalidaItems" Width="1.5" PointX="24.75" PointY="9.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.vr_go_comprobanteVenta" Width="1.5" PointX="24.75" PointY="13.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_DespachoXCliente" Width="1.5" PointX="16.75" PointY="24.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_DespachoXProducto" Width="1.5" PointX="24.75" PointY="18.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_DiferenciaPedidoNota" Width="1.5" PointX="24.75" PointY="22.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_EquipoPrestadoVsUltimaVenta" Width="1.5" PointX="26.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_EquiposPrestadoCliente" Width="1.5" PointX="0.75" PointY="26.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_FacturaVsVenta" Width="1.5" PointX="26.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_FacturaVsVenta2" Width="1.5" PointX="6.75" PointY="26.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_ListarZona" Width="1.5" PointX="8.75" PointY="26.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_PrestamoEquiposAgrupado" Width="1.5" PointX="26.75" PointY="9.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_PrestamoEquiposDetallado" Width="1.5" PointX="10.75" PointY="26.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.vr_go_reciboCliente" Width="1.5" PointX="26.75" PointY="13.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_SaldoPrestamoEquipo" Width="1.5" PointX="18.75" PointY="26.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_UltimaVentaCliente" Width="1.5" PointX="26.75" PointY="19.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.vr_go_visitasDiarias" Width="1.5" PointX="26.75" PointY="23.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GraficaVentasVs" Width="1.5" PointX="12.75" PointY="27.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_KadexCliente" Width="1.5" PointX="14.75" PointY="27.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_KardexInventario" Width="1.5" PointX="28.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_KardexPrestamos" Width="1.5" PointX="28.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_LibroVentas" Width="1.5" PointX="28.75" PointY="10.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_LibroVentasChacaltaya1" Width="1.5" PointX="28.75" PointY="16.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_LibroVentasChacaltaya2" Width="1.5" PointX="20.75" PointY="28.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.Vr_Mam_Clientes" Width="1.5" PointX="28.75" PointY="22.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_Mam_Conciliacion" Width="1.5" PointX="22.75" PointY="28.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.Vr_Mam_Credito_Cliente" Width="1.5" PointX="16.75" PointY="29.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.Vr_Mam_ProductoVenta" Width="1.5" PointX="24.75" PointY="29.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_MO_GetPedidos" Width="1.5" PointX="30.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_Nota_de_Venta" Width="1.5" PointX="0.75" PointY="30.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_Pagos" Width="1.5" PointX="30.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_ProductosMesas" Width="1.5" PointX="6.75" PointY="30.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_ResumenNotas" Width="1.5" PointX="30.75" PointY="9.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_SaldoCliente" Width="1.5" PointX="30.75" PointY="13.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_stockActual" Width="1.5" PointX="30.75" PointY="16.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_StockDisponible" Width="1.5" PointX="30.75" PointY="20.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_UtilidadPorProducto" Width="1.5" PointX="30.75" PointY="23.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.Vr_VentasVendedor12Meses" Width="1.5" PointX="30.75" PointY="26.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.Vr_VentasVendidas" Width="1.5" PointX="26.75" PointY="30.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_VistaPedido_PrecioCosto" Width="1.5" PointX="8.75" PointY="31.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
