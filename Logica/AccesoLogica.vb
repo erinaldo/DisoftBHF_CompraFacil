@@ -7375,7 +7375,7 @@ Public Class AccesoLogica
     Public Shared Function L_fnCompraGrabar(ByRef numi As String, fdoc As String, prov As String, nfac As String,
                                             obs As String, TCA0011 As DataTable, tven As Integer, fvcr As String,
                                             mon As Integer, desc As Double, total As Double, emision As Integer,
-                                            consigna As Integer, FacturaCompra As DataTable) As Boolean
+                                            consigna As Integer, retencion As Integer, asiento As Integer, FacturaCompra As DataTable) As Boolean
         '@tven, @fvcred, @mon, @est, @desc, @total, @emision, @consigna
         Dim _resultado As Boolean
 
@@ -7397,6 +7397,8 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@total", total))
         _listParam.Add(New Datos.DParametro("@emision", emision))
         _listParam.Add(New Datos.DParametro("@consigna", consigna))
+        _listParam.Add(New Datos.DParametro("@retenc", retencion))
+        _listParam.Add(New Datos.DParametro("@asientoi", asiento))
         _listParam.Add(New Datos.DParametro("@TFC001", "", FacturaCompra))
         _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
 

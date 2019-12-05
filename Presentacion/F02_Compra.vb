@@ -138,6 +138,7 @@ Public Class F02_Compra
     End Sub
 
     Private Sub dgjDetalle_KeyDown(sender As Object, e As KeyEventArgs) Handles dgjDetalle.KeyDown
+
         If (e.KeyData = Keys.Control + Keys.Enter) Then
             P_prArmarAyudaProducto()
         ElseIf (e.KeyData = Keys.Enter) Then
@@ -170,16 +171,16 @@ Public Class F02_Compra
     End Sub
     Public Sub _prCalcularPrecioTotal()
         'Agregado para que Muestre el Subtotal de la compra
-        tbSubtotalC.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("total"), AggregateFunction.Sum)
+        tbSubtotalC.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum)
 
         Dim montodesc As Double = tbMdesc.Value
 
-        tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("total"), AggregateFunction.Sum) - montodesc
+        tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum) - montodesc
 
     End Sub
     Private Sub dgjDetalle_EditingCell(sender As Object, e As EditingCellEventArgs) Handles dgjDetalle.EditingCell
         If (BoNuevo Or BoModificar) Then
-            If (e.Column.Key.Equals("cabcant") Or e.Column.Key.Equals("cabpcom")) Then
+            If (e.Column.Key.Equals("cabcant") Or e.Column.Key.Equals("cabpcom") Or e.Column.Key.Equals("cabporc") Or e.Column.Key.Equals("cabdesc")) Then
                 e.Cancel = False
             Else
                 e.Cancel = True
@@ -192,13 +193,15 @@ Public Class F02_Compra
     Private Sub dgjDetalle_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles dgjDetalle.CellEdited
         If (BoModificar Or BoNuevo) Then
             If ((e.Column.Key.Equals("cabcant")) Or (e.Column.Key.Equals("cabpcom"))) Then
-                If (e.Column.Key.Equals("cabcant")) Then
-                    dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
-                End If
+                'If (e.Column.Key.Equals("cabcant")) Then
+                '    'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+                '    dgjDetalle.SetValue("cabsubtot", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+                'End If
 
-                If (e.Column.Key.Equals("cabpcom")) Then
-                    dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
-                End If
+                'If (e.Column.Key.Equals("cabpcom")) Then
+                '    'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+                '    dgjDetalle.SetValue("cabsubtot", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+                'End If
 
                 If (dgjDetalle.GetValue("cabtca1numi") <> 0) Then
                     dgjDetalle.SetValue("estado", 2)
@@ -562,6 +565,8 @@ Public Class F02_Compra
         Dim total As Double
         Dim emision As String
         Dim consigna As String
+        Dim retencion As String
+        Dim asiento As String
 
 
         If (BoNuevo) Then
@@ -579,14 +584,16 @@ Public Class F02_Compra
                 total = tbtotal.Value
                 emision = IIf(swEmision.Value = True, 1, 0)
                 consigna = IIf(swConsigna.Value = True, 1, 0)
+                retencion = IIf(swRetencion.Value = True, 1, 0)
+                asiento = IIf(swAsiento.Value = True, 1, 0)
 
                 dtiFechaCompra.Select()
 
-                Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcant", "cabpcom", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
+                Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcant", "cabpcom", "cabsubtot", "cabporc", "cabdesc", "cabtot", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
 
                 RecuperarDatosTFC001()  'Recupera datos para grabar en la BDDiconCF en la Tabla TFC001
                 'Grabar
-                Dim res As Boolean = L_fnCompraGrabar(numi, fdoc, prov, nfac, obs, dt, tven, fvcred, mon, desc, total, emision, consigna, _detalleCompras)
+                Dim res As Boolean = L_fnCompraGrabar(numi, fdoc, prov, nfac, obs, dt, tven, fvcred, mon, desc, total, emision, consigna, retencion, asiento, _detalleCompras)
 
                 If (res) Then
                     P_prLimpiar()
@@ -1078,6 +1085,57 @@ Public Class F02_Compra
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = False
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabsubtot")
+            .Caption = "Sub Total"
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabporc")
+            .Caption = "Desc. (%)"
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabdesc")
+            .Caption = "Desc. (Bs)"
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabtot")
+            .Caption = "Total"
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.00"
@@ -1122,6 +1180,41 @@ Public Class F02_Compra
                 sms = sms + vbCrLf + "el proveedor no puede quedar vacio."
             End If
         End If
+        If swEmision.Value = True Then
+            If (tbNroFactura.Text = String.Empty) Then
+                If (sms = String.Empty) Then
+                    sms = "Debe llenar el número de factura."
+                Else
+                    sms = sms + vbCrLf + "Debe llenar el número de factura."
+                End If
+                tbNroFactura.Focus()
+            End If
+            If (tbNAutorizacion.Text = String.Empty) Then
+                If (sms = String.Empty) Then
+                    sms = "Debe llenar el número de autorización."
+                Else
+                    sms = sms + vbCrLf + "Debe llenar el número de autorización."
+                End If
+                tbNAutorizacion.Focus()
+            End If
+            If (tbCodControl.Text = String.Empty) Then
+                If (sms = String.Empty) Then
+                    sms = "Debe llenar el código de control."
+                Else
+                    sms = sms + vbCrLf + "Debe llenar el código de control."
+                End If
+                tbCodControl.Focus()
+            End If
+        Else
+            If (tbNroFactura.Text = String.Empty) Then
+                If (sms = String.Empty) Then
+                    sms = "Debe llenar el número de recibo."
+                Else
+                    sms = sms + vbCrLf + "Debe llenar el número de recibo."
+                End If
+                tbNroFactura.Focus()
+            End If
+        End If
 
         If (Not sms = String.Empty) Then
             ToastNotification.Show(Me,
@@ -1131,6 +1224,7 @@ Public Class F02_Compra
                                    eToastGlowColor.Red,
                                    eToastPosition.TopCenter)
         End If
+
 
         Return (sms = String.Empty)
     End Function
@@ -1199,6 +1293,10 @@ Public Class F02_Compra
         f.Item("cabstockf") = 0
         f.Item("cabtca1numi") = 0
         f.Item("total") = 0
+        f.Item("cabsubtot") = 0
+        f.Item("cabporc") = 0
+        f.Item("cabdesc") = 0
+        f.Item("cabtot") = 0
         f.Item("estado") = 0
 
         DtDetalle.Rows.Add(f)
@@ -1266,31 +1364,169 @@ Public Class F02_Compra
     Private Sub dgjDetalle_CellValueChanged(sender As Object, e As ColumnActionEventArgs) Handles dgjDetalle.CellValueChanged
         If (BoModificar Or BoNuevo) Then
             If ((e.Column.Key.Equals("cabcant")) Or (e.Column.Key.Equals("cabpcom"))) Then
+                Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
+                Dim pos As Integer = -1
+                _fnObtenerFilaDetalle(pos, lin)
                 If (e.Column.Key.Equals("cabcant")) Then
-                    dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+                    'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+
+                    dgjDetalle.SetValue("cabsubtot", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+
                     'CType(dgjBusqueda.DataSource, DataTable).Rows(5).Item("total") = dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom")
                     '_prCalcularPrecioTotal()
 
                 End If
 
                 If (e.Column.Key.Equals("cabpcom")) Then
+                    If (Not IsNumeric(dgjDetalle.GetValue("cabpcom")) Or dgjDetalle.GetValue("cabpcom").ToString = String.Empty) Then
+                        Dim cantidad As Double = dgjDetalle.GetValue("cabcant")
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcom") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcom")
+                        'CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cbptot") = cantidad * CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cbpcost")
 
-                    dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
-                    Dim total As Double = dgjDetalle.GetValue("total")
-                    _prCalcularPrecioTotal()
-                    tbSubtotalC.Text = tbSubtotalC.Value + total
-                    tbtotal.Text = tbSubtotalC.Text
+
+                    Else
+                        'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+
+                        dgjDetalle.SetValue("cabsubtot", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+
+                        Dim porcdesc As Double = dgjDetalle.GetValue("cabporc")
+                        Dim montodesc As Double = ((dgjDetalle.GetValue("cabpcom") * dgjDetalle.GetValue("cabcant")) * (porcdesc / 100))
+
+
+                        Dim totalF As Double = dgjDetalle.GetValue("cabsubtot") - montodesc
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = totalF
+
+                        dgjDetalle.SetValue("cabdesc", montodesc)
+                        dgjDetalle.SetValue("cabtot", totalF)
+
+
+                        'Dim total As Double = dgjDetalle.GetValue("total")
+                        'Dim total As Double = dgjDetalle.GetValue("cabtot")
+                        _prCalcularPrecioTotal()
+                        'tbSubtotalC.Text = tbSubtotalC.Value + total
+                        'tbtotal.Text = tbSubtotalC.Text
+                    End If
+
+                    If (dgjDetalle.GetValue("cabtca1numi") <> 0) Then
+                        dgjDetalle.SetValue("estado", 2)
+                    End If
                 End If
-
-                If (dgjDetalle.GetValue("cabtca1numi") <> 0) Then
-                    dgjDetalle.SetValue("estado", 2)
-                End If
-                'Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable)
-
             End If
+
+
+            '''''''''''''''''''''PORCENTAJE DE DESCUENTO '''''''''''''''''''''
+            If (e.Column.Index = dgjDetalle.RootTable.Columns("cabporc").Index) Then
+                If (Not IsNumeric(dgjDetalle.GetValue("cabporc")) Or dgjDetalle.GetValue("cabporc").ToString = String.Empty) Then
+                    Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
+                    Dim pos As Integer = -1
+                    _fnObtenerFilaDetalle(pos, lin)
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabporc") = 0
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdesc") = 0
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot")
+                Else
+                    If (dgjDetalle.GetValue("cabporc") > 0 And dgjDetalle.GetValue("cabporc") <= 100) Then
+
+                        Dim porcdesc As Double = dgjDetalle.GetValue("cabporc")
+                        Dim montodesc As Double = (dgjDetalle.GetValue("cabsubtot") * (porcdesc / 100))
+                        Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
+                        Dim pos As Integer = -1
+                        _fnObtenerFilaDetalle(pos, lin)
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdesc") = montodesc
+
+
+                        Dim totalF As Double = dgjDetalle.GetValue("cabsubtot") - montodesc
+
+                        dgjDetalle.SetValue("cabdesc", montodesc)
+                        dgjDetalle.SetValue("cabtot", totalF)
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = totalF
+
+                        'Dim total As Double = dgjDetalle.GetValue("total")
+                        'Dim total As Double = dgjDetalle.GetValue("cabtot")
+                        _prCalcularPrecioTotal()
+                        'tbSubtotalC.Text = tbSubtotalC.Value + total
+                        'tbtotal.Text = tbSubtotalC.Text
+                    Else
+                        Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
+                        Dim pos As Integer = -1
+                        _fnObtenerFilaDetalle(pos, lin)
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabporc") = 0
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdesc") = 0
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot")
+                        dgjDetalle.SetValue("cabporc", 0)
+                        dgjDetalle.SetValue("cabdesc", 0)
+                        dgjDetalle.SetValue("cabtot", dgjDetalle.GetValue("cabsubtot"))
+                        _prCalcularPrecioTotal()
+                    End If
+                End If
+            End If
+
+            '''''''''''''''''''''MONTO DE DESCUENTO '''''''''''''''''''''
+            If (e.Column.Index = dgjDetalle.RootTable.Columns("cabdesc").Index) Then
+                If (Not IsNumeric(dgjDetalle.GetValue("cabdesc")) Or dgjDetalle.GetValue("cabdesc").ToString = String.Empty) Then
+
+                    Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
+                    Dim pos As Integer = -1
+                    _fnObtenerFilaDetalle(pos, lin)
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabporc") = 0
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdesc") = 0
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot")
+                Else
+                    If (dgjDetalle.GetValue("cabdesc") > 0 And dgjDetalle.GetValue("cabdesc") <= dgjDetalle.GetValue("cabsubtot")) Then
+
+                        Dim montodesc As Double = dgjDetalle.GetValue("cabdesc")
+                        Dim pordesc As Double = ((montodesc * 100) / dgjDetalle.GetValue("cabsubtot"))
+
+                        Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
+                        Dim pos As Integer = -1
+                        _fnObtenerFilaDetalle(pos, lin)
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdesc") = montodesc
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabporc") = pordesc
+
+                        dgjDetalle.SetValue("cabporc", pordesc)
+
+                        Dim totalF As Double = dgjDetalle.GetValue("cabsubtot") - montodesc
+
+                        dgjDetalle.SetValue("cabdesc", montodesc)
+                        dgjDetalle.SetValue("cabtot", totalF)
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = totalF
+
+                        'Dim total As Double = dgjDetalle.GetValue("total")
+                        'Dim total As Double = dgjDetalle.GetValue("cabtot")
+                        _prCalcularPrecioTotal()
+                        'tbSubtotalC.Text = tbSubtotalC.Value + total
+                        'tbtotal.Text = tbSubtotalC.Text
+
+                    Else
+                        Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
+                        Dim pos As Integer = -1
+                        _fnObtenerFilaDetalle(pos, lin)
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabporc") = 0
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdesc") = 0
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot")
+                        dgjDetalle.SetValue("cabporc", 0)
+                        dgjDetalle.SetValue("cabdesc", 0)
+                        dgjDetalle.SetValue("cabtot", dgjDetalle.GetValue("cabsubtot"))
+                        _prCalcularPrecioTotal()
+
+
+                    End If
+                End If
+            End If
+
+
+
         End If
     End Sub
+    Public Sub _fnObtenerFilaDetalle(ByRef pos As Integer, numi As Integer)
+        For i As Integer = 0 To CType(dgjDetalle.DataSource, DataTable).Rows.Count - 1 Step 1
+            Dim _numi As Integer = CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabnumi")
+            If (_numi = numi) Then
+                pos = i
+                Return
+            End If
+        Next
 
+    End Sub
 
     Private Sub tbMdesc_ValueChanged(sender As Object, e As EventArgs) Handles tbMdesc.ValueChanged
         If (tbMdesc.Focused) Then
@@ -1301,8 +1537,9 @@ Public Class F02_Compra
                     tbMdesc.Value = 0
                     _prCalcularPrecioTotal()
                 Else
+
                     Dim montodesc As Double = tbMdesc.Value
-                    tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("total"), AggregateFunction.Sum) - montodesc
+                    tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum) - montodesc
 
                 End If
 
@@ -1315,6 +1552,8 @@ Public Class F02_Compra
         End If
 
     End Sub
+
+
 
 
 

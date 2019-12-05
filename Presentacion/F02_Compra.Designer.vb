@@ -30,6 +30,10 @@ Partial Class F02_Compra
         Me.tsmiEliminarFilaDetalle = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupPanelDatosGenerales = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.PanelExDatosGenerales = New DevComponents.DotNetBar.PanelEx()
+        Me.swAsiento = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
+        Me.swRetencion = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.LabelX13 = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanelFactura2 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.lbNFactura = New DevComponents.DotNetBar.LabelX()
         Me.tbSACF = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -373,6 +377,10 @@ Partial Class F02_Compra
         Me.PanelExDatosGenerales.AutoScroll = True
         Me.PanelExDatosGenerales.CanvasColor = System.Drawing.Color.Transparent
         Me.PanelExDatosGenerales.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelExDatosGenerales.Controls.Add(Me.swAsiento)
+        Me.PanelExDatosGenerales.Controls.Add(Me.LabelX2)
+        Me.PanelExDatosGenerales.Controls.Add(Me.swRetencion)
+        Me.PanelExDatosGenerales.Controls.Add(Me.LabelX13)
         Me.PanelExDatosGenerales.Controls.Add(Me.GroupPanelFactura2)
         Me.PanelExDatosGenerales.Controls.Add(Me.swConsigna)
         Me.PanelExDatosGenerales.Controls.Add(Me.LabelX12)
@@ -406,6 +414,72 @@ Partial Class F02_Compra
         Me.PanelExDatosGenerales.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelExDatosGenerales.Style.GradientAngle = 90
         Me.PanelExDatosGenerales.TabIndex = 0
+        '
+        'swAsiento
+        '
+        '
+        '
+        '
+        Me.swAsiento.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swAsiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.swAsiento.Location = New System.Drawing.Point(738, 137)
+        Me.swAsiento.Name = "swAsiento"
+        Me.swAsiento.OffBackColor = System.Drawing.Color.RoyalBlue
+        Me.swAsiento.OffText = "NO"
+        Me.swAsiento.OnBackColor = System.Drawing.Color.LightSkyBlue
+        Me.swAsiento.OnText = "SI"
+        Me.swAsiento.Size = New System.Drawing.Size(65, 22)
+        Me.swAsiento.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swAsiento.TabIndex = 384
+        Me.swAsiento.Value = True
+        Me.swAsiento.ValueObject = "Y"
+        Me.swAsiento.Visible = False
+        '
+        'LabelX2
+        '
+        '
+        '
+        '
+        Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX2.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX2.Location = New System.Drawing.Point(681, 137)
+        Me.LabelX2.Name = "LabelX2"
+        Me.LabelX2.Size = New System.Drawing.Size(55, 23)
+        Me.LabelX2.TabIndex = 385
+        Me.LabelX2.Text = "Asiento:"
+        Me.LabelX2.Visible = False
+        '
+        'swRetencion
+        '
+        '
+        '
+        '
+        Me.swRetencion.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swRetencion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.swRetencion.Location = New System.Drawing.Point(610, 137)
+        Me.swRetencion.Name = "swRetencion"
+        Me.swRetencion.OffBackColor = System.Drawing.Color.RoyalBlue
+        Me.swRetencion.OffText = "NO"
+        Me.swRetencion.OnBackColor = System.Drawing.Color.LightSkyBlue
+        Me.swRetencion.OnText = "SI"
+        Me.swRetencion.Size = New System.Drawing.Size(65, 22)
+        Me.swRetencion.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swRetencion.TabIndex = 382
+        '
+        'LabelX13
+        '
+        '
+        '
+        '
+        Me.LabelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX13.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX13.Location = New System.Drawing.Point(524, 134)
+        Me.LabelX13.Name = "LabelX13"
+        Me.LabelX13.Size = New System.Drawing.Size(70, 23)
+        Me.LabelX13.TabIndex = 383
+        Me.LabelX13.Text = "Retención:"
         '
         'GroupPanelFactura2
         '
@@ -1257,4 +1331,8 @@ Partial Class F02_Compra
     Friend WithEvents LabelX9 As DevComponents.DotNetBar.LabelX
     Friend WithEvents tbSubtotalC As DevComponents.Editors.DoubleInput
     Friend WithEvents LabelX10 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents swAsiento As DevComponents.DotNetBar.Controls.SwitchButton
+    Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents swRetencion As DevComponents.DotNetBar.Controls.SwitchButton
+    Friend WithEvents LabelX13 As DevComponents.DotNetBar.LabelX
 End Class
