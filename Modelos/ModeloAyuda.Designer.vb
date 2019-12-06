@@ -102,6 +102,6 @@ Partial Class ModeloAyuda
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents grJBuscador As Janus.Windows.GridEX.GridEX
     Friend WithEvents GPPanelP As DevComponents.DotNetBar.Controls.GroupPanel
+    Public WithEvents grJBuscador As Janus.Windows.GridEX.GridEX
 End Class

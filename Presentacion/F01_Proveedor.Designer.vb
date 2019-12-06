@@ -27,6 +27,9 @@ Partial Class F01_Proveedor
         Me.Dgj1Busqueda = New Janus.Windows.GridEX.GridEX()
         Me.GroupPanelDatosGenerales = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.PanelExDatosGenerales = New DevComponents.DotNetBar.PanelEx()
+        Me.btBuscarCuenta = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
+        Me.tbCuentaProv = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.TbNit = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
@@ -43,6 +46,7 @@ Partial Class F01_Proveedor
         Me.SbEstado = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.TbTelefono = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.TbObs = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.tbNcuenta = New DevComponents.DotNetBar.Controls.TextBoxX()
         CType(Me.MSuperTabControlPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MSuperTabControlPrincipal.SuspendLayout()
         Me.MSuperTabControlPanelRegistro.SuspendLayout()
@@ -285,6 +289,10 @@ Partial Class F01_Proveedor
         Me.PanelExDatosGenerales.AutoScroll = True
         Me.PanelExDatosGenerales.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelExDatosGenerales.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelExDatosGenerales.Controls.Add(Me.tbNcuenta)
+        Me.PanelExDatosGenerales.Controls.Add(Me.btBuscarCuenta)
+        Me.PanelExDatosGenerales.Controls.Add(Me.LabelX9)
+        Me.PanelExDatosGenerales.Controls.Add(Me.tbCuentaProv)
         Me.PanelExDatosGenerales.Controls.Add(Me.LabelX1)
         Me.PanelExDatosGenerales.Controls.Add(Me.TbNit)
         Me.PanelExDatosGenerales.Controls.Add(Me.LabelX2)
@@ -313,6 +321,46 @@ Partial Class F01_Proveedor
         Me.PanelExDatosGenerales.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelExDatosGenerales.Style.GradientAngle = 90
         Me.PanelExDatosGenerales.TabIndex = 16
+        '
+        'btBuscarCuenta
+        '
+        Me.btBuscarCuenta.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btBuscarCuenta.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btBuscarCuenta.Image = Global.Presentacion.My.Resources.Resources.buscar
+        Me.btBuscarCuenta.ImageFixedSize = New System.Drawing.Size(23, 23)
+        Me.btBuscarCuenta.Location = New System.Drawing.Point(757, 33)
+        Me.btBuscarCuenta.Name = "btBuscarCuenta"
+        Me.btBuscarCuenta.Size = New System.Drawing.Size(40, 24)
+        Me.btBuscarCuenta.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btBuscarCuenta.TabIndex = 117
+        '
+        'LabelX9
+        '
+        '
+        '
+        '
+        Me.LabelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX9.Location = New System.Drawing.Point(473, 34)
+        Me.LabelX9.Name = "LabelX9"
+        Me.LabelX9.Size = New System.Drawing.Size(94, 23)
+        Me.LabelX9.TabIndex = 17
+        Me.LabelX9.Text = "*Núm. Cuenta:"
+        '
+        'tbCuentaProv
+        '
+        '
+        '
+        '
+        Me.tbCuentaProv.Border.Class = "TextBoxBorder"
+        Me.tbCuentaProv.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbCuentaProv.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbCuentaProv.Location = New System.Drawing.Point(573, 34)
+        Me.tbCuentaProv.MaxLength = 50
+        Me.tbCuentaProv.Name = "tbCuentaProv"
+        Me.tbCuentaProv.PreventEnterBeep = True
+        Me.tbCuentaProv.Size = New System.Drawing.Size(183, 23)
+        Me.tbCuentaProv.TabIndex = 16
         '
         'LabelX1
         '
@@ -429,7 +477,7 @@ Partial Class F01_Proveedor
         '
         Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX5.Location = New System.Drawing.Point(473, 32)
+        Me.LabelX5.Location = New System.Drawing.Point(473, 81)
         Me.LabelX5.Name = "LabelX5"
         Me.LabelX5.Size = New System.Drawing.Size(94, 23)
         Me.LabelX5.TabIndex = 4
@@ -532,13 +580,29 @@ Partial Class F01_Proveedor
         Me.TbObs.Border.Class = "TextBoxBorder"
         Me.TbObs.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TbObs.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TbObs.Location = New System.Drawing.Point(574, 32)
+        Me.TbObs.Location = New System.Drawing.Point(573, 82)
         Me.TbObs.MaxLength = 200
         Me.TbObs.Multiline = True
         Me.TbObs.Name = "TbObs"
         Me.TbObs.PreventEnterBeep = True
         Me.TbObs.Size = New System.Drawing.Size(200, 60)
         Me.TbObs.TabIndex = 7
+        '
+        'tbNcuenta
+        '
+        '
+        '
+        '
+        Me.tbNcuenta.Border.Class = "TextBoxBorder"
+        Me.tbNcuenta.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbNcuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbNcuenta.Location = New System.Drawing.Point(801, 35)
+        Me.tbNcuenta.MaxLength = 50
+        Me.tbNcuenta.Name = "tbNcuenta"
+        Me.tbNcuenta.PreventEnterBeep = True
+        Me.tbNcuenta.Size = New System.Drawing.Size(32, 23)
+        Me.tbNcuenta.TabIndex = 118
+        Me.tbNcuenta.Visible = False
         '
         'F01_Proveedor
         '
@@ -593,4 +657,8 @@ Partial Class F01_Proveedor
     Friend WithEvents Gp3Proveedores As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents Dgj1Busqueda As Janus.Windows.GridEX.GridEX
     Friend WithEvents PanelExDatosGenerales As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents LabelX9 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents tbCuentaProv As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents btBuscarCuenta As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents tbNcuenta As DevComponents.DotNetBar.Controls.TextBoxX
 End Class

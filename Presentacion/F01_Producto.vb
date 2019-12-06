@@ -315,7 +315,9 @@ Public Class F01_Producto
         P_prArmarComboUnidVenta()
         P_prArmarComboUnidMax()
 
-        _prCargarComboLibreria(cbgrupo1, 101)
+        '_prCargarComboLibreria(cbgrupo1, 101)
+        P_prArmarComboProveedor()
+
         _prCargarComboLibreria(cbgrupo2, 102)
         _prCargarComboLibreria(cbgrupo3, 103)
         _prCargarComboLibreria(cbgrupo4, 104)
@@ -857,6 +859,12 @@ Public Class F01_Producto
         g_prArmarCombo(CbCategoria, Dt, 60, 200, "Código", "Categoría")
     End Sub
 
+    Private Sub P_prArmarComboProveedor()
+        Dim DtP As DataTable
+        DtP = L_fnObtenerProveedor()
+
+        g_prArmarCombo(cbgrupo1, DtP, 60, 200, "COD", "PROVEEDOR")
+    End Sub
     Private Sub P_prArmarComboEmpresa()
         Dim Dt As DataTable
 
@@ -1257,6 +1265,7 @@ Public Class F01_Producto
         End With
     End Sub
 
+
     Private Sub btgrupo1_Click(sender As Object, e As EventArgs) Handles btgrupo1.Click
         Dim numi As String = ""
 
@@ -1320,11 +1329,11 @@ Public Class F01_Producto
         End If
     End Sub
     Private Sub cbgrupo1_ValueChanged(sender As Object, e As EventArgs) Handles cbgrupo1.ValueChanged
-        If cbgrupo1.SelectedIndex < 0 And cbgrupo1.Text <> String.Empty Then
-            btgrupo1.Visible = True
-        Else
-            btgrupo1.Visible = False
-        End If
+        'If cbgrupo1.SelectedIndex < 0 And cbgrupo1.Text <> String.Empty Then
+        '    btgrupo1.Visible = True
+        'Else
+        '    btgrupo1.Visible = False
+        'End If
     End Sub
 
     Private Sub cbgrupo2_ValueChanged(sender As Object, e As EventArgs) Handles cbgrupo2.ValueChanged

@@ -228,7 +228,7 @@ Partial Class F02_Compra
         '
         'MPnUsuario
         '
-        Me.MPnUsuario.Location = New System.Drawing.Point(270, -2)
+        Me.MPnUsuario.Location = New System.Drawing.Point(421, -2)
         '
         'MLbPaginacion
         '
@@ -422,7 +422,7 @@ Partial Class F02_Compra
         '
         Me.swAsiento.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.swAsiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.swAsiento.Location = New System.Drawing.Point(738, 137)
+        Me.swAsiento.Location = New System.Drawing.Point(744, 137)
         Me.swAsiento.Name = "swAsiento"
         Me.swAsiento.OffBackColor = System.Drawing.Color.RoyalBlue
         Me.swAsiento.OffText = "NO"
@@ -443,7 +443,7 @@ Partial Class F02_Compra
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX2.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX2.Location = New System.Drawing.Point(681, 137)
+        Me.LabelX2.Location = New System.Drawing.Point(705, 137)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(55, 23)
         Me.LabelX2.TabIndex = 385
@@ -457,7 +457,7 @@ Partial Class F02_Compra
         '
         Me.swRetencion.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.swRetencion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.swRetencion.Location = New System.Drawing.Point(610, 137)
+        Me.swRetencion.Location = New System.Drawing.Point(747, 109)
         Me.swRetencion.Name = "swRetencion"
         Me.swRetencion.OffBackColor = System.Drawing.Color.RoyalBlue
         Me.swRetencion.OffText = "NO"
@@ -466,6 +466,7 @@ Partial Class F02_Compra
         Me.swRetencion.Size = New System.Drawing.Size(65, 22)
         Me.swRetencion.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.swRetencion.TabIndex = 382
+        Me.swRetencion.Visible = False
         '
         'LabelX13
         '
@@ -475,11 +476,12 @@ Partial Class F02_Compra
         Me.LabelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX13.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX13.Location = New System.Drawing.Point(524, 134)
+        Me.LabelX13.Location = New System.Drawing.Point(706, 108)
         Me.LabelX13.Name = "LabelX13"
         Me.LabelX13.Size = New System.Drawing.Size(70, 23)
         Me.LabelX13.TabIndex = 383
         Me.LabelX13.Text = "Retención:"
+        Me.LabelX13.Visible = False
         '
         'GroupPanelFactura2
         '

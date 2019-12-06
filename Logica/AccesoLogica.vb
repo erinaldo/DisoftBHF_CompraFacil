@@ -2062,6 +2062,18 @@ Public Class AccesoLogica
         Return Tabla
     End Function
 
+    Public Shared Function L_fnObtenerProveedor() As DataTable
+        Dim Tabla As DataTable
+        Dim where As String = ""
+        If (where = String.Empty) Then
+            where = "1=1"
+        Else
+            where = where + " order by a.cmnumi"
+        End If
+
+        Tabla = D_Datos_Tabla("a.cmnumi as [cod], a.cmdesc as [desc]", "TC010 a", where)
+        Return Tabla
+    End Function
     Public Shared Function L_prLibreriaProductoGeneral(cod1 As Integer) As DataTable
         Dim _Tabla As DataTable
 
@@ -4831,7 +4843,7 @@ Public Class AccesoLogica
 
     Public Shared Function L_fnGrabarProveedor(ByRef numi As String, desc As String, telf As String, email As String,
                                                rsocial As String, nit As String, est As String,
-                                               obs As String) As Boolean
+                                               obs As String, cuenta As String) As Boolean
         Dim _resultado As Boolean
 
         Dim _Tabla As DataTable
@@ -4846,6 +4858,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@nit", nit))
         _listParam.Add(New Datos.DParametro("@est", est))
         _listParam.Add(New Datos.DParametro("@obs", obs))
+        _listParam.Add(New Datos.DParametro("@cuenta", cuenta))
         _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
 
         _Tabla = D_ProcedimientoConParam("sp_go_TC010", _listParam)
@@ -4862,7 +4875,7 @@ Public Class AccesoLogica
 
     Public Shared Function L_fnModificarProveedor(ByRef numi As String, desc As String, telf As String, email As String,
                                                   rsocial As String, nit As String, est As String,
-                                                  obs As String) As Boolean
+                                                  obs As String, cuenta As String) As Boolean
         Dim _resultado As Boolean
 
         Dim _Tabla As DataTable
@@ -4877,6 +4890,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@nit", nit))
         _listParam.Add(New Datos.DParametro("@est", est))
         _listParam.Add(New Datos.DParametro("@obs", obs))
+        _listParam.Add(New Datos.DParametro("@cuenta", cuenta))
         _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
 
         _Tabla = D_ProcedimientoConParam("sp_go_TC010", _listParam)
@@ -4909,6 +4923,19 @@ Public Class AccesoLogica
         End If
 
         Return _resultado
+    End Function
+
+    Public Shared Function L_prCuentaGeneralBasico() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 4))
+        '_listParam.Add(New Datos.DParametro("@canumi", _numiEmpresa))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_go_TC010", _listParam)
+
+        Return _Tabla
     End Function
 
 #End Region

@@ -113,6 +113,9 @@ Public Class F01_Proveedor
         End If
     End Sub
 
+    Private Sub btBuscarCuenta_Click(sender As Object, e As EventArgs) Handles btBuscarCuenta.Click
+        P_prArmarAyudaCuentas()
+    End Sub
 #End Region
 
 #Region "Metodos"
@@ -250,6 +253,7 @@ Public Class F01_Proveedor
         Dim nit As String
         Dim est As String
         Dim obs As String
+        Dim cuenta As String
 
         TbNombre.Select()
         If (Nuevo) Then
@@ -261,6 +265,7 @@ Public Class F01_Proveedor
                 email = TbEmail.Text
                 rsocial = TbRazonSocial.Text
                 nit = TbNit.Text
+                cuenta = tbNcuenta.Text
                 If (SbEstado.Value) Then
                     est = "1"
                 Else
@@ -269,7 +274,7 @@ Public Class F01_Proveedor
                 obs = TbObs.Text
 
                 'Grabar cabecera
-                Dim res As Boolean = L_fnGrabarProveedor(numi, desc, telf, email, rsocial, nit, est, obs)
+                Dim res As Boolean = L_fnGrabarProveedor(numi, desc, telf, email, rsocial, nit, est, obs, cuenta)
 
                 If (res) Then
                     P_Limpiar()
@@ -299,6 +304,7 @@ Public Class F01_Proveedor
                 email = TbEmail.Text
                 rsocial = TbRazonSocial.Text
                 nit = TbNit.Text
+                cuenta = tbNcuenta.Text
                 If (SbEstado.Value) Then
                     est = "1"
                 Else
@@ -307,7 +313,7 @@ Public Class F01_Proveedor
                 obs = TbObs.Text
 
                 'Modificar
-                Dim res As Boolean = L_fnModificarProveedor(numi, desc, telf, email, rsocial, nit, est, obs)
+                Dim res As Boolean = L_fnModificarProveedor(numi, desc, telf, email, rsocial, nit, est, obs, cuenta)
 
                 If (res) Then
                     Bool = False
@@ -378,6 +384,8 @@ Public Class F01_Proveedor
         TbObs.ReadOnly = False
         TbRazonSocial.ReadOnly = False
         TbNit.ReadOnly = False
+        tbCuentaProv.ReadOnly = False
+        btBuscarCuenta.Enabled = True
 
         'Botones
         SbEstado.IsReadOnly = False
@@ -391,7 +399,8 @@ Public Class F01_Proveedor
         TbObs.ReadOnly = True
         TbRazonSocial.ReadOnly = True
         TbNit.ReadOnly = True
-
+        tbCuentaProv.ReadOnly = True
+        btBuscarCuenta.Enabled = False
         'Botones
         SbEstado.IsReadOnly = True
     End Sub
@@ -405,6 +414,8 @@ Public Class F01_Proveedor
         TbObs.Clear()
         TbRazonSocial.Clear()
         TbNit.Clear()
+        tbCuentaProv.Clear()
+        tbNcuenta.Clear()
 
         'Botones
         SbEstado.Value = True
@@ -442,8 +453,8 @@ Public Class F01_Proveedor
                 TbNit.Text = .Cells("nit").Value.ToString
                 SbEstado.Value = (.Cells("est").Value.ToString.Equals("ACTIVO"))
                 TbObs.Text = .Cells("obs").Value.ToString
+                tbCuentaProv.Text = .Cells("cmncuenta").Value.ToString
             End With
-
         Else
             If (IndexReg < 0) Then
                 IndexReg = 0
@@ -562,6 +573,15 @@ Public Class F01_Proveedor
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = False
         End With
+        With Dgj1Busqueda.RootTable.Columns(11)
+            .Caption = ""
+            .Key = "cmncuenta"
+            .Width = 0
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.FontSize = gi_fuenteTamano
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = False
+        End With
 
         'Habilitar Filtradores
         With Dgj1Busqueda
@@ -608,7 +628,9 @@ Public Class F01_Proveedor
         If (TbObs.Text = String.Empty) Then
             TbObs.Text = "S/O"
         End If
-
+        If (tbCuentaProv.Text = String.Empty) Then
+            sms = "el campo de la cuenta no puede quedar vacio.".ToUpper
+        End If
         If (Not sms = String.Empty) Then
             ToastNotification.Show(Me, sms.ToUpper,
                        My.Resources.WARNING,
@@ -621,6 +643,59 @@ Public Class F01_Proveedor
 
         Return True
     End Function
+
+
+    Private Sub P_prArmarAyudaCuentas()
+        'Dim frmAyuda As Modelo.ModeloAyuda
+        'Dim dt As DataTable = L_fnObtenerTabla("cmnumi, cmdesc, cmnit", "TC010", "cmest=1")
+        'Dim listEstCeldas As New List(Of Modelo.MCelda)
+        'listEstCeldas.Add(New Modelo.MCelda("cmnumi", True, "Código", 70))
+        'listEstCeldas.Add(New Modelo.MCelda("cmdesc", True, "Proveedor", 280))
+        'listEstCeldas.Add(New Modelo.MCelda("cmnit", False, "Proveedor", 100))
+
+        'frmAyuda = New Modelo.ModeloAyuda(300, 360, dt, "Seleccionar proveedor".ToUpper, listEstCeldas)
+        'frmAyuda.StartPosition = FormStartPosition.CenterScreen
+        'frmAyuda.ShowDialog()
+
+        'If frmAyuda.seleccionado = True Then
+        '    Dim id As String = frmAyuda.filaSelect.Cells("cmnumi").Value
+        '    Dim desc As String = frmAyuda.filaSelect.Cells("cmdesc").Value
+        '    Dim nit As String = frmAyuda.filaSelect.Cells("cmnit").Value
+        '    tbCodProveedor.Text = id
+        '    tbProveedor.Text = desc
+        '    tbNitProv.Text = nit
+        'End If
+
+
+        Dim frmAyuda As Modelo.ModeloAyuda
+        Dim dt As DataTable
+
+        dt = L_prCuentaGeneralBasico()
+
+        Dim listEstCeldas As New List(Of Modelo.MCelda)
+        listEstCeldas.Add(New Modelo.MCelda("canumi", False))
+        listEstCeldas.Add(New Modelo.MCelda("cacta", True, "codigo".ToUpper, 150))
+        listEstCeldas.Add(New Modelo.MCelda("cadesc", True, "cuenta".ToUpper, 450))
+        listEstCeldas.Add(New Modelo.MCelda("camon", True, "moneda".ToUpper, 90))
+        listEstCeldas.Add(New Modelo.MCelda("catipo", False))
+        listEstCeldas.Add(New Modelo.MCelda("cndesc1", True, "tipo".ToUpper, 90))
+
+
+        frmAyuda = New Modelo.ModeloAyuda(350, 250, dt, "seleccione cuenta".ToUpper, listEstCeldas)
+        frmAyuda.ShowDialog()
+
+        If frmAyuda.seleccionado = True Then
+            Dim numiCuenta As String = frmAyuda.filaSelect.Cells("canumi").Value
+            Dim cod As String = frmAyuda.filaSelect.Cells("cacta").Value
+            Dim desc As String = frmAyuda.filaSelect.Cells("cadesc").Value
+
+            tbCuentaProv.Text = cod
+            tbCuentaProv.Tag = numiCuenta
+            tbNcuenta.Text = numiCuenta
+        End If
+
+    End Sub
+
 
 #End Region
 

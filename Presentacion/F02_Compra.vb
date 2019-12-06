@@ -133,8 +133,15 @@ Public Class F02_Compra
     End Sub
 
     Private Sub dgjDetalle_Enter(sender As Object, e As EventArgs) Handles dgjDetalle.Enter
+
+        If (tbCodProveedor.Text = String.Empty) Then
+            ToastNotification.Show(Me, "           Antes de Continuar Por favor Seleccione un Proveedor!!             ", My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
+            tbProveedor.Focus()
+            Return
+        End If
         dgjDetalle.Row = 0
         dgjDetalle.Col = dgjDetalle.RootTable.Columns("cabtc1numi").Index
+
     End Sub
 
     Private Sub dgjDetalle_KeyDown(sender As Object, e As KeyEventArgs) Handles dgjDetalle.KeyDown
@@ -170,12 +177,17 @@ Public Class F02_Compra
         End If
     End Sub
     Public Sub _prCalcularPrecioTotal()
-        'Agregado para que Muestre el Subtotal de la compra
-        tbSubtotalC.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum)
+        ''Agregado para que Muestre el Subtotal de la compra
+        'tbSubtotalC.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum)
+        tbSubtotalC.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabsubtot"), AggregateFunction.Sum)
 
-        Dim montodesc As Double = tbMdesc.Value
+        'Dim montodesc As Double = tbMdesc.Value
+        Dim montodesc As Double = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabdesc"), AggregateFunction.Sum)
 
-        tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum) - montodesc
+        tbMdesc.Value = montodesc
+
+        ' tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum) - montodesc
+        tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabsubtot"), AggregateFunction.Sum) - montodesc
 
     End Sub
     Private Sub dgjDetalle_EditingCell(sender As Object, e As EditingCellEventArgs) Handles dgjDetalle.EditingCell
@@ -352,6 +364,21 @@ Public Class F02_Compra
         'tbProveedor.ReadOnly = Not flat
         tbNroFactura.ReadOnly = Not flat
         tbObs.ReadOnly = Not flat
+        tbNitProv.ReadOnly = Not flat
+        tbNAutorizacion.ReadOnly = Not flat
+        tbCodControl.ReadOnly = Not flat
+        tbNDui.ReadOnly = Not flat
+        tbSACF.ReadOnly = Not flat
+
+        tbMdesc.IsInputReadOnly = Not flat
+
+        If MBtNuevo.Enabled = True Then
+            tbSubtotalC.IsInputReadOnly = Not flat
+            tbtotal.IsInputReadOnly = Not flat
+        Else
+            tbSubtotalC.IsInputReadOnly = flat
+            tbtotal.IsInputReadOnly = flat
+        End If
 
         'ComboBox
 
@@ -363,7 +390,10 @@ Public Class F02_Compra
         btBuscarProveedor.Enabled = flat
 
         'Switch Button
-
+        swTipoVenta.IsReadOnly = Not flat
+        swEmision.IsReadOnly = Not flat
+        swConsigna.IsReadOnly = Not flat
+        swRetencion.IsReadOnly = Not flat
         'Radio Button
 
         'Grillas
@@ -380,6 +410,7 @@ Public Class F02_Compra
         tbNitProv.Clear()
         swEmision.Value = True
         swConsigna.Value = False
+        swRetencion.Value = False
         swTipoVenta.Value = False
         tbFechaVenc.Value = Now.Date
         tbNroFactura.Clear()
@@ -594,6 +625,7 @@ Public Class F02_Compra
                 RecuperarDatosTFC001()  'Recupera datos para grabar en la BDDiconCF en la Tabla TFC001
                 'Grabar
                 Dim res As Boolean = L_fnCompraGrabar(numi, fdoc, prov, nfac, obs, dt, tven, fvcred, mon, desc, total, emision, consigna, retencion, asiento, _detalleCompras)
+
 
                 If (res) Then
                     P_prLimpiar()
@@ -1253,7 +1285,10 @@ Public Class F02_Compra
 
     Private Sub P_prArmarAyudaProducto()
         Dim frmAyuda As Modelo.ModeloAyuda
-        Dim dt As DataTable = L_ProductosGeneral(1, "caest=1 and caserie=0").Tables(0)
+
+        'Dim dt As DataTable = L_ProductosGeneral(1, "caest=1 and caserie=0").Tables(0)
+        Dim dt As DataTable = L_ProductosGeneral(1, "caest=1 and caserie=0 and cagr1= " + tbCodProveedor.Text + " ").Tables(0)
+
         Dim listEstCeldas As New List(Of Modelo.MCelda)
         listEstCeldas.Add(New Modelo.MCelda("canumi", True, "Código", 80))
         listEstCeldas.Add(New Modelo.MCelda("cacod", True, "Cod Flex", 100))
@@ -1395,6 +1430,8 @@ Public Class F02_Compra
 
                         Dim totalF As Double = dgjDetalle.GetValue("cabsubtot") - montodesc
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = totalF
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot") = dgjDetalle.GetValue("cabsubtot")
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdesc") = montodesc
 
                         dgjDetalle.SetValue("cabdesc", montodesc)
                         dgjDetalle.SetValue("cabtot", totalF)
@@ -1439,6 +1476,9 @@ Public Class F02_Compra
                         dgjDetalle.SetValue("cabdesc", montodesc)
                         dgjDetalle.SetValue("cabtot", totalF)
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = totalF
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot") = dgjDetalle.GetValue("cabsubtot")
+
+
 
                         'Dim total As Double = dgjDetalle.GetValue("total")
                         'Dim total As Double = dgjDetalle.GetValue("cabtot")
@@ -1489,6 +1529,7 @@ Public Class F02_Compra
                         dgjDetalle.SetValue("cabdesc", montodesc)
                         dgjDetalle.SetValue("cabtot", totalF)
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = totalF
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot") = dgjDetalle.GetValue("cabsubtot")
 
                         'Dim total As Double = dgjDetalle.GetValue("total")
                         'Dim total As Double = dgjDetalle.GetValue("cabtot")
@@ -1539,7 +1580,8 @@ Public Class F02_Compra
                 Else
 
                     Dim montodesc As Double = tbMdesc.Value
-                    tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum) - montodesc
+                    'tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum) - montodesc
+                    tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabsubtot"), AggregateFunction.Sum) - montodesc
 
                 End If
 

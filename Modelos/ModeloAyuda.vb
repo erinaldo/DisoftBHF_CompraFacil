@@ -1,4 +1,5 @@
 ﻿Imports Janus.Windows.GridEX
+Imports Modelo
 
 Public Class ModeloAyuda
 
@@ -36,14 +37,16 @@ Public Class ModeloAyuda
         'grJBuscador.Row = grJBuscador.FilterRow.RowIndex
         'grJBuscador.Col = 1
         Columna = 2
+
     End Sub
 
     Public Sub _prSeleccionar()
         If (Columna >= 0) Then
             grJBuscador.Select()
-            ''  grJBuscador.Focus()
+            'grJBuscador.Focus()
             grJBuscador.MoveTo(grJBuscador.FilterRow)
             grJBuscador.Col = Columna
+
         End If
     End Sub
 
@@ -82,6 +85,7 @@ Public Class ModeloAyuda
             .DefaultFilterRowComparison = FilterConditionOperator.Contains
             .FilterMode = FilterMode.Automatic
             .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+
             'diseño de la grilla
             .GroupByBoxVisible = False
             .VisualStyle = VisualStyle.Office2007
@@ -123,4 +127,7 @@ Public Class ModeloAyuda
         Me.Close()
     End Sub
 
+    'Public Shared Widening Operator CType(v As ModeloAyuda) As ModeloAyuda
+    '    Throw New NotImplementedException()
+    'End Operator
 End Class
