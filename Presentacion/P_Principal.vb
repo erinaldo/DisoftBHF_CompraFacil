@@ -1166,6 +1166,22 @@ Public Class P_Principal
         frm.Show()
         tab3.Text = frm.Text
     End Sub
+
+    Private Sub btConfDosificacion_Click(sender As Object, e As EventArgs) Handles btConfDosificacion.Click
+        SideNav1.IsMenuExpanded = False
+        FP_Ventana.Select()
+        Dim frm As New F1_Dosificacion
+        Dim tab3 As SuperTabItem = superTabControlVentana.CreateTab(frm.Text)
+        frm._nameButton = btConfDosificacion.Name
+        frm._tab = tab3
+        frm._modulo = FP_Configuracion
+
+        Dim panel As Panel = P_Global._fnCrearPanelVentanas(frm)
+        superTabControlVentana.SelectedTabIndex = superTabControlVentana.Tabs.Count - 1
+        tab3.AttachedControl.Controls.Add(panel)
+        frm.Show()
+        tab3.Text = frm.Text
+    End Sub
 #End Region
 
 #End Region

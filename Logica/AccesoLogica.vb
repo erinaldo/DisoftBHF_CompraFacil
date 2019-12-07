@@ -8685,4 +8685,139 @@ Public Class AccesoLogica
         Return _Tabla
     End Function
 #End Region
+
+
+#Region "TS002 Dosificacion"
+
+    Public Shared Function L_fnEliminarDosificacion(numi As String, ByRef mensaje As String) As Boolean
+        Dim _resultado As Boolean
+        If L_fnbValidarEliminacion(numi, "TS002", "sbnumi", mensaje) = True Then
+            Dim _Tabla As DataTable
+            Dim _listParam As New List(Of Datos.DParametro)
+
+            _listParam.Add(New Datos.DParametro("@tipo", -1))
+            _listParam.Add(New Datos.DParametro("@numi", numi))
+            _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+
+            _Tabla = D_ProcedimientoConParam("sp_go_TS002", _listParam)
+
+            If _Tabla.Rows.Count > 0 Then
+                _resultado = True
+            Else
+                _resultado = False
+            End If
+        Else
+            _resultado = False
+        End If
+        Return _resultado
+    End Function
+
+
+
+    Public Shared Function L_fnGrabarDosificacion(ByRef numi As String, cia As Integer, alm As String, sfc As String,
+                                                  autoriz As String, nfac As Double, key As String, fdel As String,
+                                                  fal As String, nota As String, nota2 As String, est As String) As Boolean
+        Dim _resultado As Boolean
+
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 1))
+        _listParam.Add(New Datos.DParametro("@numi", numi))
+        _listParam.Add(New Datos.DParametro("@cia", cia))
+        _listParam.Add(New Datos.DParametro("@alm", alm))
+        _listParam.Add(New Datos.DParametro("@sfc", sfc))
+        _listParam.Add(New Datos.DParametro("@autoriz", autoriz))
+        _listParam.Add(New Datos.DParametro("@nfac", nfac))
+        _listParam.Add(New Datos.DParametro("@key", key))
+        _listParam.Add(New Datos.DParametro("@fdel", fdel))
+        _listParam.Add(New Datos.DParametro("@fal", fal))
+        _listParam.Add(New Datos.DParametro("@nota", nota))
+        _listParam.Add(New Datos.DParametro("@nota2", nota2))
+        _listParam.Add(New Datos.DParametro("@est", est))
+
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_go_TS002", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            numi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+
+    Public Shared Function L_fnModificarDosificacion(ByRef numi As String, cia As Integer, alm As String, sfc As String,
+                                                     autoriz As String, nfac As Double, key As String, fdel As String,
+                                                     fal As String, nota As String, nota2 As String, est As String) As Boolean
+        Dim _resultado As Boolean
+
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 2))
+        _listParam.Add(New Datos.DParametro("@numi", numi))
+        _listParam.Add(New Datos.DParametro("@cia", cia))
+        _listParam.Add(New Datos.DParametro("@alm", alm))
+        _listParam.Add(New Datos.DParametro("@sfc", sfc))
+        _listParam.Add(New Datos.DParametro("@autoriz", autoriz))
+        _listParam.Add(New Datos.DParametro("@nfac", nfac))
+        _listParam.Add(New Datos.DParametro("@key", key))
+        _listParam.Add(New Datos.DParametro("@fdel", fdel))
+        _listParam.Add(New Datos.DParametro("@fal", fal))
+        _listParam.Add(New Datos.DParametro("@nota", nota))
+        _listParam.Add(New Datos.DParametro("@nota2", nota2))
+        _listParam.Add(New Datos.DParametro("@est", est))
+
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_go_TS002", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            numi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+
+    Public Shared Function L_fnGeneralDosificacion() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 3))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_go_TS002", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_fnListarCompaniaDosificacion() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 4))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_go_TS002", _listParam)
+
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_fnListarAlmacenDosificacion() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 5))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_go_TS002", _listParam)
+
+        Return _Tabla
+    End Function
+
+#End Region
 End Class
