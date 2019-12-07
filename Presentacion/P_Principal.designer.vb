@@ -41,6 +41,7 @@ Partial Class P_Principal
         Me.btConfPersonal = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btConfcategoria = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btConfMesas = New DevComponents.DotNetBar.Metro.MetroTileItem()
+        Me.btConfDosificacion = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.PictureBox01 = New System.Windows.Forms.PictureBox()
         Me.SideNavPanelCompra = New DevComponents.DotNetBar.Controls.SideNavPanel()
         Me.PanelCompra = New System.Windows.Forms.Panel()
@@ -190,7 +191,6 @@ Partial Class P_Principal
         Me.MetroTileItem1 = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btEscRepCronoClasesPrac = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btEscRepHorasTrabajadas = New DevComponents.DotNetBar.Metro.MetroTileItem()
-        Me.btConfDosificacion = New DevComponents.DotNetBar.Metro.MetroTileItem()
         MetroTileFrame1 = New DevComponents.DotNetBar.Metro.MetroTileFrame()
         MetroTileFrame2 = New DevComponents.DotNetBar.Metro.MetroTileFrame()
         Me.SideNav1.SuspendLayout()
@@ -250,12 +250,12 @@ Partial Class P_Principal
         'SideNav1
         '
         Me.SideNav1.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
+        Me.SideNav1.Controls.Add(Me.SideNavPanelPedido)
         Me.SideNav1.Controls.Add(Me.SideNavPaenlConf)
         Me.SideNav1.Controls.Add(Me.SideNavPanelCompra)
         Me.SideNav1.Controls.Add(Me.SideNavPanelRRHH)
         Me.SideNav1.Controls.Add(Me.SideNavPanelInventario)
         Me.SideNav1.Controls.Add(Me.SideNavPanelVenta)
-        Me.SideNav1.Controls.Add(Me.SideNavPanelPedido)
         Me.SideNav1.Controls.Add(Me.SideNavPanelLogistica)
         Me.SideNav1.Controls.Add(Me.SideNavPanelCerrarSesion)
         Me.SideNav1.Controls.Add(Me.SideNavPanelVentana)
@@ -281,6 +281,7 @@ Partial Class P_Principal
         Me.SideNavPaenlConf.Name = "SideNavPaenlConf"
         Me.SideNavPaenlConf.Size = New System.Drawing.Size(1193, 700)
         Me.SideNavPaenlConf.TabIndex = 2
+        Me.SideNavPaenlConf.Visible = False
         '
         'PanelConf
         '
@@ -572,6 +573,28 @@ Partial Class P_Principal
         Me.btConfMesas.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
         Me.btConfMesas.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btConfMesas.TitleTextColor = System.Drawing.Color.Red
+        '
+        'btConfDosificacion
+        '
+        Me.btConfDosificacion.Image = Global.Presentacion.My.Resources.Resources.FORMULARIOS
+        Me.btConfDosificacion.ImageTextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btConfDosificacion.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Center
+        Me.btConfDosificacion.Name = "btConfDosificacion"
+        Me.btConfDosificacion.SymbolColor = System.Drawing.Color.Empty
+        Me.btConfDosificacion.Text = "DOSIFICACION"
+        Me.btConfDosificacion.TileColor = DevComponents.DotNetBar.Metro.eMetroTileColor.Blue
+        Me.btConfDosificacion.TileSize = New System.Drawing.Size(250, 135)
+        '
+        '
+        '
+        Me.btConfDosificacion.TileStyle.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.btConfDosificacion.TileStyle.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btConfDosificacion.TileStyle.BackColorGradientType = DevComponents.DotNetBar.eGradientType.Radial
+        Me.btConfDosificacion.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.btConfDosificacion.TileStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btConfDosificacion.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
+        Me.btConfDosificacion.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btConfDosificacion.TitleTextColor = System.Drawing.Color.Red
         '
         'PictureBox01
         '
@@ -1751,12 +1774,11 @@ Partial Class P_Principal
         Me.SideNavPanelPedido.Controls.Add(Me.PanelPedido)
         Me.SideNavPanelPedido.Controls.Add(Me.PictureBox03)
         Me.SideNavPanelPedido.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanelPedido.Location = New System.Drawing.Point(189, 44)
+        Me.SideNavPanelPedido.Location = New System.Drawing.Point(165, 40)
         Me.SideNavPanelPedido.Margin = New System.Windows.Forms.Padding(4)
         Me.SideNavPanelPedido.Name = "SideNavPanelPedido"
-        Me.SideNavPanelPedido.Size = New System.Drawing.Size(1167, 695)
+        Me.SideNavPanelPedido.Size = New System.Drawing.Size(1193, 700)
         Me.SideNavPanelPedido.TabIndex = 156
-        Me.SideNavPanelPedido.Visible = False
         '
         'PanelPedido
         '
@@ -1765,7 +1787,7 @@ Partial Class P_Principal
         Me.PanelPedido.Location = New System.Drawing.Point(0, 0)
         Me.PanelPedido.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelPedido.Name = "PanelPedido"
-        Me.PanelPedido.Size = New System.Drawing.Size(1167, 555)
+        Me.PanelPedido.Size = New System.Drawing.Size(1193, 560)
         Me.PanelPedido.TabIndex = 6
         '
         'MetroTilePanelPedido
@@ -1790,7 +1812,7 @@ Partial Class P_Principal
         Me.MetroTilePanelPedido.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroTilePanelPedido.MultiLine = True
         Me.MetroTilePanelPedido.Name = "MetroTilePanelPedido"
-        Me.MetroTilePanelPedido.Size = New System.Drawing.Size(1167, 555)
+        Me.MetroTilePanelPedido.Size = New System.Drawing.Size(1193, 560)
         Me.MetroTilePanelPedido.TabIndex = 2
         Me.MetroTilePanelPedido.Text = "mtp2Logistica"
         '
@@ -2006,10 +2028,10 @@ Partial Class P_Principal
         '
         Me.PictureBox03.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox03.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PictureBox03.Location = New System.Drawing.Point(0, 555)
+        Me.PictureBox03.Location = New System.Drawing.Point(0, 560)
         Me.PictureBox03.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox03.Name = "PictureBox03"
-        Me.PictureBox03.Size = New System.Drawing.Size(1167, 140)
+        Me.PictureBox03.Size = New System.Drawing.Size(1193, 140)
         Me.PictureBox03.TabIndex = 5
         Me.PictureBox03.TabStop = False
         Me.PictureBox03.Visible = False
@@ -2713,7 +2735,6 @@ Partial Class P_Principal
         '
         'FP_Configuracion
         '
-        Me.FP_Configuracion.Checked = True
         Me.FP_Configuracion.Name = "FP_Configuracion"
         Me.FP_Configuracion.Panel = Me.SideNavPaenlConf
         Me.FP_Configuracion.Symbol = ""
@@ -2728,6 +2749,7 @@ Partial Class P_Principal
         '
         'FP_Pedido
         '
+        Me.FP_Pedido.Checked = True
         Me.FP_Pedido.Name = "FP_Pedido"
         Me.FP_Pedido.Panel = Me.SideNavPanelPedido
         Me.FP_Pedido.Symbol = ""
@@ -3019,28 +3041,6 @@ Partial Class P_Principal
         '
         Me.btEscRepHorasTrabajadas.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.btEscRepHorasTrabajadas.TitleText = "VEHICULO"
-        '
-        'btConfDosificacion
-        '
-        Me.btConfDosificacion.Image = Global.Presentacion.My.Resources.Resources.FORMULARIOS
-        Me.btConfDosificacion.ImageTextAlignment = System.Drawing.ContentAlignment.MiddleCenter
-        Me.btConfDosificacion.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Center
-        Me.btConfDosificacion.Name = "btConfDosificacion"
-        Me.btConfDosificacion.SymbolColor = System.Drawing.Color.Empty
-        Me.btConfDosificacion.Text = "DOSIFICACION"
-        Me.btConfDosificacion.TileColor = DevComponents.DotNetBar.Metro.eMetroTileColor.Blue
-        Me.btConfDosificacion.TileSize = New System.Drawing.Size(250, 135)
-        '
-        '
-        '
-        Me.btConfDosificacion.TileStyle.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.btConfDosificacion.TileStyle.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btConfDosificacion.TileStyle.BackColorGradientType = DevComponents.DotNetBar.eGradientType.Radial
-        Me.btConfDosificacion.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.btConfDosificacion.TileStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btConfDosificacion.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
-        Me.btConfDosificacion.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
-        Me.btConfDosificacion.TitleTextColor = System.Drawing.Color.Red
         '
         'P_Principal
         '

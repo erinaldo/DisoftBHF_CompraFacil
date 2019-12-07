@@ -7575,6 +7575,37 @@ Public Class AccesoLogica
         Return _Tabla
     End Function
 
+
+    Public Shared Function L_prObtenerDetallePedidoFactura(numi As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 19))
+        _listParam.Add(New Datos.DParametro("@numi", numi))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
+        Return _Tabla
+    End Function
+
+    Public Shared Function GrabarTV001(numi As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 20))
+        _listParam.Add(New Datos.DParametro("@numi", numi))
+        _listParam.Add(New Datos.DParametro("@oluact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
+        Return _Tabla
+    End Function
+
+    Public Shared Function updateTO001C(numi As String, NumFactura As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 21))
+        _listParam.Add(New Datos.DParametro("@numi", numi))
+        _listParam.Add(New Datos.DParametro("@nrofactura", NumFactura))
+        _listParam.Add(New Datos.DParametro("@oluact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
+        Return _Tabla
+    End Function
+
     Public Shared Function L_prObtenerDetalleDeCaja(numi As String) As DataTable
         Dim _Tabla As DataTable
         Dim _listParam As New List(Of Datos.DParametro)
@@ -8024,6 +8055,16 @@ Public Class AccesoLogica
         Dim _listParam As New List(Of Datos.DParametro)
         _listParam.Add(New Datos.DParametro("@tipo", 6))
         _Tabla = D_ProcedimientoConParam("sp_Mam_ReporteVentas", _listParam)
+        Return _Tabla
+    End Function
+
+
+    Public Shared Function L_prObtenerDetallePedido(numi As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 18))
+        _listParam.Add(New Datos.DParametro("@numi", numi))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
         Return _Tabla
     End Function
 
@@ -8817,6 +8858,248 @@ Public Class AccesoLogica
         _Tabla = D_ProcedimientoConParam("sp_go_TS002", _listParam)
 
         Return _Tabla
+    End Function
+
+#End Region
+
+#Region "Facturar"
+
+    Public Shared Sub L_Grabar_Factura(_Numi As String, _Fecha As String, _Nfac As String, _NAutoriz As String, _Est As String,
+                                       _NitCli As String, _CodCli As String, _DesCli1 As String, _DesCli2 As String,
+                                       _A As String, _B As String, _C As String, _D As String, _E As String, _F As String,
+                                       _G As String, _H As String, _CodCon As String, _FecLim As String,
+                                       _Imgqr As String, _Alm As String, _Numi2 As String)
+        Dim Sql As String
+        Try
+            Sql = "" + _Numi + ", " _
+                + "'" + _Fecha + "', " _
+                + "" + _Nfac + ", " _
+                + "" + _NAutoriz + ", " _
+                + "" + _Est + ", " _
+                + "'" + _NitCli + "', " _
+                + "" + _CodCli + ", " _
+                + "'" + _DesCli1 + "', " _
+                + "'" + _DesCli2 + "', " _
+                + "" + _A + ", " _
+                + "" + _B + ", " _
+                + "" + _C + ", " _
+                + "" + _D + ", " _
+                + "" + _E + ", " _
+                + "" + _F + ", " _
+                + "" + _G + ", " _
+                + "" + _H + ", " _
+                + "'" + _CodCon + "', " _
+                + "'" + _FecLim + "', " _
+                + "" + _Imgqr + ", " _
+                + "" + _Alm + ", " _
+                + "" + _Numi2 + ""
+
+            D_Insertar_Datos("TFV001", Sql)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Public Shared Sub L_Modificar_Factura(Where As String, Optional _Fecha As String = "",
+                                          Optional _Nfact As String = "", Optional _NAutoriz As String = "",
+                                          Optional _Est As String = "", Optional _NitCli As String = "",
+                                          Optional _CodCli As String = "", Optional _DesCli1 As String = "",
+                                          Optional _DesCli2 As String = "", Optional _A As String = "",
+                                          Optional _B As String = "", Optional _C As String = "",
+                                          Optional _D As String = "", Optional _E As String = "",
+                                          Optional _F As String = "", Optional _G As String = "",
+                                          Optional _H As String = "", Optional _CodCon As String = "",
+                                          Optional _FecLim As String = "", Optional _Imgqr As String = "",
+                                          Optional _Alm As String = "", Optional _Numi2 As String = "")
+        Dim Sql As String
+        Try
+            Sql = IIf(_Fecha.Equals(""), "", "fvafec = '" + _Fecha + "', ") +
+              IIf(_Nfact.Equals(""), "", "fvanfac = " + _Nfact + ", ") +
+              IIf(_NAutoriz.Equals(""), "", "fvaautoriz = " + _NAutoriz + ", ") +
+              IIf(_Est.Equals(""), "", "fvaest = " + _Est) +
+              IIf(_NitCli.Equals(""), "", "fvanitcli = '" + _NitCli + "', ") +
+              IIf(_CodCli.Equals(""), "", "fvacodcli = " + _CodCli + ", ") +
+              IIf(_DesCli1.Equals(""), "", "fvadescli1 = '" + _DesCli1 + "', ") +
+              IIf(_DesCli2.Equals(""), "", "fvadescli2 = '" + _DesCli2 + "', ") +
+              IIf(_A.Equals(""), "", "fvastot = " + _A + ", ") +
+              IIf(_B.Equals(""), "", "fvaimpsi = " + _B + ", ") +
+              IIf(_C.Equals(""), "", "fvaimpeo = " + _C + ", ") +
+              IIf(_D.Equals(""), "", "fvaimptc = " + _D + ", ") +
+              IIf(_E.Equals(""), "", "fvasubtotal = " + _E + ", ") +
+              IIf(_F.Equals(""), "", "fvadesc = " + _F + ", ") +
+              IIf(_G.Equals(""), "", "fvatotal = " + _G + ", ") +
+              IIf(_H.Equals(""), "", "fvadebfis = " + _H + ", ") +
+              IIf(_CodCon.Equals(""), "", "fvaccont = '" + _CodCon + "', ") +
+              IIf(_FecLim.Equals(""), "", "fvaflim = '" + _FecLim + "', ") +
+              IIf(_Imgqr.Equals(""), "", "fvaimgqr = '" + _Imgqr + "', ") +
+              IIf(_Alm.Equals(""), "", "fvaalm = " + _Alm + ", ") +
+              IIf(_Numi2.Equals(""), "", "fvanumi2 = " + _Numi2 + ", ")
+            Sql = Sql.Trim
+            If (Sql.Substring(Sql.Length - 1, 1).Equals(",")) Then
+                Sql = Sql.Substring(0, Sql.Length - 1)
+            End If
+
+            D_Modificar_Datos("TFV001", Sql, Where)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
+    Public Shared Sub L_Grabar_Factura_Detalle(_Numi As String, _CodProd As String, _DescProd As String, _Cant As String, _Precio As String, _Numi2 As String)
+        Dim Sql As String
+        Try
+            Sql = _Numi + ", '" + _CodProd + "', '" + _DescProd + "', " + _Cant + ", " + _Precio + ", " + _Numi2
+
+            D_Insertar_Datos("TFV0011", Sql)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Public Shared Function L_Reporte_Factura(_Numi As String, _Numi2 As String) As DataSet
+        Dim _Tabla As DataTable
+        Dim _Ds As New DataSet
+        Dim _Where As String
+        _Where = " fvanumi = " + _Numi + " and fvanumi2 = " + _Numi2
+
+        _Tabla = D_Datos_Tabla("*", "VR_GO_Factura", _Where)
+        _Ds.Tables.Add(_Tabla)
+        Return _Ds
+    End Function
+
+    Public Shared Function L_Reporte_Factura_Cia(_Cia As String) As DataSet
+        Dim _Tabla As DataTable
+        Dim _Ds As New DataSet
+        Dim _Where As String
+        _Where = " scnumi = " + _Cia
+
+        _Tabla = D_Datos_Tabla("*", "TS003", _Where)
+        _Ds.Tables.Add(_Tabla)
+        Return _Ds
+    End Function
+
+    Public Shared Function L_ObtenerRutaImpresora(_NroImp As String, Optional tImp As String = "") As DataSet
+        Dim _Tabla As DataTable
+        Dim _Ds As New DataSet
+        Dim _Where As String
+        If (Not _NroImp.Trim.Equals("")) Then
+            _Where = " cbnumi = " + _NroImp + " and cbest = 1 order by cbnumi"
+        Else
+            _Where = " cbtimp = " + tImp + " and cbest = 1 order by cbnumi"
+        End If
+        _Tabla = D_Datos_Tabla("*", "TC002", _Where)
+        _Ds.Tables.Add(_Tabla)
+        Return _Ds
+    End Function
+
+    Public Shared Function L_fnGetIVA() As DataTable
+        Dim _Tabla As DataTable
+        Dim _Where As String
+        _Where = "1 = 1"
+        _Tabla = D_Datos_Tabla("scdebfis", "TS003", _Where)
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_fnGetICE() As DataTable
+        Dim _Tabla As DataTable
+        Dim _Where As String
+        _Where = "1 = 1"
+        _Tabla = D_Datos_Tabla("scice", "TS003", _Where)
+        Return _Tabla
+    End Function
+
+    Public Shared Sub L_Grabar_Nit(_Nit As String, _Nom1 As String, _Nom2 As String)
+        Dim _Err As Boolean
+        Dim _Nom01, _Nom02 As String
+        Dim Sql As String
+        _Nom01 = ""
+        _Nom02 = ""
+        L_Validar_Nit(_Nit, _Nom01, _Nom02)
+
+        If _Nom01 = "" Then
+            Sql = _Nit + ", '" + _Nom1 + "', '" + _Nom2 + "'"
+            _Err = D_Insertar_Datos("TS001", Sql)
+        Else
+            If (_Nom1 <> _Nom01) Or (_Nom2 <> _Nom02) Then
+                Sql = "sanom1 = '" + _Nom1 + "' " +
+                      IIf(_Nom02.ToString.Trim.Equals(""), "", ", sanom2 = '" + _Nom2 + "', ")
+                _Err = D_Modificar_Datos("TS001", Sql, "sanit = " + _Nit)
+            End If
+        End If
+
+    End Sub
+
+    Public Shared Sub L_Validar_Nit(_Nit As String, ByRef _Nom1 As String, ByRef _Nom2 As String)
+        Dim _Tabla As DataTable
+
+        _Tabla = D_Datos_Tabla("*", "TS001", "sanit = '" + _Nit + "'")
+
+        If _Tabla.Rows.Count > 0 Then
+            _Nom1 = _Tabla.Rows(0).Item(2)
+            _Nom2 = IIf(_Tabla.Rows(0).Item(3).ToString.Trim.Equals(""), "", _Tabla.Rows(0).Item(3))
+        End If
+    End Sub
+
+    Public Shared Function L_Eliminar_Nit(_Nit As String) As Boolean
+        Dim res As Boolean = False
+        Try
+            res = D_Eliminar_Datos("TS001", "sanit = " + _Nit)
+        Catch ex As Exception
+            res = False
+        End Try
+        Return res
+    End Function
+
+    Public Shared Function L_Dosificacion(_cia As String, _alm As String, _fecha As String) As DataSet
+        Dim _Tabla As DataTable
+        Dim _Ds As New DataSet
+        Dim _Where As String
+        _fecha = Now.Date.ToString("yyyy/MM/dd")
+        _Where = "yecia = " + _cia + " AND yealm = " + _alm + " AND yefdel <= '" + _fecha + "' AND yefal >= '" + _fecha + "' AND yeap = 1"
+
+        _Tabla = D_Datos_Tabla("*", "TS002", _Where)
+        _Ds.Tables.Add(_Tabla)
+        Return _Ds
+    End Function
+
+    Public Shared Sub L_Actualiza_Dosificacion(_Numi As String, _NumFac As String, _Numi2 As String)
+        Dim _Err As Boolean
+        Dim Sql, _where As String
+        Sql = "yenunf = " + _NumFac
+        _where = "yenumi = " + _Numi
+
+        _Err = D_Modificar_Datos("TS002", Sql, _where)
+    End Sub
+
+    Public Shared Function L_fnObtenerMaxIdTabla(tabla As String, campo As String, where As String) As Long
+        Dim Dt As DataTable = New DataTable
+        Dt = D_Maximo(tabla, campo, where)
+
+        If (Dt.Rows.Count > 0) Then
+            If (Dt.Rows(0).Item(0).ToString.Equals("")) Then
+                Return 0
+            Else
+                Return CLng(Dt.Rows(0).Item(0).ToString)
+            End If
+        Else
+            Return 0
+        End If
+    End Function
+
+
+
+    Public Shared Function L_fnObtenerDatoTabla(tabla As String, campo As String, where As String) As String
+        Dim Dt As DataTable = D_Datos_Tabla(campo, tabla, where)
+        If (Dt.Rows.Count > 0) Then
+            Return Dt.Rows(0).Item(campo).ToString
+        Else
+            Return ""
+        End If
+    End Function
+
+    Public Shared Function L_fnEliminarDatos(Tabla As String, Where As String) As Boolean
+        Return D_Eliminar_Datos(Tabla, Where)
     End Function
 
 #End Region

@@ -1626,6 +1626,10 @@
       <Project>{2ebbf2b3-4cbc-4df6-9586-2f6b333e6746}</Project>
       <Name>ENTITY</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Facturacion\Facturacion.vbproj">
+      <Project>{49d8fccb-6e29-4320-ad90-ab16f88b84d8}</Project>
+      <Name>Facturacion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logica\Logica.vbproj">
       <Project>{3a0a5b43-af28-4516-86a6-420d336524a8}</Project>
       <Name>Logica</Name>
