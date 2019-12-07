@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Logica", "Logica\Logica.vbproj", "{3A0A5B43-AF28-4516-86A6-420D336524A8}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{1ED1C4EA-25BD-40A8-94BA-3902C8726E21}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{F7BA1704-E3DC-4A79-9F6D-6DBB5BA3A66C}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Facturacion", "Facturacion\Facturacion.vbproj", "{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,6 +167,18 @@ Global
 		{F7BA1704-E3DC-4A79-9F6D-6DBB5BA3A66C}.Release|Any CPU.ActiveCfg = Release
 		{F7BA1704-E3DC-4A79-9F6D-6DBB5BA3A66C}.Release|x64.ActiveCfg = Release
 		{F7BA1704-E3DC-4A79-9F6D-6DBB5BA3A66C}.Release|x86.ActiveCfg = Release
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Debug|x64.Build.0 = Debug|Any CPU
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Debug|x86.ActiveCfg = Debug|x86
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Debug|x86.Build.0 = Debug|x86
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Release|x64.ActiveCfg = Release|Any CPU
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Release|x64.Build.0 = Release|Any CPU
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Release|x86.ActiveCfg = Release|x86
+		{49D8FCCB-6E29-4320-AD90-AB16F88B84D8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

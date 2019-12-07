@@ -7385,6 +7385,105 @@ Public Class AccesoLogica
         Return _Tabla
     End Function
 
+    Public Shared Function L_prServicioListarCuentas(id As String, proveedor As String) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 10))
+        _listParam.Add(New Datos.DParametro("@seuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@proveedor", proveedor))
+        _listParam.Add(New Datos.DParametro("@Id", id))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Asiento", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_prObtenerPlantila(id As String) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 35))
+        _listParam.Add(New Datos.DParametro("@seuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@Id", id))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Asiento", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_prComprobanteGrabarIntegracion(ByRef _numi As String, _numDoc As String, _tipo As String, _anio As String, _mes As String, _num As String, _fecha As String, _tipoCambio As String, _glosa As String, _obs As String, _numiEmpresa As String, _detalle As DataTable, _ifnumi As String, _ifto001numi As Integer, _iftc As Double,
+                                                            _iffechai As String, _iffechaf As String, _ifest As Integer, _sucursal As Integer,
+                                                            tipo As Integer, factura As Integer, fechai As String, fechaf As String, _oaTipo As Integer) As Boolean
+        Dim _resultado As Boolean
+
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 1))
+
+        _listParam.Add(New Datos.DParametro("@oanumdoc", _numDoc))
+        _listParam.Add(New Datos.DParametro("@oatip", _oaTipo))
+        _listParam.Add(New Datos.DParametro("@oaano", _anio))
+        _listParam.Add(New Datos.DParametro("@oames", _mes))
+        '_listParam.Add(New Datos.DParametro("@oanum", _num))
+        _listParam.Add(New Datos.DParametro("@oafdoc", _fecha))
+        _listParam.Add(New Datos.DParametro("@oatc", _tipoCambio))
+        _listParam.Add(New Datos.DParametro("@oaglosa", ""))
+        _listParam.Add(New Datos.DParametro("@oaobs", ""))
+        _listParam.Add(New Datos.DParametro("@oaemp", _numiEmpresa))
+        _listParam.Add(New Datos.DParametro("@TI005", "", _detalle))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        '@ifnumi int =-1,@ifto001numi int=-1,@iftc decimal(18,2)=null,
+        '					 @iffechai date=null,@iffechaf date=null,@ifest int=-1
+        _listParam.Add(New Datos.DParametro("@ifnumi", _ifnumi))
+        _listParam.Add(New Datos.DParametro("@ifto001numi", _ifto001numi))
+        _listParam.Add(New Datos.DParametro("@iftc", _iftc))
+        _listParam.Add(New Datos.DParametro("@iffechai", _iffechai))
+        _listParam.Add(New Datos.DParametro("@iffechaf", _iffechaf))
+        _listParam.Add(New Datos.DParametro("@ifest", _ifest))
+        _listParam.Add(New Datos.DParametro("@ifsuc", 1))  ''' Sucursal
+        _listParam.Add(New Datos.DParametro("@plantilla", _sucursal))  '''Plantilla
+
+        _listParam.Add(New Datos.DParametro("@modulo", tipo))
+        _listParam.Add(New Datos.DParametro("@factura", factura))
+        _listParam.Add(New Datos.DParametro("@fechaI", fechai))
+        _listParam.Add(New Datos.DParametro("@fechaF", fechaf))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TI005", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            _numi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+
+
+
+    Public Shared Function L_prCuentaDiferencia(_cuenta As String) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 26))
+        _listParam.Add(New Datos.DParametro("@cuenta", _cuenta))
+        _listParam.Add(New Datos.DParametro("@seuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Asiento", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_prObtenerDetallePlantilla(cuenta As String, id As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 37))
+        _listParam.Add(New Datos.DParametro("@seuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@Id", id))
+        _listParam.Add(New Datos.DParametro("@cuenta", cuenta))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Asiento", _listParam)
+
+        Return _Tabla
+    End Function
+
     Public Shared Function L_fnCompraDetalle(numi As String) As DataTable
         Dim _Tabla As DataTable
 
