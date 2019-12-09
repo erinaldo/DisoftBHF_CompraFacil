@@ -379,6 +379,7 @@ Public Class F02_Compra
         Else
             tbSubtotalC.IsInputReadOnly = flat
             tbtotal.IsInputReadOnly = flat
+            tbNitProv.ReadOnly = flat
         End If
 
         'ComboBox
@@ -546,6 +547,28 @@ Public Class F02_Compra
     End Sub
 
     Private Sub P_prEliminarRegistro()
+        'Verifica Pagos de la compra
+        If (swTipoVenta.Value = False) Then
+            Dim res1 As Boolean = L_fnVerificarPagosCompras(tbCodigo.Text)
+            If res1 Then
+                Dim img As Bitmap = New Bitmap(My.Resources.WARNING, 50, 50)
+                ToastNotification.Show(Me, "No se puede eliminar la Compra con código ".ToUpper + tbCodigo.Text + ", porque tiene pagos realizados, por favor primero elimine los pagos correspondientes a esta compra".ToUpper,
+                                          img, 5000,
+                                          eToastGlowColor.Green,
+                                          eToastPosition.TopCenter)
+
+                Exit Sub
+            End If
+        End If
+
+        'Verifica si ya se contabilizó la compra
+        Dim contabilizo As Boolean = L_fnVerificarSiSeContabilizo(tbCodigo.Text)
+        If contabilizo Then
+            Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+            ToastNotification.Show(Me, "La Compra no puede ser Eliminada porque ya fue contabilizada".ToUpper, img, 4500, eToastGlowColor.Red, eToastPosition.TopCenter)
+        End If
+
+
         Dim numi As String = tbCodigo.Text 'Valor del código único
         Dim info As New TaskDialogInfo("¿esta seguro de eliminar el registro?".ToUpper,
                                        eTaskDialogIcon.Delete, "advertencia".ToUpper,
@@ -624,6 +647,9 @@ Public Class F02_Compra
                 Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcant", "cabpcom", "cabsubtot", "cabporc", "cabdesc", "cabtot", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
 
                 RecuperarDatosTFC001()  'Recupera datos para grabar en la BDDiconCF en la Tabla TFC001
+                If ValidarDescuentos() = False Then
+                    Exit Sub
+                End If
                 'Grabar
                 Dim res As Boolean = L_fnCompraGrabar(numi, fdoc, prov, nfac, obs, dt, tven, fvcred, mon, desc, total, emision, consigna, retencion, asiento, _detalleCompras)
 
@@ -656,13 +682,24 @@ Public Class F02_Compra
                 prov = tbCodProveedor.Text.Trim
                 nfac = IIf(tbNroFactura.Text.Trim = String.Empty, "0", tbNroFactura.Text.Trim)
                 obs = tbObs.Text.Trim
+                tven = IIf(swTipoVenta.Value = True, 1, 0)
+                fvcred = IIf(swTipoVenta.Value = True, Now.Date.ToString("yyyy/MM/dd"), tbFechaVenc.Value.ToString("yyyy/MM/dd"))
+                mon = 1
+                desc = tbMdesc.Value
+                total = tbtotal.Value
+                emision = IIf(swEmision.Value = True, 1, 0)
+                consigna = IIf(swConsigna.Value = True, 1, 0)
+                retencion = IIf(swRetencion.Value = True, 1, 0)
+                asiento = IIf(swAsiento.Value = True, 1, 0)
 
                 dtiFechaCompra.Select()
 
-                Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcant", "cabpcom", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
+                'Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcant", "cabpcom", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
+                Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcant", "cabpcom", "cabsubtot", "cabporc", "cabdesc", "cabtot", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
 
+                RecuperarDatosTFC001()  'Recupera datos para grabar en la BDDiconCF en la Tabla TFC001
                 'Grabar
-                Dim res As Boolean = L_fnCompraModificar(numi, fdoc, prov, nfac, obs, dt)
+                Dim res As Boolean = L_fnCompraModificar(numi, fdoc, prov, nfac, obs, dt, tven, fvcred, mon, desc, total, emision, consigna, retencion, asiento, _detalleCompras)
 
                 If (res) Then
 
@@ -1575,23 +1612,20 @@ Public Class F02_Compra
         If (tbMdesc.Focused) Then
 
             Dim total As Double = tbtotal.Value
-            If (Not tbMdesc.Text = String.Empty And Not tbMdesc.Text = String.Empty) Then
+            If (Not tbMdesc.Text = String.Empty) Then
                 If (tbMdesc.Value = 0 Or tbMdesc.Value > total) Then
                     tbMdesc.Value = 0
                     _prCalcularPrecioTotal()
                 Else
-
                     Dim montodesc As Double = tbMdesc.Value
                     'tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum) - montodesc
                     tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabsubtot"), AggregateFunction.Sum) - montodesc
-
                 End If
 
             End If
 
             If (tbMdesc.Text = String.Empty) Then
                 tbMdesc.Value = 0
-
             End If
         End If
 
@@ -1780,6 +1814,64 @@ Public Class F02_Compra
             res = num
         End If
         Return res
+    End Function
+
+    Private Sub tbMdesc_KeyDown(sender As Object, e As KeyEventArgs) Handles tbMdesc.KeyDown
+        If (e.KeyData = Keys.Enter) Then
+            If ValidarDescuentos() = False Then
+                Exit Sub
+            End If
+
+
+            'Dim descpar As Double = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabdesc"), AggregateFunction.Sum)
+            'Dim montodesc As Double = tbMdesc.Value
+
+            'If montodesc < descpar Then
+            '    ToastNotification.Show(Me, "El monto no puede ser menor a: ".ToUpper + descpar.ToString + ", intente nuevamente.".ToUpper,
+            '                                   My.Resources.WARNING, InDuracion * 1000,
+            '                                   eToastGlowColor.Red,
+            '                                   eToastPosition.TopCenter)
+            '    tbMdesc.Value = descpar
+            'Else
+            '    tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabsubtot"), AggregateFunction.Sum) - montodesc
+            'End If
+        End If
+
+    End Sub
+
+    'Public Sub ValidarDescuentos()
+    '    Dim descpar As Double = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabdesc"), AggregateFunction.Sum)
+    '    Dim montodesc As Double = tbMdesc.Value
+
+    '    If montodesc < descpar Then
+    '        ToastNotification.Show(Me, "El monto no puede ser menor a: ".ToUpper + descpar.ToString + ", intente nuevamente.".ToUpper,
+    '                                           My.Resources.WARNING, InDuracion * 1000,
+    '                                           eToastGlowColor.Red,
+    '                                           eToastPosition.TopCenter)
+    '        tbMdesc.Value = descpar
+    '    Else
+    '        tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabsubtot"), AggregateFunction.Sum) - montodesc
+    '    End If
+
+    'End Sub
+
+    Public Function ValidarDescuentos() As Boolean
+        Dim descpar As Double = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabdesc"), AggregateFunction.Sum)
+        Dim montodesc As Double = tbMdesc.Value
+
+        If montodesc < descpar Then
+            ToastNotification.Show(Me, "El monto de descuento no puede ser menor a: ".ToUpper + descpar.ToString + ", intente nuevamente.".ToUpper,
+                                               My.Resources.WARNING, InDuracion * 1000,
+                                               eToastGlowColor.Red,
+                                               eToastPosition.TopCenter)
+            'tbMdesc.Value = descpar
+            Return False
+        Else
+            tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabsubtot"), AggregateFunction.Sum) - montodesc
+            Return True
+        End If
+
+        Return True
     End Function
 #End Region
 End Class

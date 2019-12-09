@@ -7554,7 +7554,9 @@ Public Class AccesoLogica
     End Function
 
     Public Shared Function L_fnCompraModificar(ByRef numi As String, fdoc As String, prov As String, nfac As String,
-                                               obs As String, TCA0011 As DataTable) As Boolean
+                                               obs As String, TCA0011 As DataTable, tven As Integer, fvcr As String,
+                                               mon As Integer, desc As Double, total As Double, emision As Integer,
+                                               consigna As Integer, retencion As Integer, asiento As Integer, FacturaCompra As DataTable) As Boolean
         Dim _resultado As Boolean
 
         Dim _Tabla As DataTable
@@ -7567,6 +7569,16 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@nfac", nfac))
         _listParam.Add(New Datos.DParametro("@obs", obs))
         _listParam.Add(New Datos.DParametro("@TCA0011", "", TCA0011))
+        _listParam.Add(New Datos.DParametro("@tven", tven))
+        _listParam.Add(New Datos.DParametro("@fvcred", fvcr))
+        _listParam.Add(New Datos.DParametro("@mon", mon))
+        _listParam.Add(New Datos.DParametro("@desc", desc))
+        _listParam.Add(New Datos.DParametro("@total", total))
+        _listParam.Add(New Datos.DParametro("@emision", emision))
+        _listParam.Add(New Datos.DParametro("@consigna", consigna))
+        _listParam.Add(New Datos.DParametro("@retenc", retencion))
+        _listParam.Add(New Datos.DParametro("@asientoi", asiento))
+        _listParam.Add(New Datos.DParametro("@TFC001", "", FacturaCompra))
         _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
 
         _Tabla = D_ProcedimientoConParam("sp_go_TCA001", _listParam)
@@ -7594,6 +7606,40 @@ Public Class AccesoLogica
 
         If _Tabla.Rows.Count > 0 Then
             numi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+    Public Shared Function L_fnVerificarPagosCompras(numi As String) As Boolean
+        Dim _resultado As Boolean
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 6))
+        _listParam.Add(New Datos.DParametro("@numi", numi))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_go_TCA001", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+        Return _resultado
+    End Function
+    Public Shared Function L_fnVerificarSiSeContabilizo(_canumi As String) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 7))
+        _listParam.Add(New Datos.DParametro("@numi", _canumi))
+        _Tabla = D_ProcedimientoConParam("sp_go_TCA001", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
             _resultado = True
         Else
             _resultado = False
