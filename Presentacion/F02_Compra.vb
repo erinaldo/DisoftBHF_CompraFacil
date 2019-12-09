@@ -629,7 +629,7 @@ Public Class F02_Compra
 
 
                 If (res) Then
-                    _prCargarTablaComprobantes()
+                    '_prCargarTablaComprobantes()
                     P_prLimpiar()
                     BoNavegar = False
                     P_prArmarGrillaBusqueda()
