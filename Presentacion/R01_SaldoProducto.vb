@@ -33,7 +33,7 @@ Public Class R01_SaldoProducto
 #Region "Metodos"
 
     Private Sub P_prInicio()
-        'Abrir conexion
+        'Abrir conexion dsds
         If (Not gb_ConexionAbierta) Then
             L_prAbrirConexion()
         End If

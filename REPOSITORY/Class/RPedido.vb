@@ -44,7 +44,7 @@ Public Class RPedido
                                       .Fecha = a.oafdoc,
                                       .NombreCliente = b.ccdesc,
                                       .NombreVendedor = c.cbdesc,
-                                      .NroFactura = String.Empty
+                                      .NroFactura = d.oacnrofac
                                       }).ToList()
                 Return listResult
             End Using
