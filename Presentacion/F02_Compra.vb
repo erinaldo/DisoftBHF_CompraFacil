@@ -17,6 +17,8 @@ Public Class F02_Compra
     Private boAdd As Boolean = False
     Private boModif As Boolean = False
     Private boDel As Boolean = False
+
+    Private Asiento As Integer = 0
     Public _detalleCompras As DataTable 'Almacena el detalle para insertar a la tabla TPA001 del BDDiconCF
 
 
@@ -363,6 +365,8 @@ Public Class F02_Compra
     Private Sub P_prHDComponentes(ByVal flat As Boolean)
         'TextBox
         'tbProveedor.ReadOnly = Not flat
+
+
         tbNroFactura.ReadOnly = Not flat
         tbObs.ReadOnly = Not flat
         tbNitProv.ReadOnly = Not flat
@@ -482,6 +486,7 @@ Public Class F02_Compra
                     Me.tbFechaVenc.Value = .GetValue("caafvcred").ToString
                     Me.swEmision.Value = .GetValue("caaemision")
                     Me.swConsigna.Value = .GetValue("caaconsigna")
+                    Asiento = .GetValue("asiento")
                     'a.caatven, a.caafvcred, a.caamon, a.caaest, a.caadesc, a.caatotal, a.caaemision, a.caaconsigna
                     'Aqui se coloca los datos de la grilla de los Equipos
                     P_prArmarGrillaDetalle(tbCodigo.Text)
@@ -922,7 +927,9 @@ Public Class F02_Compra
         With dgjBusqueda.RootTable.Columns("caaprov")
             .Visible = False
         End With
-
+        With dgjBusqueda.RootTable.Columns("asiento")
+            .Visible = False
+        End With
         With dgjBusqueda.RootTable.Columns("nprov")
             .Caption = "Proveedor"
             .Width = 200
@@ -1649,15 +1656,31 @@ Public Class F02_Compra
         Dim tipo As Integer
         Dim k As Integer
         Dim dt As New DataTable
-        dt = L_prServicioListarCuentas(1, tbCodProveedor.Text)  ''Ok
+        If (swEmision.Value = True) Then
+            dt = L_prServicioListarCuentas(1, tbCodProveedor.Text)  ''Es Factura
+        Else
+            dt = L_prServicioListarCuentas(2, tbCodProveedor.Text)  ''esRecibo
+        End If
+
         Dim tabla As DataTable = dt.Copy
         tabla.Rows.Clear()
         Dim BanderaCuentaPorCobrar As Boolean = False
         Dim TotalTransaccion As Double
         For i As Integer = 0 To dt.Rows.Count - 1
+            Dim dtDetalle As DataTable
+            If (swEmision.Value = True) Then
+                dtDetalle = L_prObtenerDetallePlantilla(dt.Rows(i).Item("canumi"), 1)
+            Else
+                dtDetalle = L_prObtenerDetallePlantilla(dt.Rows(i).Item("canumi"), 2)
+            End If
+            If (dtDetalle.Rows.Count = 0) Then
 
-            Dim dtDetalle As DataTable = L_prObtenerDetallePlantilla(dt.Rows(i).Item("canumi"), 1)
-            tipo = dtDetalle.Rows(0).Item("tipo")
+                tipo = 0
+            Else
+
+                tipo = dtDetalle.Rows(0).Item("tipo")
+            End If
+
 
             TotalTransaccion = tbtotal.Value
 
@@ -1734,13 +1757,21 @@ Public Class F02_Compra
                 fila.Item("habersus") = 0
             End If
         Next
-        Dim dt2 As DataTable = L_prObtenerPlantila(1)
+        Dim dt2 As DataTable
+        If (swEmision.Value = True) Then
+            dt2 = L_prObtenerPlantila(1)
+
+        Else
+
+            dt2 = L_prObtenerPlantila(1)
+        End If
+
         tipo = dt2.Rows(0).Item("Tipo")
         Dim factura As Integer = dt2.Rows(0).Item("Factura")
         Dim TipoTransacion As Integer = 0
         Dim numiComprobante As String = ""
         Dim res As Boolean = L_prComprobanteGrabarIntegracion(numiComprobante, "", 1, Now.Date.Year.ToString, Now.Date.Month.ToString, "", Now.Date.ToString("yyyy/MM/dd"), 6.96, "", "", 1, tabla, "", 0, 6.96, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), 1, 1,
-                                                             tipo, factura, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), TipoTransacion)
+                                                             tipo, factura, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), TipoTransacion, tbCodigo.Text)
         If res Then
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
             ToastNotification.Show(Me, "El Asiento Contable fue generado Exitosamente".ToUpper,
@@ -1873,5 +1904,29 @@ Public Class F02_Compra
 
         Return True
     End Function
+
+    Private Sub btnContabilizar_Click(sender As Object, e As EventArgs) Handles btnContabilizar.Click
+        If (Asiento > 0) Then
+            ToastNotification.Show(Me, "Esta Compra ya ha sido Contabilizado".ToUpper,
+                                           My.Resources.WARNING, InDuracion * 1000,
+                                           eToastGlowColor.Red,
+                                           eToastPosition.TopCenter)
+
+            Return
+
+        End If
+
+        If (swEmision.IsReadOnly = True And tbCodigo.Text.Length > 0) Then
+
+            _prCargarTablaComprobantes()
+
+        Else
+            ToastNotification.Show(Me, "No se puede Contabilizar En modo Edicion".ToUpper,
+                                            My.Resources.WARNING, InDuracion * 1000,
+                                            eToastGlowColor.Red,
+                                            eToastPosition.TopCenter)
+        End If
+
+    End Sub
 #End Region
 End Class

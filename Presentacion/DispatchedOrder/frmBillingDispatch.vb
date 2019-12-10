@@ -43,7 +43,7 @@ Public Class frmBillingDispatch
 
             For i As Integer = 0 To list2.Count - 1 Step 1
 
-                If (list2(i).EstaFacturado = False) Then
+                If (list2(i).NroFactura.Equals("") Or list2(i).NroFactura.Equals("0")) Then
                     list1.Add(list2(i))
                 End If
 
@@ -505,7 +505,7 @@ Public Class frmBillingDispatch
                 .Caption = "Facturado"
                 .Width = 80
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center
-                .Visible = True
+                .Visible = False
                 .Position = 4
             End With
 

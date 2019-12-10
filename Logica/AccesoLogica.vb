@@ -7410,7 +7410,7 @@ Public Class AccesoLogica
     End Function
     Public Shared Function L_prComprobanteGrabarIntegracion(ByRef _numi As String, _numDoc As String, _tipo As String, _anio As String, _mes As String, _num As String, _fecha As String, _tipoCambio As String, _glosa As String, _obs As String, _numiEmpresa As String, _detalle As DataTable, _ifnumi As String, _ifto001numi As Integer, _iftc As Double,
                                                             _iffechai As String, _iffechaf As String, _ifest As Integer, _sucursal As Integer,
-                                                            tipo As Integer, factura As Integer, fechai As String, fechaf As String, _oaTipo As Integer) As Boolean
+                                                            tipo As Integer, factura As Integer, fechai As String, fechaf As String, _oaTipo As Integer, numiPadre As Integer) As Boolean
         Dim _resultado As Boolean
 
         Dim _Tabla As DataTable
@@ -7445,6 +7445,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@factura", factura))
         _listParam.Add(New Datos.DParametro("@fechaI", fechai))
         _listParam.Add(New Datos.DParametro("@fechaF", fechaf))
+        _listParam.Add(New Datos.DParametro("@numiPadre", numiPadre))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TI005", _listParam)
 
         If _Tabla.Rows.Count > 0 Then
