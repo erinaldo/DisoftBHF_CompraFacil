@@ -799,7 +799,7 @@ Public Class F02_Precio
     End Sub
 
     Private Sub JGr_Detalle_EditingCell(sender As Object, e As EditingCellEventArgs) Handles JGr_Detalle.EditingCell
-        If e.Column.Index = 0 Or e.Column.Index = 1 Then
+        If e.Column.Index = 0 Or e.Column.Index = 1 Or e.Column.Index = 2 Then
             e.Cancel = True
         End If
 

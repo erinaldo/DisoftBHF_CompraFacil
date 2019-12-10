@@ -375,6 +375,12 @@
     <Compile Include="F0_CreditosPedidos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="F0_PagosCreditoCompraUlt.designer.vb">
+      <DependentUpon>F0_PagosCreditoCompraUlt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="F0_PagosCreditoCompraUlt.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
@@ -738,6 +744,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>R_ReciboCliente.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\R_ReportePagosCobranzas.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>R_ReportePagosCobranzas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\R_saldoCreditoCliente.vb">
@@ -1136,6 +1148,9 @@
     <EmbeddedResource Include="F0_CreditosPedidos.resx">
       <DependentUpon>F0_CreditosPedidos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="F0_PagosCreditoCompraUlt.resx">
+      <DependentUpon>F0_PagosCreditoCompraUlt.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
@@ -1334,6 +1349,10 @@
     <EmbeddedResource Include="Reportes\R_ReciboCliente.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>R_ReciboCliente.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\R_ReportePagosCobranzas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>R_ReportePagosCobranzas.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\R_saldoCreditoCliente.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1677,6 +1696,7 @@
   <ItemGroup>
     <Content Include="Resources\add.png" />
     <Content Include="Resources\asiento.png" />
+    <Content Include="Resources\cobro.png" />
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">

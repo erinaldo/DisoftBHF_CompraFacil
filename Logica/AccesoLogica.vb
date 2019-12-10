@@ -7651,6 +7651,178 @@ Public Class AccesoLogica
 
 #End Region
 
+#Region "TCA00121 PagosCompras"
+    Public Shared Function L_prListarBanco(cod1 As Integer, cod2 As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 10))
+        _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_fnGrabarCobranzaCompras(_tenumi As String, _tefdoc As String, _tety4vend As Integer, _teobs As String, detalle As DataTable) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
+        '   @canumi ,@caalm,@cafdoc ,@caty4prov  ,@catven,
+        '@cafvcr,@camon ,@caest  ,@caobs ,@cadesc ,@newFecha,@newHora,@cauact
+        _listParam.Add(New Datos.DParametro("@tipo", 1))
+        _listParam.Add(New Datos.DParametro("@tenumi", _tenumi))
+        _listParam.Add(New Datos.DParametro("@tefdoc", _tefdoc))
+        _listParam.Add(New Datos.DParametro("@tety4vend", _tety4vend))
+        _listParam.Add(New Datos.DParametro("@teobs", _teobs))
+        _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@TC00121", "", detalle))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+
+        If _Tabla.Rows.Count > 0 Then
+            _tenumi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+    Public Shared Function L_fnModificarCobranzaCompras(_tenumi As String, _tefdoc As String, _tety4vend As Integer, _teobs As String, detalle As DataTable) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
+        '   @canumi ,@caalm,@cafdoc ,@caty4prov  ,@catven,
+        '@cafvcr,@camon ,@caest  ,@caobs ,@cadesc ,@newFecha,@newHora,@cauact
+        _listParam.Add(New Datos.DParametro("@tipo", 2))
+        _listParam.Add(New Datos.DParametro("@tenumi", _tenumi))
+        _listParam.Add(New Datos.DParametro("@tefdoc", _tefdoc))
+        _listParam.Add(New Datos.DParametro("@tety4vend", _tety4vend))
+        _listParam.Add(New Datos.DParametro("@teobs", _teobs))
+        _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@TC00121", "", detalle))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+
+        If _Tabla.Rows.Count > 0 Then
+            _tenumi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+    Public Shared Function L_fnCobranzasGeneralCompra() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 3))
+        _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_fnCobranzasDetalleCompras(_numi As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 4))
+        _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@tenumi", _numi))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_fnListarPagosCompras(_credito As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 5))
+        _listParam.Add(New Datos.DParametro("@credito", _credito))
+        _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_fnCobranzasObtenerLasVentasACreditoCompras() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 6))
+        _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_fnCobranzasObtenerLosPagosCompra(_numi As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 7))
+        _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@tdnumi", _numi))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_fnCobranzasReporteCompras(_numi As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 8))
+        _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@tenumi", _numi))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_fnVerificarSiSeContabilizoPagoCompra(_tenumi As String) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 9))
+        _listParam.Add(New Datos.DParametro("@tenumi", _tenumi))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+    Public Shared Function L_fnEliminarCobranzaCompras(numi As String, ByRef mensaje As String) As Boolean
+        Dim _resultado As Boolean
+        If L_fnbValidarEliminacion(numi, "TC0013", "tenumi", mensaje) = True Then
+            Dim _Tabla As DataTable
+            Dim _listParam As New List(Of Datos.DParametro)
+
+            _listParam.Add(New Datos.DParametro("@tipo", -1))
+            _listParam.Add(New Datos.DParametro("@tenumi", numi))
+            _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+
+            _Tabla = D_ProcedimientoConParam("sp_Mam_TCA00121Cheque", _listParam)
+
+            If _Tabla.Rows.Count > 0 Then
+                _resultado = True
+            Else
+                _resultado = False
+            End If
+        Else
+            _resultado = False
+        End If
+        Return _resultado
+    End Function
+#End Region
 #Region "TO005 Caja"
 
 

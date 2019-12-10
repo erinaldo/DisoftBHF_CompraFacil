@@ -188,6 +188,12 @@
     <Compile Include="ModeloAyuda2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ModeloF03.designer.vb">
+      <DependentUpon>ModeloF03.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloF03.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ModeloF1.designer.vb">
       <DependentUpon>ModeloF1.vb</DependentUpon>
     </Compile>
@@ -262,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModeloAyuda2.resx">
       <DependentUpon>ModeloAyuda2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModeloF03.resx">
+      <DependentUpon>ModeloF03.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModeloF1.resx">
       <DependentUpon>ModeloF1.vb</DependentUpon>

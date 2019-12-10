@@ -1906,14 +1906,25 @@ Public Class F02_Compra
     End Function
 
     Private Sub btnContabilizar_Click(sender As Object, e As EventArgs) Handles btnContabilizar.Click
-        If (Asiento > 0) Then
-            ToastNotification.Show(Me, "Esta Compra ya ha sido Contabilizado".ToUpper,
+        'If (Asiento > 0) Then
+        '    ToastNotification.Show(Me, "Esta Compra ya ha sido Contabilizado".ToUpper,
+        '                                   My.Resources.WARNING, InDuracion * 1000,
+        '                                   eToastGlowColor.Red,
+        '                                   eToastPosition.TopCenter)
+
+        '    Return
+
+        'End If
+
+        'Verifica si ya se contabilizó la compra
+        Dim contabilizo As Boolean = L_fnVerificarSiSeContabilizo(tbCodigo.Text)
+        If contabilizo Then
+            ToastNotification.Show(Me, "Esta Compra ya ha sido Contabilizada".ToUpper,
                                            My.Resources.WARNING, InDuracion * 1000,
                                            eToastGlowColor.Red,
                                            eToastPosition.TopCenter)
 
             Return
-
         End If
 
         If (swEmision.IsReadOnly = True And tbCodigo.Text.Length > 0) Then

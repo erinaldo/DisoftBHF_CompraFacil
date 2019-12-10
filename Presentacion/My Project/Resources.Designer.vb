@@ -223,6 +223,16 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Public ReadOnly Property BONOS1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BONOS1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Public ReadOnly Property BT_ABAJO() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("BT_ABAJO", resourceCulture)
@@ -426,6 +436,16 @@ Namespace My.Resources
         Public ReadOnly Property CLIENTES() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("CLIENTES", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Public ReadOnly Property cobro() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("cobro", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -1126,6 +1146,16 @@ Namespace My.Resources
         Public ReadOnly Property IMPRIMIR() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("IMPRIMIR", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Public ReadOnly Property IMPRIMIR1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("IMPRIMIR1", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
