@@ -1768,7 +1768,7 @@ Public Class F02_Compra
 
         tipo = dt2.Rows(0).Item("Tipo")
         Dim factura As Integer = dt2.Rows(0).Item("Factura")
-        Dim TipoTransacion As Integer = 0
+        Dim TipoTransacion As Integer = 3
         Dim numiComprobante As String = ""
         Dim res As Boolean = L_prComprobanteGrabarIntegracion(numiComprobante, "", 1, Now.Date.Year.ToString, Now.Date.Month.ToString, "", Now.Date.ToString("yyyy/MM/dd"), 6.96, "", "", 1, tabla, "", 0, 6.96, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), 1, 1,
                                                              tipo, factura, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), TipoTransacion, tbCodigo.Text)
