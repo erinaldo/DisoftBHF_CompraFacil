@@ -27,6 +27,7 @@ Partial Class F01_Proveedor
         Me.Dgj1Busqueda = New Janus.Windows.GridEX.GridEX()
         Me.GroupPanelDatosGenerales = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.PanelExDatosGenerales = New DevComponents.DotNetBar.PanelEx()
+        Me.tbNcuenta = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.btBuscarCuenta = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
         Me.tbCuentaProv = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -46,7 +47,6 @@ Partial Class F01_Proveedor
         Me.SbEstado = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.TbTelefono = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.TbObs = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.tbNcuenta = New DevComponents.DotNetBar.Controls.TextBoxX()
         CType(Me.MSuperTabControlPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MSuperTabControlPrincipal.SuspendLayout()
         Me.MSuperTabControlPanelRegistro.SuspendLayout()
@@ -322,6 +322,22 @@ Partial Class F01_Proveedor
         Me.PanelExDatosGenerales.Style.GradientAngle = 90
         Me.PanelExDatosGenerales.TabIndex = 16
         '
+        'tbNcuenta
+        '
+        '
+        '
+        '
+        Me.tbNcuenta.Border.Class = "TextBoxBorder"
+        Me.tbNcuenta.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbNcuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbNcuenta.Location = New System.Drawing.Point(801, 34)
+        Me.tbNcuenta.MaxLength = 50
+        Me.tbNcuenta.Name = "tbNcuenta"
+        Me.tbNcuenta.PreventEnterBeep = True
+        Me.tbNcuenta.Size = New System.Drawing.Size(32, 23)
+        Me.tbNcuenta.TabIndex = 118
+        Me.tbNcuenta.Visible = False
+        '
         'btBuscarCuenta
         '
         Me.btBuscarCuenta.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
@@ -587,22 +603,6 @@ Partial Class F01_Proveedor
         Me.TbObs.PreventEnterBeep = True
         Me.TbObs.Size = New System.Drawing.Size(200, 60)
         Me.TbObs.TabIndex = 7
-        '
-        'tbNcuenta
-        '
-        '
-        '
-        '
-        Me.tbNcuenta.Border.Class = "TextBoxBorder"
-        Me.tbNcuenta.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.tbNcuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbNcuenta.Location = New System.Drawing.Point(801, 35)
-        Me.tbNcuenta.MaxLength = 50
-        Me.tbNcuenta.Name = "tbNcuenta"
-        Me.tbNcuenta.PreventEnterBeep = True
-        Me.tbNcuenta.Size = New System.Drawing.Size(32, 23)
-        Me.tbNcuenta.TabIndex = 118
-        Me.tbNcuenta.Visible = False
         '
         'F01_Proveedor
         '
