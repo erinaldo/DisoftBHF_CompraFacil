@@ -14,6 +14,7 @@ Imports GMap.NET
 Imports GMap.NET.WindowsForms.Markers
 Imports System.Reflection
 Imports System.Runtime.InteropServices
+Imports System.Math
 Public Class F0_PagosCreditoCompraUlt
 
 #Region "Variables Globales"
@@ -26,6 +27,18 @@ Public Class F0_PagosCreditoCompraUlt
     Private boAdd As Boolean = False
     Private boModif As Boolean = False
     Private boDel As Boolean = False
+    Dim dtTO00111 As DataTable
+    Dim Asiento As Integer = 0
+
+    Dim dtTC009 As DataTable = New DataTable
+
+    Dim Lavadero As Integer = 42
+    Dim Remolque As Integer = 55
+    Dim Administracion As Integer = 56
+    Dim Escuela As Integer = 1
+    Dim Certificacion As Integer = 43
+    Dim Hotel As Integer = 44
+    Dim Linea As Integer = 0
 #End Region
 #Region "METODOS PRIVADOS"
 
@@ -115,6 +128,10 @@ Public Class F0_PagosCreditoCompraUlt
             .Width = 120
             .Visible = True
             .Caption = "Cod Cobranza"
+        End With
+        With grcobranza.RootTable.Columns("asiento")
+            .Width = 120
+            .Visible = False
         End With
         With grcobranza.RootTable.Columns("tdnrodoc")
             .Width = 120
@@ -354,7 +371,7 @@ Public Class F0_PagosCreditoCompraUlt
             lbFecha.Text = CType(.GetValue("tefact"), Date).ToString("dd/MM/yyyy")
             lbHora.Text = .GetValue("tehact").ToString
             lbUsuario.Text = .GetValue("teuact").ToString
-
+            Asiento = .GetValue("asiento")
         End With
 
         _prDetalleCobranzas(tbnrodoc.Text)
@@ -1169,5 +1186,295 @@ Public Class F0_PagosCreditoCompraUlt
         grfactura.Select()
     End Sub
 
+    Private Sub btnContabilizar_Click(sender As Object, e As EventArgs) Handles btnContabilizar.Click
+
+        If (Asiento > 0) Then
+            Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+            ToastNotification.Show(Me, "El asiento ya ha sido generado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+
+            Return
+
+        End If
+        dtTO00111 = L_prComprobanteDetalleDetalleGeneral(-1)
+        GenerarComprobante()
+
+
+    End Sub
+
+    Public Function ObtenerNumiProveedor() As Integer
+        Dim dt As DataTable = CType(grfactura.DataSource, DataTable)
+        If (dt.Rows.Count > 0) Then
+
+            Return dt.Rows(0).Item("tcty4prov")
+
+        End If
+        Return -1
+    End Function
+    Private Function to3Decimales(num As Double) As Double
+        Dim res As Double = 0
+        Dim numeroString As String = num.ToString()
+        Dim posicionPuntoDecimal As Integer = numeroString.IndexOf(".")
+
+        If posicionPuntoDecimal > 0 Then
+            Dim cantidadDecimales As Integer = numeroString.Substring(posicionPuntoDecimal).Count - 1
+            If cantidadDecimales >= 3 Then
+                numeroString = numeroString.Substring(0, posicionPuntoDecimal + 4)
+                res = Convert.ToDouble(numeroString)
+            Else
+                res = num
+            End If
+
+        Else
+            res = num
+        End If
+        Return res
+    End Function
+
+    Public Function _fnBuscarIDTC009(ci As String, _dt As DataTable) As Integer
+        For i As Integer = 0 To _dt.Rows.Count - 1 Step 1
+            If (ci.Equals(_dt.Rows(i).Item("cjci"))) Then
+                Return _dt.Rows(i).Item("cjnumi")
+            End If
+
+        Next
+        Return 0
+
+    End Function
+    Public Sub GenerarComprobante()
+        Dim numiCuenta As Integer
+        Dim dt As New DataTable
+        dt = L_prServicioListarCuentasCreditocompras(1003, ObtenerNumiProveedor())  ''Ok
+        Dim tabla As DataTable = dt.Copy
+        tabla.Rows.Clear()
+        Dim BanderaCuentaPorCobrar As Boolean = False
+        Dim dtPagos As DataTable
+
+        For i As Integer = 0 To dt.Rows.Count - 1
+            dtPagos = New DataTable
+
+            Dim dtDetalle As DataTable = L_prObtenerDetallePlantilla(dt.Rows(i).Item("canumi"), 1003)
+
+            Dim tipo As Integer
+            If (dtDetalle.Rows.Count <= 0) Then
+                tipo = -1
+            Else
+                tipo = dtDetalle.Rows(0).Item("tipo")
+            End If
+
+
+            If (tipo = -1) Then ''''Venta Contado
+                dtPagos = L_prObtenerPagosTotalesCuentaPorCobrar(tbnrodoc.Text)
+                dtTC009 = L_prListarProveedorCreditoParaTC009Pagos(tbnrodoc.Text)
+
+            Else
+                If (tipo = -2) Then
+
+                    dtPagos = L_prObtenerPagosTotalesCuentaPorCobrarCAJA(tbnrodoc.Text)
+
+                Else
+                    Dim dtCuentasBancos = L_prServicioListarCuentasBAncos(1003, tbnrodoc.Text)  ''Ok
+
+                    Dim numiPadre As Integer = 0
+
+                    For p As Integer = 0 To dtCuentasBancos.Rows.Count - 1 Step 1
+
+                        numiCuenta = dtCuentasBancos.Rows(p).Item("canumi")
+                        Dim dtObtenerCuenta As DataTable = L_prCuentaDiferencia(numiCuenta)
+                        If (dtObtenerCuenta.Rows(0).Item("canumi") <> numiPadre) Then
+                            numiPadre = dtObtenerCuenta.Rows(0).Item("canumi")
+                            tabla.Rows.Add(dtObtenerCuenta.Rows(0).Item("canumi"), dtObtenerCuenta.Rows(0).Item("cacta"), dtObtenerCuenta.Rows(0).Item("cadesc"), DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, Escuela, 0) '''' Aqui agrego al padre
+                        End If
+
+                        tabla.ImportRow(dtCuentasBancos.Rows(p))
+
+
+
+                        dtPagos = L_prObtenerPagosTotalesCuentaPorCobrarByBanco(tbnrodoc.Text, dtCuentasBancos.Rows(p).Item("canumi"))
+
+
+                        numiCuenta = dtCuentasBancos.Rows(p).Item("canumi")
+
+
+                        If (dtPagos.Rows.Count > 0) Then
+
+                            For k As Integer = 0 To dtPagos.Rows.Count - 1 Step 1
+                                Dim Glosa As String = dt.Rows(i).Item("cadesc")
+
+                                Dim conversion As Double = dtPagos.Rows(k).Item("tdmonto")
+                                conversion = to3Decimales(conversion)
+                                Dim totales As Double = Round(conversion, 2)
+                                Dim TotalSus As Double = Round(to3Decimales(totales / (6.96)), 2)
+                                Linea = Linea + 1
+                                Dim fact As String = " con Factura Nro #" + Str(dtPagos.Rows(k).Item("nroDocumento"))
+
+                                If (dt.Rows(i).Item("chdebe") > 0) Then
+                                    tabla.Rows.Add(numiCuenta, DBNull.Value, dtPagos.Rows(k).Item("proveedor") + fact, DBNull.Value, DBNull.Value, DBNull.Value, 6.96, totales, DBNull.Value, TotalSus, DBNull.Value, Escuela, Linea)
+                                Else
+                                    tabla.Rows.Add(numiCuenta, DBNull.Value, dtPagos.Rows(k).Item("proveedor") + fact, DBNull.Value, DBNull.Value, DBNull.Value, 6.96, DBNull.Value, totales, DBNull.Value, TotalSus, Escuela, Linea)
+                                End If
+                            Next
+
+
+
+                        End If
+
+
+                    Next
+                    dtPagos = New DataTable
+
+
+                End If
+
+            End If
+
+            ''canumi , nro,cadesc ,chporcen,chdebe ,chhaber 
+            Dim porcentaje As Double = dt.Rows(i).Item("chporcen")
+
+
+
+            numiCuenta = dt.Rows(i).Item("canumi")
+
+            Dim numicuentaatc As Integer = 21 'ATC
+
+            If (dtPagos.Rows.Count > 0) Then
+                numiCuenta = dt.Rows(i).Item("canumi")
+                Dim dtObtenerCuenta As DataTable = L_prCuentaDiferencia(numiCuenta)
+                tabla.Rows.Add(dtObtenerCuenta.Rows(0).Item("canumi"), dtObtenerCuenta.Rows(0).Item("cacta"), dtObtenerCuenta.Rows(0).Item("cadesc"), DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, Escuela, 0) '''' Aqui agrego al padre
+                tabla.ImportRow(dt.Rows(i))  '''Aqui agrego al hijo
+
+                Dim _dtTC009Inserted As DataTable
+                If (tipo = -1) Then ''''Venta Contado
+                    '''''''Relleno el numi de la cuenta en la TC009
+                    For p As Integer = 0 To dtTC009.Rows.Count - 1 Step 1
+                        dtTC009.Rows(p).Item("cjnumiTc001") = numiCuenta
+                    Next
+                    '''''''''''Insertamos a la TC009'''''''''''''''
+                    _dtTC009Inserted = L_prInsertarTC009(dtTC009)
+
+                    '''''''''''''''''''''''''''''''''''''''''''''''
+                End If
+
+
+
+
+                For k As Integer = 0 To dtPagos.Rows.Count - 1 Step 1
+                    Dim Glosa As String = dt.Rows(i).Item("cadesc")
+
+                    Dim conversion As Double = dtPagos.Rows(k).Item("tdmonto")
+                    conversion = to3Decimales(conversion)
+                    Dim totales As Double = Round(conversion, 2)
+                    Dim TotalSus As Double = Round(to3Decimales(totales / (6.96)), 2)
+                    Linea = Linea + 1
+                    If (tipo = -1) Then
+
+                        ''''''''''''''''''
+                        Dim IdTC009 As Integer = _fnBuscarIDTC009(dtPagos.Rows(k).Item("ydnumi"), _dtTC009Inserted)
+                        dtTO00111.Rows.Add(0, Linea, IdTC009, 1)
+                        '''''''''''''''''''''''''
+                    End If
+
+
+                    If (dt.Rows(i).Item("chdebe") > 0) Then
+                        tabla.Rows.Add(numiCuenta, DBNull.Value, dtPagos.Rows(k).Item("proveedor") + " con Factura Nro #" + dtPagos.Rows(k).Item("nroDocumento"), DBNull.Value, DBNull.Value, DBNull.Value, 6.96, totales, DBNull.Value, TotalSus, DBNull.Value, Escuela, Linea)
+                    Else
+                        tabla.Rows.Add(numiCuenta, DBNull.Value, dtPagos.Rows(k).Item("proveedor") + " con Factura Nro #" + dtPagos.Rows(k).Item("nroDocumento"), DBNull.Value, DBNull.Value, DBNull.Value, 6.96, DBNull.Value, totales, DBNull.Value, TotalSus, Escuela, Linea)
+                    End If
+                Next
+
+
+
+            End If
+
+
+
+
+
+        Next
+
+        _prArmarCuadre(tabla)
+
+        For Each fila As DataRow In tabla.Rows
+            If IsDBNull(fila.Item("debe")) = True Then
+                fila.Item("debe") = 0
+            End If
+            If IsDBNull(fila.Item("haber")) = True Then
+                fila.Item("haber") = 0
+            End If
+            If IsDBNull(fila.Item("debesus")) = True Then
+                fila.Item("debesus") = 0
+            End If
+            If IsDBNull(fila.Item("habersus")) = True Then
+                fila.Item("habersus") = 0
+            End If
+        Next
+        Dim dt2 As DataTable
+
+        dt2 = L_prObtenerPlantila(1003)
+
+        Dim tipo02 As Integer
+
+        tipo02 = dt2.Rows(0).Item("Tipo")
+        Dim factura As Integer = dt2.Rows(0).Item("Factura")
+        Dim TipoTransacion As Integer = 2
+        Dim numiComprobante As String = ""
+        Dim res As Boolean = L_prComprobanteGrabarIntegracion(numiComprobante, "", 1, Now.Date.Year.ToString, Now.Date.Month.ToString, "", Now.Date.ToString("yyyy/MM/dd"), 6.96, "", "", 1, tabla, "", 0, 6.96, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), 1, 1,
+                                                             tipo02, factura, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), TipoTransacion, tbnrodoc.Text)
+        If res Then
+            Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
+            ToastNotification.Show(Me, "El Asiento Contable fue generado Exitosamente".ToUpper,
+                                      img, 2000,
+                                      eToastGlowColor.Green,
+                                      eToastPosition.TopCenter
+                                      )
+
+
+        Else
+            Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+            ToastNotification.Show(Me, "Los codigos no pudieron ser modificados".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+
+        End If
+
+
+    End Sub
+
+    Public Sub _prArmarCuadre(ByRef dt As DataTable)
+        Try
+            Dim totaldebe As Double = dt.Compute("Sum(debe)", "")
+            Dim totalhaber As Double = dt.Compute("Sum(haber)", "")
+            Dim totaldebesus As Double = dt.Compute("Sum(debesus)", "")
+            Dim totalhabersus As Double = dt.Compute("Sum(habersus)", "")
+            Dim restantedebe As Double = 0
+            Dim restanteHaber As Double = 0
+            Dim RestanteDebeSus As Double = 0
+            Dim RestanteHaberSus As Double = 0
+            If (totaldebe > totalhaber) Then
+                restanteHaber = totaldebe - totalhaber
+            Else
+                restantedebe = totalhaber - totaldebe
+            End If
+            If (totaldebesus > totalhabersus) Then
+                RestanteHaberSus = totaldebesus - totalhabersus
+            Else
+                RestanteDebeSus = totalhabersus - totaldebesus
+            End If
+            If (restantedebe > 0 Or restanteHaber > 0 Or RestanteDebeSus > 0 Or RestanteHaberSus > 0) Then
+                Dim dtObtenerCuenta As DataTable = L_prCuentaDiferencia(652)  '''3=Lavadero
+                dt.Rows.Add(dtObtenerCuenta.Rows(0).Item("canumi"), dtObtenerCuenta.Rows(0).Item("cacta"), dtObtenerCuenta.Rows(0).Item("cadesc"), DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, Administracion, 0)
+                dt.Rows.Add(dtObtenerCuenta.Rows(1).Item("canumi"), dtObtenerCuenta.Rows(1).Item("cacta"), dtObtenerCuenta.Rows(1).Item("cadesc"), DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, Administracion, 0)
+                Linea = Linea + 1
+                dt.Rows.Add(dtObtenerCuenta.Rows(1).Item("canumi"), DBNull.Value, "Ajuste de Cambio", DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, IIf(restantedebe = 0, DBNull.Value, restantedebe), IIf(restanteHaber = 0, DBNull.Value, restanteHaber), IIf(RestanteDebeSus = 0, DBNull.Value, RestanteDebeSus), IIf(RestanteHaberSus = 0, DBNull.Value, RestanteHaberSus), Administracion, Linea)
+
+
+            Else
+
+
+            End If
+        Catch ex As Exception
+
+        End Try
+
+
+
+    End Sub
 #End Region
 End Class
