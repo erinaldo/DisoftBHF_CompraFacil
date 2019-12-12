@@ -1482,22 +1482,27 @@ Public Class F02_Compra
                 Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
                 Dim pos As Integer = -1
                 _fnObtenerFilaDetalle(pos, lin)
-                If (e.Column.Key.Equals("cabcant")) Then
-                    'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+                If (Not IsNumeric(dgjDetalle.GetValue("cabcant")) Or dgjDetalle.GetValue("cabcant").ToString = String.Empty) Then
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabcant") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabcant")
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot")
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot")
+                Else
 
-                    dgjDetalle.SetValue("cabsubtot", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
+                    If (e.Column.Key.Equals("cabcant")) Then
+                        'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
 
-                    'CType(dgjBusqueda.DataSource, DataTable).Rows(5).Item("total") = dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom")
-                    '_prCalcularPrecioTotal()
+                        dgjDetalle.SetValue("cabsubtot", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
 
+                        'CType(dgjBusqueda.DataSource, DataTable).Rows(5).Item("total") = dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom")
+                        '_prCalcularPrecioTotal()
+
+                    End If
                 End If
-
                 If (e.Column.Key.Equals("cabpcom")) Then
                     If (Not IsNumeric(dgjDetalle.GetValue("cabpcom")) Or dgjDetalle.GetValue("cabpcom").ToString = String.Empty) Then
                         Dim cantidad As Double = dgjDetalle.GetValue("cabcant")
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcom") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcom")
                         'CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cbptot") = cantidad * CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cbpcost")
-
 
                     Else
                         'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
@@ -1976,6 +1981,25 @@ Public Class F02_Compra
                                             eToastPosition.TopCenter)
         End If
 
+    End Sub
+
+    Private Sub MBtImprimir_Click(sender As Object, e As EventArgs) Handles MBtImprimir.Click
+        P_GenerarReporte()
+    End Sub
+    Private Sub P_GenerarReporte()
+        Dim dt As DataTable = L_fnNotaCompras(tbCodigo.Text)
+        If Not IsNothing(P_Global.Visualizador) Then
+            P_Global.Visualizador.Close()
+        End If
+
+        P_Global.Visualizador = New Visualizador
+
+        Dim objrep As New R_NotaCompra
+        objrep.SetDataSource(dt)
+        'objrep.SetParameterValue("usuario", gs_user)
+        P_Global.Visualizador.CRV1.ReportSource = objrep 'Comentar
+        P_Global.Visualizador.Show() 'Comentar
+        P_Global.Visualizador.BringToFront() 'Comentar
     End Sub
 #End Region
 End Class
