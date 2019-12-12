@@ -30,6 +30,8 @@ Partial Class F02_Compra
         Me.tsmiEliminarFilaDetalle = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupPanelDatosGenerales = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.PanelExDatosGenerales = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
+        Me.dtiFIngresoAlm = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.swAsiento = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.swRetencion = New DevComponents.DotNetBar.Controls.SwitchButton()
@@ -75,8 +77,6 @@ Partial Class F02_Compra
         Me.GroupPanelBuscador = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.dgjBusqueda = New Janus.Windows.GridEX.GridEX()
         Me.btnContabilizar = New DevComponents.DotNetBar.ButtonX()
-        Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
-        Me.dtiFIngresoAlm = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         CType(Me.MSuperTabControlPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MSuperTabControlPrincipal.SuspendLayout()
         Me.MSuperTabControlPanelBusqueda.SuspendLayout()
@@ -96,6 +96,7 @@ Partial Class F02_Compra
         Me.cmDetalle.SuspendLayout()
         Me.GroupPanelDatosGenerales.SuspendLayout()
         Me.PanelExDatosGenerales.SuspendLayout()
+        CType(Me.dtiFIngresoAlm, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanelFactura2.SuspendLayout()
         CType(Me.tbFechaVenc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtiFechaCompra, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,7 +106,6 @@ Partial Class F02_Compra
         CType(Me.tbSubtotalC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanelBuscador.SuspendLayout()
         CType(Me.dgjBusqueda, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dtiFIngresoAlm, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MSuperTabControlPrincipal
@@ -436,6 +436,68 @@ Partial Class F02_Compra
         Me.PanelExDatosGenerales.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelExDatosGenerales.Style.GradientAngle = 90
         Me.PanelExDatosGenerales.TabIndex = 0
+        '
+        'LabelX7
+        '
+        Me.LabelX7.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX7.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX7.Location = New System.Drawing.Point(465, 108)
+        Me.LabelX7.Name = "LabelX7"
+        Me.LabelX7.Size = New System.Drawing.Size(139, 23)
+        Me.LabelX7.TabIndex = 387
+        Me.LabelX7.Text = "F. Ingreso Almacen:"
+        Me.LabelX7.TextAlignment = System.Drawing.StringAlignment.Far
+        '
+        'dtiFIngresoAlm
+        '
+        '
+        '
+        '
+        Me.dtiFIngresoAlm.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtiFIngresoAlm.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtiFIngresoAlm.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown
+        Me.dtiFIngresoAlm.ButtonDropDown.Visible = True
+        Me.dtiFIngresoAlm.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtiFIngresoAlm.IsPopupCalendarOpen = False
+        Me.dtiFIngresoAlm.Location = New System.Drawing.Point(610, 108)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtiFIngresoAlm.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtiFIngresoAlm.MonthCalendar.CalendarDimensions = New System.Drawing.Size(1, 1)
+        Me.dtiFIngresoAlm.MonthCalendar.ClearButtonVisible = True
+        '
+        '
+        '
+        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtiFIngresoAlm.MonthCalendar.DisplayMonth = New Date(2017, 2, 1, 0, 0, 0, 0)
+        Me.dtiFIngresoAlm.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtiFIngresoAlm.MonthCalendar.TodayButtonVisible = True
+        Me.dtiFIngresoAlm.Name = "dtiFIngresoAlm"
+        Me.dtiFIngresoAlm.Size = New System.Drawing.Size(120, 23)
+        Me.dtiFIngresoAlm.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.dtiFIngresoAlm.TabIndex = 386
         '
         'swAsiento
         '
@@ -1283,68 +1345,6 @@ Partial Class F02_Compra
         Me.btnContabilizar.Text = "CONTABILIZAR"
         Me.btnContabilizar.TextColor = System.Drawing.Color.Black
         '
-        'LabelX7
-        '
-        Me.LabelX7.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX7.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX7.Location = New System.Drawing.Point(465, 108)
-        Me.LabelX7.Name = "LabelX7"
-        Me.LabelX7.Size = New System.Drawing.Size(139, 23)
-        Me.LabelX7.TabIndex = 387
-        Me.LabelX7.Text = "F. Ingreso Almacen:"
-        Me.LabelX7.TextAlignment = System.Drawing.StringAlignment.Far
-        '
-        'dtiFIngresoAlm
-        '
-        '
-        '
-        '
-        Me.dtiFIngresoAlm.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtiFIngresoAlm.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtiFIngresoAlm.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown
-        Me.dtiFIngresoAlm.ButtonDropDown.Visible = True
-        Me.dtiFIngresoAlm.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtiFIngresoAlm.IsPopupCalendarOpen = False
-        Me.dtiFIngresoAlm.Location = New System.Drawing.Point(610, 108)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtiFIngresoAlm.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtiFIngresoAlm.MonthCalendar.CalendarDimensions = New System.Drawing.Size(1, 1)
-        Me.dtiFIngresoAlm.MonthCalendar.ClearButtonVisible = True
-        '
-        '
-        '
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtiFIngresoAlm.MonthCalendar.DisplayMonth = New Date(2017, 2, 1, 0, 0, 0, 0)
-        Me.dtiFIngresoAlm.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtiFIngresoAlm.MonthCalendar.TodayButtonVisible = True
-        Me.dtiFIngresoAlm.Name = "dtiFIngresoAlm"
-        Me.dtiFIngresoAlm.Size = New System.Drawing.Size(120, 23)
-        Me.dtiFIngresoAlm.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.dtiFIngresoAlm.TabIndex = 386
-        '
         'F02_Compra
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1377,6 +1377,7 @@ Partial Class F02_Compra
         Me.cmDetalle.ResumeLayout(False)
         Me.GroupPanelDatosGenerales.ResumeLayout(False)
         Me.PanelExDatosGenerales.ResumeLayout(False)
+        CType(Me.dtiFIngresoAlm, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanelFactura2.ResumeLayout(False)
         CType(Me.tbFechaVenc, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtiFechaCompra, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1386,7 +1387,6 @@ Partial Class F02_Compra
         CType(Me.tbSubtotalC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanelBuscador.ResumeLayout(False)
         CType(Me.dgjBusqueda, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dtiFIngresoAlm, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

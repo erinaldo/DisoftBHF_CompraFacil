@@ -42,9 +42,13 @@ Public Class frmBillingDispatch
 
 
             For i As Integer = 0 To list2.Count - 1 Step 1
-
-                If (list2(i).NroFactura.Equals("") Or list2(i).NroFactura.Equals("0")) Then
+                'If (list2(i).NroFactura.Equals("") Or list2(i).NroFactura.Equals("0")) Then
+                If (list2(i).NroFactura = Nothing) Then
                     list1.Add(list2(i))
+                Else
+                    If (list2(i).NroFactura.Equals("") Or list2(i).NroFactura.Equals("0")) Then
+                        list1.Add(list2(i))
+                    End If
                 End If
 
 
