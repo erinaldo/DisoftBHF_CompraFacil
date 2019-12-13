@@ -1418,7 +1418,7 @@ Public Class F0_PagosCreditoCompraUlt
         Dim TipoTransacion As Integer = 2
         Dim numiComprobante As String = ""
         Dim res As Boolean = L_prComprobanteGrabarIntegracion(numiComprobante, "", 1, Now.Date.Year.ToString, Now.Date.Month.ToString, "", Now.Date.ToString("yyyy/MM/dd"), 6.96, "", "", 1, tabla, "", 0, 6.96, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), 1, 1,
-                                                             tipo02, factura, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), TipoTransacion, tbnrodoc.Text)
+                                                             tipo02, factura, Now.Date.ToString("yyyy/MM/dd"), Now.Date.ToString("yyyy/MM/dd"), TipoTransacion, tbnrodoc.Text, dtTO00111)
         If res Then
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
             ToastNotification.Show(Me, "El Asiento Contable fue generado Exitosamente".ToUpper,

@@ -17,10 +17,10 @@ Public Class F02_Compra
     Private boAdd As Boolean = False
     Private boModif As Boolean = False
     Private boDel As Boolean = False
-
+    Dim dtTO00111 As DataTable
     Private Asiento As Integer = 0
     Public _detalleCompras As DataTable 'Almacena el detalle para insertar a la tabla TPA001 del BDDiconCF
-
+    Dim dtTC009 As DataTable = New DataTable
 
 #End Region
 
@@ -1754,8 +1754,18 @@ Public Class F02_Compra
                         tabla.Rows.Add(numiCuenta, DBNull.Value, tbProveedor.Text + " con Factura Nro #" + tbNroFactura.Text, DBNull.Value, DBNull.Value, DBNull.Value, 6.96, DBNull.Value, totales, DBNull.Value, TotalSus, 1, Linea)
                     End If
 
+                    dtTC009 = L_prListarProveedorCreditoParaTC009(tbCodigo.Text)
+                    '''''''Relleno el numi de la cuenta en la TC009
+                    For p As Integer = 0 To dtTC009.Rows.Count - 1 Step 1
+                        dtTC009.Rows(p).Item("cjnumiTc001") = numiCuenta
+                    Next
+                    '''''''''''Insertamos a la TC009'''''''''''''''
+                    Dim _dtTC009Inserted = L_prInsertarTC009(dtTC009)
 
-
+                    ''''''''''''''''''
+                    Dim IdTC009 As Integer = _fnBuscarIDTC009(tbCodProveedor.Text, _dtTC009Inserted)
+                    dtTO00111.Rows.Add(0, Linea, IdTC009, 1)
+                    '''''''''''''''''''''''''
 
 
 
@@ -1830,6 +1840,17 @@ Public Class F02_Compra
 
         End If
     End Sub
+
+    Public Function _fnBuscarIDTC009(ci As String, _dt As DataTable) As Integer
+        For i As Integer = 0 To _dt.Rows.Count - 1 Step 1
+            If (ci.Equals(_dt.Rows(i).Item("cjci"))) Then
+                Return _dt.Rows(i).Item("cjnumi")
+            End If
+
+        Next
+        Return 0
+
+    End Function
 
     Public Sub _prArmarCuadre(ByRef dt As DataTable)
         Try
@@ -1971,7 +1992,7 @@ Public Class F02_Compra
         End If
 
         If (swEmision.IsReadOnly = True And tbCodigo.Text.Length > 0) Then
-
+            dtTO00111 = L_prComprobanteDetalleDetalleGeneral(-1)
             _prCargarTablaComprobantes()
 
         Else
