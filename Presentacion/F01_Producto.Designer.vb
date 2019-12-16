@@ -1059,6 +1059,7 @@ Partial Class F01_Producto
         Me.TbCodFlex.Border.Class = "TextBoxBorder"
         Me.TbCodFlex.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.TbCodFlex.Location = New System.Drawing.Point(309, 3)
+        Me.TbCodFlex.MaxLength = 10
         Me.TbCodFlex.Name = "TbCodFlex"
         Me.TbCodFlex.Size = New System.Drawing.Size(100, 23)
         Me.TbCodFlex.TabIndex = 24

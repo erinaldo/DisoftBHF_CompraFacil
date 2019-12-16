@@ -3812,7 +3812,7 @@ Public Class AccesoLogica
         Else
             _Where = _Cadena
         End If
-        _Tabla = D_Datos_Tabla("canumi,cacod, cadesc,cadesc2", "TC001", _Where + " order by canumi")
+        _Tabla = D_Datos_Tabla("canumi,cacod, cadesc,cadesc2, caconv", "TC001", _Where + " order by canumi")
         _Ds.Tables.Add(_Tabla)
         Return _Ds
     End Function

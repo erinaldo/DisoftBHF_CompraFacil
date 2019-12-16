@@ -21,6 +21,7 @@ Public Class F02_Compra
     Private Asiento As Integer = 0
     Public _detalleCompras As DataTable 'Almacena el detalle para insertar a la tabla TPA001 del BDDiconCF
     Dim dtTC009 As DataTable = New DataTable
+    Public conv As String
 
 #End Region
 
@@ -165,11 +166,11 @@ Public Class F02_Compra
                 dgjDetalle.Row = f
                 dgjDetalle.Col = c + 1
             End If
-            If (c = dgjDetalle.RootTable.Columns("cabcant").Index) Then
+            If (c = dgjDetalle.RootTable.Columns("cabcantcj").Index) Then
                 dgjDetalle.Row = f
                 dgjDetalle.Col = c + 1
             End If
-            If (c = dgjDetalle.RootTable.Columns("cabpcom").Index) Then
+            If (c = dgjDetalle.RootTable.Columns("cabpcomcj").Index) Then
                 If (dgjDetalle.Row = dgjDetalle.RowCount - 1) Then
                     P_prAddFilaDetalle()
                 End If
@@ -195,7 +196,7 @@ Public Class F02_Compra
     End Sub
     Private Sub dgjDetalle_EditingCell(sender As Object, e As EditingCellEventArgs) Handles dgjDetalle.EditingCell
         If (BoNuevo Or BoModificar) Then
-            If (e.Column.Key.Equals("cabcant") Or e.Column.Key.Equals("cabpcom") Or e.Column.Key.Equals("cabporc") Or e.Column.Key.Equals("cabdesc")) Then
+            If (e.Column.Key.Equals("cabcantcj") Or e.Column.Key.Equals("cabcantun") Or e.Column.Key.Equals("cabsubtot") Or e.Column.Key.Equals("cabporc") Or e.Column.Key.Equals("cabdesccj")) Then
                 e.Cancel = False
             Else
                 e.Cancel = True
@@ -392,7 +393,7 @@ Public Class F02_Compra
         dtiFechaCompra.IsInputReadOnly = Not flat
         dtiFechaCompra.ButtonDropDown.Enabled = flat
 
-        dtiFIngresoAlm.IsInputReadOnly = Not flat
+        dtiFfactura.IsInputReadOnly = Not flat
 
         'Button
         btBuscarProveedor.Enabled = flat
@@ -437,7 +438,7 @@ Public Class F02_Compra
 
         'DateTimer
         dtiFechaCompra.Value = Now.Date
-        dtiFIngresoAlm.Value = Now.Date
+        dtiFfactura.Value = Now.Date
 
         'Switch Button
 
@@ -655,7 +656,7 @@ Public Class F02_Compra
                 consigna = IIf(swConsigna.Value = True, 1, 0)
                 retencion = IIf(swRetencion.Value = True, 1, 0)
                 asiento = IIf(swAsiento.Value = True, 1, 0)
-                fingreso = dtiFIngresoAlm.Value.ToString("yyyy/MM/dd")
+                fingreso = dtiFfactura.Value.ToString("yyyy/MM/dd")
 
                 dtiFechaCompra.Select()
 
@@ -1090,8 +1091,8 @@ Public Class F02_Compra
             '.CellStyle.BackColor = Color.AliceBlue
         End With
 
-        With dgjDetalle.RootTable.Columns("cabcant")
-            .Caption = "Cantidad"
+        With dgjDetalle.RootTable.Columns("cabcantcj")
+            .Caption = "Cant. Cj."
             .Width = 100
             .HeaderStyle.Font = FtTitulo
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
@@ -1101,9 +1102,8 @@ Public Class F02_Compra
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.00"
         End With
-
-        With dgjDetalle.RootTable.Columns("cabpcom")
-            .Caption = "Precio"
+        With dgjDetalle.RootTable.Columns("cabcantun")
+            .Caption = "Cant. Un."
             .Width = 100
             .HeaderStyle.Font = FtTitulo
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
@@ -1113,8 +1113,8 @@ Public Class F02_Compra
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.00"
         End With
-        With dgjDetalle.RootTable.Columns("cabpcosto")
-            .Caption = "P. Costo"
+        With dgjDetalle.RootTable.Columns("cabsubtot")
+            .Caption = "Importe Bruto"
             .Width = 100
             .HeaderStyle.Font = FtTitulo
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
@@ -1125,7 +1125,156 @@ Public Class F02_Compra
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
             .TotalFormatString = "0.00"
         End With
-
+        With dgjDetalle.RootTable.Columns("cabpcomcj")
+            .Caption = "Precio Cj."
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabpcomun")
+            .Caption = "Precio Un."
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabporc")
+            .Caption = "Desc. (%)"
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabdesccj")
+            .Caption = "Desc. Cj."
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabdescun")
+            .Caption = "Desc. Un."
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabdescpro1cj")
+            .Caption = "Desc. Pro1"
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabdescpro1un")
+            .Caption = "Desc. Pro1 Un."
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabdescpro2cj")
+            .Caption = "Desc. Pro2"
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabdescpro2un")
+            .Caption = "Desc. Pro2 Un."
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabtot")
+            .Caption = "Total"
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            '.CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabpcostocj")
+            .Caption = "P. Costo Cj."
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
+        With dgjDetalle.RootTable.Columns("cabpcostoun")
+            .Caption = "P. Costo Un."
+            .Width = 100
+            .HeaderStyle.Font = FtTitulo
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.Font = FtNormal
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = True
+            .FormatString = "0.00"
+            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
+            .TotalFormatString = "0.00"
+        End With
         With dgjDetalle.RootTable.Columns("cabputi")
             .Caption = "% Utilidad"
             .Width = 100
@@ -1137,7 +1286,6 @@ Public Class F02_Compra
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.00"
         End With
-
         With dgjDetalle.RootTable.Columns("cabpven")
             .Caption = "Precio Venta"
             .Width = 100
@@ -1185,11 +1333,9 @@ Public Class F02_Compra
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.00"
         End With
-
         With dgjDetalle.RootTable.Columns("cabtca1numi")
             .Visible = False
         End With
-
         With dgjDetalle.RootTable.Columns("total")
             .Caption = "Total"
             .Width = 100
@@ -1203,58 +1349,6 @@ Public Class F02_Compra
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
             .TotalFormatString = "0.00"
         End With
-        With dgjDetalle.RootTable.Columns("cabsubtot")
-            .Caption = "Sub Total"
-            .Width = 100
-            .HeaderStyle.Font = FtTitulo
-            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
-            .CellStyle.Font = FtNormal
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-            .Visible = True
-            .FormatString = "0.00"
-            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
-            .TotalFormatString = "0.00"
-        End With
-        With dgjDetalle.RootTable.Columns("cabporc")
-            .Caption = "Desc. (%)"
-            .Width = 100
-            .HeaderStyle.Font = FtTitulo
-            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
-            .CellStyle.Font = FtNormal
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-            .Visible = True
-            '.CellStyle.BackColor = Color.AliceBlue
-            .FormatString = "0.00"
-            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
-            .TotalFormatString = "0.00"
-        End With
-        With dgjDetalle.RootTable.Columns("cabdesc")
-            .Caption = "Desc. (Bs)"
-            .Width = 100
-            .HeaderStyle.Font = FtTitulo
-            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
-            .CellStyle.Font = FtNormal
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-            .Visible = True
-            '.CellStyle.BackColor = Color.AliceBlue
-            .FormatString = "0.00"
-            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
-            .TotalFormatString = "0.00"
-        End With
-        With dgjDetalle.RootTable.Columns("cabtot")
-            .Caption = "Total"
-            .Width = 100
-            .HeaderStyle.Font = FtTitulo
-            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
-            .CellStyle.Font = FtNormal
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-            .Visible = True
-            '.CellStyle.BackColor = Color.AliceBlue
-            .FormatString = "0.00"
-            .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
-            .TotalFormatString = "0.00"
-        End With
-
         With dgjDetalle.RootTable.Columns("estado")
             .Visible = False
         End With
@@ -1374,6 +1468,7 @@ Public Class F02_Compra
         listEstCeldas.Add(New Modelo.MCelda("cacod", True, "Cod Flex", 100))
         listEstCeldas.Add(New Modelo.MCelda("cadesc", True, "Producto", 300))
         listEstCeldas.Add(New Modelo.MCelda("cadesc2", True, "Desc", 150))
+        listEstCeldas.Add(New Modelo.MCelda("caconv", True, "Conversion", 150))
 
         frmAyuda = New Modelo.ModeloAyuda(600, 540, dt, "Seleccione Producto".ToUpper, listEstCeldas)
         frmAyuda.StartPosition = FormStartPosition.CenterScreen
@@ -1383,8 +1478,10 @@ Public Class F02_Compra
             Dim id As String = frmAyuda.filaSelect.Cells("canumi").Value
             Dim cod As String = frmAyuda.filaSelect.Cells("cacod").Value
             Dim desc As String = frmAyuda.filaSelect.Cells("cadesc").Value
+            conv = frmAyuda.filaSelect.Cells("caconv").Value
 
-            dgjDetalle.Col = dgjDetalle.RootTable.Columns("cabcant").Index
+
+            dgjDetalle.Col = dgjDetalle.RootTable.Columns("cabcantcj").Index
             dgjDetalle.SetValue(1, id)
             dgjDetalle.SetValue(2, cod)
             dgjDetalle.SetValue(3, desc)
@@ -1399,8 +1496,21 @@ Public Class F02_Compra
         f.Item("cabnumi") = DtDetalle.Rows.Count + 1
         f.Item("cabtc1numi") = 0
         f.Item("ntc1numi") = ""
-        f.Item("cabcant") = 0
-        f.Item("cabpcom") = 0
+        f.Item("cabcantcj") = 0
+        f.Item("cabcantun") = 0
+        f.Item("cabsubtot") = 0
+        f.Item("cabpcomcj") = 0
+        f.Item("cabpcomun") = 0
+        f.Item("cabporc") = 0
+        f.Item("cabdesccj") = 0
+        f.Item("cabdescun") = 0
+        f.Item("cabdescpro1cj") = 0
+        f.Item("cabdescpro1un") = 0
+        f.Item("cabdescpro2cj") = 0
+        f.Item("cabdescpro2un") = 0
+        f.Item("cabtot") = 0
+        f.Item("cabpcostocj") = 0
+        f.Item("cabpcostoun") = 0
         f.Item("cabputi") = 0
         f.Item("cabpven") = 0
         f.Item("cabnfr") = "0"
@@ -1408,10 +1518,6 @@ Public Class F02_Compra
         f.Item("cabstockf") = 0
         f.Item("cabtca1numi") = 0
         f.Item("total") = 0
-        f.Item("cabsubtot") = 0
-        f.Item("cabporc") = 0
-        f.Item("cabdesc") = 0
-        f.Item("cabtot") = 0
         f.Item("estado") = 0
 
         DtDetalle.Rows.Add(f)
@@ -1478,35 +1584,25 @@ Public Class F02_Compra
 
     Private Sub dgjDetalle_CellValueChanged(sender As Object, e As ColumnActionEventArgs) Handles dgjDetalle.CellValueChanged
         If (BoModificar Or BoNuevo) Then
-            If ((e.Column.Key.Equals("cabcant")) Or (e.Column.Key.Equals("cabpcom"))) Then
+            If ((e.Column.Key.Equals("cabcantcj")) Or (e.Column.Key.Equals("cabsubtot"))) Then
                 Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
                 Dim pos As Integer = -1
                 _fnObtenerFilaDetalle(pos, lin)
-                If (Not IsNumeric(dgjDetalle.GetValue("cabcant")) Or dgjDetalle.GetValue("cabcant").ToString = String.Empty) Then
-                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabcant") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabcant")
+                If (Not IsNumeric(dgjDetalle.GetValue("cabcantcj")) Or dgjDetalle.GetValue("cabcantcj").ToString = String.Empty) Then
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabcantcj") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabcantcj")
                     CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot")
                     CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot")
                 Else
-
-                    If (e.Column.Key.Equals("cabcant")) Then
-                        'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
-
-                        dgjDetalle.SetValue("cabsubtot", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
-
-                        'CType(dgjBusqueda.DataSource, DataTable).Rows(5).Item("total") = dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom")
-                        '_prCalcularPrecioTotal()
-
+                    If (e.Column.Key.Equals("cabcantcj")) Then
+                        dgjDetalle.SetValue("cabcantun", dgjDetalle.GetValue("cabcantcj") * conv)
+                        dgjDetalle.SetValue("cabpcomcj", dgjDetalle.GetValue("cabsubtot") / dgjDetalle.GetValue("cabcantcj"))
                     End If
                 End If
                 If (e.Column.Key.Equals("cabpcom")) Then
                     If (Not IsNumeric(dgjDetalle.GetValue("cabpcom")) Or dgjDetalle.GetValue("cabpcom").ToString = String.Empty) Then
                         Dim cantidad As Double = dgjDetalle.GetValue("cabcant")
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcom") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcom")
-                        'CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cbptot") = cantidad * CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cbpcost")
-
                     Else
-                        'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
-
                         dgjDetalle.SetValue("cabsubtot", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
 
                         Dim porcdesc As Double = dgjDetalle.GetValue("cabporc")
@@ -1523,12 +1619,8 @@ Public Class F02_Compra
                         dgjDetalle.SetValue("cabdesc", montodesc)
                         dgjDetalle.SetValue("cabtot", totalF)
 
-
-                        'Dim total As Double = dgjDetalle.GetValue("total")
-                        'Dim total As Double = dgjDetalle.GetValue("cabtot")
                         _prCalcularPrecioTotal()
-                        'tbSubtotalC.Text = tbSubtotalC.Value + total
-                        'tbtotal.Text = tbSubtotalC.Text
+
                     End If
 
                     If (dgjDetalle.GetValue("cabtca1numi") <> 0) Then
@@ -1588,7 +1680,7 @@ Public Class F02_Compra
             End If
 
             '''''''''''''''''''''MONTO DE DESCUENTO '''''''''''''''''''''
-            If (e.Column.Index = dgjDetalle.RootTable.Columns("cabdesc").Index) Then
+            If (e.Column.Index = dgjDetalle.RootTable.Columns("cabdesccj").Index) Then
                 If (Not IsNumeric(dgjDetalle.GetValue("cabdesc")) Or dgjDetalle.GetValue("cabdesc").ToString = String.Empty) Then
 
                     Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
@@ -1613,18 +1705,13 @@ Public Class F02_Compra
 
                         Dim totalF As Double = dgjDetalle.GetValue("cabsubtot") - montodesc
 
-                        'dgjDetalle.SetValue("cabdesc", montodesc)
                         dgjDetalle.SetValue("cabtot", totalF)
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = totalF
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot") = dgjDetalle.GetValue("cabsubtot")
 
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcosto") = (CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") * 0.87) / dgjDetalle.GetValue("cabcant")
 
-                        'Dim total As Double = dgjDetalle.GetValue("total")
-                        'Dim total As Double = dgjDetalle.GetValue("cabtot")
                         _prCalcularPrecioTotal()
-                        'tbSubtotalC.Text = tbSubtotalC.Value + total
-                        'tbtotal.Text = tbSubtotalC.Text
 
                     Else
                         Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
@@ -1642,8 +1729,6 @@ Public Class F02_Compra
                     End If
                 End If
             End If
-
-
 
         End If
     End Sub

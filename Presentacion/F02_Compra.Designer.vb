@@ -31,7 +31,7 @@ Partial Class F02_Compra
         Me.GroupPanelDatosGenerales = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.PanelExDatosGenerales = New DevComponents.DotNetBar.PanelEx()
         Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
-        Me.dtiFIngresoAlm = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.dtiFfactura = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.swAsiento = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.swRetencion = New DevComponents.DotNetBar.Controls.SwitchButton()
@@ -68,6 +68,10 @@ Partial Class F02_Compra
         Me.tbCodigo = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.DoubleInput2 = New DevComponents.Editors.DoubleInput()
+        Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
+        Me.DoubleInput1 = New DevComponents.Editors.DoubleInput()
+        Me.LabelX14 = New DevComponents.DotNetBar.LabelX()
         Me.tbtotal = New DevComponents.Editors.DoubleInput()
         Me.LabelX11 = New DevComponents.DotNetBar.LabelX()
         Me.tbMdesc = New DevComponents.Editors.DoubleInput()
@@ -77,10 +81,6 @@ Partial Class F02_Compra
         Me.GroupPanelBuscador = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.dgjBusqueda = New Janus.Windows.GridEX.GridEX()
         Me.btnContabilizar = New DevComponents.DotNetBar.ButtonX()
-        Me.DoubleInput1 = New DevComponents.Editors.DoubleInput()
-        Me.LabelX14 = New DevComponents.DotNetBar.LabelX()
-        Me.DoubleInput2 = New DevComponents.Editors.DoubleInput()
-        Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
         CType(Me.MSuperTabControlPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MSuperTabControlPrincipal.SuspendLayout()
         Me.MSuperTabControlPanelBusqueda.SuspendLayout()
@@ -100,18 +100,18 @@ Partial Class F02_Compra
         Me.cmDetalle.SuspendLayout()
         Me.GroupPanelDatosGenerales.SuspendLayout()
         Me.PanelExDatosGenerales.SuspendLayout()
-        CType(Me.dtiFIngresoAlm, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtiFfactura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanelFactura2.SuspendLayout()
         CType(Me.tbFechaVenc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtiFechaCompra, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        CType(Me.DoubleInput2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DoubleInput1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbtotal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbMdesc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbSubtotalC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanelBuscador.SuspendLayout()
         CType(Me.dgjBusqueda, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DoubleInput1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DoubleInput2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MSuperTabControlPrincipal
@@ -129,7 +129,7 @@ Partial Class F02_Compra
         Me.MSuperTabControlPrincipal.ControlBox.MenuBox.Name = ""
         Me.MSuperTabControlPrincipal.ControlBox.Name = ""
         Me.MSuperTabControlPrincipal.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.MSuperTabControlPrincipal.ControlBox.MenuBox, Me.MSuperTabControlPrincipal.ControlBox.CloseBox})
-        Me.MSuperTabControlPrincipal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MSuperTabControlPrincipal.Margin = New System.Windows.Forms.Padding(4)
         Me.MSuperTabControlPrincipal.SelectedTabIndex = 1
         Me.MSuperTabControlPrincipal.Size = New System.Drawing.Size(1286, 455)
         Me.MSuperTabControlPrincipal.Controls.SetChildIndex(Me.MSuperTabControlPanelRegistro, 0)
@@ -138,20 +138,20 @@ Partial Class F02_Compra
         'MSuperTabControlPanelBusqueda
         '
         Me.MSuperTabControlPanelBusqueda.Controls.Add(Me.GroupPanelBuscador)
-        Me.MSuperTabControlPanelBusqueda.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MSuperTabControlPanelBusqueda.Margin = New System.Windows.Forms.Padding(4)
         Me.MSuperTabControlPanelBusqueda.Size = New System.Drawing.Size(1244, 455)
         '
         'MSuperTabControlPanelRegistro
         '
         Me.MSuperTabControlPanelRegistro.Controls.Add(Me.TableLayoutPanelPrincipal)
-        Me.MSuperTabControlPanelRegistro.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MSuperTabControlPanelRegistro.Margin = New System.Windows.Forms.Padding(4)
         Me.MSuperTabControlPanelRegistro.Size = New System.Drawing.Size(1244, 455)
         Me.MSuperTabControlPanelRegistro.Controls.SetChildIndex(Me.TableLayoutPanelPrincipal, 0)
         Me.MSuperTabControlPanelRegistro.Controls.SetChildIndex(Me.MPnUsuario, 0)
         '
         'MPnSuperior
         '
-        Me.MPnSuperior.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MPnSuperior.Margin = New System.Windows.Forms.Padding(4)
         Me.MPnSuperior.Size = New System.Drawing.Size(1286, 70)
         Me.MPnSuperior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.MPnSuperior.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(244, Byte), Integer))
@@ -163,7 +163,7 @@ Partial Class F02_Compra
         '
         'MPnInferior
         '
-        Me.MPnInferior.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MPnInferior.Margin = New System.Windows.Forms.Padding(4)
         Me.MPnInferior.Size = New System.Drawing.Size(1286, 36)
         Me.MPnInferior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.MPnInferior.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(244, Byte), Integer))
@@ -176,11 +176,11 @@ Partial Class F02_Compra
         'MPanelToolBarUsuario
         '
         Me.MPanelToolBarUsuario.Location = New System.Drawing.Point(1086, 0)
-        Me.MPanelToolBarUsuario.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MPanelToolBarUsuario.Margin = New System.Windows.Forms.Padding(4)
         '
         'MTbUsuario
         '
-        Me.MTbUsuario.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MTbUsuario.Margin = New System.Windows.Forms.Padding(4)
         Me.MTbUsuario.ReadOnly = True
         Me.MTbUsuario.Size = New System.Drawing.Size(135, 32)
         Me.MTbUsuario.Text = "DEFAULT"
@@ -217,7 +217,7 @@ Partial Class F02_Compra
         '
         Me.MPanelToolBarImprimir.Controls.Add(Me.btnContabilizar)
         Me.MPanelToolBarImprimir.Location = New System.Drawing.Point(1136, 0)
-        Me.MPanelToolBarImprimir.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MPanelToolBarImprimir.Margin = New System.Windows.Forms.Padding(4)
         Me.MPanelToolBarImprimir.Size = New System.Drawing.Size(150, 70)
         Me.MPanelToolBarImprimir.Controls.SetChildIndex(Me.MBtImprimir, 0)
         Me.MPanelToolBarImprimir.Controls.SetChildIndex(Me.btnContabilizar, 0)
@@ -226,7 +226,7 @@ Partial Class F02_Compra
         '
         Me.MBtImprimir.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MBtImprimir.Location = New System.Drawing.Point(78, 0)
-        Me.MBtImprimir.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MBtImprimir.Margin = New System.Windows.Forms.Padding(4)
         '
         'MBubbleBarUsuario
         '
@@ -254,7 +254,7 @@ Partial Class F02_Compra
         'MPnUsuario
         '
         Me.MPnUsuario.Location = New System.Drawing.Point(391, -2)
-        Me.MPnUsuario.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MPnUsuario.Margin = New System.Windows.Forms.Padding(4)
         '
         'MLbPaginacion
         '
@@ -404,7 +404,7 @@ Partial Class F02_Compra
         Me.PanelExDatosGenerales.CanvasColor = System.Drawing.Color.Transparent
         Me.PanelExDatosGenerales.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PanelExDatosGenerales.Controls.Add(Me.LabelX7)
-        Me.PanelExDatosGenerales.Controls.Add(Me.dtiFIngresoAlm)
+        Me.PanelExDatosGenerales.Controls.Add(Me.dtiFfactura)
         Me.PanelExDatosGenerales.Controls.Add(Me.swAsiento)
         Me.PanelExDatosGenerales.Controls.Add(Me.LabelX2)
         Me.PanelExDatosGenerales.Controls.Add(Me.swRetencion)
@@ -452,58 +452,58 @@ Partial Class F02_Compra
         Me.LabelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX7.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX7.Location = New System.Drawing.Point(465, 108)
+        Me.LabelX7.Location = New System.Drawing.Point(503, 108)
         Me.LabelX7.Name = "LabelX7"
-        Me.LabelX7.Size = New System.Drawing.Size(139, 23)
+        Me.LabelX7.Size = New System.Drawing.Size(101, 23)
         Me.LabelX7.TabIndex = 387
-        Me.LabelX7.Text = "F. Ingreso Almacen:"
+        Me.LabelX7.Text = "Fecha Factura:"
         Me.LabelX7.TextAlignment = System.Drawing.StringAlignment.Far
         '
-        'dtiFIngresoAlm
+        'dtiFfactura
         '
         '
         '
         '
-        Me.dtiFIngresoAlm.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtiFIngresoAlm.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtiFIngresoAlm.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown
-        Me.dtiFIngresoAlm.ButtonDropDown.Visible = True
-        Me.dtiFIngresoAlm.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtiFIngresoAlm.IsPopupCalendarOpen = False
-        Me.dtiFIngresoAlm.Location = New System.Drawing.Point(610, 108)
+        Me.dtiFfactura.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtiFfactura.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtiFfactura.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown
+        Me.dtiFfactura.ButtonDropDown.Visible = True
+        Me.dtiFfactura.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtiFfactura.IsPopupCalendarOpen = False
+        Me.dtiFfactura.Location = New System.Drawing.Point(610, 108)
         '
         '
         '
         '
         '
         '
-        Me.dtiFIngresoAlm.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtiFIngresoAlm.MonthCalendar.CalendarDimensions = New System.Drawing.Size(1, 1)
-        Me.dtiFIngresoAlm.MonthCalendar.ClearButtonVisible = True
+        Me.dtiFfactura.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtiFfactura.MonthCalendar.CalendarDimensions = New System.Drawing.Size(1, 1)
+        Me.dtiFfactura.MonthCalendar.ClearButtonVisible = True
         '
         '
         '
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtiFIngresoAlm.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtiFIngresoAlm.MonthCalendar.DisplayMonth = New Date(2017, 2, 1, 0, 0, 0, 0)
-        Me.dtiFIngresoAlm.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        Me.dtiFfactura.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtiFfactura.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtiFfactura.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtiFfactura.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtiFfactura.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtiFfactura.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtiFfactura.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtiFfactura.MonthCalendar.DisplayMonth = New Date(2017, 2, 1, 0, 0, 0, 0)
+        Me.dtiFfactura.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
         '
         '
         '
-        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtiFIngresoAlm.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtiFIngresoAlm.MonthCalendar.TodayButtonVisible = True
-        Me.dtiFIngresoAlm.Name = "dtiFIngresoAlm"
-        Me.dtiFIngresoAlm.Size = New System.Drawing.Size(120, 23)
-        Me.dtiFIngresoAlm.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.dtiFIngresoAlm.TabIndex = 386
+        Me.dtiFfactura.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtiFfactura.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtiFfactura.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtiFfactura.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtiFfactura.MonthCalendar.TodayButtonVisible = True
+        Me.dtiFfactura.Name = "dtiFfactura"
+        Me.dtiFfactura.Size = New System.Drawing.Size(120, 23)
+        Me.dtiFfactura.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.dtiFfactura.TabIndex = 386
         '
         'swAsiento
         '
@@ -512,7 +512,7 @@ Partial Class F02_Compra
         '
         Me.swAsiento.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.swAsiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.swAsiento.Location = New System.Drawing.Point(744, 143)
+        Me.swAsiento.Location = New System.Drawing.Point(744, 142)
         Me.swAsiento.Name = "swAsiento"
         Me.swAsiento.OffBackColor = System.Drawing.Color.RoyalBlue
         Me.swAsiento.OffText = "NO"
@@ -533,7 +533,7 @@ Partial Class F02_Compra
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX2.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX2.Location = New System.Drawing.Point(705, 142)
+        Me.LabelX2.Location = New System.Drawing.Point(705, 141)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(55, 23)
         Me.LabelX2.TabIndex = 385
@@ -547,7 +547,7 @@ Partial Class F02_Compra
         '
         Me.swRetencion.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.swRetencion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.swRetencion.Location = New System.Drawing.Point(747, 110)
+        Me.swRetencion.Location = New System.Drawing.Point(747, 109)
         Me.swRetencion.Name = "swRetencion"
         Me.swRetencion.OffBackColor = System.Drawing.Color.RoyalBlue
         Me.swRetencion.OffText = "NO"
@@ -566,7 +566,7 @@ Partial Class F02_Compra
         Me.LabelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX13.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX13.Location = New System.Drawing.Point(706, 109)
+        Me.LabelX13.Location = New System.Drawing.Point(706, 108)
         Me.LabelX13.Name = "LabelX13"
         Me.LabelX13.Size = New System.Drawing.Size(70, 23)
         Me.LabelX13.TabIndex = 383
@@ -1185,6 +1185,72 @@ Partial Class F02_Compra
         Me.Panel1.Size = New System.Drawing.Size(1238, 44)
         Me.Panel1.TabIndex = 2
         '
+        'DoubleInput2
+        '
+        '
+        '
+        '
+        Me.DoubleInput2.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.DoubleInput2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.DoubleInput2.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.DoubleInput2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DoubleInput2.Increment = 1.0R
+        Me.DoubleInput2.Location = New System.Drawing.Point(961, 12)
+        Me.DoubleInput2.MinValue = 0R
+        Me.DoubleInput2.Name = "DoubleInput2"
+        Me.DoubleInput2.Size = New System.Drawing.Size(89, 21)
+        Me.DoubleInput2.TabIndex = 49
+        Me.DoubleInput2.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
+        '
+        'LabelX15
+        '
+        Me.LabelX15.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX15.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX15.ForeColor = System.Drawing.Color.White
+        Me.LabelX15.Location = New System.Drawing.Point(851, 14)
+        Me.LabelX15.Name = "LabelX15"
+        Me.LabelX15.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX15.Size = New System.Drawing.Size(105, 18)
+        Me.LabelX15.TabIndex = 50
+        Me.LabelX15.Text = "Desc Financiero:"
+        '
+        'DoubleInput1
+        '
+        '
+        '
+        '
+        Me.DoubleInput1.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.DoubleInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.DoubleInput1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.DoubleInput1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DoubleInput1.Increment = 1.0R
+        Me.DoubleInput1.Location = New System.Drawing.Point(746, 12)
+        Me.DoubleInput1.MinValue = 0R
+        Me.DoubleInput1.Name = "DoubleInput1"
+        Me.DoubleInput1.Size = New System.Drawing.Size(89, 21)
+        Me.DoubleInput1.TabIndex = 47
+        Me.DoubleInput1.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
+        '
+        'LabelX14
+        '
+        Me.LabelX14.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX14.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX14.ForeColor = System.Drawing.Color.White
+        Me.LabelX14.Location = New System.Drawing.Point(672, 14)
+        Me.LabelX14.Name = "LabelX14"
+        Me.LabelX14.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX14.Size = New System.Drawing.Size(68, 18)
+        Me.LabelX14.TabIndex = 48
+        Me.LabelX14.Text = "Desc Pro1:"
+        '
         'tbtotal
         '
         '
@@ -1249,7 +1315,7 @@ Partial Class F02_Compra
         Me.LabelX9.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX9.Size = New System.Drawing.Size(68, 18)
         Me.LabelX9.TabIndex = 44
-        Me.LabelX9.Text = "Desc Pro1:"
+        Me.LabelX9.Text = "Desc Pro:"
         '
         'tbSubtotalC
         '
@@ -1355,78 +1421,12 @@ Partial Class F02_Compra
         Me.btnContabilizar.Text = "CONTABILIZAR"
         Me.btnContabilizar.TextColor = System.Drawing.Color.Black
         '
-        'DoubleInput1
-        '
-        '
-        '
-        '
-        Me.DoubleInput1.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.DoubleInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.DoubleInput1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
-        Me.DoubleInput1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DoubleInput1.Increment = 1.0R
-        Me.DoubleInput1.Location = New System.Drawing.Point(746, 12)
-        Me.DoubleInput1.MinValue = 0R
-        Me.DoubleInput1.Name = "DoubleInput1"
-        Me.DoubleInput1.Size = New System.Drawing.Size(89, 21)
-        Me.DoubleInput1.TabIndex = 47
-        Me.DoubleInput1.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
-        '
-        'LabelX14
-        '
-        Me.LabelX14.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX14.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX14.ForeColor = System.Drawing.Color.White
-        Me.LabelX14.Location = New System.Drawing.Point(672, 14)
-        Me.LabelX14.Name = "LabelX14"
-        Me.LabelX14.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX14.Size = New System.Drawing.Size(68, 18)
-        Me.LabelX14.TabIndex = 48
-        Me.LabelX14.Text = "Desc Pro2:"
-        '
-        'DoubleInput2
-        '
-        '
-        '
-        '
-        Me.DoubleInput2.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.DoubleInput2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.DoubleInput2.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
-        Me.DoubleInput2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DoubleInput2.Increment = 1.0R
-        Me.DoubleInput2.Location = New System.Drawing.Point(961, 12)
-        Me.DoubleInput2.MinValue = 0R
-        Me.DoubleInput2.Name = "DoubleInput2"
-        Me.DoubleInput2.Size = New System.Drawing.Size(89, 21)
-        Me.DoubleInput2.TabIndex = 49
-        Me.DoubleInput2.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
-        '
-        'LabelX15
-        '
-        Me.LabelX15.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX15.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX15.ForeColor = System.Drawing.Color.White
-        Me.LabelX15.Location = New System.Drawing.Point(851, 14)
-        Me.LabelX15.Name = "LabelX15"
-        Me.LabelX15.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX15.Size = New System.Drawing.Size(105, 18)
-        Me.LabelX15.TabIndex = 50
-        Me.LabelX15.Text = "Desc Financiero:"
-        '
         'F02_Compra
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1286, 561)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "F02_Compra"
         Me.Text = "F02_Compra"
         Me.Controls.SetChildIndex(Me.MPnSuperior, 0)
@@ -1453,18 +1453,18 @@ Partial Class F02_Compra
         Me.cmDetalle.ResumeLayout(False)
         Me.GroupPanelDatosGenerales.ResumeLayout(False)
         Me.PanelExDatosGenerales.ResumeLayout(False)
-        CType(Me.dtiFIngresoAlm, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtiFfactura, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanelFactura2.ResumeLayout(False)
         CType(Me.tbFechaVenc, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtiFechaCompra, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
+        CType(Me.DoubleInput2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DoubleInput1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbtotal, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbMdesc, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbSubtotalC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanelBuscador.ResumeLayout(False)
         CType(Me.dgjBusqueda, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DoubleInput1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DoubleInput2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1521,7 +1521,7 @@ Partial Class F02_Compra
     Friend WithEvents LabelX13 As DevComponents.DotNetBar.LabelX
     Protected WithEvents btnContabilizar As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX7 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents dtiFIngresoAlm As DevComponents.Editors.DateTimeAdv.DateTimeInput
+    Friend WithEvents dtiFfactura As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents DoubleInput2 As DevComponents.Editors.DoubleInput
     Friend WithEvents LabelX15 As DevComponents.DotNetBar.LabelX
     Friend WithEvents DoubleInput1 As DevComponents.Editors.DoubleInput
