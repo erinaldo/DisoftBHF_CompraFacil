@@ -12,23 +12,33 @@ Imports System
 Imports System.Collections.Generic
 
 
-Partial Public Class VR_GO_DespachoXProducto
-
-    Public Property oaccbnumi As Integer
+Partial Public Class sp_Mam_Asiento_Result
 
     Public Property canumi As Integer
 
-    Public Property cacod As String
+    Public Property nro As String
 
     Public Property cadesc As String
 
-    Public Property cadesc2 As String
+    Public Property chporcen As Nullable(Of Decimal)
 
-    Public Property categoria As String
+    Public Property chdebe As Nullable(Of Integer)
 
-    Public Property obpcant As Nullable(Of Decimal)
+    Public Property chhaber As Nullable(Of Integer)
 
-    Public Property oacnconc As Nullable(Of Integer)
+    Public Property tc As Nullable(Of Decimal)
+
+    Public Property debe As Nullable(Of Decimal)
+
+    Public Property haber As Nullable(Of Decimal)
+
+    Public Property debesus As Nullable(Of Decimal)
+
+    Public Property habersus As Nullable(Of Decimal)
+
+    Public Property variable As Nullable(Of Integer)
+
+    Public Property linea As Nullable(Of Integer)
 
 
 End Class

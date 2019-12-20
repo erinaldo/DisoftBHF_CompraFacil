@@ -12,17 +12,25 @@ Imports System
 Imports System.Collections.Generic
 
 
-Partial Public Class TO001C
+Partial Public Class sp_go_Reportes_Result
 
-    Public Property oacnumi As Integer
+    Public Property CodDB As Integer
 
-    Public Property oacoanumi As Integer
+    Public Property Codigo As String
 
-    Public Property oaccbnumi As Integer
+    Public Property Contacto As String
 
-    Public Property oacnrofac As Nullable(Of Long)
+    Public Property Carrito As Nullable(Of Integer)
 
-    Public Property oacnconc As Nullable(Of Integer)
+    Public Property Botellon As Nullable(Of Integer)
+
+    Public Property Cliente As String
+
+    Public Property Direccion As String
+
+    Public Property Cantidad As Decimal
+
+    Public Property Monto As Decimal
 
 
 End Class

@@ -1161,7 +1161,7 @@ salirIf:
 
     Private Sub CargarDespachoDeChofer(codChofer As Integer)
         Try
-            Dim listResult = New LPedido().ListarDespachoXProductoDeChofer(codChofer)
+            Dim listResult = New LPedido().ListarDespachoXProductoDeChoferSalida(codChofer)
             If (listResult.Count > 0) Then
                 Dim info As New TaskDialogInfo("¿desea carga los producto de despacho del chofer?".ToUpper,
                                        eTaskDialogIcon.Information, "pregunta".ToUpper,
@@ -1184,6 +1184,10 @@ salirIf:
                     Next
                     _prCargarProductos()
                 End If
+            Else
+                Dim img As Bitmap = New Bitmap(My.Resources.Mensaje, 50, 50)
+                ToastNotification.Show(Me, "No existe productos de despacho para el chofer".ToUpper, img, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
+                'MBtGrabar.Enabled = False
             End If
         Catch ex As Exception
             Throw New Exception(ex.Message)

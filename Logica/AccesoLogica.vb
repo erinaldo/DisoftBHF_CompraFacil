@@ -1150,6 +1150,18 @@ Public Class AccesoLogica
         _Err = D_Modificar_Datos("TO001", Sql, _where)
     End Sub
 
+    Public Shared Function L_VerificarPedidoConsolidado(_IdPedido As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _Where As String
+
+        _Where = " oacoanumi=oanumi and  ieconcti2= oacnconc and oacoanumi=" + _IdPedido
+
+        Dim campos As String = "oanumi, ieconcti2, ieest"
+        _Tabla = D_Datos_Tabla(campos, "TO001,TO001C,TM0012", _Where + " order by oanumi desc")
+        Return _Tabla
+
+    End Function
+
     Public Shared Sub L_PedidoCabacera_ModificarExtencion(to1numi As String, numiprev As String)
         Dim _Err As Boolean
         Dim Sql, _where As String
@@ -6327,6 +6339,18 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+    Public Shared Function L_prConciliacionObtenerProductoTI0021IdnumiCaja(_ibid As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 24))
+        _listParam.Add(New Datos.DParametro("@ibid", _ibid))
+        _listParam.Add(New Datos.DParametro("@ibuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TM001SalidaChofer", _listParam)
+
+        Return _Tabla
+    End Function
 
     Public Shared Function L_prConciliacionObtenerPedidoEntregado(idrepa As String) As DataTable
         Dim _Tabla As DataTable
@@ -6341,7 +6365,7 @@ Public Class AccesoLogica
         Return _Tabla
     End Function
 
-    Public Shared Function L_prConciliacionObtenerPedidoEntregadoGral(idrepa As String, idfecha As String) As DataTable
+    Public Shared Function L_prConciliacionObtenerPedidoEntregadoGral(idrepa As String, idfecha As String, nconci As String) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)
@@ -6349,6 +6373,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@tipo", 23))
         _listParam.Add(New Datos.DParametro("@ibidchof", idrepa))
         _listParam.Add(New Datos.DParametro("@ibfdoc", idfecha))
+        _listParam.Add(New Datos.DParametro("@nconci", nconci))
         _listParam.Add(New Datos.DParametro("@ibuact", L_Usuario))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TM001SalidaChofer", _listParam)
 
@@ -8038,12 +8063,13 @@ Public Class AccesoLogica
         Return _resultado
     End Function
 
-    Public Shared Function L_prObtenerDetalleChofer(numi As String, fecha As String) As DataTable
+    Public Shared Function L_prObtenerDetalleChofer(numi As String, fecha As String, nconci As String) As DataTable
         Dim _Tabla As DataTable
         Dim _listParam As New List(Of Datos.DParametro)
         _listParam.Add(New Datos.DParametro("@tipo", 5))
         _listParam.Add(New Datos.DParametro("@olnumichof", numi))
         _listParam.Add(New Datos.DParametro("@olfecha", fecha))
+        _listParam.Add(New Datos.DParametro("@nconci", nconci))
         _listParam.Add(New Datos.DParametro("@oluact", L_Usuario))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TO005", _listParam)
         Return _Tabla

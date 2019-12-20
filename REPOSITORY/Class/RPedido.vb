@@ -14,7 +14,7 @@ Public Class RPedido
                                   Join a1 In db.TO001A On a.oanumi Equals a1.oaato1numi
                                   Join b In db.TC004 On a.oaccli Equals b.ccnumi
                                   Join c In db.TC002 On a1.oaanumiprev Equals c.cbnumi
-                                  Where a.oaest = ENEstadoPedido.DICTADO And
+                                  Where a.oaest = ENEstadoPedido.DICTADO And a.oaap = 1 And
                                       listIdZona.Contains(a.oazona) And
                                       Not db.TO001C.Select(Function(aa) aa.oacoanumi).ToList().Contains(a.oanumi)
                                   Select New VPedido_Dispatch With {
@@ -60,7 +60,8 @@ Public Class RPedido
                     Dim data = New TO001C With
                     {
                         .oacoanumi = id,
-                        .oaccbnumi = idChofer
+                        .oaccbnumi = idChofer,
+                        .oacnconc = 0
                     }
                     db.TO001C.Add(data)
                 Next
@@ -98,6 +99,26 @@ Public Class RPedido
             Using db = GetSchema()
                 Dim listResult = (From a In db.VR_GO_DespachoXProducto
                                   Where a.oaccbnumi = idChofer
+                                  Select New RDespachoXProducto With {
+                                      .oaccbnumi = a.oaccbnumi,
+                                      .canumi = a.canumi,
+                                      .cacod = a.cacod,
+                                      .cadesc = a.cadesc,
+                                      .cadesc2 = a.cadesc2,
+                                      .categoria = a.categoria,
+                                      .obpcant = a.obpcant
+                                      }).ToList()
+                Return listResult
+            End Using
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+    Public Function ListarDespachoXProductoDeChoferSalida(idChofer As Integer) As List(Of RDespachoXProducto) Implements IPedido.ListarDespachoXProductoDeChoferSalida
+        Try
+            Using db = GetSchema()
+                Dim listResult = (From a In db.VR_GO_DespachoXProducto
+                                  Where a.oaccbnumi = idChofer And a.oacnconc = 0
                                   Select New RDespachoXProducto With {
                                       .oaccbnumi = a.oaccbnumi,
                                       .canumi = a.canumi,

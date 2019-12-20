@@ -13,6 +13,9 @@ Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
 
+Imports System.Data.Entity.Core.Objects
+Imports System.Linq
+
 
 
 Partial Public Class BDDistBHFEntities
@@ -59,8 +62,6 @@ Partial Public Class BDDistBHFEntities
     Public Overridable Property TC0111() As DbSet(Of TC0111)
 
     Public Overridable Property TCA001() As DbSet(Of TCA001)
-
-    Public Overridable Property TCA0011() As DbSet(Of TCA0011)
 
     Public Overridable Property TFV001() As DbSet(Of TFV001)
 
@@ -251,6 +252,1704 @@ Partial Public Class BDDistBHFEntities
     Public Overridable Property Vr_VentasVendidas() As DbSet(Of Vr_VentasVendidas)
 
     Public Overridable Property VR_VistaPedido_PrecioCosto() As DbSet(Of VR_VistaPedido_PrecioCosto)
+
+    Public Overridable Property TV001() As DbSet(Of TV001)
+
+    Public Overridable Property TV0011() As DbSet(Of TV0011)
+
+    Public Overridable Property TS001() As DbSet(Of TS001)
+
+    Public Overridable Property VR_GO_Factura() As DbSet(Of VR_GO_Factura)
+
+    Public Overridable Property VR_NotaCompra() As DbSet(Of VR_NotaCompra)
+
+    Public Overridable Property TCA0011() As DbSet(Of TCA0011)
+
+
+    Public Overridable Function PlanillaSueldo(fecha As Nullable(Of Date)) As Integer
+
+        Dim fechaParameter As ObjectParameter = If(fecha.HasValue, New ObjectParameter("fecha", fecha), New ObjectParameter("fecha", GetType(Date)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("PlanillaSueldo", fechaParameter)
+    End Function
+
+
+    Public Overridable Function sp_dg_RAsistencia() As ObjectResult(Of sp_dg_RAsistencia_Result)
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sp_dg_RAsistencia_Result)("sp_dg_RAsistencia")
+    End Function
+
+
+    Public Overridable Function sp_dg_TC011(tipo As Nullable(Of Integer), cnnumi As Nullable(Of Integer), cnfdoc As Nullable(Of Date), cnobs As String, cnest As Nullable(Of Integer), cnuact As String) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim cnnumiParameter As ObjectParameter = If(cnnumi.HasValue, New ObjectParameter("cnnumi", cnnumi), New ObjectParameter("cnnumi", GetType(Integer)))
+
+
+        Dim cnfdocParameter As ObjectParameter = If(cnfdoc.HasValue, New ObjectParameter("cnfdoc", cnfdoc), New ObjectParameter("cnfdoc", GetType(Date)))
+
+
+        Dim cnobsParameter As ObjectParameter = If(cnobs IsNot Nothing, New ObjectParameter("cnobs", cnobs), New ObjectParameter("cnobs", GetType(String)))
+
+
+        Dim cnestParameter As ObjectParameter = If(cnest.HasValue, New ObjectParameter("cnest", cnest), New ObjectParameter("cnest", GetType(Integer)))
+
+
+        Dim cnuactParameter As ObjectParameter = If(cnuact IsNot Nothing, New ObjectParameter("cnuact", cnuact), New ObjectParameter("cnuact", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_dg_TC011", tipoParameter, cnnumiParameter, cnfdocParameter, cnobsParameter, cnestParameter, cnuactParameter)
+    End Function
+
+
+    Public Overridable Function sp_dg_TP007(tipo As Nullable(Of Integer), pinumi As Nullable(Of Integer), picper As Nullable(Of Integer), pifdoc As Nullable(Of Date), piturno As Nullable(Of Integer), piuact As String, fecha1 As Nullable(Of Date), fecha2 As Nullable(Of Date)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim pinumiParameter As ObjectParameter = If(pinumi.HasValue, New ObjectParameter("pinumi", pinumi), New ObjectParameter("pinumi", GetType(Integer)))
+
+
+        Dim picperParameter As ObjectParameter = If(picper.HasValue, New ObjectParameter("picper", picper), New ObjectParameter("picper", GetType(Integer)))
+
+
+        Dim pifdocParameter As ObjectParameter = If(pifdoc.HasValue, New ObjectParameter("pifdoc", pifdoc), New ObjectParameter("pifdoc", GetType(Date)))
+
+
+        Dim piturnoParameter As ObjectParameter = If(piturno.HasValue, New ObjectParameter("piturno", piturno), New ObjectParameter("piturno", GetType(Integer)))
+
+
+        Dim piuactParameter As ObjectParameter = If(piuact IsNot Nothing, New ObjectParameter("piuact", piuact), New ObjectParameter("piuact", GetType(String)))
+
+
+        Dim fecha1Parameter As ObjectParameter = If(fecha1.HasValue, New ObjectParameter("fecha1", fecha1), New ObjectParameter("fecha1", GetType(Date)))
+
+
+        Dim fecha2Parameter As ObjectParameter = If(fecha2.HasValue, New ObjectParameter("fecha2", fecha2), New ObjectParameter("fecha2", GetType(Date)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_dg_TP007", tipoParameter, pinumiParameter, picperParameter, pifdocParameter, piturnoParameter, piuactParameter, fecha1Parameter, fecha2Parameter)
+    End Function
+
+
+    Public Overridable Function sp_dg_TP008(tipo As Nullable(Of Integer), pknumi As Nullable(Of Integer), pkper As Nullable(Of Integer), pkmes As Nullable(Of Integer), pkanio As Nullable(Of Integer), cbplan As Nullable(Of Integer), uact As String) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim pknumiParameter As ObjectParameter = If(pknumi.HasValue, New ObjectParameter("pknumi", pknumi), New ObjectParameter("pknumi", GetType(Integer)))
+
+
+        Dim pkperParameter As ObjectParameter = If(pkper.HasValue, New ObjectParameter("pkper", pkper), New ObjectParameter("pkper", GetType(Integer)))
+
+
+        Dim pkmesParameter As ObjectParameter = If(pkmes.HasValue, New ObjectParameter("pkmes", pkmes), New ObjectParameter("pkmes", GetType(Integer)))
+
+
+        Dim pkanioParameter As ObjectParameter = If(pkanio.HasValue, New ObjectParameter("pkanio", pkanio), New ObjectParameter("pkanio", GetType(Integer)))
+
+
+        Dim cbplanParameter As ObjectParameter = If(cbplan.HasValue, New ObjectParameter("cbplan", cbplan), New ObjectParameter("cbplan", GetType(Integer)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_dg_TP008", tipoParameter, pknumiParameter, pkperParameter, pkmesParameter, pkanioParameter, cbplanParameter, uactParameter)
+    End Function
+
+
+    Public Overridable Function sp_dg_TZ001(tipo As Nullable(Of Integer), zacper As Nullable(Of Integer), zafecha As Nullable(Of Date)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim zacperParameter As ObjectParameter = If(zacper.HasValue, New ObjectParameter("zacper", zacper), New ObjectParameter("zacper", GetType(Integer)))
+
+
+        Dim zafechaParameter As ObjectParameter = If(zafecha.HasValue, New ObjectParameter("zafecha", zafecha), New ObjectParameter("zafecha", GetType(Date)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_dg_TZ001", tipoParameter, zacperParameter, zafechaParameter)
+    End Function
+
+
+    Public Overridable Function sp_dg_ZY002(tipo As Nullable(Of Integer), ybnumi As Nullable(Of Integer), ybrol As String, uact As String) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim ybnumiParameter As ObjectParameter = If(ybnumi.HasValue, New ObjectParameter("ybnumi", ybnumi), New ObjectParameter("ybnumi", GetType(Integer)))
+
+
+        Dim ybrolParameter As ObjectParameter = If(ybrol IsNot Nothing, New ObjectParameter("ybrol", ybrol), New ObjectParameter("ybrol", GetType(String)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_dg_ZY002", tipoParameter, ybnumiParameter, ybrolParameter, uactParameter)
+    End Function
+
+
+    Public Overridable Function Sp_GetClientes() As ObjectResult(Of Sp_GetClientes_Result)
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Sp_GetClientes_Result)("Sp_GetClientes")
+    End Function
+
+
+    Public Overridable Function sp_go_CM001(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), codigo As Nullable(Of Integer), mesa As Nullable(Of Integer), codrepart As Nullable(Of Integer), est As Nullable(Of Integer), fact As Nullable(Of Date), hact As String, uact As String, vend1 As Nullable(Of Integer), vend2 As Nullable(Of Integer), vend3 As Nullable(Of Integer), vend4 As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim codigoParameter As ObjectParameter = If(codigo.HasValue, New ObjectParameter("codigo", codigo), New ObjectParameter("codigo", GetType(Integer)))
+
+
+        Dim mesaParameter As ObjectParameter = If(mesa.HasValue, New ObjectParameter("mesa", mesa), New ObjectParameter("mesa", GetType(Integer)))
+
+
+        Dim codrepartParameter As ObjectParameter = If(codrepart.HasValue, New ObjectParameter("codrepart", codrepart), New ObjectParameter("codrepart", GetType(Integer)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Integer)))
+
+
+        Dim factParameter As ObjectParameter = If(fact.HasValue, New ObjectParameter("fact", fact), New ObjectParameter("fact", GetType(Date)))
+
+
+        Dim hactParameter As ObjectParameter = If(hact IsNot Nothing, New ObjectParameter("hact", hact), New ObjectParameter("hact", GetType(String)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Dim vend1Parameter As ObjectParameter = If(vend1.HasValue, New ObjectParameter("vend1", vend1), New ObjectParameter("vend1", GetType(Integer)))
+
+
+        Dim vend2Parameter As ObjectParameter = If(vend2.HasValue, New ObjectParameter("vend2", vend2), New ObjectParameter("vend2", GetType(Integer)))
+
+
+        Dim vend3Parameter As ObjectParameter = If(vend3.HasValue, New ObjectParameter("vend3", vend3), New ObjectParameter("vend3", GetType(Integer)))
+
+
+        Dim vend4Parameter As ObjectParameter = If(vend4.HasValue, New ObjectParameter("vend4", vend4), New ObjectParameter("vend4", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_go_CM001", tipoParameter, numiParameter, codigoParameter, mesaParameter, codrepartParameter, estParameter, factParameter, hactParameter, uactParameter, vend1Parameter, vend2Parameter, vend3Parameter, vend4Parameter)
+    End Function
+
+
+    Public Overridable Function sp_go_NV001(tipo As Nullable(Of Integer), fecha As Nullable(Of Date), vendedor As String) As ObjectResult(Of sp_go_NV001_Result)
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim fechaParameter As ObjectParameter = If(fecha.HasValue, New ObjectParameter("fecha", fecha), New ObjectParameter("fecha", GetType(Date)))
+
+
+        Dim vendedorParameter As ObjectParameter = If(vendedor IsNot Nothing, New ObjectParameter("vendedor", vendedor), New ObjectParameter("vendedor", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sp_go_NV001_Result)("sp_go_NV001", tipoParameter, fechaParameter, vendedorParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_Reportes(tipo As Nullable(Of Integer), cprod As String, fini As Nullable(Of Date), ffin As Nullable(Of Date), codigo As String, cliente As String, ban As Nullable(Of Integer), anho As Nullable(Of Integer), mes As Nullable(Of Integer)) As ObjectResult(Of sp_go_Reportes_Result)
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim cprodParameter As ObjectParameter = If(cprod IsNot Nothing, New ObjectParameter("cprod", cprod), New ObjectParameter("cprod", GetType(String)))
+
+
+        Dim finiParameter As ObjectParameter = If(fini.HasValue, New ObjectParameter("fini", fini), New ObjectParameter("fini", GetType(Date)))
+
+
+        Dim ffinParameter As ObjectParameter = If(ffin.HasValue, New ObjectParameter("ffin", ffin), New ObjectParameter("ffin", GetType(Date)))
+
+
+        Dim codigoParameter As ObjectParameter = If(codigo IsNot Nothing, New ObjectParameter("codigo", codigo), New ObjectParameter("codigo", GetType(String)))
+
+
+        Dim clienteParameter As ObjectParameter = If(cliente IsNot Nothing, New ObjectParameter("cliente", cliente), New ObjectParameter("cliente", GetType(String)))
+
+
+        Dim banParameter As ObjectParameter = If(ban.HasValue, New ObjectParameter("ban", ban), New ObjectParameter("ban", GetType(Integer)))
+
+
+        Dim anhoParameter As ObjectParameter = If(anho.HasValue, New ObjectParameter("anho", anho), New ObjectParameter("anho", GetType(Integer)))
+
+
+        Dim mesParameter As ObjectParameter = If(mes.HasValue, New ObjectParameter("mes", mes), New ObjectParameter("mes", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sp_go_Reportes_Result)("sp_go_Reportes", tipoParameter, cprodParameter, finiParameter, ffinParameter, codigoParameter, clienteParameter, banParameter, anhoParameter, mesParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TC001(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), cod As String, desc As String, desc2 As String, cat As Nullable(Of Integer), img As String, stc As Nullable(Of Boolean), est As Nullable(Of Boolean), serie As Nullable(Of Boolean), pcom As Nullable(Of Integer), fing As Nullable(Of Date), cemp As Nullable(Of Integer), uact As String, filtro As Nullable(Of Integer), cbarra As String, smin As Nullable(Of Integer), gr1 As Nullable(Of Integer), gr2 As Nullable(Of Integer), gr3 As Nullable(Of Integer), gr4 As Nullable(Of Integer), umed As Nullable(Of Integer), uventa As Nullable(Of Integer), umax As Nullable(Of Integer), conv As Nullable(Of Integer), cecon As Nullable(Of Integer), cedesc As String) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim codParameter As ObjectParameter = If(cod IsNot Nothing, New ObjectParameter("cod", cod), New ObjectParameter("cod", GetType(String)))
+
+
+        Dim descParameter As ObjectParameter = If(desc IsNot Nothing, New ObjectParameter("desc", desc), New ObjectParameter("desc", GetType(String)))
+
+
+        Dim desc2Parameter As ObjectParameter = If(desc2 IsNot Nothing, New ObjectParameter("desc2", desc2), New ObjectParameter("desc2", GetType(String)))
+
+
+        Dim catParameter As ObjectParameter = If(cat.HasValue, New ObjectParameter("cat", cat), New ObjectParameter("cat", GetType(Integer)))
+
+
+        Dim imgParameter As ObjectParameter = If(img IsNot Nothing, New ObjectParameter("img", img), New ObjectParameter("img", GetType(String)))
+
+
+        Dim stcParameter As ObjectParameter = If(stc.HasValue, New ObjectParameter("stc", stc), New ObjectParameter("stc", GetType(Boolean)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Boolean)))
+
+
+        Dim serieParameter As ObjectParameter = If(serie.HasValue, New ObjectParameter("serie", serie), New ObjectParameter("serie", GetType(Boolean)))
+
+
+        Dim pcomParameter As ObjectParameter = If(pcom.HasValue, New ObjectParameter("pcom", pcom), New ObjectParameter("pcom", GetType(Integer)))
+
+
+        Dim fingParameter As ObjectParameter = If(fing.HasValue, New ObjectParameter("fing", fing), New ObjectParameter("fing", GetType(Date)))
+
+
+        Dim cempParameter As ObjectParameter = If(cemp.HasValue, New ObjectParameter("cemp", cemp), New ObjectParameter("cemp", GetType(Integer)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Dim filtroParameter As ObjectParameter = If(filtro.HasValue, New ObjectParameter("filtro", filtro), New ObjectParameter("filtro", GetType(Integer)))
+
+
+        Dim cbarraParameter As ObjectParameter = If(cbarra IsNot Nothing, New ObjectParameter("cbarra", cbarra), New ObjectParameter("cbarra", GetType(String)))
+
+
+        Dim sminParameter As ObjectParameter = If(smin.HasValue, New ObjectParameter("smin", smin), New ObjectParameter("smin", GetType(Integer)))
+
+
+        Dim gr1Parameter As ObjectParameter = If(gr1.HasValue, New ObjectParameter("gr1", gr1), New ObjectParameter("gr1", GetType(Integer)))
+
+
+        Dim gr2Parameter As ObjectParameter = If(gr2.HasValue, New ObjectParameter("gr2", gr2), New ObjectParameter("gr2", GetType(Integer)))
+
+
+        Dim gr3Parameter As ObjectParameter = If(gr3.HasValue, New ObjectParameter("gr3", gr3), New ObjectParameter("gr3", GetType(Integer)))
+
+
+        Dim gr4Parameter As ObjectParameter = If(gr4.HasValue, New ObjectParameter("gr4", gr4), New ObjectParameter("gr4", GetType(Integer)))
+
+
+        Dim umedParameter As ObjectParameter = If(umed.HasValue, New ObjectParameter("umed", umed), New ObjectParameter("umed", GetType(Integer)))
+
+
+        Dim uventaParameter As ObjectParameter = If(uventa.HasValue, New ObjectParameter("uventa", uventa), New ObjectParameter("uventa", GetType(Integer)))
+
+
+        Dim umaxParameter As ObjectParameter = If(umax.HasValue, New ObjectParameter("umax", umax), New ObjectParameter("umax", GetType(Integer)))
+
+
+        Dim convParameter As ObjectParameter = If(conv.HasValue, New ObjectParameter("conv", conv), New ObjectParameter("conv", GetType(Integer)))
+
+
+        Dim ceconParameter As ObjectParameter = If(cecon.HasValue, New ObjectParameter("cecon", cecon), New ObjectParameter("cecon", GetType(Integer)))
+
+
+        Dim cedescParameter As ObjectParameter = If(cedesc IsNot Nothing, New ObjectParameter("cedesc", cedesc), New ObjectParameter("cedesc", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_go_TC001", tipoParameter, numiParameter, codParameter, descParameter, desc2Parameter, catParameter, imgParameter, stcParameter, estParameter, serieParameter, pcomParameter, fingParameter, cempParameter, uactParameter, filtroParameter, cbarraParameter, sminParameter, gr1Parameter, gr2Parameter, gr3Parameter, gr4Parameter, umedParameter, uventaParameter, umaxParameter, convParameter, ceconParameter, cedescParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TC002(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), desc As String, direc As String, telef As String, cat As Nullable(Of Integer), sal As Nullable(Of Decimal), ci As String, obs As String, fnac As Nullable(Of Date), fing As Nullable(Of Date), fret As Nullable(Of Date), fot As String, est As Nullable(Of Boolean), eciv As String, plan As Nullable(Of Integer), reloj As Nullable(Of Integer), uact As String) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim descParameter As ObjectParameter = If(desc IsNot Nothing, New ObjectParameter("desc", desc), New ObjectParameter("desc", GetType(String)))
+
+
+        Dim direcParameter As ObjectParameter = If(direc IsNot Nothing, New ObjectParameter("direc", direc), New ObjectParameter("direc", GetType(String)))
+
+
+        Dim telefParameter As ObjectParameter = If(telef IsNot Nothing, New ObjectParameter("telef", telef), New ObjectParameter("telef", GetType(String)))
+
+
+        Dim catParameter As ObjectParameter = If(cat.HasValue, New ObjectParameter("cat", cat), New ObjectParameter("cat", GetType(Integer)))
+
+
+        Dim salParameter As ObjectParameter = If(sal.HasValue, New ObjectParameter("sal", sal), New ObjectParameter("sal", GetType(Decimal)))
+
+
+        Dim ciParameter As ObjectParameter = If(ci IsNot Nothing, New ObjectParameter("ci", ci), New ObjectParameter("ci", GetType(String)))
+
+
+        Dim obsParameter As ObjectParameter = If(obs IsNot Nothing, New ObjectParameter("obs", obs), New ObjectParameter("obs", GetType(String)))
+
+
+        Dim fnacParameter As ObjectParameter = If(fnac.HasValue, New ObjectParameter("fnac", fnac), New ObjectParameter("fnac", GetType(Date)))
+
+
+        Dim fingParameter As ObjectParameter = If(fing.HasValue, New ObjectParameter("fing", fing), New ObjectParameter("fing", GetType(Date)))
+
+
+        Dim fretParameter As ObjectParameter = If(fret.HasValue, New ObjectParameter("fret", fret), New ObjectParameter("fret", GetType(Date)))
+
+
+        Dim fotParameter As ObjectParameter = If(fot IsNot Nothing, New ObjectParameter("fot", fot), New ObjectParameter("fot", GetType(String)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Boolean)))
+
+
+        Dim ecivParameter As ObjectParameter = If(eciv IsNot Nothing, New ObjectParameter("eciv", eciv), New ObjectParameter("eciv", GetType(String)))
+
+
+        Dim planParameter As ObjectParameter = If(plan.HasValue, New ObjectParameter("plan", plan), New ObjectParameter("plan", GetType(Integer)))
+
+
+        Dim relojParameter As ObjectParameter = If(reloj.HasValue, New ObjectParameter("reloj", reloj), New ObjectParameter("reloj", GetType(Integer)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_go_TC002", tipoParameter, numiParameter, descParameter, direcParameter, telefParameter, catParameter, salParameter, ciParameter, obsParameter, fnacParameter, fingParameter, fretParameter, fotParameter, estParameter, ecivParameter, planParameter, relojParameter, uactParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TC004(tipo As Nullable(Of Integer), ccnumi As Nullable(Of Integer), cccod As String, ccdesc As String, cczona As Nullable(Of Integer), ccdct As Nullable(Of Integer), ccdctnum As String, ccdirec As String, cctelf1 As String, cctelf2 As String, cccat As Nullable(Of Integer), ccest As Nullable(Of Integer), cclat As Nullable(Of Decimal), cclongi As Nullable(Of Decimal), ccprconsu As Nullable(Of Integer), cceven As Nullable(Of Boolean), ccobs As String, ccfnac As Nullable(Of Date), ccnomfac As String, ccnit As String, ccultped As Nullable(Of Date), ccfecing As Nullable(Of Date), ccultvent As Nullable(Of Date), recven As Nullable(Of Integer), supven As Nullable(Of Integer), preven As Nullable(Of Integer), ccuact As String, tacu As Nullable(Of Integer), fini As Nullable(Of Date), ffin As Nullable(Of Date), fre As Nullable(Of Integer), est As Nullable(Of Integer), obs As String, producto As Nullable(Of Integer), categoria As Nullable(Of Integer), tcre As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim ccnumiParameter As ObjectParameter = If(ccnumi.HasValue, New ObjectParameter("ccnumi", ccnumi), New ObjectParameter("ccnumi", GetType(Integer)))
+
+
+        Dim cccodParameter As ObjectParameter = If(cccod IsNot Nothing, New ObjectParameter("cccod", cccod), New ObjectParameter("cccod", GetType(String)))
+
+
+        Dim ccdescParameter As ObjectParameter = If(ccdesc IsNot Nothing, New ObjectParameter("ccdesc", ccdesc), New ObjectParameter("ccdesc", GetType(String)))
+
+
+        Dim cczonaParameter As ObjectParameter = If(cczona.HasValue, New ObjectParameter("cczona", cczona), New ObjectParameter("cczona", GetType(Integer)))
+
+
+        Dim ccdctParameter As ObjectParameter = If(ccdct.HasValue, New ObjectParameter("ccdct", ccdct), New ObjectParameter("ccdct", GetType(Integer)))
+
+
+        Dim ccdctnumParameter As ObjectParameter = If(ccdctnum IsNot Nothing, New ObjectParameter("ccdctnum", ccdctnum), New ObjectParameter("ccdctnum", GetType(String)))
+
+
+        Dim ccdirecParameter As ObjectParameter = If(ccdirec IsNot Nothing, New ObjectParameter("ccdirec", ccdirec), New ObjectParameter("ccdirec", GetType(String)))
+
+
+        Dim cctelf1Parameter As ObjectParameter = If(cctelf1 IsNot Nothing, New ObjectParameter("cctelf1", cctelf1), New ObjectParameter("cctelf1", GetType(String)))
+
+
+        Dim cctelf2Parameter As ObjectParameter = If(cctelf2 IsNot Nothing, New ObjectParameter("cctelf2", cctelf2), New ObjectParameter("cctelf2", GetType(String)))
+
+
+        Dim cccatParameter As ObjectParameter = If(cccat.HasValue, New ObjectParameter("cccat", cccat), New ObjectParameter("cccat", GetType(Integer)))
+
+
+        Dim ccestParameter As ObjectParameter = If(ccest.HasValue, New ObjectParameter("ccest", ccest), New ObjectParameter("ccest", GetType(Integer)))
+
+
+        Dim cclatParameter As ObjectParameter = If(cclat.HasValue, New ObjectParameter("cclat", cclat), New ObjectParameter("cclat", GetType(Decimal)))
+
+
+        Dim cclongiParameter As ObjectParameter = If(cclongi.HasValue, New ObjectParameter("cclongi", cclongi), New ObjectParameter("cclongi", GetType(Decimal)))
+
+
+        Dim ccprconsuParameter As ObjectParameter = If(ccprconsu.HasValue, New ObjectParameter("ccprconsu", ccprconsu), New ObjectParameter("ccprconsu", GetType(Integer)))
+
+
+        Dim ccevenParameter As ObjectParameter = If(cceven.HasValue, New ObjectParameter("cceven", cceven), New ObjectParameter("cceven", GetType(Boolean)))
+
+
+        Dim ccobsParameter As ObjectParameter = If(ccobs IsNot Nothing, New ObjectParameter("ccobs", ccobs), New ObjectParameter("ccobs", GetType(String)))
+
+
+        Dim ccfnacParameter As ObjectParameter = If(ccfnac.HasValue, New ObjectParameter("ccfnac", ccfnac), New ObjectParameter("ccfnac", GetType(Date)))
+
+
+        Dim ccnomfacParameter As ObjectParameter = If(ccnomfac IsNot Nothing, New ObjectParameter("ccnomfac", ccnomfac), New ObjectParameter("ccnomfac", GetType(String)))
+
+
+        Dim ccnitParameter As ObjectParameter = If(ccnit IsNot Nothing, New ObjectParameter("ccnit", ccnit), New ObjectParameter("ccnit", GetType(String)))
+
+
+        Dim ccultpedParameter As ObjectParameter = If(ccultped.HasValue, New ObjectParameter("ccultped", ccultped), New ObjectParameter("ccultped", GetType(Date)))
+
+
+        Dim ccfecingParameter As ObjectParameter = If(ccfecing.HasValue, New ObjectParameter("ccfecing", ccfecing), New ObjectParameter("ccfecing", GetType(Date)))
+
+
+        Dim ccultventParameter As ObjectParameter = If(ccultvent.HasValue, New ObjectParameter("ccultvent", ccultvent), New ObjectParameter("ccultvent", GetType(Date)))
+
+
+        Dim recvenParameter As ObjectParameter = If(recven.HasValue, New ObjectParameter("recven", recven), New ObjectParameter("recven", GetType(Integer)))
+
+
+        Dim supvenParameter As ObjectParameter = If(supven.HasValue, New ObjectParameter("supven", supven), New ObjectParameter("supven", GetType(Integer)))
+
+
+        Dim prevenParameter As ObjectParameter = If(preven.HasValue, New ObjectParameter("preven", preven), New ObjectParameter("preven", GetType(Integer)))
+
+
+        Dim ccuactParameter As ObjectParameter = If(ccuact IsNot Nothing, New ObjectParameter("ccuact", ccuact), New ObjectParameter("ccuact", GetType(String)))
+
+
+        Dim tacuParameter As ObjectParameter = If(tacu.HasValue, New ObjectParameter("tacu", tacu), New ObjectParameter("tacu", GetType(Integer)))
+
+
+        Dim finiParameter As ObjectParameter = If(fini.HasValue, New ObjectParameter("fini", fini), New ObjectParameter("fini", GetType(Date)))
+
+
+        Dim ffinParameter As ObjectParameter = If(ffin.HasValue, New ObjectParameter("ffin", ffin), New ObjectParameter("ffin", GetType(Date)))
+
+
+        Dim freParameter As ObjectParameter = If(fre.HasValue, New ObjectParameter("fre", fre), New ObjectParameter("fre", GetType(Integer)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Integer)))
+
+
+        Dim obsParameter As ObjectParameter = If(obs IsNot Nothing, New ObjectParameter("obs", obs), New ObjectParameter("obs", GetType(String)))
+
+
+        Dim productoParameter As ObjectParameter = If(producto.HasValue, New ObjectParameter("producto", producto), New ObjectParameter("producto", GetType(Integer)))
+
+
+        Dim categoriaParameter As ObjectParameter = If(categoria.HasValue, New ObjectParameter("categoria", categoria), New ObjectParameter("categoria", GetType(Integer)))
+
+
+        Dim tcreParameter As ObjectParameter = If(tcre.HasValue, New ObjectParameter("tcre", tcre), New ObjectParameter("tcre", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_go_TC004", tipoParameter, ccnumiParameter, cccodParameter, ccdescParameter, cczonaParameter, ccdctParameter, ccdctnumParameter, ccdirecParameter, cctelf1Parameter, cctelf2Parameter, cccatParameter, ccestParameter, cclatParameter, cclongiParameter, ccprconsuParameter, ccevenParameter, ccobsParameter, ccfnacParameter, ccnomfacParameter, ccnitParameter, ccultpedParameter, ccfecingParameter, ccultventParameter, recvenParameter, supvenParameter, prevenParameter, ccuactParameter, tacuParameter, finiParameter, ffinParameter, freParameter, estParameter, obsParameter, productoParameter, categoriaParameter, tcreParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TC004_appMovil(tipo As Nullable(Of Integer), code_id As Nullable(Of Integer), full_name As String, business_name As String, nit As String, mail As String, phone As String, cell_phone As String, address As String, reference As String, location_lat As Nullable(Of Decimal), location_log As Nullable(Of Decimal), password_cli As String, old_password_cli As String, new_password_cli As String, observacion As String, categoria As String, pedido As Nullable(Of Integer), tO0011 As String, json As String, fingreso As Nullable(Of Date), credito As Nullable(Of Decimal), chofer As Nullable(Of Integer), fechapedido As Nullable(Of Date), idRepartidor As Nullable(Of Integer), oanumi As String, oafdoc As Nullable(Of Date), oahora As String, oaccli As Nullable(Of Integer), oarepa As Nullable(Of Integer), oaest As Nullable(Of Integer), oaobs As String, latitud As Nullable(Of Decimal), longitud As Nullable(Of Decimal), total As Nullable(Of Decimal), tipocobro As Nullable(Of Integer), codigogenerado As String, cczona As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim code_idParameter As ObjectParameter = If(code_id.HasValue, New ObjectParameter("code_id", code_id), New ObjectParameter("code_id", GetType(Integer)))
+
+
+        Dim full_nameParameter As ObjectParameter = If(full_name IsNot Nothing, New ObjectParameter("full_name", full_name), New ObjectParameter("full_name", GetType(String)))
+
+
+        Dim business_nameParameter As ObjectParameter = If(business_name IsNot Nothing, New ObjectParameter("business_name", business_name), New ObjectParameter("business_name", GetType(String)))
+
+
+        Dim nitParameter As ObjectParameter = If(nit IsNot Nothing, New ObjectParameter("nit", nit), New ObjectParameter("nit", GetType(String)))
+
+
+        Dim mailParameter As ObjectParameter = If(mail IsNot Nothing, New ObjectParameter("mail", mail), New ObjectParameter("mail", GetType(String)))
+
+
+        Dim phoneParameter As ObjectParameter = If(phone IsNot Nothing, New ObjectParameter("phone", phone), New ObjectParameter("phone", GetType(String)))
+
+
+        Dim cell_phoneParameter As ObjectParameter = If(cell_phone IsNot Nothing, New ObjectParameter("cell_phone", cell_phone), New ObjectParameter("cell_phone", GetType(String)))
+
+
+        Dim addressParameter As ObjectParameter = If(address IsNot Nothing, New ObjectParameter("address", address), New ObjectParameter("address", GetType(String)))
+
+
+        Dim referenceParameter As ObjectParameter = If(reference IsNot Nothing, New ObjectParameter("reference", reference), New ObjectParameter("reference", GetType(String)))
+
+
+        Dim location_latParameter As ObjectParameter = If(location_lat.HasValue, New ObjectParameter("location_lat", location_lat), New ObjectParameter("location_lat", GetType(Decimal)))
+
+
+        Dim location_logParameter As ObjectParameter = If(location_log.HasValue, New ObjectParameter("location_log", location_log), New ObjectParameter("location_log", GetType(Decimal)))
+
+
+        Dim password_cliParameter As ObjectParameter = If(password_cli IsNot Nothing, New ObjectParameter("password_cli", password_cli), New ObjectParameter("password_cli", GetType(String)))
+
+
+        Dim old_password_cliParameter As ObjectParameter = If(old_password_cli IsNot Nothing, New ObjectParameter("old_password_cli", old_password_cli), New ObjectParameter("old_password_cli", GetType(String)))
+
+
+        Dim new_password_cliParameter As ObjectParameter = If(new_password_cli IsNot Nothing, New ObjectParameter("new_password_cli", new_password_cli), New ObjectParameter("new_password_cli", GetType(String)))
+
+
+        Dim observacionParameter As ObjectParameter = If(observacion IsNot Nothing, New ObjectParameter("observacion", observacion), New ObjectParameter("observacion", GetType(String)))
+
+
+        Dim categoriaParameter As ObjectParameter = If(categoria IsNot Nothing, New ObjectParameter("categoria", categoria), New ObjectParameter("categoria", GetType(String)))
+
+
+        Dim pedidoParameter As ObjectParameter = If(pedido.HasValue, New ObjectParameter("pedido", pedido), New ObjectParameter("pedido", GetType(Integer)))
+
+
+        Dim tO0011Parameter As ObjectParameter = If(tO0011 IsNot Nothing, New ObjectParameter("TO0011", tO0011), New ObjectParameter("TO0011", GetType(String)))
+
+
+        Dim jsonParameter As ObjectParameter = If(json IsNot Nothing, New ObjectParameter("json", json), New ObjectParameter("json", GetType(String)))
+
+
+        Dim fingresoParameter As ObjectParameter = If(fingreso.HasValue, New ObjectParameter("fingreso", fingreso), New ObjectParameter("fingreso", GetType(Date)))
+
+
+        Dim creditoParameter As ObjectParameter = If(credito.HasValue, New ObjectParameter("credito", credito), New ObjectParameter("credito", GetType(Decimal)))
+
+
+        Dim choferParameter As ObjectParameter = If(chofer.HasValue, New ObjectParameter("chofer", chofer), New ObjectParameter("chofer", GetType(Integer)))
+
+
+        Dim fechapedidoParameter As ObjectParameter = If(fechapedido.HasValue, New ObjectParameter("fechapedido", fechapedido), New ObjectParameter("fechapedido", GetType(Date)))
+
+
+        Dim idRepartidorParameter As ObjectParameter = If(idRepartidor.HasValue, New ObjectParameter("idRepartidor", idRepartidor), New ObjectParameter("idRepartidor", GetType(Integer)))
+
+
+        Dim oanumiParameter As ObjectParameter = If(oanumi IsNot Nothing, New ObjectParameter("oanumi", oanumi), New ObjectParameter("oanumi", GetType(String)))
+
+
+        Dim oafdocParameter As ObjectParameter = If(oafdoc.HasValue, New ObjectParameter("oafdoc", oafdoc), New ObjectParameter("oafdoc", GetType(Date)))
+
+
+        Dim oahoraParameter As ObjectParameter = If(oahora IsNot Nothing, New ObjectParameter("oahora", oahora), New ObjectParameter("oahora", GetType(String)))
+
+
+        Dim oaccliParameter As ObjectParameter = If(oaccli.HasValue, New ObjectParameter("oaccli", oaccli), New ObjectParameter("oaccli", GetType(Integer)))
+
+
+        Dim oarepaParameter As ObjectParameter = If(oarepa.HasValue, New ObjectParameter("oarepa", oarepa), New ObjectParameter("oarepa", GetType(Integer)))
+
+
+        Dim oaestParameter As ObjectParameter = If(oaest.HasValue, New ObjectParameter("oaest", oaest), New ObjectParameter("oaest", GetType(Integer)))
+
+
+        Dim oaobsParameter As ObjectParameter = If(oaobs IsNot Nothing, New ObjectParameter("oaobs", oaobs), New ObjectParameter("oaobs", GetType(String)))
+
+
+        Dim latitudParameter As ObjectParameter = If(latitud.HasValue, New ObjectParameter("latitud", latitud), New ObjectParameter("latitud", GetType(Decimal)))
+
+
+        Dim longitudParameter As ObjectParameter = If(longitud.HasValue, New ObjectParameter("longitud", longitud), New ObjectParameter("longitud", GetType(Decimal)))
+
+
+        Dim totalParameter As ObjectParameter = If(total.HasValue, New ObjectParameter("total", total), New ObjectParameter("total", GetType(Decimal)))
+
+
+        Dim tipocobroParameter As ObjectParameter = If(tipocobro.HasValue, New ObjectParameter("tipocobro", tipocobro), New ObjectParameter("tipocobro", GetType(Integer)))
+
+
+        Dim codigogeneradoParameter As ObjectParameter = If(codigogenerado IsNot Nothing, New ObjectParameter("codigogenerado", codigogenerado), New ObjectParameter("codigogenerado", GetType(String)))
+
+
+        Dim cczonaParameter As ObjectParameter = If(cczona.HasValue, New ObjectParameter("cczona", cczona), New ObjectParameter("cczona", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_go_TC004_appMovil", tipoParameter, code_idParameter, full_nameParameter, business_nameParameter, nitParameter, mailParameter, phoneParameter, cell_phoneParameter, addressParameter, referenceParameter, location_latParameter, location_logParameter, password_cliParameter, old_password_cliParameter, new_password_cliParameter, observacionParameter, categoriaParameter, pedidoParameter, tO0011Parameter, jsonParameter, fingresoParameter, creditoParameter, choferParameter, fechapedidoParameter, idRepartidorParameter, oanumiParameter, oafdocParameter, oahoraParameter, oaccliParameter, oarepaParameter, oaestParameter, oaobsParameter, latitudParameter, longitudParameter, totalParameter, tipocobroParameter, codigogeneradoParameter, cczonaParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TC009(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), desc As String, est As Nullable(Of Integer), pdf As String, obs As String, codu As Nullable(Of Integer), uact As String) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim descParameter As ObjectParameter = If(desc IsNot Nothing, New ObjectParameter("desc", desc), New ObjectParameter("desc", GetType(String)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Integer)))
+
+
+        Dim pdfParameter As ObjectParameter = If(pdf IsNot Nothing, New ObjectParameter("pdf", pdf), New ObjectParameter("pdf", GetType(String)))
+
+
+        Dim obsParameter As ObjectParameter = If(obs IsNot Nothing, New ObjectParameter("obs", obs), New ObjectParameter("obs", GetType(String)))
+
+
+        Dim coduParameter As ObjectParameter = If(codu.HasValue, New ObjectParameter("codu", codu), New ObjectParameter("codu", GetType(Integer)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_go_TC009", tipoParameter, numiParameter, descParameter, estParameter, pdfParameter, obsParameter, coduParameter, uactParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TC010(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), desc As String, telf As String, email As String, est As Nullable(Of Integer), obs As String, rsocial As String, nit As String, uact As String, cuenta As Nullable(Of Integer)) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim descParameter As ObjectParameter = If(desc IsNot Nothing, New ObjectParameter("desc", desc), New ObjectParameter("desc", GetType(String)))
+
+
+        Dim telfParameter As ObjectParameter = If(telf IsNot Nothing, New ObjectParameter("telf", telf), New ObjectParameter("telf", GetType(String)))
+
+
+        Dim emailParameter As ObjectParameter = If(email IsNot Nothing, New ObjectParameter("email", email), New ObjectParameter("email", GetType(String)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Integer)))
+
+
+        Dim obsParameter As ObjectParameter = If(obs IsNot Nothing, New ObjectParameter("obs", obs), New ObjectParameter("obs", GetType(String)))
+
+
+        Dim rsocialParameter As ObjectParameter = If(rsocial IsNot Nothing, New ObjectParameter("rsocial", rsocial), New ObjectParameter("rsocial", GetType(String)))
+
+
+        Dim nitParameter As ObjectParameter = If(nit IsNot Nothing, New ObjectParameter("nit", nit), New ObjectParameter("nit", GetType(String)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Dim cuentaParameter As ObjectParameter = If(cuenta.HasValue, New ObjectParameter("cuenta", cuenta), New ObjectParameter("cuenta", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_go_TC010", tipoParameter, numiParameter, descParameter, telfParameter, emailParameter, estParameter, obsParameter, rsocialParameter, nitParameter, uactParameter, cuentaParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TCA001(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), fdoc As Nullable(Of Date), prov As Nullable(Of Integer), nfac As String, obs As String, uact As String, tven As Nullable(Of Integer), fvcred As Nullable(Of Date), mon As Nullable(Of Integer), est As Nullable(Of Integer), desc As Nullable(Of Decimal), descpro1 As Nullable(Of Decimal), descpro2 As Nullable(Of Decimal), desctot As Nullable(Of Decimal), total As Nullable(Of Decimal), emision As Nullable(Of Integer), consigna As Nullable(Of Integer), retenc As Nullable(Of Integer), asientoi As Nullable(Of Integer), ffactura As Nullable(Of Date)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim fdocParameter As ObjectParameter = If(fdoc.HasValue, New ObjectParameter("fdoc", fdoc), New ObjectParameter("fdoc", GetType(Date)))
+
+
+        Dim provParameter As ObjectParameter = If(prov.HasValue, New ObjectParameter("prov", prov), New ObjectParameter("prov", GetType(Integer)))
+
+
+        Dim nfacParameter As ObjectParameter = If(nfac IsNot Nothing, New ObjectParameter("nfac", nfac), New ObjectParameter("nfac", GetType(String)))
+
+
+        Dim obsParameter As ObjectParameter = If(obs IsNot Nothing, New ObjectParameter("obs", obs), New ObjectParameter("obs", GetType(String)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Dim tvenParameter As ObjectParameter = If(tven.HasValue, New ObjectParameter("tven", tven), New ObjectParameter("tven", GetType(Integer)))
+
+
+        Dim fvcredParameter As ObjectParameter = If(fvcred.HasValue, New ObjectParameter("fvcred", fvcred), New ObjectParameter("fvcred", GetType(Date)))
+
+
+        Dim monParameter As ObjectParameter = If(mon.HasValue, New ObjectParameter("mon", mon), New ObjectParameter("mon", GetType(Integer)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Integer)))
+
+
+        Dim descParameter As ObjectParameter = If(desc.HasValue, New ObjectParameter("desc", desc), New ObjectParameter("desc", GetType(Decimal)))
+
+
+        Dim descpro1Parameter As ObjectParameter = If(descpro1.HasValue, New ObjectParameter("descpro1", descpro1), New ObjectParameter("descpro1", GetType(Decimal)))
+
+
+        Dim descpro2Parameter As ObjectParameter = If(descpro2.HasValue, New ObjectParameter("descpro2", descpro2), New ObjectParameter("descpro2", GetType(Decimal)))
+
+
+        Dim desctotParameter As ObjectParameter = If(desctot.HasValue, New ObjectParameter("desctot", desctot), New ObjectParameter("desctot", GetType(Decimal)))
+
+
+        Dim totalParameter As ObjectParameter = If(total.HasValue, New ObjectParameter("total", total), New ObjectParameter("total", GetType(Decimal)))
+
+
+        Dim emisionParameter As ObjectParameter = If(emision.HasValue, New ObjectParameter("emision", emision), New ObjectParameter("emision", GetType(Integer)))
+
+
+        Dim consignaParameter As ObjectParameter = If(consigna.HasValue, New ObjectParameter("consigna", consigna), New ObjectParameter("consigna", GetType(Integer)))
+
+
+        Dim retencParameter As ObjectParameter = If(retenc.HasValue, New ObjectParameter("retenc", retenc), New ObjectParameter("retenc", GetType(Integer)))
+
+
+        Dim asientoiParameter As ObjectParameter = If(asientoi.HasValue, New ObjectParameter("asientoi", asientoi), New ObjectParameter("asientoi", GetType(Integer)))
+
+
+        Dim ffacturaParameter As ObjectParameter = If(ffactura.HasValue, New ObjectParameter("ffactura", ffactura), New ObjectParameter("ffactura", GetType(Date)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_go_TCA001", tipoParameter, numiParameter, fdocParameter, provParameter, nfacParameter, obsParameter, uactParameter, tvenParameter, fvcredParameter, monParameter, estParameter, descParameter, descpro1Parameter, descpro2Parameter, desctotParameter, totalParameter, emisionParameter, consignaParameter, retencParameter, asientoiParameter, ffacturaParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TCI001(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), desc As String, mov As Nullable(Of Integer), movcli As Nullable(Of Integer), tipo1 As Nullable(Of Integer), est As Nullable(Of Integer), uact As String, filtro As Nullable(Of Integer)) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim descParameter As ObjectParameter = If(desc IsNot Nothing, New ObjectParameter("desc", desc), New ObjectParameter("desc", GetType(String)))
+
+
+        Dim movParameter As ObjectParameter = If(mov.HasValue, New ObjectParameter("mov", mov), New ObjectParameter("mov", GetType(Integer)))
+
+
+        Dim movcliParameter As ObjectParameter = If(movcli.HasValue, New ObjectParameter("movcli", movcli), New ObjectParameter("movcli", GetType(Integer)))
+
+
+        Dim tipo1Parameter As ObjectParameter = If(tipo1.HasValue, New ObjectParameter("tipo1", tipo1), New ObjectParameter("tipo1", GetType(Integer)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Integer)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Dim filtroParameter As ObjectParameter = If(filtro.HasValue, New ObjectParameter("filtro", filtro), New ObjectParameter("filtro", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_go_TCI001", tipoParameter, numiParameter, descParameter, movParameter, movcliParameter, tipo1Parameter, estParameter, uactParameter, filtroParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TCP001(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), prov As Nullable(Of Integer), fdoc As Nullable(Of Date), monto As Nullable(Of Decimal), obs As String, est As Nullable(Of Integer), fven As Nullable(Of Date), tpago As Nullable(Of Integer), fpro As Nullable(Of Integer), nota As Nullable(Of Integer), tpro As Nullable(Of Integer), uact As String, ffec As Nullable(Of Date), fnit As String, frsocial As String, fnro As Nullable(Of Integer), fautoriz As Nullable(Of Long), fmonto As Nullable(Of Decimal), fccont As String, fmcfiscal As Nullable(Of Decimal), fdesc As Nullable(Of Decimal), filtro As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim provParameter As ObjectParameter = If(prov.HasValue, New ObjectParameter("prov", prov), New ObjectParameter("prov", GetType(Integer)))
+
+
+        Dim fdocParameter As ObjectParameter = If(fdoc.HasValue, New ObjectParameter("fdoc", fdoc), New ObjectParameter("fdoc", GetType(Date)))
+
+
+        Dim montoParameter As ObjectParameter = If(monto.HasValue, New ObjectParameter("monto", monto), New ObjectParameter("monto", GetType(Decimal)))
+
+
+        Dim obsParameter As ObjectParameter = If(obs IsNot Nothing, New ObjectParameter("obs", obs), New ObjectParameter("obs", GetType(String)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Integer)))
+
+
+        Dim fvenParameter As ObjectParameter = If(fven.HasValue, New ObjectParameter("fven", fven), New ObjectParameter("fven", GetType(Date)))
+
+
+        Dim tpagoParameter As ObjectParameter = If(tpago.HasValue, New ObjectParameter("tpago", tpago), New ObjectParameter("tpago", GetType(Integer)))
+
+
+        Dim fproParameter As ObjectParameter = If(fpro.HasValue, New ObjectParameter("fpro", fpro), New ObjectParameter("fpro", GetType(Integer)))
+
+
+        Dim notaParameter As ObjectParameter = If(nota.HasValue, New ObjectParameter("nota", nota), New ObjectParameter("nota", GetType(Integer)))
+
+
+        Dim tproParameter As ObjectParameter = If(tpro.HasValue, New ObjectParameter("tpro", tpro), New ObjectParameter("tpro", GetType(Integer)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Dim ffecParameter As ObjectParameter = If(ffec.HasValue, New ObjectParameter("ffec", ffec), New ObjectParameter("ffec", GetType(Date)))
+
+
+        Dim fnitParameter As ObjectParameter = If(fnit IsNot Nothing, New ObjectParameter("fnit", fnit), New ObjectParameter("fnit", GetType(String)))
+
+
+        Dim frsocialParameter As ObjectParameter = If(frsocial IsNot Nothing, New ObjectParameter("frsocial", frsocial), New ObjectParameter("frsocial", GetType(String)))
+
+
+        Dim fnroParameter As ObjectParameter = If(fnro.HasValue, New ObjectParameter("fnro", fnro), New ObjectParameter("fnro", GetType(Integer)))
+
+
+        Dim fautorizParameter As ObjectParameter = If(fautoriz.HasValue, New ObjectParameter("fautoriz", fautoriz), New ObjectParameter("fautoriz", GetType(Long)))
+
+
+        Dim fmontoParameter As ObjectParameter = If(fmonto.HasValue, New ObjectParameter("fmonto", fmonto), New ObjectParameter("fmonto", GetType(Decimal)))
+
+
+        Dim fccontParameter As ObjectParameter = If(fccont IsNot Nothing, New ObjectParameter("fccont", fccont), New ObjectParameter("fccont", GetType(String)))
+
+
+        Dim fmcfiscalParameter As ObjectParameter = If(fmcfiscal.HasValue, New ObjectParameter("fmcfiscal", fmcfiscal), New ObjectParameter("fmcfiscal", GetType(Decimal)))
+
+
+        Dim fdescParameter As ObjectParameter = If(fdesc.HasValue, New ObjectParameter("fdesc", fdesc), New ObjectParameter("fdesc", GetType(Decimal)))
+
+
+        Dim filtroParameter As ObjectParameter = If(filtro.HasValue, New ObjectParameter("filtro", filtro), New ObjectParameter("filtro", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_go_TCP001", tipoParameter, numiParameter, provParameter, fdocParameter, montoParameter, obsParameter, estParameter, fvenParameter, tpagoParameter, fproParameter, notaParameter, tproParameter, uactParameter, ffecParameter, fnitParameter, frsocialParameter, fnroParameter, fautorizParameter, fmontoParameter, fccontParameter, fmcfiscalParameter, fdescParameter, filtroParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TI002(tipo As Nullable(Of Integer), id As Nullable(Of Integer), fdoc As Nullable(Of Date), concep As Nullable(Of Integer), obs As String, est As Nullable(Of Integer), alm As Nullable(Of Integer), iddc As Nullable(Of Integer), uact As String) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim idParameter As ObjectParameter = If(id.HasValue, New ObjectParameter("id", id), New ObjectParameter("id", GetType(Integer)))
+
+
+        Dim fdocParameter As ObjectParameter = If(fdoc.HasValue, New ObjectParameter("fdoc", fdoc), New ObjectParameter("fdoc", GetType(Date)))
+
+
+        Dim concepParameter As ObjectParameter = If(concep.HasValue, New ObjectParameter("concep", concep), New ObjectParameter("concep", GetType(Integer)))
+
+
+        Dim obsParameter As ObjectParameter = If(obs IsNot Nothing, New ObjectParameter("obs", obs), New ObjectParameter("obs", GetType(String)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Integer)))
+
+
+        Dim almParameter As ObjectParameter = If(alm.HasValue, New ObjectParameter("alm", alm), New ObjectParameter("alm", GetType(Integer)))
+
+
+        Dim iddcParameter As ObjectParameter = If(iddc.HasValue, New ObjectParameter("iddc", iddc), New ObjectParameter("iddc", GetType(Integer)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_go_TI002", tipoParameter, idParameter, fdocParameter, concepParameter, obsParameter, estParameter, almParameter, iddcParameter, uactParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TO0023(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), tc1 As Nullable(Of Integer), tc4 As Nullable(Of Integer), cant As Nullable(Of Integer), est As Nullable(Of Integer), dif As Nullable(Of Boolean), to1 As Nullable(Of Integer), to2 As Nullable(Of Integer), uact As String) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim tc1Parameter As ObjectParameter = If(tc1.HasValue, New ObjectParameter("tc1", tc1), New ObjectParameter("tc1", GetType(Integer)))
+
+
+        Dim tc4Parameter As ObjectParameter = If(tc4.HasValue, New ObjectParameter("tc4", tc4), New ObjectParameter("tc4", GetType(Integer)))
+
+
+        Dim cantParameter As ObjectParameter = If(cant.HasValue, New ObjectParameter("cant", cant), New ObjectParameter("cant", GetType(Integer)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Integer)))
+
+
+        Dim difParameter As ObjectParameter = If(dif.HasValue, New ObjectParameter("dif", dif), New ObjectParameter("dif", GetType(Boolean)))
+
+
+        Dim to1Parameter As ObjectParameter = If(to1.HasValue, New ObjectParameter("to1", to1), New ObjectParameter("to1", GetType(Integer)))
+
+
+        Dim to2Parameter As ObjectParameter = If(to2.HasValue, New ObjectParameter("to2", to2), New ObjectParameter("to2", GetType(Integer)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_go_TO0023", tipoParameter, numiParameter, tc1Parameter, tc4Parameter, cantParameter, estParameter, difParameter, to1Parameter, to2Parameter, uactParameter)
+    End Function
+
+
+    Public Overridable Function sp_go_TS002(tipo As Nullable(Of Integer), numi As Nullable(Of Integer), cia As Nullable(Of Integer), alm As Nullable(Of Integer), sfc As Nullable(Of Integer), autoriz As Nullable(Of Decimal), nfac As Nullable(Of Integer), key As String, fdel As Nullable(Of Date), fal As Nullable(Of Date), nota As String, nota2 As String, est As Nullable(Of Boolean), uact As String, filtro As Nullable(Of Integer)) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim ciaParameter As ObjectParameter = If(cia.HasValue, New ObjectParameter("cia", cia), New ObjectParameter("cia", GetType(Integer)))
+
+
+        Dim almParameter As ObjectParameter = If(alm.HasValue, New ObjectParameter("alm", alm), New ObjectParameter("alm", GetType(Integer)))
+
+
+        Dim sfcParameter As ObjectParameter = If(sfc.HasValue, New ObjectParameter("sfc", sfc), New ObjectParameter("sfc", GetType(Integer)))
+
+
+        Dim autorizParameter As ObjectParameter = If(autoriz.HasValue, New ObjectParameter("autoriz", autoriz), New ObjectParameter("autoriz", GetType(Decimal)))
+
+
+        Dim nfacParameter As ObjectParameter = If(nfac.HasValue, New ObjectParameter("nfac", nfac), New ObjectParameter("nfac", GetType(Integer)))
+
+
+        Dim keyParameter As ObjectParameter = If(key IsNot Nothing, New ObjectParameter("key", key), New ObjectParameter("key", GetType(String)))
+
+
+        Dim fdelParameter As ObjectParameter = If(fdel.HasValue, New ObjectParameter("fdel", fdel), New ObjectParameter("fdel", GetType(Date)))
+
+
+        Dim falParameter As ObjectParameter = If(fal.HasValue, New ObjectParameter("fal", fal), New ObjectParameter("fal", GetType(Date)))
+
+
+        Dim notaParameter As ObjectParameter = If(nota IsNot Nothing, New ObjectParameter("nota", nota), New ObjectParameter("nota", GetType(String)))
+
+
+        Dim nota2Parameter As ObjectParameter = If(nota2 IsNot Nothing, New ObjectParameter("nota2", nota2), New ObjectParameter("nota2", GetType(String)))
+
+
+        Dim estParameter As ObjectParameter = If(est.HasValue, New ObjectParameter("est", est), New ObjectParameter("est", GetType(Boolean)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Dim filtroParameter As ObjectParameter = If(filtro.HasValue, New ObjectParameter("filtro", filtro), New ObjectParameter("filtro", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_go_TS002", tipoParameter, numiParameter, ciaParameter, almParameter, sfcParameter, autorizParameter, nfacParameter, keyParameter, fdelParameter, falParameter, notaParameter, nota2Parameter, estParameter, uactParameter, filtroParameter)
+    End Function
+
+
+    Public Overridable Function sp_Insert_TC004(ccdesc As String, cczona As Nullable(Of Integer), ccdctnum As String, ccnit As String, cctelf1 As String, ccdirec As String, ccnomfac As String, cclat As Nullable(Of Decimal), cclongi As Nullable(Of Decimal)) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim ccdescParameter As ObjectParameter = If(ccdesc IsNot Nothing, New ObjectParameter("ccdesc", ccdesc), New ObjectParameter("ccdesc", GetType(String)))
+
+
+        Dim cczonaParameter As ObjectParameter = If(cczona.HasValue, New ObjectParameter("cczona", cczona), New ObjectParameter("cczona", GetType(Integer)))
+
+
+        Dim ccdctnumParameter As ObjectParameter = If(ccdctnum IsNot Nothing, New ObjectParameter("ccdctnum", ccdctnum), New ObjectParameter("ccdctnum", GetType(String)))
+
+
+        Dim ccnitParameter As ObjectParameter = If(ccnit IsNot Nothing, New ObjectParameter("ccnit", ccnit), New ObjectParameter("ccnit", GetType(String)))
+
+
+        Dim cctelf1Parameter As ObjectParameter = If(cctelf1 IsNot Nothing, New ObjectParameter("cctelf1", cctelf1), New ObjectParameter("cctelf1", GetType(String)))
+
+
+        Dim ccdirecParameter As ObjectParameter = If(ccdirec IsNot Nothing, New ObjectParameter("ccdirec", ccdirec), New ObjectParameter("ccdirec", GetType(String)))
+
+
+        Dim ccnomfacParameter As ObjectParameter = If(ccnomfac IsNot Nothing, New ObjectParameter("ccnomfac", ccnomfac), New ObjectParameter("ccnomfac", GetType(String)))
+
+
+        Dim cclatParameter As ObjectParameter = If(cclat.HasValue, New ObjectParameter("cclat", cclat), New ObjectParameter("cclat", GetType(Decimal)))
+
+
+        Dim cclongiParameter As ObjectParameter = If(cclongi.HasValue, New ObjectParameter("cclongi", cclongi), New ObjectParameter("cclongi", GetType(Decimal)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_Insert_TC004", ccdescParameter, cczonaParameter, ccdctnumParameter, ccnitParameter, cctelf1Parameter, ccdirecParameter, ccnomfacParameter, cclatParameter, cclongiParameter)
+    End Function
+
+
+    Public Overridable Function sp_Insert_TFV001(fvafec As Nullable(Of Date), fvanfac As Nullable(Of Integer), fvaautoriz As Nullable(Of Double), fvanitcli As String, fvadescli1 As String, fvastot As Nullable(Of Double), fvadebfis As Nullable(Of Double), fvaccont As String, fvaflim As Nullable(Of Date), fvanumi As Nullable(Of Integer)) As ObjectResult(Of sp_Insert_TFV001_Result)
+
+        Dim fvafecParameter As ObjectParameter = If(fvafec.HasValue, New ObjectParameter("fvafec", fvafec), New ObjectParameter("fvafec", GetType(Date)))
+
+
+        Dim fvanfacParameter As ObjectParameter = If(fvanfac.HasValue, New ObjectParameter("fvanfac", fvanfac), New ObjectParameter("fvanfac", GetType(Integer)))
+
+
+        Dim fvaautorizParameter As ObjectParameter = If(fvaautoriz.HasValue, New ObjectParameter("fvaautoriz", fvaautoriz), New ObjectParameter("fvaautoriz", GetType(Double)))
+
+
+        Dim fvanitcliParameter As ObjectParameter = If(fvanitcli IsNot Nothing, New ObjectParameter("fvanitcli", fvanitcli), New ObjectParameter("fvanitcli", GetType(String)))
+
+
+        Dim fvadescli1Parameter As ObjectParameter = If(fvadescli1 IsNot Nothing, New ObjectParameter("fvadescli1", fvadescli1), New ObjectParameter("fvadescli1", GetType(String)))
+
+
+        Dim fvastotParameter As ObjectParameter = If(fvastot.HasValue, New ObjectParameter("fvastot", fvastot), New ObjectParameter("fvastot", GetType(Double)))
+
+
+        Dim fvadebfisParameter As ObjectParameter = If(fvadebfis.HasValue, New ObjectParameter("fvadebfis", fvadebfis), New ObjectParameter("fvadebfis", GetType(Double)))
+
+
+        Dim fvaccontParameter As ObjectParameter = If(fvaccont IsNot Nothing, New ObjectParameter("fvaccont", fvaccont), New ObjectParameter("fvaccont", GetType(String)))
+
+
+        Dim fvaflimParameter As ObjectParameter = If(fvaflim.HasValue, New ObjectParameter("fvaflim", fvaflim), New ObjectParameter("fvaflim", GetType(Date)))
+
+
+        Dim fvanumiParameter As ObjectParameter = If(fvanumi.HasValue, New ObjectParameter("fvanumi", fvanumi), New ObjectParameter("fvanumi", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sp_Insert_TFV001_Result)("sp_Insert_TFV001", fvafecParameter, fvanfacParameter, fvaautorizParameter, fvanitcliParameter, fvadescli1Parameter, fvastotParameter, fvadebfisParameter, fvaccontParameter, fvaflimParameter, fvanumiParameter)
+    End Function
+
+
+    Public Overridable Function sp_Insert_TL002(ldchof As Nullable(Of Integer), ldfec As Nullable(Of Date), ldhora As String, lblat As Nullable(Of Decimal), lblongi As Nullable(Of Decimal)) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim ldchofParameter As ObjectParameter = If(ldchof.HasValue, New ObjectParameter("ldchof", ldchof), New ObjectParameter("ldchof", GetType(Integer)))
+
+
+        Dim ldfecParameter As ObjectParameter = If(ldfec.HasValue, New ObjectParameter("ldfec", ldfec), New ObjectParameter("ldfec", GetType(Date)))
+
+
+        Dim ldhoraParameter As ObjectParameter = If(ldhora IsNot Nothing, New ObjectParameter("ldhora", ldhora), New ObjectParameter("ldhora", GetType(String)))
+
+
+        Dim lblatParameter As ObjectParameter = If(lblat.HasValue, New ObjectParameter("lblat", lblat), New ObjectParameter("lblat", GetType(Decimal)))
+
+
+        Dim lblongiParameter As ObjectParameter = If(lblongi.HasValue, New ObjectParameter("lblongi", lblongi), New ObjectParameter("lblongi", GetType(Decimal)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_Insert_TL002", ldchofParameter, ldfecParameter, ldhoraParameter, lblatParameter, lblongiParameter)
+    End Function
+
+
+    Public Overridable Function sp_Insert_TO001(oafdoc As Nullable(Of Date), oaccli As Nullable(Of Integer), oaobs As String, tO0011 As String) As ObjectResult(Of sp_Insert_TO001_Result)
+
+        Dim oafdocParameter As ObjectParameter = If(oafdoc.HasValue, New ObjectParameter("oafdoc", oafdoc), New ObjectParameter("oafdoc", GetType(Date)))
+
+
+        Dim oaccliParameter As ObjectParameter = If(oaccli.HasValue, New ObjectParameter("oaccli", oaccli), New ObjectParameter("oaccli", GetType(Integer)))
+
+
+        Dim oaobsParameter As ObjectParameter = If(oaobs IsNot Nothing, New ObjectParameter("oaobs", oaobs), New ObjectParameter("oaobs", GetType(String)))
+
+
+        Dim tO0011Parameter As ObjectParameter = If(tO0011 IsNot Nothing, New ObjectParameter("TO0011", tO0011), New ObjectParameter("TO0011", GetType(String)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sp_Insert_TO001_Result)("sp_Insert_TO001", oafdocParameter, oaccliParameter, oaobsParameter, tO0011Parameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_Asiento(tipo As Nullable(Of Integer), seuact As String, categoria As Nullable(Of Integer), canumi As Nullable(Of Integer), cuenta As String, descripcion As String, empresa As Nullable(Of Integer), sector As Nullable(Of Integer), vcnumi As Nullable(Of Integer), servicio As Nullable(Of Integer), fechaI As Nullable(Of Date), fechaF As Nullable(Of Date), sucursal As Nullable(Of Integer), estado As Nullable(Of Integer), tventa As Nullable(Of Integer), modulo As Nullable(Of Integer), factura As Nullable(Of Integer), id As Nullable(Of Integer), proveedor As Nullable(Of Integer), numi As Nullable(Of Integer)) As ObjectResult(Of sp_Mam_Asiento_Result)
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim seuactParameter As ObjectParameter = If(seuact IsNot Nothing, New ObjectParameter("seuact", seuact), New ObjectParameter("seuact", GetType(String)))
+
+
+        Dim categoriaParameter As ObjectParameter = If(categoria.HasValue, New ObjectParameter("categoria", categoria), New ObjectParameter("categoria", GetType(Integer)))
+
+
+        Dim canumiParameter As ObjectParameter = If(canumi.HasValue, New ObjectParameter("canumi", canumi), New ObjectParameter("canumi", GetType(Integer)))
+
+
+        Dim cuentaParameter As ObjectParameter = If(cuenta IsNot Nothing, New ObjectParameter("cuenta", cuenta), New ObjectParameter("cuenta", GetType(String)))
+
+
+        Dim descripcionParameter As ObjectParameter = If(descripcion IsNot Nothing, New ObjectParameter("descripcion", descripcion), New ObjectParameter("descripcion", GetType(String)))
+
+
+        Dim empresaParameter As ObjectParameter = If(empresa.HasValue, New ObjectParameter("empresa", empresa), New ObjectParameter("empresa", GetType(Integer)))
+
+
+        Dim sectorParameter As ObjectParameter = If(sector.HasValue, New ObjectParameter("sector", sector), New ObjectParameter("sector", GetType(Integer)))
+
+
+        Dim vcnumiParameter As ObjectParameter = If(vcnumi.HasValue, New ObjectParameter("vcnumi", vcnumi), New ObjectParameter("vcnumi", GetType(Integer)))
+
+
+        Dim servicioParameter As ObjectParameter = If(servicio.HasValue, New ObjectParameter("servicio", servicio), New ObjectParameter("servicio", GetType(Integer)))
+
+
+        Dim fechaIParameter As ObjectParameter = If(fechaI.HasValue, New ObjectParameter("fechaI", fechaI), New ObjectParameter("fechaI", GetType(Date)))
+
+
+        Dim fechaFParameter As ObjectParameter = If(fechaF.HasValue, New ObjectParameter("fechaF", fechaF), New ObjectParameter("fechaF", GetType(Date)))
+
+
+        Dim sucursalParameter As ObjectParameter = If(sucursal.HasValue, New ObjectParameter("sucursal", sucursal), New ObjectParameter("sucursal", GetType(Integer)))
+
+
+        Dim estadoParameter As ObjectParameter = If(estado.HasValue, New ObjectParameter("Estado", estado), New ObjectParameter("Estado", GetType(Integer)))
+
+
+        Dim tventaParameter As ObjectParameter = If(tventa.HasValue, New ObjectParameter("tventa", tventa), New ObjectParameter("tventa", GetType(Integer)))
+
+
+        Dim moduloParameter As ObjectParameter = If(modulo.HasValue, New ObjectParameter("modulo", modulo), New ObjectParameter("modulo", GetType(Integer)))
+
+
+        Dim facturaParameter As ObjectParameter = If(factura.HasValue, New ObjectParameter("factura", factura), New ObjectParameter("factura", GetType(Integer)))
+
+
+        Dim idParameter As ObjectParameter = If(id.HasValue, New ObjectParameter("Id", id), New ObjectParameter("Id", GetType(Integer)))
+
+
+        Dim proveedorParameter As ObjectParameter = If(proveedor.HasValue, New ObjectParameter("proveedor", proveedor), New ObjectParameter("proveedor", GetType(Integer)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sp_Mam_Asiento_Result)("sp_Mam_Asiento", tipoParameter, seuactParameter, categoriaParameter, canumiParameter, cuentaParameter, descripcionParameter, empresaParameter, sectorParameter, vcnumiParameter, servicioParameter, fechaIParameter, fechaFParameter, sucursalParameter, estadoParameter, tventaParameter, moduloParameter, facturaParameter, idParameter, proveedorParameter, numiParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_ReporteVentas(tipo As Nullable(Of Integer), uact As String, numi As Nullable(Of Integer), fechaI As Nullable(Of Date), fechaF As Nullable(Of Date), prevendedor As Nullable(Of Integer), distribuidor As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim fechaIParameter As ObjectParameter = If(fechaI.HasValue, New ObjectParameter("fechaI", fechaI), New ObjectParameter("fechaI", GetType(Date)))
+
+
+        Dim fechaFParameter As ObjectParameter = If(fechaF.HasValue, New ObjectParameter("fechaF", fechaF), New ObjectParameter("fechaF", GetType(Date)))
+
+
+        Dim prevendedorParameter As ObjectParameter = If(prevendedor.HasValue, New ObjectParameter("prevendedor", prevendedor), New ObjectParameter("prevendedor", GetType(Integer)))
+
+
+        Dim distribuidorParameter As ObjectParameter = If(distribuidor.HasValue, New ObjectParameter("distribuidor", distribuidor), New ObjectParameter("distribuidor", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_ReporteVentas", tipoParameter, uactParameter, numiParameter, fechaIParameter, fechaFParameter, prevendedorParameter, distribuidorParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TC002(tipo As Nullable(Of Integer), cbnumi As Nullable(Of Integer), cbuact As String, panumi As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim cbnumiParameter As ObjectParameter = If(cbnumi.HasValue, New ObjectParameter("cbnumi", cbnumi), New ObjectParameter("cbnumi", GetType(Integer)))
+
+
+        Dim cbuactParameter As ObjectParameter = If(cbuact IsNot Nothing, New ObjectParameter("cbuact", cbuact), New ObjectParameter("cbuact", GetType(String)))
+
+
+        Dim panumiParameter As ObjectParameter = If(panumi.HasValue, New ObjectParameter("panumi", panumi), New ObjectParameter("panumi", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TC002", tipoParameter, cbnumiParameter, cbuactParameter, panumiParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TC005C(tipo As Nullable(Of Integer), canumi As Nullable(Of Integer), canombre As String, cadesc As String, caimg As String, cauact As String, caest As Nullable(Of Integer)) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim canumiParameter As ObjectParameter = If(canumi.HasValue, New ObjectParameter("canumi", canumi), New ObjectParameter("canumi", GetType(Integer)))
+
+
+        Dim canombreParameter As ObjectParameter = If(canombre IsNot Nothing, New ObjectParameter("canombre", canombre), New ObjectParameter("canombre", GetType(String)))
+
+
+        Dim cadescParameter As ObjectParameter = If(cadesc IsNot Nothing, New ObjectParameter("cadesc", cadesc), New ObjectParameter("cadesc", GetType(String)))
+
+
+        Dim caimgParameter As ObjectParameter = If(caimg IsNot Nothing, New ObjectParameter("caimg", caimg), New ObjectParameter("caimg", GetType(String)))
+
+
+        Dim cauactParameter As ObjectParameter = If(cauact IsNot Nothing, New ObjectParameter("cauact", cauact), New ObjectParameter("cauact", GetType(String)))
+
+
+        Dim caestParameter As ObjectParameter = If(caest.HasValue, New ObjectParameter("caest", caest), New ObjectParameter("caest", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_Mam_TC005C", tipoParameter, canumiParameter, canombreParameter, cadescParameter, caimgParameter, cauactParameter, caestParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TCA00121Cheque(tipo As Nullable(Of Integer), tenumi As Nullable(Of Integer), tefdoc As Nullable(Of Date), tety4vend As Nullable(Of Integer), teobs As String, tdnumi As Nullable(Of Integer), teuact As String, credito As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim tenumiParameter As ObjectParameter = If(tenumi.HasValue, New ObjectParameter("tenumi", tenumi), New ObjectParameter("tenumi", GetType(Integer)))
+
+
+        Dim tefdocParameter As ObjectParameter = If(tefdoc.HasValue, New ObjectParameter("tefdoc", tefdoc), New ObjectParameter("tefdoc", GetType(Date)))
+
+
+        Dim tety4vendParameter As ObjectParameter = If(tety4vend.HasValue, New ObjectParameter("tety4vend", tety4vend), New ObjectParameter("tety4vend", GetType(Integer)))
+
+
+        Dim teobsParameter As ObjectParameter = If(teobs IsNot Nothing, New ObjectParameter("teobs", teobs), New ObjectParameter("teobs", GetType(String)))
+
+
+        Dim tdnumiParameter As ObjectParameter = If(tdnumi.HasValue, New ObjectParameter("tdnumi", tdnumi), New ObjectParameter("tdnumi", GetType(Integer)))
+
+
+        Dim teuactParameter As ObjectParameter = If(teuact IsNot Nothing, New ObjectParameter("teuact", teuact), New ObjectParameter("teuact", GetType(String)))
+
+
+        Dim creditoParameter As ObjectParameter = If(credito.HasValue, New ObjectParameter("credito", credito), New ObjectParameter("credito", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TCA00121Cheque", tipoParameter, tenumiParameter, tefdocParameter, tety4vendParameter, teobsParameter, tdnumiParameter, teuactParameter, creditoParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TI005(tipo As Nullable(Of Integer), oanumi As Nullable(Of Integer), oanumdoc As String, oatip As Nullable(Of Integer), oaano As Nullable(Of Integer), oames As Nullable(Of Integer), oanum As Nullable(Of Integer), oafdoc As Nullable(Of Date), oatc As Nullable(Of Decimal), oaglosa As String, oaobs As String, oaemp As Nullable(Of Integer), fecha1 As Nullable(Of Date), fecha2 As Nullable(Of Date), uact As String, ifnumi As Nullable(Of Integer), ifto001numi As Nullable(Of Integer), iftc As Nullable(Of Decimal), iffechai As Nullable(Of Date), iffechaf As Nullable(Of Date), ifest As Nullable(Of Integer), ifsuc As Nullable(Of Integer), modulo As Nullable(Of Integer), factura As Nullable(Of Integer), fechaI As Nullable(Of Date), fechaF As Nullable(Of Date), plantilla As Nullable(Of Integer), numiPadre As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim oanumiParameter As ObjectParameter = If(oanumi.HasValue, New ObjectParameter("oanumi", oanumi), New ObjectParameter("oanumi", GetType(Integer)))
+
+
+        Dim oanumdocParameter As ObjectParameter = If(oanumdoc IsNot Nothing, New ObjectParameter("oanumdoc", oanumdoc), New ObjectParameter("oanumdoc", GetType(String)))
+
+
+        Dim oatipParameter As ObjectParameter = If(oatip.HasValue, New ObjectParameter("oatip", oatip), New ObjectParameter("oatip", GetType(Integer)))
+
+
+        Dim oaanoParameter As ObjectParameter = If(oaano.HasValue, New ObjectParameter("oaano", oaano), New ObjectParameter("oaano", GetType(Integer)))
+
+
+        Dim oamesParameter As ObjectParameter = If(oames.HasValue, New ObjectParameter("oames", oames), New ObjectParameter("oames", GetType(Integer)))
+
+
+        Dim oanumParameter As ObjectParameter = If(oanum.HasValue, New ObjectParameter("oanum", oanum), New ObjectParameter("oanum", GetType(Integer)))
+
+
+        Dim oafdocParameter As ObjectParameter = If(oafdoc.HasValue, New ObjectParameter("oafdoc", oafdoc), New ObjectParameter("oafdoc", GetType(Date)))
+
+
+        Dim oatcParameter As ObjectParameter = If(oatc.HasValue, New ObjectParameter("oatc", oatc), New ObjectParameter("oatc", GetType(Decimal)))
+
+
+        Dim oaglosaParameter As ObjectParameter = If(oaglosa IsNot Nothing, New ObjectParameter("oaglosa", oaglosa), New ObjectParameter("oaglosa", GetType(String)))
+
+
+        Dim oaobsParameter As ObjectParameter = If(oaobs IsNot Nothing, New ObjectParameter("oaobs", oaobs), New ObjectParameter("oaobs", GetType(String)))
+
+
+        Dim oaempParameter As ObjectParameter = If(oaemp.HasValue, New ObjectParameter("oaemp", oaemp), New ObjectParameter("oaemp", GetType(Integer)))
+
+
+        Dim fecha1Parameter As ObjectParameter = If(fecha1.HasValue, New ObjectParameter("fecha1", fecha1), New ObjectParameter("fecha1", GetType(Date)))
+
+
+        Dim fecha2Parameter As ObjectParameter = If(fecha2.HasValue, New ObjectParameter("fecha2", fecha2), New ObjectParameter("fecha2", GetType(Date)))
+
+
+        Dim uactParameter As ObjectParameter = If(uact IsNot Nothing, New ObjectParameter("uact", uact), New ObjectParameter("uact", GetType(String)))
+
+
+        Dim ifnumiParameter As ObjectParameter = If(ifnumi.HasValue, New ObjectParameter("ifnumi", ifnumi), New ObjectParameter("ifnumi", GetType(Integer)))
+
+
+        Dim ifto001numiParameter As ObjectParameter = If(ifto001numi.HasValue, New ObjectParameter("ifto001numi", ifto001numi), New ObjectParameter("ifto001numi", GetType(Integer)))
+
+
+        Dim iftcParameter As ObjectParameter = If(iftc.HasValue, New ObjectParameter("iftc", iftc), New ObjectParameter("iftc", GetType(Decimal)))
+
+
+        Dim iffechaiParameter As ObjectParameter = If(iffechai.HasValue, New ObjectParameter("iffechai", iffechai), New ObjectParameter("iffechai", GetType(Date)))
+
+
+        Dim iffechafParameter As ObjectParameter = If(iffechaf.HasValue, New ObjectParameter("iffechaf", iffechaf), New ObjectParameter("iffechaf", GetType(Date)))
+
+
+        Dim ifestParameter As ObjectParameter = If(ifest.HasValue, New ObjectParameter("ifest", ifest), New ObjectParameter("ifest", GetType(Integer)))
+
+
+        Dim ifsucParameter As ObjectParameter = If(ifsuc.HasValue, New ObjectParameter("ifsuc", ifsuc), New ObjectParameter("ifsuc", GetType(Integer)))
+
+
+        Dim moduloParameter As ObjectParameter = If(modulo.HasValue, New ObjectParameter("modulo", modulo), New ObjectParameter("modulo", GetType(Integer)))
+
+
+        Dim facturaParameter As ObjectParameter = If(factura.HasValue, New ObjectParameter("factura", factura), New ObjectParameter("factura", GetType(Integer)))
+
+
+        Dim fechaIParameter As ObjectParameter = If(fechaI.HasValue, New ObjectParameter("fechaI", fechaI), New ObjectParameter("fechaI", GetType(Date)))
+
+
+        Dim fechaFParameter As ObjectParameter = If(fechaF.HasValue, New ObjectParameter("fechaF", fechaF), New ObjectParameter("fechaF", GetType(Date)))
+
+
+        Dim plantillaParameter As ObjectParameter = If(plantilla.HasValue, New ObjectParameter("plantilla", plantilla), New ObjectParameter("plantilla", GetType(Integer)))
+
+
+        Dim numiPadreParameter As ObjectParameter = If(numiPadre.HasValue, New ObjectParameter("numiPadre", numiPadre), New ObjectParameter("numiPadre", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TI005", tipoParameter, oanumiParameter, oanumdocParameter, oatipParameter, oaanoParameter, oamesParameter, oanumParameter, oafdocParameter, oatcParameter, oaglosaParameter, oaobsParameter, oaempParameter, fecha1Parameter, fecha2Parameter, uactParameter, ifnumiParameter, ifto001numiParameter, iftcParameter, iffechaiParameter, iffechafParameter, ifestParameter, ifsucParameter, moduloParameter, facturaParameter, fechaIParameter, fechaFParameter, plantillaParameter, numiPadreParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TM001(tipo As Nullable(Of Integer), ibid As Nullable(Of Integer), ibfdoc As Nullable(Of Date), ibconcep As Nullable(Of Integer), ibobs As String, ibest As Nullable(Of Integer), ibalm As Nullable(Of Integer), ibiddc As Nullable(Of Integer), ibidchof As Nullable(Of Integer), ibidvent As Nullable(Of Integer), ibidconcil As Nullable(Of Integer), ibuact As String, chofer As Nullable(Of Integer), concepto As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim ibidParameter As ObjectParameter = If(ibid.HasValue, New ObjectParameter("ibid", ibid), New ObjectParameter("ibid", GetType(Integer)))
+
+
+        Dim ibfdocParameter As ObjectParameter = If(ibfdoc.HasValue, New ObjectParameter("ibfdoc", ibfdoc), New ObjectParameter("ibfdoc", GetType(Date)))
+
+
+        Dim ibconcepParameter As ObjectParameter = If(ibconcep.HasValue, New ObjectParameter("ibconcep", ibconcep), New ObjectParameter("ibconcep", GetType(Integer)))
+
+
+        Dim ibobsParameter As ObjectParameter = If(ibobs IsNot Nothing, New ObjectParameter("ibobs", ibobs), New ObjectParameter("ibobs", GetType(String)))
+
+
+        Dim ibestParameter As ObjectParameter = If(ibest.HasValue, New ObjectParameter("ibest", ibest), New ObjectParameter("ibest", GetType(Integer)))
+
+
+        Dim ibalmParameter As ObjectParameter = If(ibalm.HasValue, New ObjectParameter("ibalm", ibalm), New ObjectParameter("ibalm", GetType(Integer)))
+
+
+        Dim ibiddcParameter As ObjectParameter = If(ibiddc.HasValue, New ObjectParameter("ibiddc", ibiddc), New ObjectParameter("ibiddc", GetType(Integer)))
+
+
+        Dim ibidchofParameter As ObjectParameter = If(ibidchof.HasValue, New ObjectParameter("ibidchof", ibidchof), New ObjectParameter("ibidchof", GetType(Integer)))
+
+
+        Dim ibidventParameter As ObjectParameter = If(ibidvent.HasValue, New ObjectParameter("ibidvent", ibidvent), New ObjectParameter("ibidvent", GetType(Integer)))
+
+
+        Dim ibidconcilParameter As ObjectParameter = If(ibidconcil.HasValue, New ObjectParameter("ibidconcil", ibidconcil), New ObjectParameter("ibidconcil", GetType(Integer)))
+
+
+        Dim ibuactParameter As ObjectParameter = If(ibuact IsNot Nothing, New ObjectParameter("ibuact", ibuact), New ObjectParameter("ibuact", GetType(String)))
+
+
+        Dim choferParameter As ObjectParameter = If(chofer.HasValue, New ObjectParameter("chofer", chofer), New ObjectParameter("chofer", GetType(Integer)))
+
+
+        Dim conceptoParameter As ObjectParameter = If(concepto.HasValue, New ObjectParameter("concepto", concepto), New ObjectParameter("concepto", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TM001", tipoParameter, ibidParameter, ibfdocParameter, ibconcepParameter, ibobsParameter, ibestParameter, ibalmParameter, ibiddcParameter, ibidchofParameter, ibidventParameter, ibidconcilParameter, ibuactParameter, choferParameter, conceptoParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TM001SalidaChofer(tipo As Nullable(Of Integer), ibid As Nullable(Of Integer), ibfdoc As Nullable(Of Date), ibconcep As Nullable(Of Integer), ibobs As String, ibest As Nullable(Of Integer), ibalm As Nullable(Of Integer), ibiddc As Nullable(Of Integer), ibidchof As Nullable(Of Integer), ibidvent As Nullable(Of Integer), ibidconcil As Nullable(Of Integer), ibuact As String, chofer As Nullable(Of Integer), concepto As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim ibidParameter As ObjectParameter = If(ibid.HasValue, New ObjectParameter("ibid", ibid), New ObjectParameter("ibid", GetType(Integer)))
+
+
+        Dim ibfdocParameter As ObjectParameter = If(ibfdoc.HasValue, New ObjectParameter("ibfdoc", ibfdoc), New ObjectParameter("ibfdoc", GetType(Date)))
+
+
+        Dim ibconcepParameter As ObjectParameter = If(ibconcep.HasValue, New ObjectParameter("ibconcep", ibconcep), New ObjectParameter("ibconcep", GetType(Integer)))
+
+
+        Dim ibobsParameter As ObjectParameter = If(ibobs IsNot Nothing, New ObjectParameter("ibobs", ibobs), New ObjectParameter("ibobs", GetType(String)))
+
+
+        Dim ibestParameter As ObjectParameter = If(ibest.HasValue, New ObjectParameter("ibest", ibest), New ObjectParameter("ibest", GetType(Integer)))
+
+
+        Dim ibalmParameter As ObjectParameter = If(ibalm.HasValue, New ObjectParameter("ibalm", ibalm), New ObjectParameter("ibalm", GetType(Integer)))
+
+
+        Dim ibiddcParameter As ObjectParameter = If(ibiddc.HasValue, New ObjectParameter("ibiddc", ibiddc), New ObjectParameter("ibiddc", GetType(Integer)))
+
+
+        Dim ibidchofParameter As ObjectParameter = If(ibidchof.HasValue, New ObjectParameter("ibidchof", ibidchof), New ObjectParameter("ibidchof", GetType(Integer)))
+
+
+        Dim ibidventParameter As ObjectParameter = If(ibidvent.HasValue, New ObjectParameter("ibidvent", ibidvent), New ObjectParameter("ibidvent", GetType(Integer)))
+
+
+        Dim ibidconcilParameter As ObjectParameter = If(ibidconcil.HasValue, New ObjectParameter("ibidconcil", ibidconcil), New ObjectParameter("ibidconcil", GetType(Integer)))
+
+
+        Dim ibuactParameter As ObjectParameter = If(ibuact IsNot Nothing, New ObjectParameter("ibuact", ibuact), New ObjectParameter("ibuact", GetType(String)))
+
+
+        Dim choferParameter As ObjectParameter = If(chofer.HasValue, New ObjectParameter("chofer", chofer), New ObjectParameter("chofer", GetType(Integer)))
+
+
+        Dim conceptoParameter As ObjectParameter = If(concepto.HasValue, New ObjectParameter("concepto", concepto), New ObjectParameter("concepto", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TM001SalidaChofer", tipoParameter, ibidParameter, ibfdocParameter, ibconcepParameter, ibobsParameter, ibestParameter, ibalmParameter, ibiddcParameter, ibidchofParameter, ibidventParameter, ibidconcilParameter, ibuactParameter, choferParameter, conceptoParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TO004(tipo As Nullable(Of Integer), ohnumi As Nullable(Of Integer), ohfec As Nullable(Of Date), ohconc As Nullable(Of Integer), ohest As String, ohuact As String, ojnumi As Nullable(Of Integer), cliente As Nullable(Of Integer), producto As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim ohnumiParameter As ObjectParameter = If(ohnumi.HasValue, New ObjectParameter("ohnumi", ohnumi), New ObjectParameter("ohnumi", GetType(Integer)))
+
+
+        Dim ohfecParameter As ObjectParameter = If(ohfec.HasValue, New ObjectParameter("ohfec", ohfec), New ObjectParameter("ohfec", GetType(Date)))
+
+
+        Dim ohconcParameter As ObjectParameter = If(ohconc.HasValue, New ObjectParameter("ohconc", ohconc), New ObjectParameter("ohconc", GetType(Integer)))
+
+
+        Dim ohestParameter As ObjectParameter = If(ohest IsNot Nothing, New ObjectParameter("ohest", ohest), New ObjectParameter("ohest", GetType(String)))
+
+
+        Dim ohuactParameter As ObjectParameter = If(ohuact IsNot Nothing, New ObjectParameter("ohuact", ohuact), New ObjectParameter("ohuact", GetType(String)))
+
+
+        Dim ojnumiParameter As ObjectParameter = If(ojnumi.HasValue, New ObjectParameter("ojnumi", ojnumi), New ObjectParameter("ojnumi", GetType(Integer)))
+
+
+        Dim clienteParameter As ObjectParameter = If(cliente.HasValue, New ObjectParameter("cliente", cliente), New ObjectParameter("cliente", GetType(Integer)))
+
+
+        Dim productoParameter As ObjectParameter = If(producto.HasValue, New ObjectParameter("producto", producto), New ObjectParameter("producto", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TO004", tipoParameter, ohnumiParameter, ohfecParameter, ohconcParameter, ohestParameter, ohuactParameter, ojnumiParameter, clienteParameter, productoParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TO005(tipo As Nullable(Of Integer), olnumi As Nullable(Of Integer), olnumichof As Nullable(Of Integer), olnumiconci As Nullable(Of Integer), olfecha As Nullable(Of Date), oluact As String, pedido As Nullable(Of Integer), zona As Nullable(Of Integer), mrec As Nullable(Of Decimal), cliente As Nullable(Of Integer), fechai As Nullable(Of Date), fechaf As Nullable(Of Date), numi As Nullable(Of Integer), nroFactura As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim olnumiParameter As ObjectParameter = If(olnumi.HasValue, New ObjectParameter("olnumi", olnumi), New ObjectParameter("olnumi", GetType(Integer)))
+
+
+        Dim olnumichofParameter As ObjectParameter = If(olnumichof.HasValue, New ObjectParameter("olnumichof", olnumichof), New ObjectParameter("olnumichof", GetType(Integer)))
+
+
+        Dim olnumiconciParameter As ObjectParameter = If(olnumiconci.HasValue, New ObjectParameter("olnumiconci", olnumiconci), New ObjectParameter("olnumiconci", GetType(Integer)))
+
+
+        Dim olfechaParameter As ObjectParameter = If(olfecha.HasValue, New ObjectParameter("olfecha", olfecha), New ObjectParameter("olfecha", GetType(Date)))
+
+
+        Dim oluactParameter As ObjectParameter = If(oluact IsNot Nothing, New ObjectParameter("oluact", oluact), New ObjectParameter("oluact", GetType(String)))
+
+
+        Dim pedidoParameter As ObjectParameter = If(pedido.HasValue, New ObjectParameter("pedido", pedido), New ObjectParameter("pedido", GetType(Integer)))
+
+
+        Dim zonaParameter As ObjectParameter = If(zona.HasValue, New ObjectParameter("zona", zona), New ObjectParameter("zona", GetType(Integer)))
+
+
+        Dim mrecParameter As ObjectParameter = If(mrec.HasValue, New ObjectParameter("mrec", mrec), New ObjectParameter("mrec", GetType(Decimal)))
+
+
+        Dim clienteParameter As ObjectParameter = If(cliente.HasValue, New ObjectParameter("cliente", cliente), New ObjectParameter("cliente", GetType(Integer)))
+
+
+        Dim fechaiParameter As ObjectParameter = If(fechai.HasValue, New ObjectParameter("fechai", fechai), New ObjectParameter("fechai", GetType(Date)))
+
+
+        Dim fechafParameter As ObjectParameter = If(fechaf.HasValue, New ObjectParameter("fechaf", fechaf), New ObjectParameter("fechaf", GetType(Date)))
+
+
+        Dim numiParameter As ObjectParameter = If(numi.HasValue, New ObjectParameter("numi", numi), New ObjectParameter("numi", GetType(Integer)))
+
+
+        Dim nroFacturaParameter As ObjectParameter = If(nroFactura.HasValue, New ObjectParameter("nroFactura", nroFactura), New ObjectParameter("nroFactura", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TO005", tipoParameter, olnumiParameter, olnumichofParameter, olnumiconciParameter, olfechaParameter, oluactParameter, pedidoParameter, zonaParameter, mrecParameter, clienteParameter, fechaiParameter, fechafParameter, numiParameter, nroFacturaParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TV00121(tipo As Nullable(Of Integer), tdnumi As Nullable(Of Integer), tduact As String, credito As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim tdnumiParameter As ObjectParameter = If(tdnumi.HasValue, New ObjectParameter("tdnumi", tdnumi), New ObjectParameter("tdnumi", GetType(Integer)))
+
+
+        Dim tduactParameter As ObjectParameter = If(tduact IsNot Nothing, New ObjectParameter("tduact", tduact), New ObjectParameter("tduact", GetType(String)))
+
+
+        Dim creditoParameter As ObjectParameter = If(credito.HasValue, New ObjectParameter("credito", credito), New ObjectParameter("credito", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TV00121", tipoParameter, tdnumiParameter, tduactParameter, creditoParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_TV00121Cheque(tipo As Nullable(Of Integer), tenumi As Nullable(Of Integer), tefdoc As Nullable(Of Date), tety4vend As Nullable(Of Integer), teobs As String, tdnumi As Nullable(Of Integer), teuact As String, credito As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim tenumiParameter As ObjectParameter = If(tenumi.HasValue, New ObjectParameter("tenumi", tenumi), New ObjectParameter("tenumi", GetType(Integer)))
+
+
+        Dim tefdocParameter As ObjectParameter = If(tefdoc.HasValue, New ObjectParameter("tefdoc", tefdoc), New ObjectParameter("tefdoc", GetType(Date)))
+
+
+        Dim tety4vendParameter As ObjectParameter = If(tety4vend.HasValue, New ObjectParameter("tety4vend", tety4vend), New ObjectParameter("tety4vend", GetType(Integer)))
+
+
+        Dim teobsParameter As ObjectParameter = If(teobs IsNot Nothing, New ObjectParameter("teobs", teobs), New ObjectParameter("teobs", GetType(String)))
+
+
+        Dim tdnumiParameter As ObjectParameter = If(tdnumi.HasValue, New ObjectParameter("tdnumi", tdnumi), New ObjectParameter("tdnumi", GetType(Integer)))
+
+
+        Dim teuactParameter As ObjectParameter = If(teuact IsNot Nothing, New ObjectParameter("teuact", teuact), New ObjectParameter("teuact", GetType(String)))
+
+
+        Dim creditoParameter As ObjectParameter = If(credito.HasValue, New ObjectParameter("credito", credito), New ObjectParameter("credito", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_TV00121Cheque", tipoParameter, tenumiParameter, tefdocParameter, tety4vendParameter, teobsParameter, tdnumiParameter, teuactParameter, creditoParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_VentasCredito(tipo As Nullable(Of Integer), fechaI As Nullable(Of Date), fechaF As Nullable(Of Date), yduact As String, cliente As Nullable(Of Integer), codCredito As Nullable(Of Integer), catPrecio As Nullable(Of Integer), almacen As Nullable(Of Integer), vendedor As Nullable(Of Integer)) As ObjectResult(Of sp_Mam_VentasCredito_Result)
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim fechaIParameter As ObjectParameter = If(fechaI.HasValue, New ObjectParameter("fechaI", fechaI), New ObjectParameter("fechaI", GetType(Date)))
+
+
+        Dim fechaFParameter As ObjectParameter = If(fechaF.HasValue, New ObjectParameter("fechaF", fechaF), New ObjectParameter("fechaF", GetType(Date)))
+
+
+        Dim yduactParameter As ObjectParameter = If(yduact IsNot Nothing, New ObjectParameter("yduact", yduact), New ObjectParameter("yduact", GetType(String)))
+
+
+        Dim clienteParameter As ObjectParameter = If(cliente.HasValue, New ObjectParameter("cliente", cliente), New ObjectParameter("cliente", GetType(Integer)))
+
+
+        Dim codCreditoParameter As ObjectParameter = If(codCredito.HasValue, New ObjectParameter("codCredito", codCredito), New ObjectParameter("codCredito", GetType(Integer)))
+
+
+        Dim catPrecioParameter As ObjectParameter = If(catPrecio.HasValue, New ObjectParameter("catPrecio", catPrecio), New ObjectParameter("catPrecio", GetType(Integer)))
+
+
+        Dim almacenParameter As ObjectParameter = If(almacen.HasValue, New ObjectParameter("almacen", almacen), New ObjectParameter("almacen", GetType(Integer)))
+
+
+        Dim vendedorParameter As ObjectParameter = If(vendedor.HasValue, New ObjectParameter("vendedor", vendedor), New ObjectParameter("vendedor", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of sp_Mam_VentasCredito_Result)("sp_Mam_VentasCredito", tipoParameter, fechaIParameter, fechaFParameter, yduactParameter, clienteParameter, codCreditoParameter, catPrecioParameter, almacenParameter, vendedorParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_VentasEstadisticos(tipo As Nullable(Of Integer), fechaI As Nullable(Of Date), fechaF As Nullable(Of Date), yduact As String, vendedor As Nullable(Of Integer), cliente As Nullable(Of Integer), producto As Nullable(Of Integer), zona As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim fechaIParameter As ObjectParameter = If(fechaI.HasValue, New ObjectParameter("fechaI", fechaI), New ObjectParameter("fechaI", GetType(Date)))
+
+
+        Dim fechaFParameter As ObjectParameter = If(fechaF.HasValue, New ObjectParameter("fechaF", fechaF), New ObjectParameter("fechaF", GetType(Date)))
+
+
+        Dim yduactParameter As ObjectParameter = If(yduact IsNot Nothing, New ObjectParameter("yduact", yduact), New ObjectParameter("yduact", GetType(String)))
+
+
+        Dim vendedorParameter As ObjectParameter = If(vendedor.HasValue, New ObjectParameter("vendedor", vendedor), New ObjectParameter("vendedor", GetType(Integer)))
+
+
+        Dim clienteParameter As ObjectParameter = If(cliente.HasValue, New ObjectParameter("cliente", cliente), New ObjectParameter("cliente", GetType(Integer)))
+
+
+        Dim productoParameter As ObjectParameter = If(producto.HasValue, New ObjectParameter("producto", producto), New ObjectParameter("producto", GetType(Integer)))
+
+
+        Dim zonaParameter As ObjectParameter = If(zona.HasValue, New ObjectParameter("zona", zona), New ObjectParameter("zona", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_VentasEstadisticos", tipoParameter, fechaIParameter, fechaFParameter, yduactParameter, vendedorParameter, clienteParameter, productoParameter, zonaParameter)
+    End Function
+
+
+    Public Overridable Function sp_Mam_VentasGraficas(tipo As Nullable(Of Integer), fechaI As Nullable(Of Date), fechaF As Nullable(Of Date), yduact As String, fechaVenta As Nullable(Of Date), producto As Nullable(Of Integer), almacen As Nullable(Of Integer), cantMeses As Nullable(Of Integer), mes As Nullable(Of Integer), anho As Nullable(Of Integer)) As Integer
+
+        Dim tipoParameter As ObjectParameter = If(tipo.HasValue, New ObjectParameter("tipo", tipo), New ObjectParameter("tipo", GetType(Integer)))
+
+
+        Dim fechaIParameter As ObjectParameter = If(fechaI.HasValue, New ObjectParameter("fechaI", fechaI), New ObjectParameter("fechaI", GetType(Date)))
+
+
+        Dim fechaFParameter As ObjectParameter = If(fechaF.HasValue, New ObjectParameter("fechaF", fechaF), New ObjectParameter("fechaF", GetType(Date)))
+
+
+        Dim yduactParameter As ObjectParameter = If(yduact IsNot Nothing, New ObjectParameter("yduact", yduact), New ObjectParameter("yduact", GetType(String)))
+
+
+        Dim fechaVentaParameter As ObjectParameter = If(fechaVenta.HasValue, New ObjectParameter("fechaVenta", fechaVenta), New ObjectParameter("fechaVenta", GetType(Date)))
+
+
+        Dim productoParameter As ObjectParameter = If(producto.HasValue, New ObjectParameter("producto", producto), New ObjectParameter("producto", GetType(Integer)))
+
+
+        Dim almacenParameter As ObjectParameter = If(almacen.HasValue, New ObjectParameter("almacen", almacen), New ObjectParameter("almacen", GetType(Integer)))
+
+
+        Dim cantMesesParameter As ObjectParameter = If(cantMeses.HasValue, New ObjectParameter("cantMeses", cantMeses), New ObjectParameter("cantMeses", GetType(Integer)))
+
+
+        Dim mesParameter As ObjectParameter = If(mes.HasValue, New ObjectParameter("Mes", mes), New ObjectParameter("Mes", GetType(Integer)))
+
+
+        Dim anhoParameter As ObjectParameter = If(anho.HasValue, New ObjectParameter("Anho", anho), New ObjectParameter("Anho", GetType(Integer)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("sp_Mam_VentasGraficas", tipoParameter, fechaIParameter, fechaFParameter, yduactParameter, fechaVentaParameter, productoParameter, almacenParameter, cantMesesParameter, mesParameter, anhoParameter)
+    End Function
+
+
+    Public Overridable Function sp_nfactura(nautori As Nullable(Of Double)) As ObjectResult(Of Nullable(Of Integer))
+
+        Dim nautoriParameter As ObjectParameter = If(nautori.HasValue, New ObjectParameter("nautori", nautori), New ObjectParameter("nautori", GetType(Double)))
+
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of Nullable(Of Integer))("sp_nfactura", nautoriParameter)
+    End Function
+
+
+    Public Overridable Function vis_promedioConsumo() As ObjectResult(Of vis_promedioConsumo_Result)
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of vis_promedioConsumo_Result)("vis_promedioConsumo")
+    End Function
+
+
+    Public Overridable Function vis_transacciones() As ObjectResult(Of vis_transacciones_Result)
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction(Of vis_transacciones_Result)("vis_transacciones")
+    End Function
 
 
 End Class

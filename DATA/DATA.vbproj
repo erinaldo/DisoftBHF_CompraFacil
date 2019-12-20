@@ -98,6 +98,30 @@
     <Compile Include="EntityDataModel\BDDistBHF\CM0011.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\sp_dg_RAsistencia_Result.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\Sp_GetClientes_Result.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\sp_go_NV001_Result.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\sp_go_Reportes_Result.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\sp_Insert_TFV001_Result.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\sp_Insert_TO001_Result.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\sp_Mam_Asiento_Result.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\sp_Mam_VentasCredito_Result.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\TA001.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
@@ -272,6 +296,15 @@
     <Compile Include="EntityDataModel\BDDistBHF\TP0081.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\TS001.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\TV001.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\TV0011.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\TV00121.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
@@ -285,6 +318,12 @@
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\vista_transacciones.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\vis_promedioConsumo_Result.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\vis_transacciones_Result.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\VR_Clientes.vb">
@@ -327,6 +366,9 @@
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\VR_GO_EquiposPrestadoCliente.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\VR_GO_Factura.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\VR_GO_FacturaVsVenta.vb">
@@ -390,6 +432,9 @@
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\VR_MO_GetPedidos.vb">
+      <DependentUpon>BDDistBHFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel\BDDistBHF\VR_NotaCompra.vb">
       <DependentUpon>BDDistBHFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityDataModel\BDDistBHF\VR_Nota_de_Venta.vb">

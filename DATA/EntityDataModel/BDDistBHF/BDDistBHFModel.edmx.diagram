@@ -21,7 +21,6 @@
         <EntityTypeShape EntityType="BDDistBHFModel.TC011" Width="1.5" PointX="10.75" PointY="7.75" />
         <EntityTypeShape EntityType="BDDistBHFModel.TC0111" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="BDDistBHFModel.TCA001" Width="1.5" PointX="2.75" PointY="11.75" />
-        <EntityTypeShape EntityType="BDDistBHFModel.TCA0011" Width="1.5" PointX="8.75" PointY="11.75" />
         <EntityTypeShape EntityType="BDDistBHFModel.TFV001" Width="1.5" PointX="10.75" PointY="11.75" />
         <EntityTypeShape EntityType="BDDistBHFModel.TI002" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="BDDistBHFModel.TI0021" Width="1.5" PointX="12.75" PointY="4.75" />
@@ -117,6 +116,12 @@
         <EntityTypeShape EntityType="BDDistBHFModel.Vr_VentasVendedor12Meses" Width="1.5" PointX="30.75" PointY="26.75" />
         <EntityTypeShape EntityType="BDDistBHFModel.Vr_VentasVendidas" Width="1.5" PointX="26.75" PointY="30.75" />
         <EntityTypeShape EntityType="BDDistBHFModel.VR_VistaPedido_PrecioCosto" Width="1.5" PointX="8.75" PointY="31.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TV001" Width="1.5" PointX="11.375" PointY="31.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TV0011" Width="1.5" PointX="29.375" PointY="31.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TS001" Width="1.5" PointX="31.375" PointY="31.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_GO_Factura" Width="1.5" PointX="3.375" PointY="32.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.VR_NotaCompra" Width="1.5" PointX="13.375" PointY="32.75" />
+        <EntityTypeShape EntityType="BDDistBHFModel.TCA0011" Width="1.5" PointX="33.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

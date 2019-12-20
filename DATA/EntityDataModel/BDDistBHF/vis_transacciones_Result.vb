@@ -12,17 +12,21 @@ Imports System
 Imports System.Collections.Generic
 
 
-Partial Public Class TO001C
+Partial Public Class vis_transacciones_Result
 
-    Public Property oacnumi As Integer
+    Public Property numi As Integer
 
-    Public Property oacoanumi As Integer
+    Public Property odnota As Nullable(Of Integer)
 
-    Public Property oaccbnumi As Integer
+    Public Property fdoc As Nullable(Of Date)
 
-    Public Property oacnrofac As Nullable(Of Long)
+    Public Property fact As Nullable(Of Date)
 
-    Public Property oacnconc As Nullable(Of Integer)
+    Public Property hact As String
+
+    Public Property uact As String
+
+    Public Property tipo As Integer
 
 
 End Class

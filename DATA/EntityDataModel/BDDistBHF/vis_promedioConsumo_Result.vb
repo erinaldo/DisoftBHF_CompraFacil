@@ -12,17 +12,23 @@ Imports System
 Imports System.Collections.Generic
 
 
-Partial Public Class TO001C
+Partial Public Class vis_promedioConsumo_Result
 
-    Public Property oacnumi As Integer
+    Public Property ccnumi As Integer
 
-    Public Property oacoanumi As Integer
+    Public Property ccdesc As String
 
-    Public Property oaccbnumi As Integer
+    Public Property cczona As Nullable(Of Integer)
 
-    Public Property oacnrofac As Nullable(Of Long)
+    Public Property cctelf1 As String
 
-    Public Property oacnconc As Nullable(Of Integer)
+    Public Property ccdirec As String
+
+    Public Property ccest As Nullable(Of Integer)
+
+    Public Property ccprconsu As Nullable(Of Integer)
+
+    Public Property fTentativa As Nullable(Of Date)
 
 
 End Class

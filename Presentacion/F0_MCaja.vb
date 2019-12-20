@@ -74,7 +74,7 @@ Public Class F0_MCaja
         TablaPrincipal.Columns.Add("icid")
         TablaPrincipal.Columns.Add("img", Type.GetType("System.Byte[]"))
         '''''''''''Aqui inserto los movimientos ya insertados para modificarlos
-        Dim ProductosMovimientoSalida As DataTable = L_prConciliacionObtenerProductoTI0021Idnumi(Numi_Conciliacion) ''''Estado=3 Conciliacion Chofer
+        Dim ProductosMovimientoSalida As DataTable = L_prConciliacionObtenerProductoTI0021IdnumiCaja(Numi_Conciliacion) ''''Estado=3 Conciliacion Chofer
         For j As Integer = 0 To TablaPrincipal.Rows.Count - 1 Step 1
             Dim idprod As Integer = TablaPrincipal.Rows(j).Item("canumi")
             Dim result As DataRow() = ProductosMovimientoSalida.Select("iccprod=" + Str(idprod))
@@ -187,7 +187,7 @@ Public Class F0_MCaja
         End With
         With grdetalle.RootTable.Columns("MOVIL")
             .Width = 150
-            .Visible = True
+            .Visible = False
             .FormatString = "0.00"
             .TextAlignment = TextAlignment.Far
             .Caption = "MOVIL"
@@ -198,7 +198,7 @@ Public Class F0_MCaja
             .Visible = True
             .FormatString = "0.00"
             .TextAlignment = TextAlignment.Far
-            .Caption = "PC"
+            .Caption = "ENTREGADOS"
             '.CellStyle.BackColor = Color.Gold
         End With
         With grdetalle.RootTable.Columns("DEVOLUCION")
@@ -235,7 +235,7 @@ Public Class F0_MCaja
             .Width = 80
             .Caption = "ESTADO".ToUpper
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
-            .Visible = True
+            .Visible = False
         End With
         With grdetalle
             .GroupByBoxVisible = False
@@ -467,7 +467,7 @@ Public Class F0_MCaja
             .FormatString = "0.00"
         End With
         With grtotalpedidos.RootTable.Columns("contado")
-            .Caption = "CONTADO"
+            .Caption = "EFECTIVO"
             .Width = 120
             .AggregateFunction = AggregateFunction.Sum
             .Visible = True
@@ -477,7 +477,8 @@ Public Class F0_MCaja
             .Caption = "CREDITO"
             .Width = 120
             .AggregateFunction = AggregateFunction.Sum
-            .Visible = (gi_vcre2 = 1)
+            '.Visible = (gi_vcre2 = 1)
+            .Visible = False
             .FormatString = "0.00"
         End With
         With grtotalpedidos.RootTable.Columns("oarepa")
@@ -514,7 +515,8 @@ Public Class F0_MCaja
     Public Sub cargarDetalleConciliacion()
         Dim dt As New DataTable
 
-        dt = L_prObtenerDetalleChofer(Numi_Chofer, tbFecha.Value.ToString("yyyy/MM/dd"))
+        'dt = L_prObtenerDetalleChofer(Numi_Chofer, tbFecha.Value.ToString("yyyy/MM/dd"))
+        dt = L_prObtenerDetalleChofer(Numi_Chofer, tbFecha.Value.ToString("yyyy/MM/dd"), lbconciliacion.Text)
         grtotalpedidos.DataSource = dt
         grtotalpedidos.RetrieveStructure()
         grtotalpedidos.AlternatingColors = True
@@ -561,7 +563,7 @@ Public Class F0_MCaja
             .AggregateFunction = AggregateFunction.Sum
         End With
         With grtotalpedidos.RootTable.Columns("contado")
-            .Caption = "CONTADO"
+            .Caption = "EFECTIVO"
             .Width = 120
             .Visible = True
             .FormatString = "0.00"
@@ -570,7 +572,8 @@ Public Class F0_MCaja
         With grtotalpedidos.RootTable.Columns("credito")
             .Caption = "CREDITO"
             .Width = 120
-            .Visible = (gi_vcre2 = 1)
+            '.Visible = (gi_vcre2 = 1)
+            .Visible = False
             .FormatString = "0.00"
             .AggregateFunction = AggregateFunction.Sum
         End With
@@ -745,11 +748,11 @@ Public Class F0_MCaja
             Return False
 
         End If
-        If (_fnValidarTotal() = False) Then
-            Dim img As Bitmap = New Bitmap(My.Resources.Mensaje, 50, 50)
-            ToastNotification.Show(Me, "ERROR:  LA CANTIDAD DE PRODUCTO SACADOS ES DISTINTO A LOS VENDIDOS ".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-            Return False
-        End If
+        'If (_fnValidarTotal() = False) Then
+        '    Dim img As Bitmap = New Bitmap(My.Resources.Mensaje, 50, 50)
+        '    ToastNotification.Show(Me, "ERROR:  LA CANTIDAD DE PRODUCTO SACADOS ES DISTINTO A LOS VENDIDOS ".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+        '    Return False
+        'End If
 
         Return True
     End Function
@@ -766,6 +769,10 @@ Public Class F0_MCaja
         P_prArmarAyudaConciliacion()
         cargarDetalleConciliacion()
         _prCrearTablaConciliacion()
+
+
+        'Colocar el total del contado en el tbdRecibido.Text
+        tbdRecibido.Text = grtotalpedidos.GetTotal(grtotalpedidos.RootTable.Columns("contado"), AggregateFunction.Sum)
     End Sub
 
     Private Sub F0_Caja_Load(sender As Object, e As EventArgs) Handles MyBase.Load

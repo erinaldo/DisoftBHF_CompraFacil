@@ -12,17 +12,15 @@ Imports System
 Imports System.Collections.Generic
 
 
-Partial Public Class TO001C
+Partial Public Class TS001
 
-    Public Property oacnumi As Integer
+    Public Property sanumi As Integer
 
-    Public Property oacoanumi As Integer
+    Public Property sanit As String
 
-    Public Property oaccbnumi As Integer
+    Public Property sanom1 As String
 
-    Public Property oacnrofac As Nullable(Of Long)
-
-    Public Property oacnconc As Nullable(Of Integer)
+    Public Property sanom2 As String
 
 
 End Class

@@ -432,6 +432,7 @@ advertencia 6013: La tabla o vista 'BDDistBHF_CF.dbo.TC010' no tiene definida un
           <Property Name="cmfact" Type="date" />
           <Property Name="cmhact" Type="nvarchar" MaxLength="5" />
           <Property Name="cmuact" Type="nvarchar" MaxLength="10" />
+          <Property Name="cmncuenta" Type="int" />
         </EntityType>-->
         <EntityType Name="TC011">
           <Key>
@@ -473,9 +474,15 @@ advertencia 6013: La tabla o vista 'BDDistBHF_CF.dbo.TC010' no tiene definida un
           <Property Name="caamon" Type="int" />
           <Property Name="caaest" Type="int" />
           <Property Name="caadesc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="caadescpro1" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="caadescpro2" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="caadesctot" Type="decimal" Precision="18" Scale="2" />
           <Property Name="caatotal" Type="decimal" Precision="18" Scale="2" />
           <Property Name="caaemision" Type="int" />
           <Property Name="caaconsigna" Type="int" />
+          <Property Name="caaretenc" Type="int" />
+          <Property Name="caaasientoi" Type="int" />
+          <Property Name="caaffactura" Type="date" />
         </EntityType>
         <EntityType Name="TCA0011">
           <Key>
@@ -483,8 +490,21 @@ advertencia 6013: La tabla o vista 'BDDistBHF_CF.dbo.TC010' no tiene definida un
           </Key>
           <Property Name="cabnumi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cabtc1numi" Type="int" />
-          <Property Name="cabcant" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="cabpcom" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabcantcj" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="cabcantun" Type="int" />
+          <Property Name="cabsubtot" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabpcomcj" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="cabpcomun" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="cabporc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabdesccj" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabdescun" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabdescpro1cj" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="cabdescpro1un" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="cabdescpro2cj" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="cabdescpro2un" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="cabtot" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabpcostocj" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="cabpcostoun" Type="decimal" Precision="18" Scale="4" />
           <Property Name="cabputi" Type="decimal" Precision="18" Scale="2" />
           <Property Name="cabpven" Type="decimal" Precision="18" Scale="2" />
           <Property Name="cabnfr" Type="nvarchar" MaxLength="20" />
@@ -526,6 +546,17 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.TCA00121' no tiene definida
           <Property Name="tdhact" Type="nvarchar" MaxLength="5" />
           <Property Name="tduact" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'BDDistBHF_CF.dbo.TCA0013' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="TCA0013">
+          <Property Name="tenumi" Type="int" />
+          <Property Name="tefdoc" Type="date" />
+          <Property Name="tety4vend" Type="int" />
+          <Property Name="teobs" Type="nvarchar" MaxLength="100" />
+          <Property Name="tefact" Type="date" />
+          <Property Name="tehact" Type="nvarchar" MaxLength="5" />
+          <Property Name="teuact" Type="nvarchar" MaxLength="10" />
+        </EntityType>-->
         <!--Errores durante la generación:
 advertencia 6013: La tabla o vista 'BDDistBHF_CF.dbo.TCI001' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="TCI001">
@@ -915,6 +946,7 @@ advertencia 6013: La tabla o vista 'BDDistBHF_CF.dbo.TO001B' no tiene definida u
           <Property Name="oacoanumi" Type="int" Nullable="false" />
           <Property Name="oaccbnumi" Type="int" Nullable="false" />
           <Property Name="oacnrofac" Type="bigint" />
+          <Property Name="oacnconc" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.TO002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1218,6 +1250,17 @@ advertencia 6013: La tabla o vista 'BDDistBHF_CF.dbo.TP0071' no tiene definida u
           <Property Name="plnumibd" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.TS001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="TS001">
+          <Key>
+            <PropertyRef Name="sanumi" />
+          </Key>
+          <Property Name="sanumi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sanit" Type="nvarchar" MaxLength="20" />
+          <Property Name="sanom1" Type="nvarchar" MaxLength="100" />
+          <Property Name="sanom2" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6013: La tabla o vista 'BDDistBHF_CF.dbo.TS002' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="TS002">
           <Property Name="yenumi" Type="int" />
@@ -1254,6 +1297,46 @@ advertencia 6013: La tabla o vista 'BDDistBHF_CF.dbo.TS003' no tiene definida un
           <Property Name="schact" Type="nvarchar" MaxLength="5" />
           <Property Name="scuact" Type="nvarchar" MaxLength="10" />
         </EntityType>-->
+        <EntityType Name="TV001">
+          <Key>
+            <PropertyRef Name="tanumi" />
+          </Key>
+          <Property Name="tanumi" Type="int" Nullable="false" />
+          <Property Name="taalm" Type="int" />
+          <Property Name="tafdoc" Type="date" />
+          <Property Name="taven" Type="int" />
+          <Property Name="tatven" Type="int" />
+          <Property Name="tafvcr" Type="date" />
+          <Property Name="taclpr" Type="int" Nullable="false" />
+          <Property Name="tamon" Type="int" />
+          <Property Name="taest" Type="int" />
+          <Property Name="tatotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tafact" Type="date" />
+          <Property Name="tahact" Type="nvarchar" MaxLength="5" />
+          <Property Name="tauact" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TV0011">
+          <Key>
+            <PropertyRef Name="tbnumi" />
+          </Key>
+          <Property Name="tbnumi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tbtv1numi" Type="int" />
+          <Property Name="tbty5prod" Type="int" />
+          <Property Name="tbest" Type="int" />
+          <Property Name="tbcmin" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tbumin" Type="int" />
+          <Property Name="tbpbas" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tbptot" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tbporc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tbdesc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tbtotdesc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tbobs" Type="nvarchar" MaxLength="30" />
+          <Property Name="tbpcos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tbptot2" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tbfact" Type="date" />
+          <Property Name="tbhact" Type="nvarchar" MaxLength="5" />
+          <Property Name="tbuact" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="TV00121">
           <Key>
             <PropertyRef Name="tdnumi" />
@@ -1600,6 +1683,7 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_GO_DespachoXProducto' no
           <Property Name="cadesc2" Type="nvarchar" MaxLength="100" />
           <Property Name="categoria" Type="nvarchar" MaxLength="200" />
           <Property Name="obpcant" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="oacnconc" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_GO_DiferenciaPedidoNota' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1653,6 +1737,42 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_GO_EquiposPrestadoClient
           <Property Name="botellone" Type="int" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="direccion" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_GO_Factura' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VR_GO_Factura">
+          <Key>
+            <PropertyRef Name="fvanumi" />
+            <PropertyRef Name="fvanumi2" />
+          </Key>
+          <Property Name="fvanumi" Type="int" Nullable="false" />
+          <Property Name="fvafec" Type="date" />
+          <Property Name="fvanfac" Type="int" />
+          <Property Name="fvaautoriz" Type="float" />
+          <Property Name="fvaest" Type="int" />
+          <Property Name="fvanitcli" Type="nvarchar" MaxLength="15" />
+          <Property Name="fvacodcli" Type="int" />
+          <Property Name="fvadescli1" Type="nvarchar" MaxLength="20" />
+          <Property Name="fvadescli2" Type="nvarchar" MaxLength="30" />
+          <Property Name="fvastot" Type="float" />
+          <Property Name="fvaimpsi" Type="float" />
+          <Property Name="fvaimpeo" Type="float" />
+          <Property Name="fvaimptc" Type="float" />
+          <Property Name="fvasubtotal" Type="float" />
+          <Property Name="fvadesc" Type="float" />
+          <Property Name="fvatotal" Type="float" />
+          <Property Name="fvadebfis" Type="float" />
+          <Property Name="fvaccont" Type="nvarchar" MaxLength="14" />
+          <Property Name="fvaflim" Type="date" />
+          <Property Name="fvaimgqr" Type="image" />
+          <Property Name="fvaalm" Type="int" />
+          <Property Name="fvanumi2" Type="int" Nullable="false" />
+          <Property Name="fvbnumi" Type="int" />
+          <Property Name="fvbcprod" Type="nvarchar" MaxLength="10" />
+          <Property Name="fvbdesprod" Type="nvarchar" MaxLength="50" />
+          <Property Name="fvbcant" Type="int" />
+          <Property Name="fvbprecio" Type="float" />
+          <Property Name="fvbnumi2" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_GO_FacturaVsVenta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -2154,6 +2274,42 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_Nota de Venta' no tiene 
           <Property Name="FechaPedido" Type="date" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_NotaCompra' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VR_NotaCompra">
+          <Key>
+            <PropertyRef Name="caanumi" />
+            <PropertyRef Name="tipocompra" />
+          </Key>
+          <Property Name="caanumi" Type="int" Nullable="false" />
+          <Property Name="caafdoc" Type="date" />
+          <Property Name="caaprov" Type="int" />
+          <Property Name="cmdesc" Type="nvarchar" MaxLength="50" />
+          <Property Name="cmrsocial" Type="nvarchar" MaxLength="50" />
+          <Property Name="cmnit" Type="nvarchar" MaxLength="20" />
+          <Property Name="cmtelf" Type="nvarchar" MaxLength="20" />
+          <Property Name="caanfac" Type="nvarchar" MaxLength="20" />
+          <Property Name="caatven" Type="int" />
+          <Property Name="tipocompra" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="caafvcred" Type="date" />
+          <Property Name="caadesc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="caatotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="caaemision" Type="int" />
+          <Property Name="caafingreso" Type="date" />
+          <Property Name="cabtc1numi" Type="int" />
+          <Property Name="cadesc" Type="nvarchar" MaxLength="100" />
+          <Property Name="cabcant" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabpcom" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabpcosto" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabsubtot" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabdesc" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cabtot" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="fcarsocial" Type="nvarchar" MaxLength="200" />
+          <Property Name="fcanfac" Type="bigint" />
+          <Property Name="fcaautoriz" Type="bigint" />
+          <Property Name="fcaccont" Type="nvarchar" MaxLength="14" />
+          <Property Name="plazo" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_Pagos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VR_Pagos">
           <Key>
@@ -2340,6 +2496,578 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <Property Name="precioVenta" Type="numeric" Precision="38" Scale="2" />
           <Property Name="Utilidad" Type="numeric" Precision="38" Scale="2" />
         </EntityType>
+        <Function Name="getCantidadEquipoCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="codigoCliente" Type="int" Mode="In" />
+          <Parameter Name="codigoEquipo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getCantidadVentaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
+          <Parameter Name="codigoCliente" Type="int" Mode="In" />
+          <Parameter Name="anho" Type="int" Mode="In" />
+          <Parameter Name="mes" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getMontoVentaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
+          <Parameter Name="codigoCliente" Type="int" Mode="In" />
+          <Parameter Name="anho" Type="int" Mode="In" />
+          <Parameter Name="mes" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PlanillaSueldo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_dg_RAsistencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_dg_TC011" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="cnnumi" Type="int" Mode="In" />
+          <Parameter Name="cnfdoc" Type="date" Mode="In" />
+          <Parameter Name="cnobs" Type="nvarchar" Mode="In" />
+          <Parameter Name="cnest" Type="int" Mode="In" />
+          <Parameter Name="cnuact" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_dg_TP007" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="pinumi" Type="int" Mode="In" />
+          <Parameter Name="picper" Type="int" Mode="In" />
+          <Parameter Name="pifdoc" Type="date" Mode="In" />
+          <Parameter Name="piturno" Type="int" Mode="In" />
+          <Parameter Name="piuact" Type="nvarchar" Mode="In" />
+          <Parameter Name="fecha1" Type="date" Mode="In" />
+          <Parameter Name="fecha2" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_dg_TP008" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="pknumi" Type="int" Mode="In" />
+          <Parameter Name="pkper" Type="int" Mode="In" />
+          <Parameter Name="pkmes" Type="int" Mode="In" />
+          <Parameter Name="pkanio" Type="int" Mode="In" />
+          <Parameter Name="cbplan" Type="int" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_dg_TZ001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="zacper" Type="int" Mode="In" />
+          <Parameter Name="zafecha" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_dg_ZY002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="ybnumi" Type="int" Mode="In" />
+          <Parameter Name="ybrol" Type="nvarchar" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_GetClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_go_CM001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="codigo" Type="int" Mode="In" />
+          <Parameter Name="mesa" Type="int" Mode="In" />
+          <Parameter Name="codrepart" Type="int" Mode="In" />
+          <Parameter Name="est" Type="int" Mode="In" />
+          <Parameter Name="fact" Type="date" Mode="In" />
+          <Parameter Name="hact" Type="nvarchar" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+          <Parameter Name="vend1" Type="int" Mode="In" />
+          <Parameter Name="vend2" Type="int" Mode="In" />
+          <Parameter Name="vend3" Type="int" Mode="In" />
+          <Parameter Name="vend4" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_go_NV001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="vendedor" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_go_Reportes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="cprod" Type="nvarchar" Mode="In" />
+          <Parameter Name="fini" Type="date" Mode="In" />
+          <Parameter Name="ffin" Type="date" Mode="In" />
+          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
+          <Parameter Name="cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="ban" Type="int" Mode="In" />
+          <Parameter Name="anho" Type="int" Mode="In" />
+          <Parameter Name="mes" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TC001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="cod" Type="nvarchar" Mode="In" />
+          <Parameter Name="desc" Type="nvarchar" Mode="In" />
+          <Parameter Name="desc2" Type="nvarchar" Mode="In" />
+          <Parameter Name="cat" Type="int" Mode="In" />
+          <Parameter Name="img" Type="nvarchar" Mode="In" />
+          <Parameter Name="stc" Type="bit" Mode="In" />
+          <Parameter Name="est" Type="bit" Mode="In" />
+          <Parameter Name="serie" Type="bit" Mode="In" />
+          <Parameter Name="pcom" Type="int" Mode="In" />
+          <Parameter Name="fing" Type="date" Mode="In" />
+          <Parameter Name="cemp" Type="int" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+          <Parameter Name="filtro" Type="int" Mode="In" />
+          <Parameter Name="cbarra" Type="nvarchar" Mode="In" />
+          <Parameter Name="smin" Type="int" Mode="In" />
+          <Parameter Name="gr1" Type="int" Mode="In" />
+          <Parameter Name="gr2" Type="int" Mode="In" />
+          <Parameter Name="gr3" Type="int" Mode="In" />
+          <Parameter Name="gr4" Type="int" Mode="In" />
+          <Parameter Name="umed" Type="int" Mode="In" />
+          <Parameter Name="uventa" Type="int" Mode="In" />
+          <Parameter Name="umax" Type="int" Mode="In" />
+          <Parameter Name="conv" Type="int" Mode="In" />
+          <Parameter Name="cecon" Type="int" Mode="In" />
+          <Parameter Name="cedesc" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TC002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="desc" Type="nvarchar" Mode="In" />
+          <Parameter Name="direc" Type="nvarchar" Mode="In" />
+          <Parameter Name="telef" Type="nvarchar" Mode="In" />
+          <Parameter Name="cat" Type="int" Mode="In" />
+          <Parameter Name="sal" Type="decimal" Mode="In" />
+          <Parameter Name="ci" Type="nvarchar" Mode="In" />
+          <Parameter Name="obs" Type="nvarchar" Mode="In" />
+          <Parameter Name="fnac" Type="date" Mode="In" />
+          <Parameter Name="fing" Type="date" Mode="In" />
+          <Parameter Name="fret" Type="date" Mode="In" />
+          <Parameter Name="fot" Type="nvarchar" Mode="In" />
+          <Parameter Name="est" Type="bit" Mode="In" />
+          <Parameter Name="eciv" Type="nvarchar" Mode="In" />
+          <Parameter Name="plan" Type="int" Mode="In" />
+          <Parameter Name="reloj" Type="int" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TC004" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="ccnumi" Type="int" Mode="In" />
+          <Parameter Name="cccod" Type="nvarchar" Mode="In" />
+          <Parameter Name="ccdesc" Type="nvarchar" Mode="In" />
+          <Parameter Name="cczona" Type="int" Mode="In" />
+          <Parameter Name="ccdct" Type="int" Mode="In" />
+          <Parameter Name="ccdctnum" Type="nvarchar" Mode="In" />
+          <Parameter Name="ccdirec" Type="nvarchar" Mode="In" />
+          <Parameter Name="cctelf1" Type="nvarchar" Mode="In" />
+          <Parameter Name="cctelf2" Type="nvarchar" Mode="In" />
+          <Parameter Name="cccat" Type="int" Mode="In" />
+          <Parameter Name="ccest" Type="int" Mode="In" />
+          <Parameter Name="cclat" Type="decimal" Mode="In" />
+          <Parameter Name="cclongi" Type="decimal" Mode="In" />
+          <Parameter Name="ccprconsu" Type="int" Mode="In" />
+          <Parameter Name="cceven" Type="bit" Mode="In" />
+          <Parameter Name="ccobs" Type="nvarchar" Mode="In" />
+          <Parameter Name="ccfnac" Type="date" Mode="In" />
+          <Parameter Name="ccnomfac" Type="nvarchar" Mode="In" />
+          <Parameter Name="ccnit" Type="nvarchar" Mode="In" />
+          <Parameter Name="ccultped" Type="date" Mode="In" />
+          <Parameter Name="ccfecing" Type="date" Mode="In" />
+          <Parameter Name="ccultvent" Type="date" Mode="In" />
+          <Parameter Name="recven" Type="int" Mode="In" />
+          <Parameter Name="supven" Type="int" Mode="In" />
+          <Parameter Name="preven" Type="int" Mode="In" />
+          <Parameter Name="ccuact" Type="nvarchar" Mode="In" />
+          <Parameter Name="tacu" Type="int" Mode="In" />
+          <Parameter Name="fini" Type="date" Mode="In" />
+          <Parameter Name="ffin" Type="date" Mode="In" />
+          <Parameter Name="fre" Type="int" Mode="In" />
+          <Parameter Name="est" Type="int" Mode="In" />
+          <Parameter Name="obs" Type="nvarchar" Mode="In" />
+          <Parameter Name="producto" Type="int" Mode="In" />
+          <Parameter Name="categoria" Type="int" Mode="In" />
+          <Parameter Name="tcre" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TC004_appMovil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="code_id" Type="int" Mode="In" />
+          <Parameter Name="full_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="business_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="nit" Type="nvarchar" Mode="In" />
+          <Parameter Name="mail" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="cell_phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="reference" Type="nvarchar" Mode="In" />
+          <Parameter Name="location_lat" Type="decimal" Mode="In" />
+          <Parameter Name="location_log" Type="decimal" Mode="In" />
+          <Parameter Name="password_cli" Type="nvarchar" Mode="In" />
+          <Parameter Name="old_password_cli" Type="nvarchar" Mode="In" />
+          <Parameter Name="new_password_cli" Type="nvarchar" Mode="In" />
+          <Parameter Name="observacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="categoria" Type="nvarchar" Mode="In" />
+          <Parameter Name="pedido" Type="int" Mode="In" />
+          <Parameter Name="TO0011" Type="xml" Mode="In" />
+          <Parameter Name="json" Type="nvarchar" Mode="In" />
+          <Parameter Name="fingreso" Type="date" Mode="In" />
+          <Parameter Name="credito" Type="decimal" Mode="In" />
+          <Parameter Name="chofer" Type="int" Mode="In" />
+          <Parameter Name="fechapedido" Type="date" Mode="In" />
+          <Parameter Name="idRepartidor" Type="int" Mode="In" />
+          <Parameter Name="oanumi" Type="nvarchar" Mode="In" />
+          <Parameter Name="oafdoc" Type="date" Mode="In" />
+          <Parameter Name="oahora" Type="nvarchar" Mode="In" />
+          <Parameter Name="oaccli" Type="int" Mode="In" />
+          <Parameter Name="oarepa" Type="int" Mode="In" />
+          <Parameter Name="oaest" Type="int" Mode="In" />
+          <Parameter Name="oaobs" Type="nvarchar" Mode="In" />
+          <Parameter Name="latitud" Type="decimal" Mode="In" />
+          <Parameter Name="longitud" Type="decimal" Mode="In" />
+          <Parameter Name="total" Type="decimal" Mode="In" />
+          <Parameter Name="tipocobro" Type="int" Mode="In" />
+          <Parameter Name="codigogenerado" Type="nvarchar" Mode="In" />
+          <Parameter Name="cczona" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TC009" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="desc" Type="nvarchar" Mode="In" />
+          <Parameter Name="est" Type="int" Mode="In" />
+          <Parameter Name="pdf" Type="nvarchar" Mode="In" />
+          <Parameter Name="obs" Type="nvarchar" Mode="In" />
+          <Parameter Name="codu" Type="int" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TC010" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="desc" Type="nvarchar" Mode="In" />
+          <Parameter Name="telf" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="est" Type="int" Mode="In" />
+          <Parameter Name="obs" Type="nvarchar" Mode="In" />
+          <Parameter Name="rsocial" Type="nvarchar" Mode="In" />
+          <Parameter Name="nit" Type="nvarchar" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+          <Parameter Name="cuenta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TCA001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="fdoc" Type="date" Mode="In" />
+          <Parameter Name="prov" Type="int" Mode="In" />
+          <Parameter Name="nfac" Type="nvarchar" Mode="In" />
+          <Parameter Name="obs" Type="nvarchar" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+          <Parameter Name="tven" Type="int" Mode="In" />
+          <Parameter Name="fvcred" Type="date" Mode="In" />
+          <Parameter Name="mon" Type="int" Mode="In" />
+          <Parameter Name="est" Type="int" Mode="In" />
+          <Parameter Name="desc" Type="decimal" Mode="In" />
+          <Parameter Name="descpro1" Type="decimal" Mode="In" />
+          <Parameter Name="descpro2" Type="decimal" Mode="In" />
+          <Parameter Name="desctot" Type="decimal" Mode="In" />
+          <Parameter Name="total" Type="decimal" Mode="In" />
+          <Parameter Name="emision" Type="int" Mode="In" />
+          <Parameter Name="consigna" Type="int" Mode="In" />
+          <Parameter Name="retenc" Type="int" Mode="In" />
+          <Parameter Name="asientoi" Type="int" Mode="In" />
+          <Parameter Name="ffactura" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TCI001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="desc" Type="nvarchar" Mode="In" />
+          <Parameter Name="mov" Type="int" Mode="In" />
+          <Parameter Name="movcli" Type="int" Mode="In" />
+          <Parameter Name="tipo1" Type="int" Mode="In" />
+          <Parameter Name="est" Type="int" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+          <Parameter Name="filtro" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TCP001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="prov" Type="int" Mode="In" />
+          <Parameter Name="fdoc" Type="date" Mode="In" />
+          <Parameter Name="monto" Type="decimal" Mode="In" />
+          <Parameter Name="obs" Type="nvarchar" Mode="In" />
+          <Parameter Name="est" Type="int" Mode="In" />
+          <Parameter Name="fven" Type="date" Mode="In" />
+          <Parameter Name="tpago" Type="int" Mode="In" />
+          <Parameter Name="fpro" Type="int" Mode="In" />
+          <Parameter Name="nota" Type="int" Mode="In" />
+          <Parameter Name="tpro" Type="int" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+          <Parameter Name="ffec" Type="date" Mode="In" />
+          <Parameter Name="fnit" Type="nvarchar" Mode="In" />
+          <Parameter Name="frsocial" Type="nvarchar" Mode="In" />
+          <Parameter Name="fnro" Type="int" Mode="In" />
+          <Parameter Name="fautoriz" Type="bigint" Mode="In" />
+          <Parameter Name="fmonto" Type="decimal" Mode="In" />
+          <Parameter Name="fccont" Type="nvarchar" Mode="In" />
+          <Parameter Name="fmcfiscal" Type="decimal" Mode="In" />
+          <Parameter Name="fdesc" Type="decimal" Mode="In" />
+          <Parameter Name="filtro" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TI002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="fdoc" Type="date" Mode="In" />
+          <Parameter Name="concep" Type="int" Mode="In" />
+          <Parameter Name="obs" Type="nvarchar" Mode="In" />
+          <Parameter Name="est" Type="int" Mode="In" />
+          <Parameter Name="alm" Type="int" Mode="In" />
+          <Parameter Name="iddc" Type="int" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TO0023" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="tc1" Type="int" Mode="In" />
+          <Parameter Name="tc4" Type="int" Mode="In" />
+          <Parameter Name="cant" Type="int" Mode="In" />
+          <Parameter Name="est" Type="int" Mode="In" />
+          <Parameter Name="dif" Type="bit" Mode="In" />
+          <Parameter Name="to1" Type="int" Mode="In" />
+          <Parameter Name="to2" Type="int" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_go_TS002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="cia" Type="int" Mode="In" />
+          <Parameter Name="alm" Type="int" Mode="In" />
+          <Parameter Name="sfc" Type="int" Mode="In" />
+          <Parameter Name="autoriz" Type="decimal" Mode="In" />
+          <Parameter Name="nfac" Type="int" Mode="In" />
+          <Parameter Name="key" Type="nvarchar" Mode="In" />
+          <Parameter Name="fdel" Type="date" Mode="In" />
+          <Parameter Name="fal" Type="date" Mode="In" />
+          <Parameter Name="nota" Type="nvarchar" Mode="In" />
+          <Parameter Name="nota2" Type="nvarchar" Mode="In" />
+          <Parameter Name="est" Type="bit" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+          <Parameter Name="filtro" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Insert_TC004" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ccdesc" Type="nvarchar" Mode="In" />
+          <Parameter Name="cczona" Type="int" Mode="In" />
+          <Parameter Name="ccdctnum" Type="nvarchar" Mode="In" />
+          <Parameter Name="ccnit" Type="nvarchar" Mode="In" />
+          <Parameter Name="cctelf1" Type="nvarchar" Mode="In" />
+          <Parameter Name="ccdirec" Type="nvarchar" Mode="In" />
+          <Parameter Name="ccnomfac" Type="nvarchar" Mode="In" />
+          <Parameter Name="cclat" Type="decimal" Mode="In" />
+          <Parameter Name="cclongi" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_Insert_TFV001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fvafec" Type="date" Mode="In" />
+          <Parameter Name="fvanfac" Type="int" Mode="In" />
+          <Parameter Name="fvaautoriz" Type="float" Mode="In" />
+          <Parameter Name="fvanitcli" Type="nvarchar" Mode="In" />
+          <Parameter Name="fvadescli1" Type="nvarchar" Mode="In" />
+          <Parameter Name="fvastot" Type="float" Mode="In" />
+          <Parameter Name="fvadebfis" Type="float" Mode="In" />
+          <Parameter Name="fvaccont" Type="nvarchar" Mode="In" />
+          <Parameter Name="fvaflim" Type="date" Mode="In" />
+          <Parameter Name="fvanumi" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Insert_TL002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ldchof" Type="int" Mode="In" />
+          <Parameter Name="ldfec" Type="date" Mode="In" />
+          <Parameter Name="ldhora" Type="nvarchar" Mode="In" />
+          <Parameter Name="lblat" Type="decimal" Mode="In" />
+          <Parameter Name="lblongi" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_Insert_TO001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="oafdoc" Type="date" Mode="In" />
+          <Parameter Name="oaccli" Type="int" Mode="In" />
+          <Parameter Name="oaobs" Type="nvarchar" Mode="In" />
+          <Parameter Name="TO0011" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_Asiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="seuact" Type="nvarchar" Mode="In" />
+          <Parameter Name="categoria" Type="int" Mode="In" />
+          <Parameter Name="canumi" Type="int" Mode="In" />
+          <Parameter Name="cuenta" Type="nvarchar" Mode="In" />
+          <Parameter Name="descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="empresa" Type="int" Mode="In" />
+          <Parameter Name="sector" Type="int" Mode="In" />
+          <Parameter Name="vcnumi" Type="int" Mode="In" />
+          <Parameter Name="servicio" Type="int" Mode="In" />
+          <Parameter Name="fechaI" Type="date" Mode="In" />
+          <Parameter Name="fechaF" Type="date" Mode="In" />
+          <Parameter Name="sucursal" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="int" Mode="In" />
+          <Parameter Name="tventa" Type="int" Mode="In" />
+          <Parameter Name="modulo" Type="int" Mode="In" />
+          <Parameter Name="factura" Type="int" Mode="In" />
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="proveedor" Type="int" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_ReporteVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="fechaI" Type="date" Mode="In" />
+          <Parameter Name="fechaF" Type="date" Mode="In" />
+          <Parameter Name="prevendedor" Type="int" Mode="In" />
+          <Parameter Name="distribuidor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TC002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="cbnumi" Type="int" Mode="In" />
+          <Parameter Name="cbuact" Type="nvarchar" Mode="In" />
+          <Parameter Name="panumi" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TC005C" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="canumi" Type="int" Mode="In" />
+          <Parameter Name="canombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="cadesc" Type="nvarchar" Mode="In" />
+          <Parameter Name="caimg" Type="nvarchar" Mode="In" />
+          <Parameter Name="cauact" Type="nvarchar" Mode="In" />
+          <Parameter Name="caest" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TCA00121Cheque" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="tenumi" Type="int" Mode="In" />
+          <Parameter Name="tefdoc" Type="date" Mode="In" />
+          <Parameter Name="tety4vend" Type="int" Mode="In" />
+          <Parameter Name="teobs" Type="nvarchar" Mode="In" />
+          <Parameter Name="tdnumi" Type="int" Mode="In" />
+          <Parameter Name="teuact" Type="nvarchar" Mode="In" />
+          <Parameter Name="credito" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TI005" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="oanumi" Type="int" Mode="In" />
+          <Parameter Name="oanumdoc" Type="nvarchar" Mode="In" />
+          <Parameter Name="oatip" Type="int" Mode="In" />
+          <Parameter Name="oaano" Type="int" Mode="In" />
+          <Parameter Name="oames" Type="int" Mode="In" />
+          <Parameter Name="oanum" Type="int" Mode="In" />
+          <Parameter Name="oafdoc" Type="date" Mode="In" />
+          <Parameter Name="oatc" Type="decimal" Mode="In" />
+          <Parameter Name="oaglosa" Type="nvarchar" Mode="In" />
+          <Parameter Name="oaobs" Type="nvarchar" Mode="In" />
+          <Parameter Name="oaemp" Type="int" Mode="In" />
+          <Parameter Name="fecha1" Type="date" Mode="In" />
+          <Parameter Name="fecha2" Type="date" Mode="In" />
+          <Parameter Name="uact" Type="nvarchar" Mode="In" />
+          <Parameter Name="ifnumi" Type="int" Mode="In" />
+          <Parameter Name="ifto001numi" Type="int" Mode="In" />
+          <Parameter Name="iftc" Type="decimal" Mode="In" />
+          <Parameter Name="iffechai" Type="date" Mode="In" />
+          <Parameter Name="iffechaf" Type="date" Mode="In" />
+          <Parameter Name="ifest" Type="int" Mode="In" />
+          <Parameter Name="ifsuc" Type="int" Mode="In" />
+          <Parameter Name="modulo" Type="int" Mode="In" />
+          <Parameter Name="factura" Type="int" Mode="In" />
+          <Parameter Name="fechaI" Type="date" Mode="In" />
+          <Parameter Name="fechaF" Type="date" Mode="In" />
+          <Parameter Name="plantilla" Type="int" Mode="In" />
+          <Parameter Name="numiPadre" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TM001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="ibid" Type="int" Mode="In" />
+          <Parameter Name="ibfdoc" Type="date" Mode="In" />
+          <Parameter Name="ibconcep" Type="int" Mode="In" />
+          <Parameter Name="ibobs" Type="nvarchar" Mode="In" />
+          <Parameter Name="ibest" Type="int" Mode="In" />
+          <Parameter Name="ibalm" Type="int" Mode="In" />
+          <Parameter Name="ibiddc" Type="int" Mode="In" />
+          <Parameter Name="ibidchof" Type="int" Mode="In" />
+          <Parameter Name="ibidvent" Type="int" Mode="In" />
+          <Parameter Name="ibidconcil" Type="int" Mode="In" />
+          <Parameter Name="ibuact" Type="nvarchar" Mode="In" />
+          <Parameter Name="chofer" Type="int" Mode="In" />
+          <Parameter Name="concepto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TM001SalidaChofer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="ibid" Type="int" Mode="In" />
+          <Parameter Name="ibfdoc" Type="date" Mode="In" />
+          <Parameter Name="ibconcep" Type="int" Mode="In" />
+          <Parameter Name="ibobs" Type="nvarchar" Mode="In" />
+          <Parameter Name="ibest" Type="int" Mode="In" />
+          <Parameter Name="ibalm" Type="int" Mode="In" />
+          <Parameter Name="ibiddc" Type="int" Mode="In" />
+          <Parameter Name="ibidchof" Type="int" Mode="In" />
+          <Parameter Name="ibidvent" Type="int" Mode="In" />
+          <Parameter Name="ibidconcil" Type="int" Mode="In" />
+          <Parameter Name="ibuact" Type="nvarchar" Mode="In" />
+          <Parameter Name="chofer" Type="int" Mode="In" />
+          <Parameter Name="concepto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TO004" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="ohnumi" Type="int" Mode="In" />
+          <Parameter Name="ohfec" Type="date" Mode="In" />
+          <Parameter Name="ohconc" Type="int" Mode="In" />
+          <Parameter Name="ohest" Type="nvarchar" Mode="In" />
+          <Parameter Name="ohuact" Type="nvarchar" Mode="In" />
+          <Parameter Name="ojnumi" Type="int" Mode="In" />
+          <Parameter Name="cliente" Type="int" Mode="In" />
+          <Parameter Name="producto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TO005" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="olnumi" Type="int" Mode="In" />
+          <Parameter Name="olnumichof" Type="int" Mode="In" />
+          <Parameter Name="olnumiconci" Type="int" Mode="In" />
+          <Parameter Name="olfecha" Type="date" Mode="In" />
+          <Parameter Name="oluact" Type="nvarchar" Mode="In" />
+          <Parameter Name="pedido" Type="int" Mode="In" />
+          <Parameter Name="zona" Type="int" Mode="In" />
+          <Parameter Name="mrec" Type="decimal" Mode="In" />
+          <Parameter Name="cliente" Type="int" Mode="In" />
+          <Parameter Name="fechai" Type="date" Mode="In" />
+          <Parameter Name="fechaf" Type="date" Mode="In" />
+          <Parameter Name="numi" Type="int" Mode="In" />
+          <Parameter Name="nroFactura" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TV00121" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="tdnumi" Type="int" Mode="In" />
+          <Parameter Name="tduact" Type="nvarchar" Mode="In" />
+          <Parameter Name="credito" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_TV00121Cheque" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="tenumi" Type="int" Mode="In" />
+          <Parameter Name="tefdoc" Type="date" Mode="In" />
+          <Parameter Name="tety4vend" Type="int" Mode="In" />
+          <Parameter Name="teobs" Type="nvarchar" Mode="In" />
+          <Parameter Name="tdnumi" Type="int" Mode="In" />
+          <Parameter Name="teuact" Type="nvarchar" Mode="In" />
+          <Parameter Name="credito" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_VentasCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="fechaI" Type="date" Mode="In" />
+          <Parameter Name="fechaF" Type="date" Mode="In" />
+          <Parameter Name="yduact" Type="nvarchar" Mode="In" />
+          <Parameter Name="cliente" Type="int" Mode="In" />
+          <Parameter Name="codCredito" Type="int" Mode="In" />
+          <Parameter Name="catPrecio" Type="int" Mode="In" />
+          <Parameter Name="almacen" Type="int" Mode="In" />
+          <Parameter Name="vendedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_VentasEstadisticos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="fechaI" Type="date" Mode="In" />
+          <Parameter Name="fechaF" Type="date" Mode="In" />
+          <Parameter Name="yduact" Type="nvarchar" Mode="In" />
+          <Parameter Name="vendedor" Type="int" Mode="In" />
+          <Parameter Name="cliente" Type="int" Mode="In" />
+          <Parameter Name="producto" Type="int" Mode="In" />
+          <Parameter Name="zona" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mam_VentasGraficas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="fechaI" Type="date" Mode="In" />
+          <Parameter Name="fechaF" Type="date" Mode="In" />
+          <Parameter Name="yduact" Type="nvarchar" Mode="In" />
+          <Parameter Name="fechaVenta" Type="date" Mode="In" />
+          <Parameter Name="producto" Type="int" Mode="In" />
+          <Parameter Name="almacen" Type="int" Mode="In" />
+          <Parameter Name="cantMeses" Type="int" Mode="In" />
+          <Parameter Name="Mes" Type="int" Mode="In" />
+          <Parameter Name="Anho" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_nfactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nautori" Type="float" Mode="In" />
+        </Function>
+        <Function Name="vis_promedioConsumo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="vis_transacciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BDDistBHFModelStoreContainer">
           <EntitySet Name="CM001" EntityType="Self.CM001" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CM0011" EntityType="Self.CM0011" Schema="dbo" store:Type="Tables" />
@@ -2371,6 +3099,8 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <EntitySet Name="TP007" EntityType="Self.TP007" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TP008" EntityType="Self.TP008" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TP0081" EntityType="Self.TP0081" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TV001" EntityType="Self.TV001" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TV0011" EntityType="Self.TV0011" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TV00121" EntityType="Self.TV00121" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TZ001" EntityType="Self.TZ001" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZY0021" EntityType="Self.ZY0021" Schema="dbo" store:Type="Tables" />
@@ -2707,6 +3437,14 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
     [TP0061].[phdias] AS [phdias]
     FROM [dbo].[TP0061] AS [TP0061]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="TS001" EntityType="Self.TS001" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TS001].[sanumi] AS [sanumi], 
+    [TS001].[sanit] AS [sanit], 
+    [TS001].[sanom1] AS [sanom1], 
+    [TS001].[sanom2] AS [sanom2]
+    FROM [dbo].[TS001] AS [TS001]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="TV0013" EntityType="Self.TV0013" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TV0013].[tenumi] AS [tenumi], 
@@ -2906,7 +3644,8 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
     [VR_GO_DespachoXProducto].[cadesc] AS [cadesc], 
     [VR_GO_DespachoXProducto].[cadesc2] AS [cadesc2], 
     [VR_GO_DespachoXProducto].[categoria] AS [categoria], 
-    [VR_GO_DespachoXProducto].[obpcant] AS [obpcant]
+    [VR_GO_DespachoXProducto].[obpcant] AS [obpcant], 
+    [VR_GO_DespachoXProducto].[oacnconc] AS [oacnconc]
     FROM [dbo].[VR_GO_DespachoXProducto] AS [VR_GO_DespachoXProducto]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VR_GO_DiferenciaPedidoNota" EntityType="Self.VR_GO_DiferenciaPedidoNota" store:Type="Views" store:Schema="dbo">
@@ -2951,6 +3690,38 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
     [VR_GO_EquiposPrestadoCliente].[nombre] AS [nombre], 
     [VR_GO_EquiposPrestadoCliente].[direccion] AS [direccion]
     FROM [dbo].[VR_GO_EquiposPrestadoCliente] AS [VR_GO_EquiposPrestadoCliente]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VR_GO_Factura" EntityType="Self.VR_GO_Factura" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VR_GO_Factura].[fvanumi] AS [fvanumi], 
+    [VR_GO_Factura].[fvafec] AS [fvafec], 
+    [VR_GO_Factura].[fvanfac] AS [fvanfac], 
+    [VR_GO_Factura].[fvaautoriz] AS [fvaautoriz], 
+    [VR_GO_Factura].[fvaest] AS [fvaest], 
+    [VR_GO_Factura].[fvanitcli] AS [fvanitcli], 
+    [VR_GO_Factura].[fvacodcli] AS [fvacodcli], 
+    [VR_GO_Factura].[fvadescli1] AS [fvadescli1], 
+    [VR_GO_Factura].[fvadescli2] AS [fvadescli2], 
+    [VR_GO_Factura].[fvastot] AS [fvastot], 
+    [VR_GO_Factura].[fvaimpsi] AS [fvaimpsi], 
+    [VR_GO_Factura].[fvaimpeo] AS [fvaimpeo], 
+    [VR_GO_Factura].[fvaimptc] AS [fvaimptc], 
+    [VR_GO_Factura].[fvasubtotal] AS [fvasubtotal], 
+    [VR_GO_Factura].[fvadesc] AS [fvadesc], 
+    [VR_GO_Factura].[fvatotal] AS [fvatotal], 
+    [VR_GO_Factura].[fvadebfis] AS [fvadebfis], 
+    [VR_GO_Factura].[fvaccont] AS [fvaccont], 
+    [VR_GO_Factura].[fvaflim] AS [fvaflim], 
+    [VR_GO_Factura].[fvaimgqr] AS [fvaimgqr], 
+    [VR_GO_Factura].[fvaalm] AS [fvaalm], 
+    [VR_GO_Factura].[fvanumi2] AS [fvanumi2], 
+    [VR_GO_Factura].[fvbnumi] AS [fvbnumi], 
+    [VR_GO_Factura].[fvbcprod] AS [fvbcprod], 
+    [VR_GO_Factura].[fvbdesprod] AS [fvbdesprod], 
+    [VR_GO_Factura].[fvbcant] AS [fvbcant], 
+    [VR_GO_Factura].[fvbprecio] AS [fvbprecio], 
+    [VR_GO_Factura].[fvbnumi2] AS [fvbnumi2]
+    FROM [dbo].[VR_GO_Factura] AS [VR_GO_Factura]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VR_GO_FacturaVsVenta" EntityType="Self.VR_GO_FacturaVsVenta" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -3337,6 +4108,38 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
     [VR_Nota de Venta].[FechaPedido] AS [FechaPedido]
     FROM [dbo].[VR_Nota de Venta] AS [VR_Nota de Venta]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VR_NotaCompra" EntityType="Self.VR_NotaCompra" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VR_NotaCompra].[caanumi] AS [caanumi], 
+    [VR_NotaCompra].[caafdoc] AS [caafdoc], 
+    [VR_NotaCompra].[caaprov] AS [caaprov], 
+    [VR_NotaCompra].[cmdesc] AS [cmdesc], 
+    [VR_NotaCompra].[cmrsocial] AS [cmrsocial], 
+    [VR_NotaCompra].[cmnit] AS [cmnit], 
+    [VR_NotaCompra].[cmtelf] AS [cmtelf], 
+    [VR_NotaCompra].[caanfac] AS [caanfac], 
+    [VR_NotaCompra].[caatven] AS [caatven], 
+    [VR_NotaCompra].[tipocompra] AS [tipocompra], 
+    [VR_NotaCompra].[caafvcred] AS [caafvcred], 
+    [VR_NotaCompra].[caadesc] AS [caadesc], 
+    [VR_NotaCompra].[caatotal] AS [caatotal], 
+    [VR_NotaCompra].[caaemision] AS [caaemision], 
+    [VR_NotaCompra].[caafingreso] AS [caafingreso], 
+    [VR_NotaCompra].[cabtc1numi] AS [cabtc1numi], 
+    [VR_NotaCompra].[cadesc] AS [cadesc], 
+    [VR_NotaCompra].[cabcant] AS [cabcant], 
+    [VR_NotaCompra].[cabpcom] AS [cabpcom], 
+    [VR_NotaCompra].[cabpcosto] AS [cabpcosto], 
+    [VR_NotaCompra].[cabsubtot] AS [cabsubtot], 
+    [VR_NotaCompra].[cabdesc] AS [cabdesc], 
+    [VR_NotaCompra].[cabtot] AS [cabtot], 
+    [VR_NotaCompra].[fcarsocial] AS [fcarsocial], 
+    [VR_NotaCompra].[fcanfac] AS [fcanfac], 
+    [VR_NotaCompra].[fcaautoriz] AS [fcaautoriz], 
+    [VR_NotaCompra].[fcaccont] AS [fcaccont], 
+    [VR_NotaCompra].[plazo] AS [plazo]
+    FROM [dbo].[VR_NotaCompra] AS [VR_NotaCompra]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VR_Pagos" EntityType="Self.VR_Pagos" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VR_Pagos].[ognumi] AS [ognumi], 
@@ -3484,7 +4287,6 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <EntitySet Name="TC011" EntityType="BDDistBHFModel.TC011" />
           <EntitySet Name="TC0111" EntityType="BDDistBHFModel.TC0111" />
           <EntitySet Name="TCA001" EntityType="BDDistBHFModel.TCA001" />
-          <EntitySet Name="TCA0011" EntityType="BDDistBHFModel.TCA0011" />
           <EntitySet Name="TFV001" EntityType="BDDistBHFModel.TFV001" />
           <EntitySet Name="TI002" EntityType="BDDistBHFModel.TI002" />
           <EntitySet Name="TI0021" EntityType="BDDistBHFModel.TI0021" />
@@ -3580,6 +4382,570 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <EntitySet Name="Vr_VentasVendedor12Meses" EntityType="BDDistBHFModel.Vr_VentasVendedor12Meses" />
           <EntitySet Name="Vr_VentasVendidas" EntityType="BDDistBHFModel.Vr_VentasVendidas" />
           <EntitySet Name="VR_VistaPedido_PrecioCosto" EntityType="BDDistBHFModel.VR_VistaPedido_PrecioCosto" />
+          <EntitySet Name="TV001" EntityType="BDDistBHFModel.TV001" />
+          <EntitySet Name="TV0011" EntityType="BDDistBHFModel.TV0011" />
+          <EntitySet Name="TS001" EntityType="BDDistBHFModel.TS001" />
+          <EntitySet Name="VR_GO_Factura" EntityType="BDDistBHFModel.VR_GO_Factura" />
+          <EntitySet Name="VR_NotaCompra" EntityType="BDDistBHFModel.VR_NotaCompra" />
+          <FunctionImport Name="PlanillaSueldo">
+          <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dg_RAsistencia" ReturnType="Collection(BDDistBHFModel.sp_dg_RAsistencia_Result)" />
+          <FunctionImport Name="sp_dg_TC011">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="cnnumi" Mode="In" Type="Int32" />
+            <Parameter Name="cnfdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="cnobs" Mode="In" Type="String" />
+            <Parameter Name="cnest" Mode="In" Type="Int32" />
+            <Parameter Name="cnuact" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dg_TP007">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="pinumi" Mode="In" Type="Int32" />
+            <Parameter Name="picper" Mode="In" Type="Int32" />
+            <Parameter Name="pifdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="piturno" Mode="In" Type="Int32" />
+            <Parameter Name="piuact" Mode="In" Type="String" />
+            <Parameter Name="fecha1" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dg_TP008">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="pknumi" Mode="In" Type="Int32" />
+            <Parameter Name="pkper" Mode="In" Type="Int32" />
+            <Parameter Name="pkmes" Mode="In" Type="Int32" />
+            <Parameter Name="pkanio" Mode="In" Type="Int32" />
+            <Parameter Name="cbplan" Mode="In" Type="Int32" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dg_TZ001">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="zacper" Mode="In" Type="Int32" />
+            <Parameter Name="zafecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dg_ZY002">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="ybnumi" Mode="In" Type="Int32" />
+            <Parameter Name="ybrol" Mode="In" Type="String" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_GetClientes" ReturnType="Collection(BDDistBHFModel.Sp_GetClientes_Result)" />
+          <FunctionImport Name="sp_go_CM001">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="codigo" Mode="In" Type="Int32" />
+            <Parameter Name="mesa" Mode="In" Type="Int32" />
+            <Parameter Name="codrepart" Mode="In" Type="Int32" />
+            <Parameter Name="est" Mode="In" Type="Int32" />
+            <Parameter Name="fact" Mode="In" Type="DateTime" />
+            <Parameter Name="hact" Mode="In" Type="String" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+            <Parameter Name="vend1" Mode="In" Type="Int32" />
+            <Parameter Name="vend2" Mode="In" Type="Int32" />
+            <Parameter Name="vend3" Mode="In" Type="Int32" />
+            <Parameter Name="vend4" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_NV001" ReturnType="Collection(BDDistBHFModel.sp_go_NV001_Result)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="vendedor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_Reportes" ReturnType="Collection(BDDistBHFModel.sp_go_Reportes_Result)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="cprod" Mode="In" Type="String" />
+            <Parameter Name="fini" Mode="In" Type="DateTime" />
+            <Parameter Name="ffin" Mode="In" Type="DateTime" />
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="cliente" Mode="In" Type="String" />
+            <Parameter Name="ban" Mode="In" Type="Int32" />
+            <Parameter Name="anho" Mode="In" Type="Int32" />
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TC001" ReturnType="Collection(Int32)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="cod" Mode="In" Type="String" />
+            <Parameter Name="desc" Mode="In" Type="String" />
+            <Parameter Name="desc2" Mode="In" Type="String" />
+            <Parameter Name="cat" Mode="In" Type="Int32" />
+            <Parameter Name="img" Mode="In" Type="String" />
+            <Parameter Name="stc" Mode="In" Type="Boolean" />
+            <Parameter Name="est" Mode="In" Type="Boolean" />
+            <Parameter Name="serie" Mode="In" Type="Boolean" />
+            <Parameter Name="pcom" Mode="In" Type="Int32" />
+            <Parameter Name="fing" Mode="In" Type="DateTime" />
+            <Parameter Name="cemp" Mode="In" Type="Int32" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+            <Parameter Name="filtro" Mode="In" Type="Int32" />
+            <Parameter Name="cbarra" Mode="In" Type="String" />
+            <Parameter Name="smin" Mode="In" Type="Int32" />
+            <Parameter Name="gr1" Mode="In" Type="Int32" />
+            <Parameter Name="gr2" Mode="In" Type="Int32" />
+            <Parameter Name="gr3" Mode="In" Type="Int32" />
+            <Parameter Name="gr4" Mode="In" Type="Int32" />
+            <Parameter Name="umed" Mode="In" Type="Int32" />
+            <Parameter Name="uventa" Mode="In" Type="Int32" />
+            <Parameter Name="umax" Mode="In" Type="Int32" />
+            <Parameter Name="conv" Mode="In" Type="Int32" />
+            <Parameter Name="cecon" Mode="In" Type="Int32" />
+            <Parameter Name="cedesc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TC002" ReturnType="Collection(Int32)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="desc" Mode="In" Type="String" />
+            <Parameter Name="direc" Mode="In" Type="String" />
+            <Parameter Name="telef" Mode="In" Type="String" />
+            <Parameter Name="cat" Mode="In" Type="Int32" />
+            <Parameter Name="sal" Mode="In" Type="Decimal" />
+            <Parameter Name="ci" Mode="In" Type="String" />
+            <Parameter Name="obs" Mode="In" Type="String" />
+            <Parameter Name="fnac" Mode="In" Type="DateTime" />
+            <Parameter Name="fing" Mode="In" Type="DateTime" />
+            <Parameter Name="fret" Mode="In" Type="DateTime" />
+            <Parameter Name="fot" Mode="In" Type="String" />
+            <Parameter Name="est" Mode="In" Type="Boolean" />
+            <Parameter Name="eciv" Mode="In" Type="String" />
+            <Parameter Name="plan" Mode="In" Type="Int32" />
+            <Parameter Name="reloj" Mode="In" Type="Int32" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TC004">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="ccnumi" Mode="In" Type="Int32" />
+            <Parameter Name="cccod" Mode="In" Type="String" />
+            <Parameter Name="ccdesc" Mode="In" Type="String" />
+            <Parameter Name="cczona" Mode="In" Type="Int32" />
+            <Parameter Name="ccdct" Mode="In" Type="Int32" />
+            <Parameter Name="ccdctnum" Mode="In" Type="String" />
+            <Parameter Name="ccdirec" Mode="In" Type="String" />
+            <Parameter Name="cctelf1" Mode="In" Type="String" />
+            <Parameter Name="cctelf2" Mode="In" Type="String" />
+            <Parameter Name="cccat" Mode="In" Type="Int32" />
+            <Parameter Name="ccest" Mode="In" Type="Int32" />
+            <Parameter Name="cclat" Mode="In" Type="Decimal" />
+            <Parameter Name="cclongi" Mode="In" Type="Decimal" />
+            <Parameter Name="ccprconsu" Mode="In" Type="Int32" />
+            <Parameter Name="cceven" Mode="In" Type="Boolean" />
+            <Parameter Name="ccobs" Mode="In" Type="String" />
+            <Parameter Name="ccfnac" Mode="In" Type="DateTime" />
+            <Parameter Name="ccnomfac" Mode="In" Type="String" />
+            <Parameter Name="ccnit" Mode="In" Type="String" />
+            <Parameter Name="ccultped" Mode="In" Type="DateTime" />
+            <Parameter Name="ccfecing" Mode="In" Type="DateTime" />
+            <Parameter Name="ccultvent" Mode="In" Type="DateTime" />
+            <Parameter Name="recven" Mode="In" Type="Int32" />
+            <Parameter Name="supven" Mode="In" Type="Int32" />
+            <Parameter Name="preven" Mode="In" Type="Int32" />
+            <Parameter Name="ccuact" Mode="In" Type="String" />
+            <Parameter Name="tacu" Mode="In" Type="Int32" />
+            <Parameter Name="fini" Mode="In" Type="DateTime" />
+            <Parameter Name="ffin" Mode="In" Type="DateTime" />
+            <Parameter Name="fre" Mode="In" Type="Int32" />
+            <Parameter Name="est" Mode="In" Type="Int32" />
+            <Parameter Name="obs" Mode="In" Type="String" />
+            <Parameter Name="producto" Mode="In" Type="Int32" />
+            <Parameter Name="categoria" Mode="In" Type="Int32" />
+            <Parameter Name="tcre" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TC004_appMovil">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="code_id" Mode="In" Type="Int32" />
+            <Parameter Name="full_name" Mode="In" Type="String" />
+            <Parameter Name="business_name" Mode="In" Type="String" />
+            <Parameter Name="nit" Mode="In" Type="String" />
+            <Parameter Name="mail" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="cell_phone" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="reference" Mode="In" Type="String" />
+            <Parameter Name="location_lat" Mode="In" Type="Decimal" />
+            <Parameter Name="location_log" Mode="In" Type="Decimal" />
+            <Parameter Name="password_cli" Mode="In" Type="String" />
+            <Parameter Name="old_password_cli" Mode="In" Type="String" />
+            <Parameter Name="new_password_cli" Mode="In" Type="String" />
+            <Parameter Name="observacion" Mode="In" Type="String" />
+            <Parameter Name="categoria" Mode="In" Type="String" />
+            <Parameter Name="pedido" Mode="In" Type="Int32" />
+            <Parameter Name="TO0011" Mode="In" Type="String" />
+            <Parameter Name="json" Mode="In" Type="String" />
+            <Parameter Name="fingreso" Mode="In" Type="DateTime" />
+            <Parameter Name="credito" Mode="In" Type="Decimal" />
+            <Parameter Name="chofer" Mode="In" Type="Int32" />
+            <Parameter Name="fechapedido" Mode="In" Type="DateTime" />
+            <Parameter Name="idRepartidor" Mode="In" Type="Int32" />
+            <Parameter Name="oanumi" Mode="In" Type="String" />
+            <Parameter Name="oafdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="oahora" Mode="In" Type="String" />
+            <Parameter Name="oaccli" Mode="In" Type="Int32" />
+            <Parameter Name="oarepa" Mode="In" Type="Int32" />
+            <Parameter Name="oaest" Mode="In" Type="Int32" />
+            <Parameter Name="oaobs" Mode="In" Type="String" />
+            <Parameter Name="latitud" Mode="In" Type="Decimal" />
+            <Parameter Name="longitud" Mode="In" Type="Decimal" />
+            <Parameter Name="total" Mode="In" Type="Decimal" />
+            <Parameter Name="tipocobro" Mode="In" Type="Int32" />
+            <Parameter Name="codigogenerado" Mode="In" Type="String" />
+            <Parameter Name="cczona" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TC009">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="desc" Mode="In" Type="String" />
+            <Parameter Name="est" Mode="In" Type="Int32" />
+            <Parameter Name="pdf" Mode="In" Type="String" />
+            <Parameter Name="obs" Mode="In" Type="String" />
+            <Parameter Name="codu" Mode="In" Type="Int32" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TC010" ReturnType="Collection(Int32)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="desc" Mode="In" Type="String" />
+            <Parameter Name="telf" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="est" Mode="In" Type="Int32" />
+            <Parameter Name="obs" Mode="In" Type="String" />
+            <Parameter Name="rsocial" Mode="In" Type="String" />
+            <Parameter Name="nit" Mode="In" Type="String" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+            <Parameter Name="cuenta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TCA001">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="fdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="prov" Mode="In" Type="Int32" />
+            <Parameter Name="nfac" Mode="In" Type="String" />
+            <Parameter Name="obs" Mode="In" Type="String" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+            <Parameter Name="tven" Mode="In" Type="Int32" />
+            <Parameter Name="fvcred" Mode="In" Type="DateTime" />
+            <Parameter Name="mon" Mode="In" Type="Int32" />
+            <Parameter Name="est" Mode="In" Type="Int32" />
+            <Parameter Name="desc" Mode="In" Type="Decimal" />
+            <Parameter Name="descpro1" Mode="In" Type="Decimal" />
+            <Parameter Name="descpro2" Mode="In" Type="Decimal" />
+            <Parameter Name="desctot" Mode="In" Type="Decimal" />
+            <Parameter Name="total" Mode="In" Type="Decimal" />
+            <Parameter Name="emision" Mode="In" Type="Int32" />
+            <Parameter Name="consigna" Mode="In" Type="Int32" />
+            <Parameter Name="retenc" Mode="In" Type="Int32" />
+            <Parameter Name="asientoi" Mode="In" Type="Int32" />
+            <Parameter Name="ffactura" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TCI001" ReturnType="Collection(Int32)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="desc" Mode="In" Type="String" />
+            <Parameter Name="mov" Mode="In" Type="Int32" />
+            <Parameter Name="movcli" Mode="In" Type="Int32" />
+            <Parameter Name="tipo1" Mode="In" Type="Int32" />
+            <Parameter Name="est" Mode="In" Type="Int32" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+            <Parameter Name="filtro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TCP001">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="prov" Mode="In" Type="Int32" />
+            <Parameter Name="fdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="monto" Mode="In" Type="Decimal" />
+            <Parameter Name="obs" Mode="In" Type="String" />
+            <Parameter Name="est" Mode="In" Type="Int32" />
+            <Parameter Name="fven" Mode="In" Type="DateTime" />
+            <Parameter Name="tpago" Mode="In" Type="Int32" />
+            <Parameter Name="fpro" Mode="In" Type="Int32" />
+            <Parameter Name="nota" Mode="In" Type="Int32" />
+            <Parameter Name="tpro" Mode="In" Type="Int32" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+            <Parameter Name="ffec" Mode="In" Type="DateTime" />
+            <Parameter Name="fnit" Mode="In" Type="String" />
+            <Parameter Name="frsocial" Mode="In" Type="String" />
+            <Parameter Name="fnro" Mode="In" Type="Int32" />
+            <Parameter Name="fautoriz" Mode="In" Type="Int64" />
+            <Parameter Name="fmonto" Mode="In" Type="Decimal" />
+            <Parameter Name="fccont" Mode="In" Type="String" />
+            <Parameter Name="fmcfiscal" Mode="In" Type="Decimal" />
+            <Parameter Name="fdesc" Mode="In" Type="Decimal" />
+            <Parameter Name="filtro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TI002">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="fdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="concep" Mode="In" Type="Int32" />
+            <Parameter Name="obs" Mode="In" Type="String" />
+            <Parameter Name="est" Mode="In" Type="Int32" />
+            <Parameter Name="alm" Mode="In" Type="Int32" />
+            <Parameter Name="iddc" Mode="In" Type="Int32" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TO0023" ReturnType="Collection(Int32)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="tc1" Mode="In" Type="Int32" />
+            <Parameter Name="tc4" Mode="In" Type="Int32" />
+            <Parameter Name="cant" Mode="In" Type="Int32" />
+            <Parameter Name="est" Mode="In" Type="Int32" />
+            <Parameter Name="dif" Mode="In" Type="Boolean" />
+            <Parameter Name="to1" Mode="In" Type="Int32" />
+            <Parameter Name="to2" Mode="In" Type="Int32" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_go_TS002" ReturnType="Collection(Int32)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="cia" Mode="In" Type="Int32" />
+            <Parameter Name="alm" Mode="In" Type="Int32" />
+            <Parameter Name="sfc" Mode="In" Type="Int32" />
+            <Parameter Name="autoriz" Mode="In" Type="Decimal" />
+            <Parameter Name="nfac" Mode="In" Type="Int32" />
+            <Parameter Name="key" Mode="In" Type="String" />
+            <Parameter Name="fdel" Mode="In" Type="DateTime" />
+            <Parameter Name="fal" Mode="In" Type="DateTime" />
+            <Parameter Name="nota" Mode="In" Type="String" />
+            <Parameter Name="nota2" Mode="In" Type="String" />
+            <Parameter Name="est" Mode="In" Type="Boolean" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+            <Parameter Name="filtro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Insert_TC004" ReturnType="Collection(Int32)">
+            <Parameter Name="ccdesc" Mode="In" Type="String" />
+            <Parameter Name="cczona" Mode="In" Type="Int32" />
+            <Parameter Name="ccdctnum" Mode="In" Type="String" />
+            <Parameter Name="ccnit" Mode="In" Type="String" />
+            <Parameter Name="cctelf1" Mode="In" Type="String" />
+            <Parameter Name="ccdirec" Mode="In" Type="String" />
+            <Parameter Name="ccnomfac" Mode="In" Type="String" />
+            <Parameter Name="cclat" Mode="In" Type="Decimal" />
+            <Parameter Name="cclongi" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Insert_TFV001" ReturnType="Collection(BDDistBHFModel.sp_Insert_TFV001_Result)">
+            <Parameter Name="fvafec" Mode="In" Type="DateTime" />
+            <Parameter Name="fvanfac" Mode="In" Type="Int32" />
+            <Parameter Name="fvaautoriz" Mode="In" Type="Double" />
+            <Parameter Name="fvanitcli" Mode="In" Type="String" />
+            <Parameter Name="fvadescli1" Mode="In" Type="String" />
+            <Parameter Name="fvastot" Mode="In" Type="Double" />
+            <Parameter Name="fvadebfis" Mode="In" Type="Double" />
+            <Parameter Name="fvaccont" Mode="In" Type="String" />
+            <Parameter Name="fvaflim" Mode="In" Type="DateTime" />
+            <Parameter Name="fvanumi" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Insert_TL002" ReturnType="Collection(Int32)">
+            <Parameter Name="ldchof" Mode="In" Type="Int32" />
+            <Parameter Name="ldfec" Mode="In" Type="DateTime" />
+            <Parameter Name="ldhora" Mode="In" Type="String" />
+            <Parameter Name="lblat" Mode="In" Type="Decimal" />
+            <Parameter Name="lblongi" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Insert_TO001" ReturnType="Collection(BDDistBHFModel.sp_Insert_TO001_Result)">
+            <Parameter Name="oafdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="oaccli" Mode="In" Type="Int32" />
+            <Parameter Name="oaobs" Mode="In" Type="String" />
+            <Parameter Name="TO0011" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_Asiento" ReturnType="Collection(BDDistBHFModel.sp_Mam_Asiento_Result)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="seuact" Mode="In" Type="String" />
+            <Parameter Name="categoria" Mode="In" Type="Int32" />
+            <Parameter Name="canumi" Mode="In" Type="Int32" />
+            <Parameter Name="cuenta" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="empresa" Mode="In" Type="Int32" />
+            <Parameter Name="sector" Mode="In" Type="Int32" />
+            <Parameter Name="vcnumi" Mode="In" Type="Int32" />
+            <Parameter Name="servicio" Mode="In" Type="Int32" />
+            <Parameter Name="fechaI" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaF" Mode="In" Type="DateTime" />
+            <Parameter Name="sucursal" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Int32" />
+            <Parameter Name="tventa" Mode="In" Type="Int32" />
+            <Parameter Name="modulo" Mode="In" Type="Int32" />
+            <Parameter Name="factura" Mode="In" Type="Int32" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_ReporteVentas">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="fechaI" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaF" Mode="In" Type="DateTime" />
+            <Parameter Name="prevendedor" Mode="In" Type="Int32" />
+            <Parameter Name="distribuidor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TC002">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="cbnumi" Mode="In" Type="Int32" />
+            <Parameter Name="cbuact" Mode="In" Type="String" />
+            <Parameter Name="panumi" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TC005C" ReturnType="Collection(Int32)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="canumi" Mode="In" Type="Int32" />
+            <Parameter Name="canombre" Mode="In" Type="String" />
+            <Parameter Name="cadesc" Mode="In" Type="String" />
+            <Parameter Name="caimg" Mode="In" Type="String" />
+            <Parameter Name="cauact" Mode="In" Type="String" />
+            <Parameter Name="caest" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TCA00121Cheque">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="tenumi" Mode="In" Type="Int32" />
+            <Parameter Name="tefdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="tety4vend" Mode="In" Type="Int32" />
+            <Parameter Name="teobs" Mode="In" Type="String" />
+            <Parameter Name="tdnumi" Mode="In" Type="Int32" />
+            <Parameter Name="teuact" Mode="In" Type="String" />
+            <Parameter Name="credito" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TI005">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="oanumi" Mode="In" Type="Int32" />
+            <Parameter Name="oanumdoc" Mode="In" Type="String" />
+            <Parameter Name="oatip" Mode="In" Type="Int32" />
+            <Parameter Name="oaano" Mode="In" Type="Int32" />
+            <Parameter Name="oames" Mode="In" Type="Int32" />
+            <Parameter Name="oanum" Mode="In" Type="Int32" />
+            <Parameter Name="oafdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="oatc" Mode="In" Type="Decimal" />
+            <Parameter Name="oaglosa" Mode="In" Type="String" />
+            <Parameter Name="oaobs" Mode="In" Type="String" />
+            <Parameter Name="oaemp" Mode="In" Type="Int32" />
+            <Parameter Name="fecha1" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha2" Mode="In" Type="DateTime" />
+            <Parameter Name="uact" Mode="In" Type="String" />
+            <Parameter Name="ifnumi" Mode="In" Type="Int32" />
+            <Parameter Name="ifto001numi" Mode="In" Type="Int32" />
+            <Parameter Name="iftc" Mode="In" Type="Decimal" />
+            <Parameter Name="iffechai" Mode="In" Type="DateTime" />
+            <Parameter Name="iffechaf" Mode="In" Type="DateTime" />
+            <Parameter Name="ifest" Mode="In" Type="Int32" />
+            <Parameter Name="ifsuc" Mode="In" Type="Int32" />
+            <Parameter Name="modulo" Mode="In" Type="Int32" />
+            <Parameter Name="factura" Mode="In" Type="Int32" />
+            <Parameter Name="fechaI" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaF" Mode="In" Type="DateTime" />
+            <Parameter Name="plantilla" Mode="In" Type="Int32" />
+            <Parameter Name="numiPadre" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TM001">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="ibid" Mode="In" Type="Int32" />
+            <Parameter Name="ibfdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="ibconcep" Mode="In" Type="Int32" />
+            <Parameter Name="ibobs" Mode="In" Type="String" />
+            <Parameter Name="ibest" Mode="In" Type="Int32" />
+            <Parameter Name="ibalm" Mode="In" Type="Int32" />
+            <Parameter Name="ibiddc" Mode="In" Type="Int32" />
+            <Parameter Name="ibidchof" Mode="In" Type="Int32" />
+            <Parameter Name="ibidvent" Mode="In" Type="Int32" />
+            <Parameter Name="ibidconcil" Mode="In" Type="Int32" />
+            <Parameter Name="ibuact" Mode="In" Type="String" />
+            <Parameter Name="chofer" Mode="In" Type="Int32" />
+            <Parameter Name="concepto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TM001SalidaChofer">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="ibid" Mode="In" Type="Int32" />
+            <Parameter Name="ibfdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="ibconcep" Mode="In" Type="Int32" />
+            <Parameter Name="ibobs" Mode="In" Type="String" />
+            <Parameter Name="ibest" Mode="In" Type="Int32" />
+            <Parameter Name="ibalm" Mode="In" Type="Int32" />
+            <Parameter Name="ibiddc" Mode="In" Type="Int32" />
+            <Parameter Name="ibidchof" Mode="In" Type="Int32" />
+            <Parameter Name="ibidvent" Mode="In" Type="Int32" />
+            <Parameter Name="ibidconcil" Mode="In" Type="Int32" />
+            <Parameter Name="ibuact" Mode="In" Type="String" />
+            <Parameter Name="chofer" Mode="In" Type="Int32" />
+            <Parameter Name="concepto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TO004">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="ohnumi" Mode="In" Type="Int32" />
+            <Parameter Name="ohfec" Mode="In" Type="DateTime" />
+            <Parameter Name="ohconc" Mode="In" Type="Int32" />
+            <Parameter Name="ohest" Mode="In" Type="String" />
+            <Parameter Name="ohuact" Mode="In" Type="String" />
+            <Parameter Name="ojnumi" Mode="In" Type="Int32" />
+            <Parameter Name="cliente" Mode="In" Type="Int32" />
+            <Parameter Name="producto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TO005">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="olnumi" Mode="In" Type="Int32" />
+            <Parameter Name="olnumichof" Mode="In" Type="Int32" />
+            <Parameter Name="olnumiconci" Mode="In" Type="Int32" />
+            <Parameter Name="olfecha" Mode="In" Type="DateTime" />
+            <Parameter Name="oluact" Mode="In" Type="String" />
+            <Parameter Name="pedido" Mode="In" Type="Int32" />
+            <Parameter Name="zona" Mode="In" Type="Int32" />
+            <Parameter Name="mrec" Mode="In" Type="Decimal" />
+            <Parameter Name="cliente" Mode="In" Type="Int32" />
+            <Parameter Name="fechai" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaf" Mode="In" Type="DateTime" />
+            <Parameter Name="numi" Mode="In" Type="Int32" />
+            <Parameter Name="nroFactura" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TV00121">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="tdnumi" Mode="In" Type="Int32" />
+            <Parameter Name="tduact" Mode="In" Type="String" />
+            <Parameter Name="credito" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_TV00121Cheque">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="tenumi" Mode="In" Type="Int32" />
+            <Parameter Name="tefdoc" Mode="In" Type="DateTime" />
+            <Parameter Name="tety4vend" Mode="In" Type="Int32" />
+            <Parameter Name="teobs" Mode="In" Type="String" />
+            <Parameter Name="tdnumi" Mode="In" Type="Int32" />
+            <Parameter Name="teuact" Mode="In" Type="String" />
+            <Parameter Name="credito" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_VentasCredito" ReturnType="Collection(BDDistBHFModel.sp_Mam_VentasCredito_Result)">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="fechaI" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaF" Mode="In" Type="DateTime" />
+            <Parameter Name="yduact" Mode="In" Type="String" />
+            <Parameter Name="cliente" Mode="In" Type="Int32" />
+            <Parameter Name="codCredito" Mode="In" Type="Int32" />
+            <Parameter Name="catPrecio" Mode="In" Type="Int32" />
+            <Parameter Name="almacen" Mode="In" Type="Int32" />
+            <Parameter Name="vendedor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_VentasEstadisticos">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="fechaI" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaF" Mode="In" Type="DateTime" />
+            <Parameter Name="yduact" Mode="In" Type="String" />
+            <Parameter Name="vendedor" Mode="In" Type="Int32" />
+            <Parameter Name="cliente" Mode="In" Type="Int32" />
+            <Parameter Name="producto" Mode="In" Type="Int32" />
+            <Parameter Name="zona" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mam_VentasGraficas">
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="fechaI" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaF" Mode="In" Type="DateTime" />
+            <Parameter Name="yduact" Mode="In" Type="String" />
+            <Parameter Name="fechaVenta" Mode="In" Type="DateTime" />
+            <Parameter Name="producto" Mode="In" Type="Int32" />
+            <Parameter Name="almacen" Mode="In" Type="Int32" />
+            <Parameter Name="cantMeses" Mode="In" Type="Int32" />
+            <Parameter Name="Mes" Mode="In" Type="Int32" />
+            <Parameter Name="Anho" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_nfactura" ReturnType="Collection(Int32)">
+          <Parameter Name="nautori" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="vis_promedioConsumo" ReturnType="Collection(BDDistBHFModel.vis_promedioConsumo_Result)" />
+          <FunctionImport Name="vis_transacciones" ReturnType="Collection(BDDistBHFModel.vis_transacciones_Result)" />
+          <EntitySet Name="TCA0011" EntityType="BDDistBHFModel.TCA0011" />
         </EntityContainer>
         <EntityType Name="CM001">
           <Key>
@@ -3826,21 +5192,12 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <Property Name="caatotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="caaemision" Type="Int32" />
           <Property Name="caaconsigna" Type="Int32" />
-        </EntityType>
-        <EntityType Name="TCA0011">
-          <Key>
-            <PropertyRef Name="cabnumi" />
-          </Key>
-          <Property Name="cabnumi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cabtc1numi" Type="Int32" />
-          <Property Name="cabcant" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="cabpcom" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="cabputi" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="cabpven" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="cabnfr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="cabstocka" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="cabstockf" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="cabtca1numi" Type="Int32" />
+          <Property Name="caadescpro1" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="caadescpro2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="caadesctot" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="caaretenc" Type="Int32" />
+          <Property Name="caaasientoi" Type="Int32" />
+          <Property Name="caaffactura" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="TFV001">
           <Key>
@@ -3969,6 +5326,7 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <Property Name="oacoanumi" Type="Int32" Nullable="false" />
           <Property Name="oaccbnumi" Type="Int32" Nullable="false" />
           <Property Name="oacnrofac" Type="Int64" />
+          <Property Name="oacnconc" Type="Int32" />
         </EntityType>
         <EntityType Name="TO004">
           <Key>
@@ -4643,6 +6001,7 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <Property Name="cadesc2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="categoria" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="obpcant" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="oacnconc" Type="Int32" />
         </EntityType>
         <EntityType Name="VR_GO_DiferenciaPedidoNota">
           <Key>
@@ -5268,6 +6627,306 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <Property Name="precioVenta" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="Utilidad" Type="Decimal" Precision="38" Scale="2" />
         </EntityType>
+        <EntityType Name="TV001">
+          <Key>
+            <PropertyRef Name="tanumi" />
+          </Key>
+          <Property Name="tanumi" Type="Int32" Nullable="false" />
+          <Property Name="taalm" Type="Int32" />
+          <Property Name="tafdoc" Type="DateTime" Precision="0" />
+          <Property Name="taven" Type="Int32" />
+          <Property Name="tatven" Type="Int32" />
+          <Property Name="tafvcr" Type="DateTime" Precision="0" />
+          <Property Name="taclpr" Type="Int32" Nullable="false" />
+          <Property Name="tamon" Type="Int32" />
+          <Property Name="taest" Type="Int32" />
+          <Property Name="tatotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tafact" Type="DateTime" Precision="0" />
+          <Property Name="tahact" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="tauact" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TV0011">
+          <Key>
+            <PropertyRef Name="tbnumi" />
+          </Key>
+          <Property Name="tbnumi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tbtv1numi" Type="Int32" />
+          <Property Name="tbty5prod" Type="Int32" />
+          <Property Name="tbest" Type="Int32" />
+          <Property Name="tbcmin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tbumin" Type="Int32" />
+          <Property Name="tbpbas" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tbptot" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tbporc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tbdesc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tbtotdesc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tbobs" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="tbpcos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tbptot2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tbfact" Type="DateTime" Precision="0" />
+          <Property Name="tbhact" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="tbuact" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TS001">
+          <Key>
+            <PropertyRef Name="sanumi" />
+          </Key>
+          <Property Name="sanumi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sanit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="sanom1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sanom2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VR_GO_Factura">
+          <Key>
+            <PropertyRef Name="fvanumi" />
+            <PropertyRef Name="fvanumi2" />
+          </Key>
+          <Property Name="fvanumi" Type="Int32" Nullable="false" />
+          <Property Name="fvafec" Type="DateTime" Precision="0" />
+          <Property Name="fvanfac" Type="Int32" />
+          <Property Name="fvaautoriz" Type="Double" />
+          <Property Name="fvaest" Type="Int32" />
+          <Property Name="fvanitcli" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="fvacodcli" Type="Int32" />
+          <Property Name="fvadescli1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fvadescli2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="fvastot" Type="Double" />
+          <Property Name="fvaimpsi" Type="Double" />
+          <Property Name="fvaimpeo" Type="Double" />
+          <Property Name="fvaimptc" Type="Double" />
+          <Property Name="fvasubtotal" Type="Double" />
+          <Property Name="fvadesc" Type="Double" />
+          <Property Name="fvatotal" Type="Double" />
+          <Property Name="fvadebfis" Type="Double" />
+          <Property Name="fvaccont" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="fvaflim" Type="DateTime" Precision="0" />
+          <Property Name="fvaimgqr" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="fvaalm" Type="Int32" />
+          <Property Name="fvanumi2" Type="Int32" Nullable="false" />
+          <Property Name="fvbnumi" Type="Int32" />
+          <Property Name="fvbcprod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fvbdesprod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fvbcant" Type="Int32" />
+          <Property Name="fvbprecio" Type="Double" />
+          <Property Name="fvbnumi2" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VR_NotaCompra">
+          <Key>
+            <PropertyRef Name="caanumi" />
+            <PropertyRef Name="tipocompra" />
+          </Key>
+          <Property Name="caanumi" Type="Int32" Nullable="false" />
+          <Property Name="caafdoc" Type="DateTime" Precision="0" />
+          <Property Name="caaprov" Type="Int32" />
+          <Property Name="cmdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cmrsocial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cmnit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="cmtelf" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="caanfac" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="caatven" Type="Int32" />
+          <Property Name="tipocompra" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="caafvcred" Type="DateTime" Precision="0" />
+          <Property Name="caadesc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="caatotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="caaemision" Type="Int32" />
+          <Property Name="caafingreso" Type="DateTime" Precision="0" />
+          <Property Name="cabtc1numi" Type="Int32" />
+          <Property Name="cadesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cabcant" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabpcom" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabpcosto" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabsubtot" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabdesc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabtot" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="fcarsocial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fcanfac" Type="Int64" />
+          <Property Name="fcaautoriz" Type="Int64" />
+          <Property Name="fcaccont" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="plazo" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="sp_dg_RAsistencia_Result">
+          <Property Type="Int32" Name="cbnumi" Nullable="false" />
+          <Property Type="String" Name="cbdesc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="pjent" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="pjsal" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="pjfecha" Nullable="true" />
+          <Property Type="String" Name="dia" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ing1" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="sal1" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="ing2" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="sal2" Nullable="true" MaxLength="5" />
+        </ComplexType>
+        <ComplexType Name="Sp_GetClientes_Result">
+          <Property Type="Int32" Name="ccnumi" Nullable="false" />
+          <Property Type="String" Name="cccod" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="ccdesc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ccdirec" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="cctelf1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cctelf2" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="numZona" Nullable="true" />
+          <Property Type="String" Name="descZona" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="numDct" Nullable="false" />
+          <Property Type="String" Name="descDct" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ccdctnum" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="numCat" Nullable="true" />
+          <Property Type="String" Name="descCat" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="ccest" Nullable="true" />
+          <Property Type="Decimal" Name="cclat" Nullable="true" Precision="18" Scale="14" />
+          <Property Type="Decimal" Name="cclongi" Nullable="true" Precision="18" Scale="14" />
+          <Property Type="Boolean" Name="cceven" Nullable="true" />
+          <Property Type="String" Name="ccobs" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="ccfnac" Nullable="true" />
+          <Property Type="String" Name="ccnomfac" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ccnit" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="ccfecing" Nullable="true" />
+          <Property Type="DateTime" Name="ccultped" Nullable="true" />
+          <Property Type="String" Name="ccuact" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_go_NV001_Result">
+          <Property Type="Int32" Name="oanumi" Nullable="false" />
+          <Property Type="Int32" Name="CodCliente" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CI" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Celular" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CodProducto" Nullable="false" />
+          <Property Type="String" Name="Producto" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrecioUnitario" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Vendedor" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaPedido" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_go_Reportes_Result">
+          <Property Type="Int32" Name="CodDB" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Contacto" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Carrito" Nullable="true" />
+          <Property Type="Int32" Name="Botellon" Nullable="true" />
+          <Property Type="String" Name="Cliente" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="Cantidad" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Monto" Nullable="false" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_Insert_TFV001_Result">
+          <Property Type="Int32" Name="fvanumi" Nullable="false" />
+          <Property Type="DateTime" Name="fvafec" Nullable="true" />
+          <Property Type="Int32" Name="fvanfac" Nullable="true" />
+          <Property Type="Double" Name="fvaautoriz" Nullable="true" />
+          <Property Type="Int32" Name="fvaest" Nullable="true" />
+          <Property Type="String" Name="fvanitcli" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="fvacodcli" Nullable="true" />
+          <Property Type="String" Name="fvadescli1" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="fvadescli2" Nullable="true" MaxLength="30" />
+          <Property Type="Double" Name="fvastot" Nullable="true" />
+          <Property Type="Double" Name="fvaimpsi" Nullable="true" />
+          <Property Type="Double" Name="fvaimpeo" Nullable="true" />
+          <Property Type="Double" Name="fvaimptc" Nullable="true" />
+          <Property Type="Double" Name="fvasubtotal" Nullable="true" />
+          <Property Type="Double" Name="fvadesc" Nullable="true" />
+          <Property Type="Double" Name="fvatotal" Nullable="true" />
+          <Property Type="Double" Name="fvadebfis" Nullable="true" />
+          <Property Type="String" Name="fvaccont" Nullable="true" MaxLength="14" />
+          <Property Type="DateTime" Name="fvaflim" Nullable="true" />
+          <Property Type="Binary" Name="fvaimgqr" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="fvaalm" Nullable="true" />
+          <Property Type="Int32" Name="fvanumi2" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_Insert_TO001_Result">
+          <Property Type="Int32" Name="oanumi" Nullable="false" />
+          <Property Type="DateTime" Name="oafdoc" Nullable="true" />
+          <Property Type="String" Name="oahora" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="oaccli" Nullable="true" />
+          <Property Type="Int32" Name="oazona" Nullable="true" />
+          <Property Type="Int32" Name="oarepa" Nullable="true" />
+          <Property Type="String" Name="oaobs" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="oaobs2" Nullable="true" MaxLength="60" />
+          <Property Type="Int32" Name="oaest" Nullable="true" />
+          <Property Type="Int32" Name="oaap" Nullable="true" />
+          <Property Type="Int32" Name="oapg" Nullable="true" />
+          <Property Type="DateTime" Name="oafact" Nullable="true" />
+          <Property Type="String" Name="oahact" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="oauact" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_Mam_Asiento_Result">
+          <Property Type="Int32" Name="canumi" Nullable="false" />
+          <Property Type="String" Name="nro" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="cadesc" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="chporcen" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="chdebe" Nullable="true" />
+          <Property Type="Int32" Name="chhaber" Nullable="true" />
+          <Property Type="Decimal" Name="tc" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="debe" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="haber" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="debesus" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="habersus" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="variable" Nullable="true" />
+          <Property Type="Int32" Name="linea" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_Mam_VentasCredito_Result">
+          <Property Type="Int32" Name="numicliente" Nullable="false" />
+          <Property Type="String" Name="cliente" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="credito" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="aporte" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="deuda" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="numiventa" Nullable="false" />
+          <Property Type="String" Name="aabdes" Nullable="false" MaxLength="17" />
+          <Property Type="String" Name="fechaventa" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="fechacredito" Nullable="true" MaxLength="4000" />
+          <Property Type="Decimal" Name="tctotcre" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="tdnrorecibo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="tdfechaPago" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="tdnrodoc" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="tdmonto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="observacion" Nullable="false" MaxLength="19" />
+        </ComplexType>
+        <ComplexType Name="vis_promedioConsumo_Result">
+          <Property Type="Int32" Name="ccnumi" Nullable="false" />
+          <Property Type="String" Name="ccdesc" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="cczona" Nullable="true" />
+          <Property Type="String" Name="cctelf1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ccdirec" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ccest" Nullable="true" />
+          <Property Type="Int32" Name="ccprconsu" Nullable="true" />
+          <Property Type="DateTime" Name="fTentativa" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="vis_transacciones_Result">
+          <Property Type="Int32" Name="numi" Nullable="false" />
+          <Property Type="Int32" Name="odnota" Nullable="true" />
+          <Property Type="DateTime" Name="fdoc" Nullable="true" />
+          <Property Type="DateTime" Name="fact" Nullable="true" />
+          <Property Type="String" Name="hact" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="uact" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="tipo" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="TCA0011">
+          <Key>
+            <PropertyRef Name="cabnumi" />
+          </Key>
+          <Property Name="cabnumi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cabtc1numi" Type="Int32" />
+          <Property Name="cabcantcj" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cabcantun" Type="Int32" />
+          <Property Name="cabsubtot" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabpcomcj" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cabpcomun" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cabporc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabdesccj" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabdescun" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabdescpro1cj" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cabdescpro1un" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cabdescpro2cj" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cabdescpro2un" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cabtot" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabpcostocj" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cabpcostoun" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cabputi" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabpven" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabnfr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="cabstocka" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabstockf" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cabtca1numi" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5517,6 +7176,12 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <EntitySetMapping Name="TCA001">
             <EntityTypeMapping TypeName="BDDistBHFModel.TCA001">
               <MappingFragment StoreEntitySet="TCA001">
+                <ScalarProperty Name="caaffactura" ColumnName="caaffactura" />
+                <ScalarProperty Name="caaasientoi" ColumnName="caaasientoi" />
+                <ScalarProperty Name="caaretenc" ColumnName="caaretenc" />
+                <ScalarProperty Name="caadesctot" ColumnName="caadesctot" />
+                <ScalarProperty Name="caadescpro2" ColumnName="caadescpro2" />
+                <ScalarProperty Name="caadescpro1" ColumnName="caadescpro1" />
                 <ScalarProperty Name="caaconsigna" ColumnName="caaconsigna" />
                 <ScalarProperty Name="caaemision" ColumnName="caaemision" />
                 <ScalarProperty Name="caatotal" ColumnName="caatotal" />
@@ -5533,22 +7198,6 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
                 <ScalarProperty Name="caaprov" ColumnName="caaprov" />
                 <ScalarProperty Name="caafdoc" ColumnName="caafdoc" />
                 <ScalarProperty Name="caanumi" ColumnName="caanumi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TCA0011">
-            <EntityTypeMapping TypeName="BDDistBHFModel.TCA0011">
-              <MappingFragment StoreEntitySet="TCA0011">
-                <ScalarProperty Name="cabtca1numi" ColumnName="cabtca1numi" />
-                <ScalarProperty Name="cabstockf" ColumnName="cabstockf" />
-                <ScalarProperty Name="cabstocka" ColumnName="cabstocka" />
-                <ScalarProperty Name="cabnfr" ColumnName="cabnfr" />
-                <ScalarProperty Name="cabpven" ColumnName="cabpven" />
-                <ScalarProperty Name="cabputi" ColumnName="cabputi" />
-                <ScalarProperty Name="cabpcom" ColumnName="cabpcom" />
-                <ScalarProperty Name="cabcant" ColumnName="cabcant" />
-                <ScalarProperty Name="cabtc1numi" ColumnName="cabtc1numi" />
-                <ScalarProperty Name="cabnumi" ColumnName="cabnumi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5681,6 +7330,7 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <EntitySetMapping Name="TO001C">
             <EntityTypeMapping TypeName="BDDistBHFModel.TO001C">
               <MappingFragment StoreEntitySet="TO001C">
+                <ScalarProperty Name="oacnconc" ColumnName="oacnconc" />
                 <ScalarProperty Name="oacnrofac" ColumnName="oacnrofac" />
                 <ScalarProperty Name="oaccbnumi" ColumnName="oaccbnumi" />
                 <ScalarProperty Name="oacoanumi" ColumnName="oacoanumi" />
@@ -6394,6 +8044,7 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
           <EntitySetMapping Name="VR_GO_DespachoXProducto">
             <EntityTypeMapping TypeName="BDDistBHFModel.VR_GO_DespachoXProducto">
               <MappingFragment StoreEntitySet="VR_GO_DespachoXProducto">
+                <ScalarProperty Name="oacnconc" ColumnName="oacnconc" />
                 <ScalarProperty Name="obpcant" ColumnName="obpcant" />
                 <ScalarProperty Name="categoria" ColumnName="categoria" />
                 <ScalarProperty Name="cadesc2" ColumnName="cadesc2" />
@@ -7024,6 +8675,385 @@ advertencia 6002: La tabla o vista 'BDDistBHF_CF.dbo.VR_VistaPedido_PrecioCosto'
                 <ScalarProperty Name="codcliente" ColumnName="codcliente" />
                 <ScalarProperty Name="oafdoc" ColumnName="oafdoc" />
                 <ScalarProperty Name="oanumi" ColumnName="oanumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TV001">
+            <EntityTypeMapping TypeName="BDDistBHFModel.TV001">
+              <MappingFragment StoreEntitySet="TV001">
+                <ScalarProperty Name="tauact" ColumnName="tauact" />
+                <ScalarProperty Name="tahact" ColumnName="tahact" />
+                <ScalarProperty Name="tafact" ColumnName="tafact" />
+                <ScalarProperty Name="tatotal" ColumnName="tatotal" />
+                <ScalarProperty Name="taest" ColumnName="taest" />
+                <ScalarProperty Name="tamon" ColumnName="tamon" />
+                <ScalarProperty Name="taclpr" ColumnName="taclpr" />
+                <ScalarProperty Name="tafvcr" ColumnName="tafvcr" />
+                <ScalarProperty Name="tatven" ColumnName="tatven" />
+                <ScalarProperty Name="taven" ColumnName="taven" />
+                <ScalarProperty Name="tafdoc" ColumnName="tafdoc" />
+                <ScalarProperty Name="taalm" ColumnName="taalm" />
+                <ScalarProperty Name="tanumi" ColumnName="tanumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TV0011">
+            <EntityTypeMapping TypeName="BDDistBHFModel.TV0011">
+              <MappingFragment StoreEntitySet="TV0011">
+                <ScalarProperty Name="tbuact" ColumnName="tbuact" />
+                <ScalarProperty Name="tbhact" ColumnName="tbhact" />
+                <ScalarProperty Name="tbfact" ColumnName="tbfact" />
+                <ScalarProperty Name="tbptot2" ColumnName="tbptot2" />
+                <ScalarProperty Name="tbpcos" ColumnName="tbpcos" />
+                <ScalarProperty Name="tbobs" ColumnName="tbobs" />
+                <ScalarProperty Name="tbtotdesc" ColumnName="tbtotdesc" />
+                <ScalarProperty Name="tbdesc" ColumnName="tbdesc" />
+                <ScalarProperty Name="tbporc" ColumnName="tbporc" />
+                <ScalarProperty Name="tbptot" ColumnName="tbptot" />
+                <ScalarProperty Name="tbpbas" ColumnName="tbpbas" />
+                <ScalarProperty Name="tbumin" ColumnName="tbumin" />
+                <ScalarProperty Name="tbcmin" ColumnName="tbcmin" />
+                <ScalarProperty Name="tbest" ColumnName="tbest" />
+                <ScalarProperty Name="tbty5prod" ColumnName="tbty5prod" />
+                <ScalarProperty Name="tbtv1numi" ColumnName="tbtv1numi" />
+                <ScalarProperty Name="tbnumi" ColumnName="tbnumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TS001">
+            <EntityTypeMapping TypeName="BDDistBHFModel.TS001">
+              <MappingFragment StoreEntitySet="TS001">
+                <ScalarProperty Name="sanom2" ColumnName="sanom2" />
+                <ScalarProperty Name="sanom1" ColumnName="sanom1" />
+                <ScalarProperty Name="sanit" ColumnName="sanit" />
+                <ScalarProperty Name="sanumi" ColumnName="sanumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VR_GO_Factura">
+            <EntityTypeMapping TypeName="BDDistBHFModel.VR_GO_Factura">
+              <MappingFragment StoreEntitySet="VR_GO_Factura">
+                <ScalarProperty Name="fvbnumi2" ColumnName="fvbnumi2" />
+                <ScalarProperty Name="fvbprecio" ColumnName="fvbprecio" />
+                <ScalarProperty Name="fvbcant" ColumnName="fvbcant" />
+                <ScalarProperty Name="fvbdesprod" ColumnName="fvbdesprod" />
+                <ScalarProperty Name="fvbcprod" ColumnName="fvbcprod" />
+                <ScalarProperty Name="fvbnumi" ColumnName="fvbnumi" />
+                <ScalarProperty Name="fvanumi2" ColumnName="fvanumi2" />
+                <ScalarProperty Name="fvaalm" ColumnName="fvaalm" />
+                <ScalarProperty Name="fvaimgqr" ColumnName="fvaimgqr" />
+                <ScalarProperty Name="fvaflim" ColumnName="fvaflim" />
+                <ScalarProperty Name="fvaccont" ColumnName="fvaccont" />
+                <ScalarProperty Name="fvadebfis" ColumnName="fvadebfis" />
+                <ScalarProperty Name="fvatotal" ColumnName="fvatotal" />
+                <ScalarProperty Name="fvadesc" ColumnName="fvadesc" />
+                <ScalarProperty Name="fvasubtotal" ColumnName="fvasubtotal" />
+                <ScalarProperty Name="fvaimptc" ColumnName="fvaimptc" />
+                <ScalarProperty Name="fvaimpeo" ColumnName="fvaimpeo" />
+                <ScalarProperty Name="fvaimpsi" ColumnName="fvaimpsi" />
+                <ScalarProperty Name="fvastot" ColumnName="fvastot" />
+                <ScalarProperty Name="fvadescli2" ColumnName="fvadescli2" />
+                <ScalarProperty Name="fvadescli1" ColumnName="fvadescli1" />
+                <ScalarProperty Name="fvacodcli" ColumnName="fvacodcli" />
+                <ScalarProperty Name="fvanitcli" ColumnName="fvanitcli" />
+                <ScalarProperty Name="fvaest" ColumnName="fvaest" />
+                <ScalarProperty Name="fvaautoriz" ColumnName="fvaautoriz" />
+                <ScalarProperty Name="fvanfac" ColumnName="fvanfac" />
+                <ScalarProperty Name="fvafec" ColumnName="fvafec" />
+                <ScalarProperty Name="fvanumi" ColumnName="fvanumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VR_NotaCompra">
+            <EntityTypeMapping TypeName="BDDistBHFModel.VR_NotaCompra">
+              <MappingFragment StoreEntitySet="VR_NotaCompra">
+                <ScalarProperty Name="plazo" ColumnName="plazo" />
+                <ScalarProperty Name="fcaccont" ColumnName="fcaccont" />
+                <ScalarProperty Name="fcaautoriz" ColumnName="fcaautoriz" />
+                <ScalarProperty Name="fcanfac" ColumnName="fcanfac" />
+                <ScalarProperty Name="fcarsocial" ColumnName="fcarsocial" />
+                <ScalarProperty Name="cabtot" ColumnName="cabtot" />
+                <ScalarProperty Name="cabdesc" ColumnName="cabdesc" />
+                <ScalarProperty Name="cabsubtot" ColumnName="cabsubtot" />
+                <ScalarProperty Name="cabpcosto" ColumnName="cabpcosto" />
+                <ScalarProperty Name="cabpcom" ColumnName="cabpcom" />
+                <ScalarProperty Name="cabcant" ColumnName="cabcant" />
+                <ScalarProperty Name="cadesc" ColumnName="cadesc" />
+                <ScalarProperty Name="cabtc1numi" ColumnName="cabtc1numi" />
+                <ScalarProperty Name="caafingreso" ColumnName="caafingreso" />
+                <ScalarProperty Name="caaemision" ColumnName="caaemision" />
+                <ScalarProperty Name="caatotal" ColumnName="caatotal" />
+                <ScalarProperty Name="caadesc" ColumnName="caadesc" />
+                <ScalarProperty Name="caafvcred" ColumnName="caafvcred" />
+                <ScalarProperty Name="tipocompra" ColumnName="tipocompra" />
+                <ScalarProperty Name="caatven" ColumnName="caatven" />
+                <ScalarProperty Name="caanfac" ColumnName="caanfac" />
+                <ScalarProperty Name="cmtelf" ColumnName="cmtelf" />
+                <ScalarProperty Name="cmnit" ColumnName="cmnit" />
+                <ScalarProperty Name="cmrsocial" ColumnName="cmrsocial" />
+                <ScalarProperty Name="cmdesc" ColumnName="cmdesc" />
+                <ScalarProperty Name="caaprov" ColumnName="caaprov" />
+                <ScalarProperty Name="caafdoc" ColumnName="caafdoc" />
+                <ScalarProperty Name="caanumi" ColumnName="caanumi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PlanillaSueldo" FunctionName="BDDistBHFModel.Store.PlanillaSueldo" />
+          <FunctionImportMapping FunctionImportName="sp_dg_RAsistencia" FunctionName="BDDistBHFModel.Store.sp_dg_RAsistencia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.sp_dg_RAsistencia_Result">
+                <ScalarProperty Name="cbnumi" ColumnName="cbnumi" />
+                <ScalarProperty Name="cbdesc" ColumnName="cbdesc" />
+                <ScalarProperty Name="pjent" ColumnName="pjent" />
+                <ScalarProperty Name="pjsal" ColumnName="pjsal" />
+                <ScalarProperty Name="pjfecha" ColumnName="pjfecha" />
+                <ScalarProperty Name="dia" ColumnName="dia" />
+                <ScalarProperty Name="ing1" ColumnName="ing1" />
+                <ScalarProperty Name="sal1" ColumnName="sal1" />
+                <ScalarProperty Name="ing2" ColumnName="ing2" />
+                <ScalarProperty Name="sal2" ColumnName="sal2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_dg_TC011" FunctionName="BDDistBHFModel.Store.sp_dg_TC011" />
+          <FunctionImportMapping FunctionImportName="sp_dg_TP007" FunctionName="BDDistBHFModel.Store.sp_dg_TP007" />
+          <FunctionImportMapping FunctionImportName="sp_dg_TP008" FunctionName="BDDistBHFModel.Store.sp_dg_TP008" />
+          <FunctionImportMapping FunctionImportName="sp_dg_TZ001" FunctionName="BDDistBHFModel.Store.sp_dg_TZ001" />
+          <FunctionImportMapping FunctionImportName="sp_dg_ZY002" FunctionName="BDDistBHFModel.Store.sp_dg_ZY002" />
+          <FunctionImportMapping FunctionImportName="Sp_GetClientes" FunctionName="BDDistBHFModel.Store.Sp_GetClientes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.Sp_GetClientes_Result">
+                <ScalarProperty Name="ccnumi" ColumnName="ccnumi" />
+                <ScalarProperty Name="cccod" ColumnName="cccod" />
+                <ScalarProperty Name="ccdesc" ColumnName="ccdesc" />
+                <ScalarProperty Name="ccdirec" ColumnName="ccdirec" />
+                <ScalarProperty Name="cctelf1" ColumnName="cctelf1" />
+                <ScalarProperty Name="cctelf2" ColumnName="cctelf2" />
+                <ScalarProperty Name="numZona" ColumnName="numZona" />
+                <ScalarProperty Name="descZona" ColumnName="descZona" />
+                <ScalarProperty Name="numDct" ColumnName="numDct" />
+                <ScalarProperty Name="descDct" ColumnName="descDct" />
+                <ScalarProperty Name="ccdctnum" ColumnName="ccdctnum" />
+                <ScalarProperty Name="numCat" ColumnName="numCat" />
+                <ScalarProperty Name="descCat" ColumnName="descCat" />
+                <ScalarProperty Name="ccest" ColumnName="ccest" />
+                <ScalarProperty Name="cclat" ColumnName="cclat" />
+                <ScalarProperty Name="cclongi" ColumnName="cclongi" />
+                <ScalarProperty Name="cceven" ColumnName="cceven" />
+                <ScalarProperty Name="ccobs" ColumnName="ccobs" />
+                <ScalarProperty Name="ccfnac" ColumnName="ccfnac" />
+                <ScalarProperty Name="ccnomfac" ColumnName="ccnomfac" />
+                <ScalarProperty Name="ccnit" ColumnName="ccnit" />
+                <ScalarProperty Name="ccfecing" ColumnName="ccfecing" />
+                <ScalarProperty Name="ccultped" ColumnName="ccultped" />
+                <ScalarProperty Name="ccuact" ColumnName="ccuact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_go_CM001" FunctionName="BDDistBHFModel.Store.sp_go_CM001" />
+          <FunctionImportMapping FunctionImportName="sp_go_NV001" FunctionName="BDDistBHFModel.Store.sp_go_NV001">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.sp_go_NV001_Result">
+                <ScalarProperty Name="oanumi" ColumnName="oanumi" />
+                <ScalarProperty Name="CodCliente" ColumnName="CodCliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CI" ColumnName="CI" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="FechaPedido" ColumnName="FechaPedido" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_go_Reportes" FunctionName="BDDistBHFModel.Store.sp_go_Reportes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.sp_go_Reportes_Result">
+                <ScalarProperty Name="CodDB" ColumnName="CodDB" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+                <ScalarProperty Name="Carrito" ColumnName="Carrito" />
+                <ScalarProperty Name="Botellon" ColumnName="Botellon" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_go_TC001" FunctionName="BDDistBHFModel.Store.sp_go_TC001" />
+          <FunctionImportMapping FunctionImportName="sp_go_TC002" FunctionName="BDDistBHFModel.Store.sp_go_TC002" />
+          <FunctionImportMapping FunctionImportName="sp_go_TC004" FunctionName="BDDistBHFModel.Store.sp_go_TC004" />
+          <FunctionImportMapping FunctionImportName="sp_go_TC004_appMovil" FunctionName="BDDistBHFModel.Store.sp_go_TC004_appMovil" />
+          <FunctionImportMapping FunctionImportName="sp_go_TC009" FunctionName="BDDistBHFModel.Store.sp_go_TC009" />
+          <FunctionImportMapping FunctionImportName="sp_go_TC010" FunctionName="BDDistBHFModel.Store.sp_go_TC010" />
+          <FunctionImportMapping FunctionImportName="sp_go_TCA001" FunctionName="BDDistBHFModel.Store.sp_go_TCA001" />
+          <FunctionImportMapping FunctionImportName="sp_go_TCI001" FunctionName="BDDistBHFModel.Store.sp_go_TCI001" />
+          <FunctionImportMapping FunctionImportName="sp_go_TCP001" FunctionName="BDDistBHFModel.Store.sp_go_TCP001" />
+          <FunctionImportMapping FunctionImportName="sp_go_TI002" FunctionName="BDDistBHFModel.Store.sp_go_TI002" />
+          <FunctionImportMapping FunctionImportName="sp_go_TO0023" FunctionName="BDDistBHFModel.Store.sp_go_TO0023" />
+          <FunctionImportMapping FunctionImportName="sp_go_TS002" FunctionName="BDDistBHFModel.Store.sp_go_TS002" />
+          <FunctionImportMapping FunctionImportName="sp_Insert_TC004" FunctionName="BDDistBHFModel.Store.sp_Insert_TC004" />
+          <FunctionImportMapping FunctionImportName="sp_Insert_TFV001" FunctionName="BDDistBHFModel.Store.sp_Insert_TFV001">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.sp_Insert_TFV001_Result">
+                <ScalarProperty Name="fvanumi" ColumnName="fvanumi" />
+                <ScalarProperty Name="fvafec" ColumnName="fvafec" />
+                <ScalarProperty Name="fvanfac" ColumnName="fvanfac" />
+                <ScalarProperty Name="fvaautoriz" ColumnName="fvaautoriz" />
+                <ScalarProperty Name="fvaest" ColumnName="fvaest" />
+                <ScalarProperty Name="fvanitcli" ColumnName="fvanitcli" />
+                <ScalarProperty Name="fvacodcli" ColumnName="fvacodcli" />
+                <ScalarProperty Name="fvadescli1" ColumnName="fvadescli1" />
+                <ScalarProperty Name="fvadescli2" ColumnName="fvadescli2" />
+                <ScalarProperty Name="fvastot" ColumnName="fvastot" />
+                <ScalarProperty Name="fvaimpsi" ColumnName="fvaimpsi" />
+                <ScalarProperty Name="fvaimpeo" ColumnName="fvaimpeo" />
+                <ScalarProperty Name="fvaimptc" ColumnName="fvaimptc" />
+                <ScalarProperty Name="fvasubtotal" ColumnName="fvasubtotal" />
+                <ScalarProperty Name="fvadesc" ColumnName="fvadesc" />
+                <ScalarProperty Name="fvatotal" ColumnName="fvatotal" />
+                <ScalarProperty Name="fvadebfis" ColumnName="fvadebfis" />
+                <ScalarProperty Name="fvaccont" ColumnName="fvaccont" />
+                <ScalarProperty Name="fvaflim" ColumnName="fvaflim" />
+                <ScalarProperty Name="fvaimgqr" ColumnName="fvaimgqr" />
+                <ScalarProperty Name="fvaalm" ColumnName="fvaalm" />
+                <ScalarProperty Name="fvanumi2" ColumnName="fvanumi2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Insert_TL002" FunctionName="BDDistBHFModel.Store.sp_Insert_TL002" />
+          <FunctionImportMapping FunctionImportName="sp_Insert_TO001" FunctionName="BDDistBHFModel.Store.sp_Insert_TO001">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.sp_Insert_TO001_Result">
+                <ScalarProperty Name="oanumi" ColumnName="oanumi" />
+                <ScalarProperty Name="oafdoc" ColumnName="oafdoc" />
+                <ScalarProperty Name="oahora" ColumnName="oahora" />
+                <ScalarProperty Name="oaccli" ColumnName="oaccli" />
+                <ScalarProperty Name="oazona" ColumnName="oazona" />
+                <ScalarProperty Name="oarepa" ColumnName="oarepa" />
+                <ScalarProperty Name="oaobs" ColumnName="oaobs" />
+                <ScalarProperty Name="oaobs2" ColumnName="oaobs2" />
+                <ScalarProperty Name="oaest" ColumnName="oaest" />
+                <ScalarProperty Name="oaap" ColumnName="oaap" />
+                <ScalarProperty Name="oapg" ColumnName="oapg" />
+                <ScalarProperty Name="oafact" ColumnName="oafact" />
+                <ScalarProperty Name="oahact" ColumnName="oahact" />
+                <ScalarProperty Name="oauact" ColumnName="oauact" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Mam_Asiento" FunctionName="BDDistBHFModel.Store.sp_Mam_Asiento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.sp_Mam_Asiento_Result">
+                <ScalarProperty Name="canumi" ColumnName="canumi" />
+                <ScalarProperty Name="nro" ColumnName="nro" />
+                <ScalarProperty Name="cadesc" ColumnName="cadesc" />
+                <ScalarProperty Name="chporcen" ColumnName="chporcen" />
+                <ScalarProperty Name="chdebe" ColumnName="chdebe" />
+                <ScalarProperty Name="chhaber" ColumnName="chhaber" />
+                <ScalarProperty Name="tc" ColumnName="tc" />
+                <ScalarProperty Name="debe" ColumnName="debe" />
+                <ScalarProperty Name="haber" ColumnName="haber" />
+                <ScalarProperty Name="debesus" ColumnName="debesus" />
+                <ScalarProperty Name="habersus" ColumnName="habersus" />
+                <ScalarProperty Name="variable" ColumnName="variable" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Mam_ReporteVentas" FunctionName="BDDistBHFModel.Store.sp_Mam_ReporteVentas" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TC002" FunctionName="BDDistBHFModel.Store.sp_Mam_TC002" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TC005C" FunctionName="BDDistBHFModel.Store.sp_Mam_TC005C" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TCA00121Cheque" FunctionName="BDDistBHFModel.Store.sp_Mam_TCA00121Cheque" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TI005" FunctionName="BDDistBHFModel.Store.sp_Mam_TI005" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TM001" FunctionName="BDDistBHFModel.Store.sp_Mam_TM001" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TM001SalidaChofer" FunctionName="BDDistBHFModel.Store.sp_Mam_TM001SalidaChofer" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TO004" FunctionName="BDDistBHFModel.Store.sp_Mam_TO004" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TO005" FunctionName="BDDistBHFModel.Store.sp_Mam_TO005" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TV00121" FunctionName="BDDistBHFModel.Store.sp_Mam_TV00121" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_TV00121Cheque" FunctionName="BDDistBHFModel.Store.sp_Mam_TV00121Cheque" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_VentasCredito" FunctionName="BDDistBHFModel.Store.sp_Mam_VentasCredito">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.sp_Mam_VentasCredito_Result">
+                <ScalarProperty Name="numicliente" ColumnName="numicliente" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="credito" ColumnName="credito" />
+                <ScalarProperty Name="aporte" ColumnName="aporte" />
+                <ScalarProperty Name="deuda" ColumnName="deuda" />
+                <ScalarProperty Name="numiventa" ColumnName="numiventa" />
+                <ScalarProperty Name="aabdes" ColumnName="aabdes" />
+                <ScalarProperty Name="fechaventa" ColumnName="fechaventa" />
+                <ScalarProperty Name="fechacredito" ColumnName="fechacredito" />
+                <ScalarProperty Name="tctotcre" ColumnName="tctotcre" />
+                <ScalarProperty Name="tdnrorecibo" ColumnName="tdnrorecibo" />
+                <ScalarProperty Name="tdfechaPago" ColumnName="tdfechaPago" />
+                <ScalarProperty Name="tdnrodoc" ColumnName="tdnrodoc" />
+                <ScalarProperty Name="tdmonto" ColumnName="tdmonto" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Mam_VentasEstadisticos" FunctionName="BDDistBHFModel.Store.sp_Mam_VentasEstadisticos" />
+          <FunctionImportMapping FunctionImportName="sp_Mam_VentasGraficas" FunctionName="BDDistBHFModel.Store.sp_Mam_VentasGraficas" />
+          <FunctionImportMapping FunctionImportName="sp_nfactura" FunctionName="BDDistBHFModel.Store.sp_nfactura" />
+          <FunctionImportMapping FunctionImportName="vis_promedioConsumo" FunctionName="BDDistBHFModel.Store.vis_promedioConsumo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.vis_promedioConsumo_Result">
+                <ScalarProperty Name="ccnumi" ColumnName="ccnumi" />
+                <ScalarProperty Name="ccdesc" ColumnName="ccdesc" />
+                <ScalarProperty Name="cczona" ColumnName="cczona" />
+                <ScalarProperty Name="cctelf1" ColumnName="cctelf1" />
+                <ScalarProperty Name="ccdirec" ColumnName="ccdirec" />
+                <ScalarProperty Name="ccest" ColumnName="ccest" />
+                <ScalarProperty Name="ccprconsu" ColumnName="ccprconsu" />
+                <ScalarProperty Name="fTentativa" ColumnName="fTentativa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="vis_transacciones" FunctionName="BDDistBHFModel.Store.vis_transacciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDDistBHFModel.vis_transacciones_Result">
+                <ScalarProperty Name="numi" ColumnName="numi" />
+                <ScalarProperty Name="odnota" ColumnName="odnota" />
+                <ScalarProperty Name="fdoc" ColumnName="fdoc" />
+                <ScalarProperty Name="fact" ColumnName="fact" />
+                <ScalarProperty Name="hact" ColumnName="hact" />
+                <ScalarProperty Name="uact" ColumnName="uact" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TCA0011">
+            <EntityTypeMapping TypeName="BDDistBHFModel.TCA0011">
+              <MappingFragment StoreEntitySet="TCA0011">
+                <ScalarProperty Name="cabtca1numi" ColumnName="cabtca1numi" />
+                <ScalarProperty Name="cabstockf" ColumnName="cabstockf" />
+                <ScalarProperty Name="cabstocka" ColumnName="cabstocka" />
+                <ScalarProperty Name="cabnfr" ColumnName="cabnfr" />
+                <ScalarProperty Name="cabpven" ColumnName="cabpven" />
+                <ScalarProperty Name="cabputi" ColumnName="cabputi" />
+                <ScalarProperty Name="cabpcostoun" ColumnName="cabpcostoun" />
+                <ScalarProperty Name="cabpcostocj" ColumnName="cabpcostocj" />
+                <ScalarProperty Name="cabtot" ColumnName="cabtot" />
+                <ScalarProperty Name="cabdescpro2un" ColumnName="cabdescpro2un" />
+                <ScalarProperty Name="cabdescpro2cj" ColumnName="cabdescpro2cj" />
+                <ScalarProperty Name="cabdescpro1un" ColumnName="cabdescpro1un" />
+                <ScalarProperty Name="cabdescpro1cj" ColumnName="cabdescpro1cj" />
+                <ScalarProperty Name="cabdescun" ColumnName="cabdescun" />
+                <ScalarProperty Name="cabdesccj" ColumnName="cabdesccj" />
+                <ScalarProperty Name="cabporc" ColumnName="cabporc" />
+                <ScalarProperty Name="cabpcomun" ColumnName="cabpcomun" />
+                <ScalarProperty Name="cabpcomcj" ColumnName="cabpcomcj" />
+                <ScalarProperty Name="cabsubtot" ColumnName="cabsubtot" />
+                <ScalarProperty Name="cabcantun" ColumnName="cabcantun" />
+                <ScalarProperty Name="cabcantcj" ColumnName="cabcantcj" />
+                <ScalarProperty Name="cabtc1numi" ColumnName="cabtc1numi" />
+                <ScalarProperty Name="cabnumi" ColumnName="cabnumi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

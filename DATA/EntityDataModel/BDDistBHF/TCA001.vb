@@ -46,5 +46,17 @@ Partial Public Class TCA001
 
     Public Property caaconsigna As Nullable(Of Integer)
 
+    Public Property caadescpro1 As Nullable(Of Decimal)
+
+    Public Property caadescpro2 As Nullable(Of Decimal)
+
+    Public Property caadesctot As Nullable(Of Decimal)
+
+    Public Property caaretenc As Nullable(Of Integer)
+
+    Public Property caaasientoi As Nullable(Of Integer)
+
+    Public Property caaffactura As Nullable(Of Date)
+
 
 End Class

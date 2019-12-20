@@ -12,17 +12,27 @@ Imports System
 Imports System.Collections.Generic
 
 
-Partial Public Class TO001C
+Partial Public Class sp_dg_RAsistencia_Result
 
-    Public Property oacnumi As Integer
+    Public Property cbnumi As Integer
 
-    Public Property oacoanumi As Integer
+    Public Property cbdesc As String
 
-    Public Property oaccbnumi As Integer
+    Public Property pjent As String
 
-    Public Property oacnrofac As Nullable(Of Long)
+    Public Property pjsal As String
 
-    Public Property oacnconc As Nullable(Of Integer)
+    Public Property pjfecha As Nullable(Of Date)
+
+    Public Property dia As String
+
+    Public Property ing1 As String
+
+    Public Property sal1 As String
+
+    Public Property ing2 As String
+
+    Public Property sal2 As String
 
 
 End Class

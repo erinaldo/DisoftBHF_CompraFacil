@@ -116,7 +116,8 @@ Public Class F0G_MovimientoChoferEntrada
         cbConcepto.ReadOnly = False
         tbObservacion.ReadOnly = False
         tbFecha.IsInputReadOnly = False
-        grmovimiento.Enabled = False
+        'grmovimiento.Enabled = False
+        grmovimiento.Enabled = True
 
         MBtGrabar.Enabled = True
     End Sub
@@ -469,7 +470,9 @@ Public Class F0G_MovimientoChoferEntrada
         If (_fnAccesible()) Then
             If (cbConcepto.Value = 10) Then
                 If (e.Column.Index = grdetalle.RootTable.Columns("DEVOLUCION").Index) Then
-                    e.Cancel = False
+                    'e.Cancel = False
+                    'Lo cambiamos para que ya no modifiquen la grilla porque ahora calcula automáticamente
+                    e.Cancel = True
                 Else
                     e.Cancel = True
                 End If
@@ -857,7 +860,7 @@ Public Class F0G_MovimientoChoferEntrada
         'Aqui se trae los pedido de un determinado chofer que esta cerrada su caja 
 
         Dim dtPedidosEntregados As DataTable = New DataTable()
-        dtPedidosEntregados = L_prConciliacionObtenerPedidoEntregadoGral(_codChofer, tbFecha.Value)
+        dtPedidosEntregados = L_prConciliacionObtenerPedidoEntregadoGral(_codChofer, tbFecha.Value, lbcodigo.Text)
         dtPedidosEntregados.AcceptChanges()
         If (dtPedidosEntregados.Rows.Count > 0) Then
             For j As Integer = 0 To TablaPrincipal.Rows.Count - 1 Step 1
@@ -865,7 +868,8 @@ Public Class F0G_MovimientoChoferEntrada
                 If (IsDBNull(TablaPrincipal.Rows(j).Item("estado"))) Then
                     flag = True
                 Else
-                    If (Not TablaPrincipal.Rows(j).Item("estado") = 1) Then
+                    'If (Not TablaPrincipal.Rows(j).Item("estado") = 1) Then
+                    If (TablaPrincipal.Rows(j).Item("estado") = 1) Then
                         flag = True
                     End If
                 End If

@@ -18,9 +18,35 @@ Partial Public Class TCA0011
 
     Public Property cabtc1numi As Nullable(Of Integer)
 
-    Public Property cabcant As Nullable(Of Decimal)
+    Public Property cabcantcj As Nullable(Of Decimal)
 
-    Public Property cabpcom As Nullable(Of Decimal)
+    Public Property cabcantun As Nullable(Of Integer)
+
+    Public Property cabsubtot As Nullable(Of Decimal)
+
+    Public Property cabpcomcj As Nullable(Of Decimal)
+
+    Public Property cabpcomun As Nullable(Of Decimal)
+
+    Public Property cabporc As Nullable(Of Decimal)
+
+    Public Property cabdesccj As Nullable(Of Decimal)
+
+    Public Property cabdescun As Nullable(Of Decimal)
+
+    Public Property cabdescpro1cj As Nullable(Of Decimal)
+
+    Public Property cabdescpro1un As Nullable(Of Decimal)
+
+    Public Property cabdescpro2cj As Nullable(Of Decimal)
+
+    Public Property cabdescpro2un As Nullable(Of Decimal)
+
+    Public Property cabtot As Nullable(Of Decimal)
+
+    Public Property cabpcostocj As Nullable(Of Decimal)
+
+    Public Property cabpcostoun As Nullable(Of Decimal)
 
     Public Property cabputi As Nullable(Of Decimal)
 
