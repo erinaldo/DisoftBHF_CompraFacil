@@ -199,7 +199,7 @@ Public Class F02_Compra
         tbMdesc.Value = montodesc
 
         ' tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabtot"), AggregateFunction.Sum) - montodesc
-        tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabsubtot"), AggregateFunction.Sum) - montodesc
+        tbtotal.Value = dgjDetalle.GetTotal(dgjDetalle.RootTable.Columns("cabsubtot"), AggregateFunction.Sum) - (montodesc + tbDescuentoPro1.Value + tvDescuento02.Value)
 
     End Sub
     Private Sub dgjDetalle_EditingCell(sender As Object, e As EditingCellEventArgs) Handles dgjDetalle.EditingCell
@@ -436,10 +436,11 @@ Public Class F02_Compra
         tbNDui.Clear()
         tbSACF.Clear()
 
-
-        tbMdesc.Value = 0
-        tbtotal.Value = 0
         tbSubtotalC.Value = 0
+        tbMdesc.Value = 0
+        tbDescuentoPro1.Value = 0
+        tvDescuento02.Value = 0
+        tbtotal.Value = 0
 
 
         'ComboBox
@@ -498,13 +499,18 @@ Public Class F02_Compra
                     Me.tbFechaVenc.Value = .GetValue("caafvcred").ToString
                     Me.swEmision.Value = .GetValue("caaemision")
                     Me.swConsigna.Value = .GetValue("caaconsigna")
+                    Me.dtiFfactura.Value = .GetValue("caaffactura")
+                    Me.tbDescuentoPro1.Value = .GetValue("caadescpro1")
+                    Me.tvDescuento02.Value = .GetValue("caadescpro2")
+
+
                     'If (IsDBNull(.GetValue("asiento"))) Then
                     '    Asiento = ""
                     'Else
                     '    Asiento = .GetValue("asiento")
                     'End If
 
-                    'a.caatven, a.caafvcred, a.caamon, a.caaest, a.caadesc, a.caatotal, a.caaemision, a.caaconsigna
+
                     'Aqui se coloca los datos de la grilla de los Equipos
                     P_prArmarGrillaDetalle(tbCodigo.Text)
 
@@ -639,12 +645,15 @@ Public Class F02_Compra
         Dim fvcred As String
         Dim mon As String
         Dim desc As Double
+        Dim descpro1 As Double
+        Dim descpro2 As Double
+        Dim desctot As Double
         Dim total As Double
         Dim emision As String
         Dim consigna As String
         Dim retencion As String
         Dim asiento As String
-        Dim fingreso As String
+        Dim ffactura As String
 
 
         If (BoNuevo) Then
@@ -659,23 +668,26 @@ Public Class F02_Compra
                 fvcred = IIf(swTipoVenta.Value = True, Now.Date.ToString("yyyy/MM/dd"), tbFechaVenc.Value.ToString("yyyy/MM/dd"))
                 mon = 1
                 desc = tbMdesc.Value
+                descpro1 = tbDescuentoPro1.Value
+                descpro2 = tvDescuento02.Value
+                desctot = desc + descpro1 + descpro2
                 total = tbtotal.Value
                 emision = IIf(swEmision.Value = True, 1, 0)
                 consigna = IIf(swConsigna.Value = True, 1, 0)
                 retencion = IIf(swRetencion.Value = True, 1, 0)
                 asiento = IIf(swAsiento.Value = True, 1, 0)
-                fingreso = dtiFfactura.Value.ToString("yyyy/MM/dd")
+                ffactura = dtiFfactura.Value.ToString("yyyy/MM/dd")
 
                 dtiFechaCompra.Select()
 
-                Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcant", "cabpcom", "cabpcosto", "cabsubtot", "cabporc", "cabdesc", "cabtot", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
+                Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcantcj", "cabcantun", "cabsubtot", "cabpcomcj", "cabpcomun", "cabporc", "cabdesccj", "cabdescun", "cabdescpro1cj", "cabdescpro1un", "cabdescpro2cj", "cabdescpro2un", "cabtot", "cabpcostocj", "cabpcostoun", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
 
                 RecuperarDatosTFC001()  'Recupera datos para grabar en la BDDiconCF en la Tabla TFC001
                 If ValidarDescuentos() = False Then
                     Exit Sub
                 End If
                 'Grabar
-                Dim res As Boolean = L_fnCompraGrabar(numi, fdoc, prov, nfac, obs, dt, tven, fvcred, mon, desc, total, emision, consigna, retencion, asiento, fingreso, _detalleCompras)
+                Dim res As Boolean = L_fnCompraGrabar(numi, fdoc, prov, nfac, obs, dt, tven, fvcred, mon, desc, descpro1, descpro2, desctot, total, emision, consigna, retencion, asiento, ffactura, _detalleCompras)
 
 
                 If (res) Then
@@ -710,20 +722,24 @@ Public Class F02_Compra
                 fvcred = IIf(swTipoVenta.Value = True, Now.Date.ToString("yyyy/MM/dd"), tbFechaVenc.Value.ToString("yyyy/MM/dd"))
                 mon = 1
                 desc = tbMdesc.Value
+                descpro1 = tbDescuentoPro1.Value
+                descpro2 = tvDescuento02.Value
+                desctot = desc + descpro1 + descpro2
                 total = tbtotal.Value
                 emision = IIf(swEmision.Value = True, 1, 0)
                 consigna = IIf(swConsigna.Value = True, 1, 0)
                 retencion = IIf(swRetencion.Value = True, 1, 0)
                 asiento = IIf(swAsiento.Value = True, 1, 0)
+                ffactura = dtiFfactura.Value.ToString("yyyy/MM/dd")
 
                 dtiFechaCompra.Select()
 
                 'Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcant", "cabpcom", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
-                Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcant", "cabpcom", "cabsubtot", "cabporc", "cabdesc", "cabtot", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
+                Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable).DefaultView.ToTable(False, "cabnumi", "cabtc1numi", "cabcantcj", "cabcantun", "cabsubtot", "cabpcomcj", "cabpcomun", "cabporc", "cabdesccj", "cabdescun", "cabdescpro1cj", "cabdescpro1un", "cabdescpro2cj", "cabdescpro2un", "cabtot", "cabpcostocj", "cabpcostoun", "cabputi", "cabpven", "cabnfr", "cabstocka", "cabstockf", "cabtca1numi", "estado")
 
                 RecuperarDatosTFC001()  'Recupera datos para grabar en la BDDiconCF en la Tabla TFC001
                 'Grabar
-                Dim res As Boolean = L_fnCompraModificar(numi, fdoc, prov, nfac, obs, dt, tven, fvcred, mon, desc, total, emision, consigna, retencion, asiento, _detalleCompras)
+                Dim res As Boolean = L_fnCompraModificar(numi, fdoc, prov, nfac, obs, dt, tven, fvcred, mon, desc, descpro1, descpro2, desctot, total, emision, consigna, retencion, asiento, ffactura, _detalleCompras)
 
                 If (res) Then
 
@@ -781,11 +797,11 @@ Public Class F02_Compra
             fndui = tbNDui.Text
 
             fautoriz = tbNAutorizacion.Text
-            fmonto = tbtotal.Value.ToString + tbMdesc.Value
+            fmonto = tbtotal.Value.ToString + tbMdesc.Value + tbDescuentoPro1.Value + tvDescuento02.Value
             sujetoCreditoFiscal = tbSACF.Text
             nosujetoCreditoFiscal = tbtotal.Value.ToString - sujetoCreditoFiscal
             subTotal = fmonto - nosujetoCreditoFiscal
-            fdesc = tbMdesc.Value.ToString
+            fdesc = tbMdesc.Value + tbDescuentoPro1.Value + tvDescuento02.Value
             'tbImporteBaseCreditoFiscal.Value = TbSubTotal.Value - TbdDescuento.Value
             importeBaseCreditoFiscal = fmonto - fdesc
             creditoFiscal = importeBaseCreditoFiscal * 0.13
@@ -1009,6 +1025,15 @@ Public Class F02_Compra
         With dgjBusqueda.RootTable.Columns("caadesc")
             .Visible = False
         End With
+        With dgjBusqueda.RootTable.Columns("caadescpro1")
+            .Visible = False
+        End With
+        With dgjBusqueda.RootTable.Columns("caadescpro2")
+            .Visible = False
+        End With
+        With dgjBusqueda.RootTable.Columns("caadesctot")
+            .Visible = False
+        End With
         With dgjBusqueda.RootTable.Columns("caatotal")
             .Caption = "Total"
             .Width = 100
@@ -1036,7 +1061,9 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-
+        End With
+        With dgjBusqueda.RootTable.Columns("caaffactura")
+            .Visible = False
         End With
         'Habilitar Filtradores
         With dgjBusqueda
@@ -1107,7 +1134,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-            '.CellStyle.BackColor = Color.AliceBlue
+            .CellStyle.BackColor = Color.SkyBlue
             .FormatString = "0.00"
         End With
         With dgjDetalle.RootTable.Columns("cabcantun")
@@ -1118,7 +1145,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-            '.CellStyle.BackColor = Color.AliceBlue
+            .CellStyle.BackColor = Color.SkyBlue
             .FormatString = "0.00"
         End With
         With dgjDetalle.RootTable.Columns("cabsubtot")
@@ -1129,6 +1156,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
+            .CellStyle.BackColor = Color.SkyBlue
             .FormatString = "0.00"
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
             .TotalFormatString = "0.00"
@@ -1189,7 +1217,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-            '.CellStyle.BackColor = Color.AliceBlue
+            .CellStyle.BackColor = Color.SkyBlue
             .FormatString = "0.00"
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
             .TotalFormatString = "0.00"
@@ -1202,7 +1230,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-            '.CellStyle.BackColor = Color.AliceBlue
+            .CellStyle.BackColor = Color.Turquoise
             .FormatString = "0.0000"
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
             .TotalFormatString = "0.0000"
@@ -1214,7 +1242,7 @@ Public Class F02_Compra
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-            .Visible = True
+            .Visible = False
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.0000"
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
@@ -1228,7 +1256,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-            '.CellStyle.BackColor = Color.AliceBlue
+            .CellStyle.BackColor = Color.Turquoise
             .FormatString = "0.0000"
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
             .TotalFormatString = "0.0000"
@@ -1240,14 +1268,14 @@ Public Class F02_Compra
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-            .Visible = True
+            .Visible = False
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.0000"
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
             .TotalFormatString = "0.0000"
         End With
         With dgjDetalle.RootTable.Columns("cabtot")
-            .Caption = "Total"
+            .Caption = "Importe"
             .Width = 100
             .HeaderStyle.Font = FtTitulo
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
@@ -1276,7 +1304,7 @@ Public Class F02_Compra
             .Width = 100
             .HeaderStyle.Font = FtTitulo
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
-            .CellStyle.Font = FtNormal
+            .CellStyle.Font = FtTitulo
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
             .FormatString = "0.0000"
@@ -2168,6 +2196,7 @@ Public Class F02_Compra
         Dim CantidadCaja As Double
         Dim Descuento01 As Double
         Dim ImporteBruto As Double
+        Dim CostoTotal As Double
         Dim PrecioCostoCaja As Double
         Dim CantidadUnitaria As Double
         If (dt.Rows.Count > 0 And tbObs.ReadOnly = False) Then
@@ -2181,18 +2210,17 @@ Public Class F02_Compra
                     CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabdescpro1un") = DescuentoUnitario
 
                     '''''''Aqui Calculo el descuento
-                    PrecioCostoCaja = (dt.Rows(i).Item("cabpcomcj") - (dt.Rows(i).Item("cabdescun") + dt.Rows(i).Item("cabdescpro1un") + dt.Rows(i).Item("cabdescpro2un"))) * 0.87
+                    CostoTotal = (dt.Rows(i).Item("cabsubtot") - (dt.Rows(i).Item("cabdesccj") + dt.Rows(i).Item("cabdescpro1cj") + dt.Rows(i).Item("cabdescpro2cj")))
+                    PrecioCostoCaja = (dt.Rows(i).Item("cabsubtot") - (dt.Rows(i).Item("cabdesccj") + dt.Rows(i).Item("cabdescpro1cj") + dt.Rows(i).Item("cabdescpro2cj"))) * 0.87
                     PrecioCostoCaja = PrecioCostoCaja / dt.Rows(i).Item("cabcantcj")
                     CantidadUnitaria = dt.Rows(i).Item("cabcantun") / dt.Rows(i).Item("cabcantcj")
                     If (PrecioCostoCaja > 0 And CantidadUnitaria > 0) Then
+                        CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabtot") = CostoTotal
                         CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabpcostocj") = PrecioCostoCaja
                         CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabpcostoun") = PrecioCostoCaja / CantidadUnitaria
                     End If
                     '''''''''
-
-
                 End If
-
             Next
 
             tbtotal.Value = (tbSubtotalC.Value - (tbMdesc.Value + tbDescuentoPro1.Value + tvDescuento02.Value))
@@ -2206,6 +2234,7 @@ Public Class F02_Compra
         Dim CantidadCaja As Double
         Dim Descuento01 As Double
         Dim ImporteBruto As Double
+        Dim CostoTotal As Double
         Dim PrecioCostoCaja As Double
         Dim CantidadUnitaria As Double
         If (dt.Rows.Count > 0 And tbObs.ReadOnly = False) Then
@@ -2218,10 +2247,13 @@ Public Class F02_Compra
                     DescuentoUnitario = Descuento01 / CantidadCaja
                     CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabdescpro2un") = DescuentoUnitario
                     '''''''Aqui Calculo el descuento
-                    PrecioCostoCaja = (dt.Rows(i).Item("cabpcomcj") - (dt.Rows(i).Item("cabdescun") + dt.Rows(i).Item("cabdescpro1un") + dt.Rows(i).Item("cabdescpro2un"))) * 0.87
+                    CostoTotal = (dt.Rows(i).Item("cabsubtot") - (dt.Rows(i).Item("cabdesccj") + dt.Rows(i).Item("cabdescpro1cj") + dt.Rows(i).Item("cabdescpro2cj")))
+                    PrecioCostoCaja = (dt.Rows(i).Item("cabsubtot") - (dt.Rows(i).Item("cabdesccj") + dt.Rows(i).Item("cabdescpro1cj") + dt.Rows(i).Item("cabdescpro2cj"))) * 0.87
+
                     PrecioCostoCaja = PrecioCostoCaja / dt.Rows(i).Item("cabcantcj")
                     CantidadUnitaria = dt.Rows(i).Item("cabcantun") / dt.Rows(i).Item("cabcantcj")
                     If (PrecioCostoCaja > 0 And CantidadUnitaria > 0) Then
+                        CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabtot") = CostoTotal
                         CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabpcostocj") = PrecioCostoCaja
                         CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabpcostoun") = PrecioCostoCaja / CantidadUnitaria
                     End If
