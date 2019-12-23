@@ -1600,10 +1600,21 @@ Public Class F02_Compra
                     CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabcantcj") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabcantcj")
                     CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot")
                     CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot")
+
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdescpro1cj") = 0
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdescpro1un") = 0
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdescpro2cj") = 0
+                    CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdescpro2un") = 0
+
                 Else
                     If (e.Column.Key.Equals("cabcantcj")) Then
                         dgjDetalle.SetValue("cabcantun", dgjDetalle.GetValue("cabcantcj") * conv)
                         dgjDetalle.SetValue("cabpcomcj", dgjDetalle.GetValue("cabsubtot") / dgjDetalle.GetValue("cabcantcj"))
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabcantcj") = dgjDetalle.GetValue("cabcantcj")
+                        Dim descuento As Double = tbDescuentoPro1.Value
+                        Dim TotalBruto As Double = tbSubtotalC.Value
+                        CalcularDescuento01(TotalBruto, descuento)
+                        CalcularDescuento02(TotalBruto, tvDescuento02.Value)
                     End If
                 End If
                 If (Not IsNumeric(dgjDetalle.GetValue("cabcantun")) Or dgjDetalle.GetValue("cabcantun").ToString = String.Empty) Then
@@ -1624,6 +1635,11 @@ Public Class F02_Compra
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcomcj") = 0 ' CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcomcj")
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcomun") = 0
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") = 0
+
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdescpro1cj") = 0
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdescpro1un") = 0
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdescpro2cj") = 0
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabdescpro2un") = 0
                     Else
                         dgjDetalle.SetValue("cabpcomcj", dgjDetalle.GetValue("cabsubtot") / dgjDetalle.GetValue("cabcantcj"))
 
@@ -1646,6 +1662,11 @@ Public Class F02_Compra
 
                         _prCalcularPrecioTotal()
 
+                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot") = dgjDetalle.GetValue("cabsubtot")
+                        Dim descuento As Double = tbDescuentoPro1.Value
+                        Dim TotalBruto As Double = tbSubtotalC.Value
+                        CalcularDescuento01(TotalBruto, descuento)
+                        CalcularDescuento02(TotalBruto, tvDescuento02.Value)
                     End If
 
                     If (dgjDetalle.GetValue("cabtca1numi") <> 0) Then
@@ -1737,10 +1758,14 @@ Public Class F02_Compra
                         CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabsubtot") = dgjDetalle.GetValue("cabsubtot")
 
 
-                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcostocj") = (CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabtot") * 0.87) / dgjDetalle.GetValue("cabcantcj")
-                        CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcostoun") = CType(dgjDetalle.DataSource, DataTable).Rows(pos).Item("cabpcostocj") / conv
-
                         _prCalcularPrecioTotal()
+
+
+
+                        Dim descuento As Double = tbDescuentoPro1.Value
+                        Dim TotalBruto As Double = tbSubtotalC.Value
+                        CalcularDescuento01(TotalBruto, descuento)
+                        CalcularDescuento02(TotalBruto, tvDescuento02.Value)
 
                     Else
                         Dim lin As Integer = dgjDetalle.GetValue("cabnumi")
@@ -2134,6 +2159,107 @@ Public Class F02_Compra
         P_Global.Visualizador.CRV1.ReportSource = objrep 'Comentar
         P_Global.Visualizador.Show() 'Comentar
         P_Global.Visualizador.BringToFront() 'Comentar
+    End Sub
+
+    Public Sub CalcularDescuento01(TotalBruto As Double, descuento As Double)
+
+        Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable)
+        Dim DescuentoUnitario As Double
+        Dim CantidadCaja As Double
+        Dim Descuento01 As Double
+        Dim ImporteBruto As Double
+        Dim PrecioCostoCaja As Double
+        Dim CantidadUnitaria As Double
+        If (dt.Rows.Count > 0 And tbObs.ReadOnly = False) Then
+            For i As Integer = 0 To dt.Rows.Count - 1 Step 1
+                CantidadCaja = dt.Rows(i).Item("cabcantcj")
+                ImporteBruto = dt.Rows(i).Item("cabsubtot")
+                If (ImporteBruto > 0 And CantidadCaja > 0 And TotalBruto > 0) Then
+                    Descuento01 = ((ImporteBruto * descuento) / TotalBruto)
+                    CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabdescpro1cj") = Descuento01
+                    DescuentoUnitario = Descuento01 / CantidadCaja
+                    CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabdescpro1un") = DescuentoUnitario
+
+                    '''''''Aqui Calculo el descuento
+                    PrecioCostoCaja = (dt.Rows(i).Item("cabpcomcj") - (dt.Rows(i).Item("cabdescun") + dt.Rows(i).Item("cabdescpro1un") + dt.Rows(i).Item("cabdescpro2un"))) * 0.87
+                    PrecioCostoCaja = PrecioCostoCaja / dt.Rows(i).Item("cabcantcj")
+                    CantidadUnitaria = dt.Rows(i).Item("cabcantun") / dt.Rows(i).Item("cabcantcj")
+                    If (PrecioCostoCaja > 0 And CantidadUnitaria > 0) Then
+                        CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabpcostocj") = PrecioCostoCaja
+                        CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabpcostoun") = PrecioCostoCaja / CantidadUnitaria
+                    End If
+                    '''''''''
+
+
+                End If
+
+            Next
+
+            tbtotal.Value = (tbSubtotalC.Value - (tbMdesc.Value + tbDescuentoPro1.Value + tvDescuento02.Value))
+        End If
+    End Sub
+
+    Public Sub CalcularDescuento02(TotalBruto As Double, descuento As Double)
+
+        Dim dt As DataTable = CType(dgjDetalle.DataSource, DataTable)
+        Dim DescuentoUnitario As Double
+        Dim CantidadCaja As Double
+        Dim Descuento01 As Double
+        Dim ImporteBruto As Double
+        Dim PrecioCostoCaja As Double
+        Dim CantidadUnitaria As Double
+        If (dt.Rows.Count > 0 And tbObs.ReadOnly = False) Then
+            For i As Integer = 0 To dt.Rows.Count - 1 Step 1
+                CantidadCaja = dt.Rows(i).Item("cabcantcj")
+                ImporteBruto = dt.Rows(i).Item("cabsubtot")
+                If (ImporteBruto > 0 And CantidadCaja > 0 And TotalBruto > 0) Then
+                    Descuento01 = ((ImporteBruto * descuento) / TotalBruto)
+                    CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabdescpro2cj") = Descuento01
+                    DescuentoUnitario = Descuento01 / CantidadCaja
+                    CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabdescpro2un") = DescuentoUnitario
+                    '''''''Aqui Calculo el descuento
+                    PrecioCostoCaja = (dt.Rows(i).Item("cabpcomcj") - (dt.Rows(i).Item("cabdescun") + dt.Rows(i).Item("cabdescpro1un") + dt.Rows(i).Item("cabdescpro2un"))) * 0.87
+                    PrecioCostoCaja = PrecioCostoCaja / dt.Rows(i).Item("cabcantcj")
+                    CantidadUnitaria = dt.Rows(i).Item("cabcantun") / dt.Rows(i).Item("cabcantcj")
+                    If (PrecioCostoCaja > 0 And CantidadUnitaria > 0) Then
+                        CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabpcostocj") = PrecioCostoCaja
+                        CType(dgjDetalle.DataSource, DataTable).Rows(i).Item("cabpcostoun") = PrecioCostoCaja / CantidadUnitaria
+                    End If
+                    '''''''''
+                End If
+
+            Next
+            tbtotal.Value = (tbSubtotalC.Value - (tbMdesc.Value + tbDescuentoPro1.Value + tvDescuento02.Value))
+        End If
+    End Sub
+
+    Private Sub DoubleInput1_ValueChanged(sender As Object, e As EventArgs) Handles tbDescuentoPro1.ValueChanged
+        Dim descuento As Double = tbDescuentoPro1.Value
+        Dim TotalBruto As Double = tbSubtotalC.Value
+        If (descuento > 0) Then
+            CalcularDescuento01(TotalBruto, descuento)
+        End If
+
+    End Sub
+
+    Private Sub tbSubtotalC_ValueChanged(sender As Object, e As EventArgs) Handles tbSubtotalC.ValueChanged
+        Dim descuento As Double = tbDescuentoPro1.Value
+        Dim TotalBruto As Double = tbSubtotalC.Value
+        If (descuento > 0) Then
+            CalcularDescuento01(TotalBruto, descuento)
+        End If
+        Dim descuento02 As Double = tvDescuento02.Value
+        If (descuento02 > 0) Then
+            CalcularDescuento02(TotalBruto, descuento02)
+        End If
+    End Sub
+
+    Private Sub tvDescuento02_ValueChanged(sender As Object, e As EventArgs) Handles tvDescuento02.ValueChanged
+        Dim descuento02 As Double = tvDescuento02.Value
+        Dim TotalBruto As Double = tbSubtotalC.Value
+        If (descuento02 > 0) Then
+            CalcularDescuento02(TotalBruto, descuento02)
+        End If
     End Sub
 #End Region
 End Class
