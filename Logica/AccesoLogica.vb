@@ -7807,6 +7807,16 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+    Public Shared Function L_DatosEmpresa(_Cia As String) As DataSet
+        Dim _Tabla As DataTable
+        Dim _Ds As New DataSet
+        Dim _Where As String
+        _Where = " scnumi = " + _Cia
+
+        _Tabla = D_Datos_Tabla("*", "TS003", _Where)
+        _Ds.Tables.Add(_Tabla)
+        Return _Ds
+    End Function
 
 #End Region
 

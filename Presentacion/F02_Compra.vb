@@ -216,7 +216,8 @@ Public Class F02_Compra
 
     Private Sub dgjDetalle_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles dgjDetalle.CellEdited
         If (BoModificar Or BoNuevo) Then
-            If ((e.Column.Key.Equals("cabcant")) Or (e.Column.Key.Equals("cabpcom"))) Then
+            If (e.Column.Key.Equals("cabcantcj") Or e.Column.Key.Equals("cabcantun") Or e.Column.Key.Equals("cabsubtot") Or e.Column.Key.Equals("cabdesccj")) Then
+
                 'If (e.Column.Key.Equals("cabcant")) Then
                 '    'dgjDetalle.SetValue("total", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
                 '    dgjDetalle.SetValue("cabsubtot", dgjDetalle.GetValue("cabcant") * dgjDetalle.GetValue("cabpcom"))
@@ -228,10 +229,10 @@ Public Class F02_Compra
                 'End If
 
                 If (dgjDetalle.GetValue("cabtca1numi") <> 0) Then
-                    dgjDetalle.SetValue("estado", 2)
+                        dgjDetalle.SetValue("estado", 2)
+                    End If
                 End If
             End If
-        End If
     End Sub
 
     Private Sub tsmiEliminarFilaDetalle_Click(sender As Object, e As EventArgs) Handles tsmiEliminarFilaDetalle.Click
@@ -389,9 +390,11 @@ Public Class F02_Compra
         If MBtNuevo.Enabled = True Then
             tbSubtotalC.IsInputReadOnly = Not flat
             tbtotal.IsInputReadOnly = Not flat
+            tbMdesc.IsInputReadOnly = Not flat
         Else
             tbSubtotalC.IsInputReadOnly = flat
             tbtotal.IsInputReadOnly = flat
+            tbMdesc.IsInputReadOnly = flat
             tbNitProv.ReadOnly = flat
         End If
 
@@ -1134,7 +1137,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-            .CellStyle.BackColor = Color.SkyBlue
+            .CellStyle.BackColor = Color.SteelBlue
             .FormatString = "0.00"
         End With
         With dgjDetalle.RootTable.Columns("cabcantun")
@@ -1145,7 +1148,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-            .CellStyle.BackColor = Color.SkyBlue
+            .CellStyle.BackColor = Color.SteelBlue
             .FormatString = "0.00"
         End With
         With dgjDetalle.RootTable.Columns("cabsubtot")
@@ -1156,7 +1159,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-            .CellStyle.BackColor = Color.SkyBlue
+            .CellStyle.BackColor = Color.SteelBlue
             .FormatString = "0.00"
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
             .TotalFormatString = "0.00"
@@ -1217,7 +1220,7 @@ Public Class F02_Compra
             .CellStyle.Font = FtNormal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
-            .CellStyle.BackColor = Color.SkyBlue
+            .CellStyle.BackColor = Color.SteelBlue
             .FormatString = "0.00"
             .AggregateFunction = Janus.Windows.GridEX.AggregateFunction.Sum
             .TotalFormatString = "0.00"
@@ -2175,6 +2178,18 @@ Public Class F02_Compra
     End Sub
     Private Sub P_GenerarReporte()
         Dim dt As DataTable = L_fnNotaCompras(tbCodigo.Text)
+        Dim dt2 = L_DatosEmpresa("1")
+        Dim _TotalLi As Decimal
+        Dim _Literal, _TotalDecimal, _TotalDecimal2 As String
+
+        'Literal 
+        _TotalLi = dt.Rows(0).Item("caatotal")
+        _TotalDecimal = _TotalLi - Math.Truncate(_TotalLi)
+        _TotalDecimal2 = CDbl(_TotalDecimal) * 100
+
+        _Literal = Facturacion.ConvertirLiteral.A_fnConvertirLiteral(CDbl(_TotalLi) - CDbl(_TotalDecimal)) + "  " + IIf(_TotalDecimal2.Equals("0"), "00", _TotalDecimal2) + "/100 Bolivianos"
+
+
         If Not IsNothing(P_Global.Visualizador) Then
             P_Global.Visualizador.Close()
         End If
@@ -2183,10 +2198,15 @@ Public Class F02_Compra
 
         Dim objrep As New R_NotaCompra
         objrep.SetDataSource(dt)
-        'objrep.SetParameterValue("usuario", gs_user)
-        P_Global.Visualizador.CRV1.ReportSource = objrep 'Comentar
-        P_Global.Visualizador.Show() 'Comentar
-        P_Global.Visualizador.BringToFront() 'Comentar
+        objrep.SetParameterValue("Empresa", dt2.Tables(0).Rows(0).Item("scneg").ToString)
+        objrep.SetParameterValue("Direccion", dt2.Tables(0).Rows(0).Item("scdir").ToString)
+        objrep.SetParameterValue("Telefono", dt2.Tables(0).Rows(0).Item("sctelf").ToString)
+        objrep.SetParameterValue("Nit", dt2.Tables(0).Rows(0).Item("scnit").ToString)
+        objrep.SetParameterValue("Literal", _Literal)
+
+        P_Global.Visualizador.CRV1.ReportSource = objrep
+        P_Global.Visualizador.Show()
+        P_Global.Visualizador.BringToFront()
     End Sub
 
     Public Sub CalcularDescuento01(TotalBruto As Double, descuento As Double)
